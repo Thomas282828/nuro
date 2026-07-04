@@ -492,19 +492,25 @@ a{color:var(--accent)}
   <div class="settings-scroll">
     <div class="settings-inner">
       <div class="settings-section">
-        <p class="settings-lbl">Clés API</p>
-        <div class="info-card">Tes clés sont stockées <strong>uniquement dans ton navigateur</strong>. Elles sont envoyées directement vers Deepgram et Anthropic lors de chaque enregistrement.</div>
-        <div class="field">
-          <div class="key-row"><label style="font-size:.75rem;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.05em">Clé Deepgram</label><span class="key-status" id="dg-status">—</span></div>
-          <input type="password" id="dg-key" placeholder="Colle ta clé Deepgram…">
-          <p class="field-hint">→ <a href="https://console.deepgram.com" target="_blank">console.deepgram.com</a> — API Keys (200$ gratuits, sans CB)</p>
-        </div>
-        <div class="field">
-          <div class="key-row"><label style="font-size:.75rem;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.05em">Clé Claude (Anthropic)</label><span class="key-status" id="cl-status">—</span></div>
-          <input type="password" id="cl-key" placeholder="Colle ta clé Anthropic…">
-          <p class="field-hint">→ <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> — API Keys (5$ gratuits)</p>
-        </div>
-        <button class="btn-save" onclick="saveKeys()">Sauvegarder</button>
+        <p class="settings-lbl">Transcription & IA</p>
+        <div class="info-card">✅ <strong>Tout est prêt.</strong> La transcription et l'IA fonctionnent directement — aucune configuration nécessaire de ta part. Tes enregistrements sont transcrits et résumés automatiquement.</div>
+        <details style="margin-top:8px">
+          <summary style="cursor:pointer;font-size:.8rem;color:var(--ink2);font-weight:600;padding:6px 0">⚙️ Options avancées (clés API personnelles)</summary>
+          <div style="padding-top:12px">
+            <div class="info-card" style="font-size:.8rem">Optionnel : si tu veux utiliser tes propres clés API au lieu du service Nuro, entre-les ici. Sinon, laisse vide — tout marche déjà.</div>
+            <div class="field">
+              <div class="key-row"><label style="font-size:.75rem;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.05em">Clé Deepgram</label><span class="key-status" id="dg-status">—</span></div>
+              <input type="password" id="dg-key" placeholder="Optionnel…">
+              <p class="field-hint">→ <a href="https://console.deepgram.com" target="_blank">console.deepgram.com</a></p>
+            </div>
+            <div class="field">
+              <div class="key-row"><label style="font-size:.75rem;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.05em">Clé Claude (Anthropic)</label><span class="key-status" id="cl-status">—</span></div>
+              <input type="password" id="cl-key" placeholder="Optionnel…">
+              <p class="field-hint">→ <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a></p>
+            </div>
+            <button class="btn-save" onclick="saveKeys()">Sauvegarder</button>
+          </div>
+        </details>
       </div>
       <div class="settings-section">
         <p class="settings-lbl">Compte</p>
@@ -558,6 +564,44 @@ a{color:var(--accent)}
 // ══ FONDATEURS ══
 const FOUNDERS = ['vincent.naigeon@gmail.com','worldultimaterecords@outlook.com'];
 const isFounder = () => FOUNDERS.includes((currentUser||'').toLowerCase());
+
+// ══ BACKEND CLOUDFLARE ══
+const WORKER_URL = 'https://nuro-proxy.worldultimaterecords.workers.dev';
+
+// Appelle Claude via le Worker Cloudflare (clé cachée côté serveur).
+// Fallback sur la clé locale si l'utilisateur en a configuré une (mode avancé/fondateur).
+async function callClaude(payload){
+  const localKey = K.clKey();
+  if(WORKER_URL){
+    try{
+      const r = await fetch(WORKER_URL + '/claude', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(payload)
+      });
+      if(r.ok) return r;
+    }catch(e){ /* si le Worker échoue, on tente la clé locale */ }
+  }
+  if(localKey){
+    return fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'x-api-key':localKey,'anthropic-version':'2023-06-01','Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true'},
+      body: JSON.stringify(payload)
+    });
+  }
+  throw new Error('no-claude-access');
+}
+
+// Récupère la clé Deepgram via le Worker (ou locale en fallback)
+async function getDeepgramKey(){
+  if(WORKER_URL){
+    try{
+      const r = await fetch(WORKER_URL + '/deepgram-token');
+      if(r.ok){ const d = await r.json(); if(d.key) return d.key; }
+    }catch(e){}
+  }
+  return K.dgKey();
+}
 
 // ══ STORAGE ══
 const K = {
@@ -667,21 +711,19 @@ function enterDashboard(){
   const fab=document.getElementById('fab-asst');if(fab)fab.style.display='flex';
   showView('dashboard');
   if(isFounder()){setTimeout(()=>showToast('★ Accès Fondateur — bienvenue !'),400)}
-  else if(!K.dgKey()||!K.clKey()){setTimeout(()=>{showToast('⚙️ Configure tes clés API pour commencer');showView('settings')},600)}
 }
 
 // ══ ENREGISTREMENT ══
 async function toggleRec(){
   if(isRec){stopRec();return}
-  const dg=K.dgKey(),cl=K.clKey();
-  if(!isFounder()&&(!dg||!cl)){showToast('⚙️ Configure tes clés API d\'abord');showView('settings');return}
-  if(isFounder()&&(!dg||!cl)){showToast('⚙️ Entre tes clés API dans Paramètres');showView('settings');return}
   try{
     const stream=await navigator.mediaDevices.getUserMedia({audio:true});
     finalTx='';interimTx='';
     document.getElementById('live-txt').innerHTML='';
     document.getElementById('live-wc').textContent='0 mot';
     document.getElementById('live-box').classList.add('show');
+    const dg=await getDeepgramKey();
+    if(!dg){showToast('⚠️ Service de transcription indisponible');document.getElementById('live-box').classList.remove('show');return}
     dgWs=new WebSocket('wss://api.deepgram.com/v1/listen?language=fr&model=nova-2&punctuate=true&interim_results=true&smart_format=true',['token',dg]);
     dgWs.onopen=()=>{
       isRec=true;startTime=Date.now();setRecUI(true);startTimer();startViz();
@@ -725,17 +767,12 @@ async function finishRec(){
 }
 
 async function genSummary(s){
-  const cl=K.clKey();
-  if(!cl){s.status='error';K.saveSessions(sessions);renderSessions();showToast('⚠️ Clé Claude manquante');return}
+
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'x-api-key':cl,'anthropic-version':'2023-06-01','Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({
+    const res=await callClaude({
         model:'claude-haiku-4-5-20251001',max_tokens:1024,
         system:`Analyse cette transcription et réponds UNIQUEMENT en JSON valide sans markdown :\n{"titre":"Titre court (max 8 mots)","resume":"2-3 phrases claires","points_cles":["point 1","point 2"],"actions":["action 1"]}`,
         messages:[{role:'user',content:`Transcription :\n\n${s.transcript}`}]
-      })
     });
     if(!res.ok)throw new Error();
     const d=await res.json();
@@ -904,8 +941,7 @@ function addMsg(id,role,text,save=true){
 
 async function callAi(id,msg){
   const s=sessions.find(x=>x.id===id);if(!s)return;
-  const cl=K.clKey();
-  if(!cl){addMsg(id,'bot','⚠️ Configure ta clé Claude dans Paramètres.');return}
+
   const btn=document.querySelector(`[onclick="sendAi('${id}')"]`);if(btn)btn.disabled=true;
   addMsg(id,'user',msg);
   const c=document.getElementById(`ai-msgs-${id}`);
@@ -915,20 +951,16 @@ async function callAi(id,msg){
   const hist=K.aiHist(id);
   const msgs=[...hist.slice(-8).map(m=>({role:m.role==='user'?'user':'assistant',content:m.content})),{role:'user',content:msg}];
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'x-api-key':cl,'anthropic-version':'2023-06-01','Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({
+    const res=await callClaude({
         model:'claude-haiku-4-5-20251001',max_tokens:1024,
         system:`Tu es un assistant IA intégré à Nuro. Tu aides à exploiter le contenu d'un enregistrement vocal.\n\nTranscription :\n---\n${s.transcript}\n---\n${s.summary?`Résumé : ${s.summary.resume}`:''}\n\nRéponds en français, de façon concise. Fournis directement le contenu demandé (email, traduction, etc).`,
         messages:msgs
-      })
     });
     if(!res.ok)throw new Error();
     const d=await res.json();
     th.remove();
     addMsg(id,'bot',d.content?.[0]?.text||'Désolé, je n\'ai pas pu répondre.');
-  }catch{th.remove();addMsg(id,'bot','⚠️ Erreur API. Vérifie ta clé Claude dans Paramètres.')}
+  }catch{th.remove();addMsg(id,'bot','⚠️ Erreur de connexion à l\'assistant. Réessaie dans un instant.')}
   if(btn)btn.disabled=false;
 }
 
@@ -1019,8 +1051,7 @@ function aiEditChip(id,instruction){
 async function runAiEdit(id){
   const s=sessions.find(x=>x.id===id);
   if(!s)return;
-  const cl=K.clKey();
-  if(!cl){showToast('⚙️ Configure ta clé Claude dans Paramètres');return;}
+
   const input=document.getElementById(`ai-edit-in-${id}`);
   const instruction=input?.value.trim();
   if(!instruction){showToast('Décris ta modification');return;}
@@ -1033,14 +1064,10 @@ async function runAiEdit(id){
   aiEditBackup[id]=s.transcript;
 
   try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'x-api-key':cl,'anthropic-version':'2023-06-01','Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({
+    const res=await callClaude({
         model:'claude-haiku-4-5-20251001',max_tokens:2048,
         system:`Tu modifies une transcription selon l'instruction de l'utilisateur. Réponds UNIQUEMENT avec le texte modifié, sans commentaire, sans préambule, sans guillemets. Conserve le sens et les informations, applique uniquement la transformation demandée.`,
         messages:[{role:'user',content:`Instruction : ${instruction}\n\nTranscription à modifier :\n${s.transcript}`}]
-      })
     });
     if(!res.ok)throw new Error();
     const data=await res.json();
@@ -1122,9 +1149,32 @@ function openAssistant(){
   document.getElementById('asst-overlay').classList.add('open');
   document.getElementById('asst-panel').classList.add('open');
   updateAsstQuota();
+
+  // Adapter les suggestions selon qu'il y a des enregistrements ou non
+  const chips = document.getElementById('asst-chips');
+  const hasSessions = sessions.length > 0;
+  if(chips){
+    if(hasSessions){
+      chips.innerHTML = `
+        <button class="asst-chip" onclick="asstChip('Résume mes 3 derniers enregistrements')">Résumer mes sessions</button>
+        <button class="asst-chip" onclick="asstChip('Quelles actions ai-je en attente ?')">Mes actions en attente</button>
+        <button class="asst-chip" onclick="asstChip('Retrouve où je parle de budget')">Rechercher un sujet</button>
+        <button class="asst-chip" onclick="asstChip('Aide-moi à rédiger un email')">Rédiger un email</button>`;
+    } else {
+      chips.innerHTML = `
+        <button class="asst-chip" onclick="asstChip('Comment fonctionne Nuro ?')">Comment ça marche ?</button>
+        <button class="asst-chip" onclick="asstChip('Donne-moi des idées pour être plus productif')">Conseils productivité</button>
+        <button class="asst-chip" onclick="asstChip('Aide-moi à rédiger un email professionnel')">Rédiger un email</button>
+        <button class="asst-chip" onclick="asstChip('Traduis un texte en anglais')">Traduire un texte</button>`;
+    }
+  }
+
   if(asstHistory.length === 0){
     const c = document.getElementById('asst-msgs');
-    if(c) c.innerHTML = `<div class="asst-msg bot"><div class="asst-av">N</div><div class="asst-bubble">Bonjour ! Je connais tous vos enregistrements. Je peux les résumer, les trier, retrouver un sujet, lister vos actions en attente, ou répondre à n'importe quelle question. Que puis-je faire ?</div></div>`;
+    const welcome = hasSessions
+      ? "Bonjour ! Je suis votre assistant. Je peux répondre à toutes vos questions, mais aussi exploiter vos enregistrements : les résumer, les trier, retrouver un sujet, lister vos actions. Que puis-je faire ?"
+      : "Bonjour ! Je suis votre assistant IA. Posez-moi n'importe quelle question — j'y réponds. Et dès que vous ferez un enregistrement, je pourrai aussi le résumer, le trier et retrouver vos informations. Comment puis-je vous aider ?";
+    if(c) c.innerHTML = `<div class="asst-msg bot"><div class="asst-av">N</div><div class="asst-bubble">${welcome}</div></div>`;
   }
   setTimeout(()=>document.getElementById('asst-input')?.focus(), 300);
 }
@@ -1166,8 +1216,7 @@ async function asstSend(){
     return;
   }
 
-  const cl = K.clKey();
-  if(!cl){ asstAddMsg('bot','⚙️ Configure ta clé Claude dans Paramètres pour utiliser l\\'assistant.'); return; }
+
 
   input.value=''; input.style.height='auto';
   const sendBtn = document.getElementById('asst-send');
@@ -1186,19 +1235,15 @@ async function asstSend(){
   const msgs = [...asstHistory.slice(-10).map(m=>({role:m.role==='user'?'user':'assistant',content:m.content}))];
 
   try{
-    const res = await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'x-api-key':cl,'anthropic-version':'2023-06-01','Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true'},
-      body:JSON.stringify({
+    const res = await callClaude({
         model:'claude-haiku-4-5-20251001', max_tokens:1024,
-        system:`Tu es l'assistant IA de Nuro, une app d'enregistrement et transcription vocale. Tu aides l'utilisateur à exploiter TOUS ses enregistrements : les résumer, les trier, retrouver un sujet, lister ses actions en attente, répondre à ses questions.\n\nVoici les enregistrements de l'utilisateur :\n---\n${context}\n---\n\nRéponds en français, de façon concise et utile. Si l'utilisateur demande quelque chose qui concerne un enregistrement précis, réfère-t'y par son titre. Si l'information n'est pas dans les enregistrements, dis-le clairement.`,
+        system:`Tu es l'assistant IA de Nuro, une app d'enregistrement et transcription vocale. Tu es polyvalent et serviable comme un assistant général : tu réponds à TOUTES les questions de l'utilisateur, qu'elles concernent ses enregistrements ou non (culture générale, aide à la rédaction, traduction, conseils, explications, etc.).\n\nTu peux aussi aider l'utilisateur avec ses enregistrements : les résumer, les trier, retrouver un sujet, lister ses actions en attente.\n\nÉtat des enregistrements de l'utilisateur :\n---\n${context}\n---\n\nRéponds en français, de façon concise, claire et utile. Si la question concerne un enregistrement précis, réfère-t'y par son titre. Si l'utilisateur n'a pas encore d'enregistrement et pose une question générale, réponds simplement à sa question sans insister sur les enregistrements.`,
         messages: msgs
-      })
     });
     if(!res.ok) throw new Error();
     const data = await res.json();
     think.remove();
-    const reply = data.content?.[0]?.text || 'Désolé, je n\\'ai pas pu répondre.';
+    const reply = data.content?.[0]?.text || 'Désolé, je n\'ai pas pu répondre.';
     asstAddMsg('bot', reply);
     asstHistory.push({role:'assistant', content:reply});
     if(!asstUnlimited()){ incAsstUsed(); updateAsstQuota(); }
