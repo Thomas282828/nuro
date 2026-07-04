@@ -108,6 +108,16 @@ a{color:var(--accent)}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 .live-wc{font-size:.73rem;color:var(--ink3)}
 .live-txt{font-size:.88rem;line-height:1.72;color:var(--ink);max-height:110px;overflow-y:auto;word-break:break-word}
+.live-ai{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.live-ai-row{display:flex;gap:7px}
+.live-ai-input{flex:1;background:var(--bg2);border:1.5px solid var(--line);border-radius:var(--radius-sm);padding:8px 12px;color:var(--ink);font-size:.82rem;font-family:'Inter',sans-serif;outline:none;transition:border-color .15s}
+.live-ai-input:focus{border-color:var(--accent)}
+.live-ai-btn{background:var(--accent);color:white;border-radius:var(--radius-sm);padding:0 14px;font-size:.78rem;font-weight:600;white-space:nowrap;transition:opacity .15s}
+.live-ai-btn:hover{opacity:.9}
+.live-ai-btn:disabled{opacity:.4;cursor:not-allowed}
+.live-ai-answer{margin-top:9px;font-size:.83rem;line-height:1.6;color:var(--ink);background:var(--accent2);border:1px solid var(--accent-b);border-radius:var(--radius-sm);padding:10px 12px;display:none;white-space:pre-wrap}
+.live-ai-answer.show{display:block}
+.live-ai-answer.thinking{color:var(--ink2);font-style:italic}
 .live-int{color:var(--ink2)}
 
 /* SESSIONS */
@@ -418,6 +428,13 @@ a{color:var(--accent)}
       <div class="live-box" id="live-box">
         <div class="live-hd"><div class="live-lbl"><span class="live-dot"></span>En direct</div><span class="live-wc" id="live-wc">0 mot</span></div>
         <div class="live-txt" id="live-txt"></div>
+        <div class="live-ai" id="live-ai">
+          <div class="live-ai-row">
+            <input class="live-ai-input" id="live-ai-input" placeholder="Demander à l'IA pendant l'enregistrement…" onkeydown="if(event.key==='Enter')askLiveAi()">
+            <button class="live-ai-btn" onclick="askLiveAi()">Demander</button>
+          </div>
+          <div class="live-ai-answer" id="live-ai-answer"></div>
+        </div>
       </div>
       <div class="sessions-hd"><span class="sessions-lbl">Enregistrements</span><span class="sessions-ct" id="s-ct">0</span></div>
       <div id="sessions-list"></div>
@@ -620,6 +637,7 @@ let currentUser=null, sessions=[];
 let isRec=false, mr=null, dgWs=null;
 let timerInt=null, startTime=null;
 let finalTx='', interimTx='';
+let speakerSegments=[];
 let vizBars=[], vizRaf=null, vizPhase=0;
 
 // ══ AUTH ══
@@ -719,12 +737,15 @@ async function toggleRec(){
   try{
     const stream=await navigator.mediaDevices.getUserMedia({audio:true});
     finalTx='';interimTx='';
+    speakerSegments=[];
     document.getElementById('live-txt').innerHTML='';
     document.getElementById('live-wc').textContent='0 mot';
+    const laa=document.getElementById('live-ai-answer'); if(laa){laa.className='live-ai-answer';laa.textContent='';}
+    const lai=document.getElementById('live-ai-input'); if(lai) lai.value='';
     document.getElementById('live-box').classList.add('show');
     const dg=await getDeepgramKey();
     if(!dg){showToast('⚠️ Service de transcription indisponible');document.getElementById('live-box').classList.remove('show');return}
-    dgWs=new WebSocket('wss://api.deepgram.com/v1/listen?language=fr&model=nova-2&punctuate=true&interim_results=true&smart_format=true',['token',dg]);
+    dgWs=new WebSocket('wss://api.deepgram.com/v1/listen?language=fr&model=nova-2&punctuate=true&interim_results=true&smart_format=true&diarize=true',['token',dg]);
     dgWs.onopen=()=>{
       isRec=true;startTime=Date.now();setRecUI(true);startTimer();startViz();
       mr=new MediaRecorder(stream,{mimeType:getMime()});
@@ -734,10 +755,30 @@ async function toggleRec(){
     dgWs.onmessage=e=>{
       const d=JSON.parse(e.data);if(d.type!=='Results')return;
       const a=d.channel?.alternatives?.[0];if(!a)return;
-      if(d.is_final){finalTx+=a.transcript+' ';interimTx=''}else interimTx=a.transcript;
+      if(d.is_final){
+        // Regrouper les mots par locuteur (diarization)
+        const words=a.words||[];
+        if(words.length && words[0].speaker!==undefined){
+          let curSpk=words[0].speaker, buf='';
+          words.forEach(w=>{
+            if(w.speaker!==curSpk){
+              speakerSegments.push({speaker:curSpk, text:buf.trim()});
+              curSpk=w.speaker; buf='';
+            }
+            buf+=(w.punctuated_word||w.word)+' ';
+          });
+          if(buf.trim()) speakerSegments.push({speaker:curSpk, text:buf.trim()});
+        } else if(a.transcript){
+          speakerSegments.push({speaker:0, text:a.transcript});
+        }
+        finalTx+=a.transcript+' ';
+        interimTx='';
+      } else {
+        interimTx=a.transcript;
+      }
       refreshLive();
     };
-    dgWs.onerror=()=>showToast('⚠️ Erreur Deepgram — vérifie ta clé');
+    dgWs.onerror=()=>showToast('⚠️ Erreur de transcription');
     dgWs.onclose=()=>{if(isRec)finishRec()};
   }catch(err){
     if(err.name==='NotAllowedError')showToast('🎤 Autorise le micro dans ton navigateur');
@@ -759,7 +800,23 @@ async function finishRec(){
   const tx=finalTx.trim();
   document.getElementById('live-box').classList.remove('show');
   if(!tx||tx.length<5){showToast('Enregistrement trop court');return}
-  const s={id:`s_${Date.now()}`,createdAt:Date.now(),duration:dur,transcript:tx,wordCount:tx.split(/\s+/).length,status:'processing',summary:null};
+
+  // Construire un transcript formaté avec les locuteurs (si plusieurs détectés)
+  let formattedTx = tx;
+  const speakers = [...new Set(speakerSegments.map(s=>s.speaker))];
+  if(speakerSegments.length && speakers.length > 1){
+    // Fusionner les segments consécutifs du même locuteur
+    const merged=[];
+    speakerSegments.forEach(seg=>{
+      if(!seg.text) return;
+      const last=merged[merged.length-1];
+      if(last && last.speaker===seg.speaker){ last.text += ' ' + seg.text; }
+      else merged.push({speaker:seg.speaker, text:seg.text});
+    });
+    formattedTx = merged.map(seg=>`Locuteur ${seg.speaker+1} : ${seg.text}`).join('\n\n');
+  }
+
+  const s={id:`s_${Date.now()}`,createdAt:Date.now(),duration:dur,transcript:formattedTx,wordCount:tx.split(/\s+/).length,status:'processing',summary:null,speakerCount:speakers.length};
   sessions.unshift(s);K.saveSessions(sessions);
   renderSessions();renderStats();
   showToast('🎙️ Sauvegardé — résumé en cours…');
@@ -800,6 +857,36 @@ function refreshLive(){
   document.getElementById('live-wc').textContent=`${wc} mot${wc>1?'s':''}`;
   el.scrollTop=el.scrollHeight;
 }
+
+// IA en direct pendant l'enregistrement
+async function askLiveAi(){
+  const input=document.getElementById('live-ai-input');
+  const q=input?.value.trim();
+  if(!q) return;
+  const answerEl=document.getElementById('live-ai-answer');
+  const btn=document.querySelector('.live-ai-btn');
+  const currentText=(finalTx+' '+interimTx).trim();
+
+  input.value='';
+  if(btn) btn.disabled=true;
+  if(answerEl){ answerEl.className='live-ai-answer show thinking'; answerEl.textContent='Réflexion…'; }
+
+  try{
+    const res=await callClaude({
+      model:'claude-haiku-4-5-20251001', max_tokens:512,
+      system:`Tu es un assistant IA qui écoute un enregistrement en cours en temps réel. Voici ce qui a été dit jusqu'à présent :\n---\n${currentText || '(rien encore)'}\n---\nRéponds à la question de l'utilisateur de façon très concise et directe (2-3 phrases max), en français. Tu peux répondre sur le contenu de l'enregistrement OU à toute autre question.`,
+      messages:[{role:'user', content:q}]
+    });
+    if(!res.ok) throw new Error();
+    const data=await res.json();
+    const reply=data.content?.[0]?.text || 'Pas de réponse.';
+    if(answerEl){ answerEl.className='live-ai-answer show'; answerEl.textContent=reply; }
+  }catch{
+    if(answerEl){ answerEl.className='live-ai-answer show'; answerEl.textContent='⚠️ Erreur — réessaie.'; }
+  }
+  if(btn) btn.disabled=false;
+}
+
 function startTimer(){timerInt=setInterval(()=>{const e=Math.floor((Date.now()-startTime)/1000);document.getElementById('rec-timer').textContent=`${String(Math.floor(e/60)).padStart(2,'0')}:${String(e%60).padStart(2,'0')}`},200)}
 function stopTimer(){clearInterval(timerInt)}
 function startViz(){
@@ -834,6 +921,26 @@ function renderSessions(){
   }).join('');
 }
 function fmtDur(s){if(!s)return'0:00';return`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`}
+
+// Formate la transcription en colorant les locuteurs
+function formatTranscript(text){
+  if(!text) return '';
+  const esc = t => t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  // Si le texte contient "Locuteur N :", on stylise chaque locuteur
+  if(/Locuteur \d+\s*:/.test(text)){
+    const colors=['#3B82F6','#34D399','#F0A500','#F87171','#A78BFA','#EC4899'];
+    return text.split('\n').filter(l=>l.trim()).map(line=>{
+      const m=line.match(/^Locuteur (\d+)\s*:\s*(.*)$/);
+      if(m){
+        const n=parseInt(m[1],10);
+        const color=colors[(n-1)%colors.length];
+        return `<div style="margin-bottom:10px"><span style="display:inline-block;font-size:.7rem;font-weight:700;color:${color};background:${color}18;border:1px solid ${color}40;border-radius:999px;padding:1px 8px;margin-bottom:3px">Locuteur ${n}</span><br>${esc(m[2])}</div>`;
+      }
+      return esc(line);
+    }).join('');
+  }
+  return esc(text);
+}
 
 // ══ DÉTAIL ══
 function openSession(id){
@@ -885,7 +992,7 @@ function openSession(id){
             Annuler la modification
           </button>
         </div>
-        <div class="transcript-txt" id="tx-txt-${id}">${s.transcript}</div>
+        <div class="transcript-txt" id="tx-txt-${id}">${formatTranscript(s.transcript)}</div>
       </div>
     </div>
     <div class="ai-section">
@@ -1078,7 +1185,7 @@ async function runAiEdit(id){
     s.transcript=newText;
     s.wordCount=newText.split(/\s+/).filter(Boolean).length;
     K.saveSessions(sessions);
-    if(txtEl)txtEl.textContent=newText;
+    if(txtEl)txtEl.innerHTML=formatTranscript(newText);
     const wcEl=document.getElementById(`tx-wc-${id}`);
     if(wcEl)wcEl.textContent=`${s.wordCount} mots`;
     const undoBtn=document.getElementById(`ai-edit-undo-${id}`);
@@ -1099,7 +1206,7 @@ function undoAiEdit(id){
   s.wordCount=s.transcript.split(/\s+/).filter(Boolean).length;
   K.saveSessions(sessions);
   const txtEl=document.getElementById(`tx-txt-${id}`);
-  if(txtEl)txtEl.textContent=s.transcript;
+  if(txtEl)txtEl.innerHTML=formatTranscript(s.transcript);
   const wcEl=document.getElementById(`tx-wc-${id}`);
   if(wcEl)wcEl.textContent=`${s.wordCount} mots`;
   const undoBtn=document.getElementById(`ai-edit-undo-${id}`);
