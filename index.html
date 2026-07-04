@@ -158,6 +158,23 @@ a{color:var(--accent)}
 .act-list{display:flex;flex-direction:column;gap:7px}
 .act-item{display:flex;align-items:flex-start;gap:11px;background:var(--bg1);border:1px solid var(--line);border-radius:var(--radius-sm);padding:11px 13px;font-size:.88rem;line-height:1.5}
 .act-arr{color:var(--green);font-weight:700;flex-shrink:0}
+.transcript-hd-actions{display:flex;align-items:center;gap:8px}
+.btn-ai-edit{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:600;color:var(--accent);background:var(--accent2);border:1px solid var(--accent-b);border-radius:999px;padding:4px 11px;cursor:pointer;transition:all .15s}
+.btn-ai-edit:hover{background:rgba(59,130,246,0.18)}
+.ai-edit-bar{display:none;flex-direction:column;gap:9px;padding:12px 16px;background:var(--bg2);border-bottom:1px solid var(--line)}
+.ai-edit-bar.show{display:flex}
+.ai-edit-chips{display:flex;gap:6px;flex-wrap:wrap}
+.ai-edit-chip{font-size:.72rem;font-weight:500;color:var(--ink2);background:var(--bg1);border:1px solid var(--line);border-radius:999px;padding:4px 10px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.ai-edit-chip:hover{border-color:var(--accent);color:var(--ink)}
+.ai-edit-input-row{display:flex;gap:8px}
+.ai-edit-input{flex:1;background:var(--bg1);border:1.5px solid var(--line);border-radius:var(--radius-sm);padding:9px 12px;color:var(--ink);font-size:.82rem;font-family:'Inter',sans-serif;outline:none;transition:border-color .15s}
+.ai-edit-input:focus{border-color:var(--accent)}
+.ai-edit-send{background:var(--accent);color:white;border-radius:var(--radius-sm);padding:0 16px;font-size:.8rem;font-weight:600;transition:opacity .15s}
+.ai-edit-send:hover{opacity:.9}
+.ai-edit-send:disabled{opacity:.4;cursor:not-allowed}
+.ai-edit-undo{display:none;align-items:center;gap:5px;font-size:.72rem;font-weight:600;color:var(--ink2);background:none;border:none;cursor:pointer;padding:4px 0;transition:color .15s}
+.ai-edit-undo:hover{color:var(--ink)}
+.ai-edit-undo.show{display:inline-flex}
 .transcript-box{background:var(--bg1);border:1.5px solid var(--line);border-radius:var(--radius);overflow:hidden}
 .transcript-hd{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line);background:var(--bg2)}
 .transcript-lbl{font-size:.75rem;font-weight:600;color:var(--ink2)}
@@ -251,6 +268,53 @@ a{color:var(--accent)}
 .btn-logout{font-size:.82rem;color:var(--red);font-weight:600;padding:8px 13px;border:1.5px solid rgba(248,113,113,0.2);border-radius:var(--radius-sm);transition:all .15s}
 .btn-logout:hover{background:var(--red2)}
 
+/* ── ASSISTANT IA FLOTTANT ── */
+.fab-assistant{position:fixed;bottom:calc(var(--safe-bottom) + 20px);right:20px;z-index:60;width:56px;height:56px;border-radius:50%;background:var(--accent);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 28px rgba(59,130,246,0.45);transition:transform .2s}
+.fab-assistant:hover{transform:scale(1.06)}
+.fab-assistant:active{transform:scale(.96)}
+.asst-overlay{position:fixed;inset:0;z-index:70;background:rgba(8,12,18,0.6);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .25s}
+.asst-overlay.open{opacity:1;pointer-events:auto}
+.asst-panel{position:fixed;bottom:0;right:0;left:0;z-index:71;max-width:480px;margin:0 auto;background:var(--bg1);border:1px solid var(--line2);border-radius:20px 20px 0 0;max-height:82vh;display:flex;flex-direction:column;transform:translateY(100%);transition:transform .3s cubic-bezier(.32,.72,0,1)}
+.asst-panel.open{transform:translateY(0)}
+@media(min-width:520px){.asst-panel{bottom:20px;right:20px;left:auto;border-radius:20px;width:420px;max-height:640px}}
+.asst-hd{display:flex;align-items:center;gap:11px;padding:16px 18px;border-bottom:1px solid var(--line)}
+.asst-hd-icon{width:34px;height:34px;border-radius:10px;background:var(--accent2);border:1px solid var(--accent-b);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.asst-hd-txt{flex:1}
+.asst-hd-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.95rem}
+.asst-hd-sub{font-size:.72rem;color:var(--ink3)}
+.asst-quota{font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:999px}
+.asst-quota.ok{color:var(--green);background:var(--green2);border:1px solid rgba(52,211,153,0.25)}
+.asst-quota.low{color:#F0A500;background:rgba(240,165,0,.08);border:1px solid rgba(240,165,0,.25)}
+.asst-quota.founder{color:#F0B429;background:rgba(240,180,41,0.1);border:1px solid rgba(240,180,41,0.3)}
+.asst-close{width:30px;height:30px;border-radius:8px;background:var(--bg2);border:none;color:var(--ink2);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;transition:all .15s}
+.asst-close:hover{background:var(--bg3);color:var(--ink)}
+.asst-chips{display:flex;gap:7px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--line)}
+.asst-chip{font-size:.73rem;font-weight:500;color:var(--ink2);background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:6px 11px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.asst-chip:hover{border-color:var(--accent);color:var(--ink)}
+.asst-msgs{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;min-height:120px}
+.asst-msgs::-webkit-scrollbar{width:3px}
+.asst-msgs::-webkit-scrollbar-thumb{background:var(--line2)}
+.asst-msg{display:flex;gap:9px;align-items:flex-start}
+.asst-msg.user{flex-direction:row-reverse}
+.asst-av{width:26px;height:26px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:.62rem;font-weight:700}
+.asst-msg.user .asst-av{background:var(--accent2);color:var(--accent)}
+.asst-msg.bot .asst-av{background:var(--bg2);color:var(--ink2)}
+.asst-bubble{max-width:82%;padding:10px 13px;border-radius:12px;font-size:.85rem;line-height:1.65;white-space:pre-wrap}
+.asst-msg.user .asst-bubble{background:var(--accent);color:white;border-radius:12px 12px 4px 12px}
+.asst-msg.bot .asst-bubble{background:var(--bg2);color:var(--ink);border:1px solid var(--line);border-radius:12px 12px 12px 4px}
+.asst-bubble.thinking{color:var(--ink2);font-style:italic}
+.asst-input-row{display:flex;border-top:1px solid var(--line);padding:10px;gap:8px;align-items:flex-end}
+.asst-input{flex:1;background:var(--bg2);border:1.5px solid var(--line);border-radius:12px;padding:10px 13px;color:var(--ink);font-size:.86rem;font-family:'Inter',sans-serif;resize:none;outline:none;min-height:42px;max-height:120px;transition:border-color .15s}
+.asst-input:focus{border-color:var(--accent)}
+.asst-send{width:42px;height:42px;border-radius:12px;background:var(--accent);color:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity .15s}
+.asst-send:hover{opacity:.9}
+.asst-send:disabled{opacity:.4;cursor:not-allowed}
+.asst-limit{padding:16px;text-align:center}
+.asst-limit-box{background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
+.asst-limit-box h4{font-size:.95rem;margin-bottom:8px}
+.asst-limit-box p{font-size:.83rem;color:var(--ink2);line-height:1.6;margin-bottom:14px}
+.btn-upgrade{display:inline-block;background:var(--accent);color:white;padding:10px 22px;border-radius:999px;font-size:.85rem;font-weight:700;cursor:pointer;border:none}
+
 /* TOAST */
 #toast{position:fixed;bottom:calc(var(--safe-bottom) + 22px);left:50%;transform:translateX(-50%) translateY(8px);background:var(--bg2);border:1px solid var(--line2);color:var(--ink);padding:11px 18px;border-radius:999px;font-size:.85rem;font-weight:500;opacity:0;transition:all .2s;pointer-events:none;white-space:nowrap;z-index:200;box-shadow:0 8px 28px rgba(0,0,0,0.4)}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -289,6 +353,9 @@ a{color:var(--accent)}
         <div class="field"><label>Email</label><input type="email" id="log-email" placeholder="ton@email.com" autocomplete="email"></div>
         <div class="field"><label>Mot de passe</label><input type="password" id="log-pwd" placeholder="••••••••" autocomplete="current-password"></div>
         <button class="btn-submit" id="btn-log" onclick="doLogin()">Se connecter</button>
+        <p style="text-align:center;margin-top:14px;font-size:.8rem;color:var(--ink3)">
+          <button onclick="useOtherAccount()" style="background:none;border:none;color:var(--accent);font-size:.8rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif">Utiliser un autre compte</button>
+        </p>
       </div>
     </div>
   </div>
@@ -450,6 +517,41 @@ a{color:var(--accent)}
   </div>
 </div>
 
+<!-- ASSISTANT IA FLOTTANT -->
+<button class="fab-assistant" id="fab-asst" onclick="openAssistant()" aria-label="Assistant IA" style="display:none">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9L12 3z" fill="white"/><circle cx="18" cy="5" r="1.5" fill="white" opacity=".7"/><circle cx="5.5" cy="17" r="1" fill="white" opacity=".5"/></svg>
+</button>
+
+<div class="asst-overlay" id="asst-overlay" onclick="closeAssistant()"></div>
+<div class="asst-panel" id="asst-panel">
+  <div class="asst-hd">
+    <div class="asst-hd-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9L12 3z" fill="#3B82F6"/></svg>
+    </div>
+    <div class="asst-hd-txt">
+      <div class="asst-hd-title">Assistant Nuro</div>
+      <div class="asst-hd-sub">Connaît tous vos enregistrements</div>
+    </div>
+    <span class="asst-quota" id="asst-quota">—</span>
+    <button class="asst-close" onclick="closeAssistant()" aria-label="Fermer">
+      <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M3.5 3.5l8 8M11.5 3.5l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div class="asst-chips" id="asst-chips">
+    <button class="asst-chip" onclick="asstChip('Résume mes 3 derniers enregistrements')">Résumer mes sessions</button>
+    <button class="asst-chip" onclick="asstChip('Quelles actions ai-je en attente ?')">Mes actions en attente</button>
+    <button class="asst-chip" onclick="asstChip('Retrouve où je parle de budget')">Rechercher un sujet</button>
+    <button class="asst-chip" onclick="asstChip('Quel enregistrement était le plus long ?')">Trier mes sessions</button>
+  </div>
+  <div class="asst-msgs" id="asst-msgs"></div>
+  <div class="asst-input-row" id="asst-input-row">
+    <textarea class="asst-input" id="asst-input" placeholder="Pose une question sur tes enregistrements…" rows="1" onkeydown="asstKey(event)"></textarea>
+    <button class="asst-send" id="asst-send" onclick="asstSend()" aria-label="Envoyer">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 9l14-6-6 14-2-6-6-2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/></svg>
+    </button>
+  </div>
+</div>
+
 <div id="toast"></div>
 
 <script>
@@ -496,7 +598,7 @@ function doRegister(){
   if(users[email]){authErr('Email déjà utilisé. Connecte-toi.');switchTab('login');return}
   users[email]={pwd:btoa(pwd),createdAt:Date.now()};
   K.saveUsers(users);
-  currentUser=email; localStorage.setItem('nuro_cu',email);
+  currentUser=email; localStorage.setItem('nuro_cu',email); localStorage.setItem('nuro_last_email',email);
   enterDashboard();
 }
 
@@ -506,14 +608,44 @@ function doLogin(){
   if(!email||!pwd){authErr('Remplis tous les champs.');return}
   const users=K.users();
   if(!users[email]||users[email].pwd!==btoa(pwd)){authErr('Email ou mot de passe incorrect.');return}
-  currentUser=email; localStorage.setItem('nuro_cu',email);
+  currentUser=email; localStorage.setItem('nuro_cu',email); localStorage.setItem('nuro_last_email',email);
   enterDashboard();
 }
 
 function doLogout(){
   if(isRec)stopRec();
+  // Mémoriser le dernier email pour le pré-remplir à la prochaine connexion
+  if(currentUser) localStorage.setItem('nuro_last_email', currentUser);
   currentUser=null; localStorage.removeItem('nuro_cu');
+  const fab=document.getElementById('fab-asst');if(fab)fab.style.display='none';
+  closeAssistant();
+  // Vider les mots de passe (jamais mémorisés) et pré-remplir l'email
+  const lp=document.getElementById('log-pwd'); if(lp) lp.value='';
+  const rp=document.getElementById('reg-pwd'); if(rp) rp.value='';
+  prefillEmail();
+  switchTab('login');
   showView('auth');
+  setTimeout(()=>document.getElementById('log-pwd')?.focus(),100);
+}
+
+// Pré-remplir l'email si l'utilisateur s'est déjà connecté avant
+function prefillEmail(){
+  const last = localStorage.getItem('nuro_last_email') || '';
+  if(!last) return;
+  const logEmail = document.getElementById('log-email');
+  const regEmail = document.getElementById('reg-email');
+  if(logEmail) logEmail.value = last;
+  if(regEmail) regEmail.value = last;
+}
+
+// Vider les champs pour se connecter avec un autre compte
+function useOtherAccount(){
+  localStorage.removeItem('nuro_last_email');
+  ['log-email','log-pwd','reg-email','reg-pwd'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.value='';
+  });
+  document.getElementById('auth-error')?.classList.remove('show');
+  document.getElementById('log-email')?.focus();
 }
 
 // ══ NAV ══
@@ -532,6 +664,7 @@ function enterDashboard(){
   const g=h<6?'Bonne nuit 🌙':h<12?'Bonjour ☀️':h<18?'Bon après-midi 🌤':'Bonne soirée 🌆';
   const el=document.getElementById('dash-greeting');if(el)el.textContent=g;
   renderStats();renderSessions();
+  const fab=document.getElementById('fab-asst');if(fab)fab.style.display='flex';
   showView('dashboard');
   if(isFounder()){setTimeout(()=>showToast('★ Accès Fondateur — bienvenue !'),400)}
   else if(!K.dgKey()||!K.clKey()){setTimeout(()=>{showToast('⚙️ Configure tes clés API pour commencer');showView('settings')},600)}
@@ -689,8 +822,33 @@ function openSession(id){
   html+=`
     <div class="detail-block"><div class="block-lbl">Transcription</div>
       <div class="transcript-box">
-        <div class="transcript-hd"><span class="transcript-lbl">Texte brut</span><span class="transcript-wc">${wc} mots</span></div>
-        <div class="transcript-txt">${s.transcript}</div>
+        <div class="transcript-hd">
+          <span class="transcript-lbl">Texte brut</span>
+          <div class="transcript-hd-actions">
+            <span class="transcript-wc" id="tx-wc-${id}">${wc} mots</span>
+            <button class="btn-ai-edit" onclick="toggleAiEdit('${id}')">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1l1.3 3.2L10.5 5 7.3 6.3 6 9.5 4.7 6.3 1.5 5l3.2-.8L6 1z" fill="currentColor"/></svg>
+              Modifier avec l'IA
+            </button>
+          </div>
+        </div>
+        <div class="ai-edit-bar" id="ai-edit-bar-${id}">
+          <div class="ai-edit-chips">
+            <button class="ai-edit-chip" onclick="aiEditChip('${id}','Corrige les fautes d\'orthographe et de grammaire')">Corriger les fautes</button>
+            <button class="ai-edit-chip" onclick="aiEditChip('${id}','Enlève les hésitations, répétitions et mots parasites')">Nettoyer</button>
+            <button class="ai-edit-chip" onclick="aiEditChip('${id}','Reformule proprement en style écrit clair')">Reformuler</button>
+            <button class="ai-edit-chip" onclick="aiEditChip('${id}','Ajoute la ponctuation et découpe en paragraphes')">Ponctuer</button>
+          </div>
+          <div class="ai-edit-input-row">
+            <input class="ai-edit-input" id="ai-edit-in-${id}" placeholder="Ou décris ta modification…" onkeydown="if(event.key==='Enter')runAiEdit('${id}')">
+            <button class="ai-edit-send" id="ai-edit-send-${id}" onclick="runAiEdit('${id}')">Appliquer</button>
+          </div>
+          <button class="ai-edit-undo" id="ai-edit-undo-${id}" onclick="undoAiEdit('${id}')">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6a4 4 0 104-4M2 6l1.6-1.3M2 6l1.4 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Annuler la modification
+          </button>
+        </div>
+        <div class="transcript-txt" id="tx-txt-${id}">${s.transcript}</div>
       </div>
     </div>
     <div class="ai-section">
@@ -844,6 +1002,238 @@ function saveKeys(){
   refreshSettings();showToast('✅ Clés sauvegardées');showView('dashboard');
 }
 
+// ══ MODIFICATION IA DE LA TRANSCRIPTION ══
+let aiEditBackup = {};
+
+function toggleAiEdit(id){
+  const bar=document.getElementById(`ai-edit-bar-${id}`);
+  if(bar)bar.classList.toggle('show');
+}
+
+function aiEditChip(id,instruction){
+  const input=document.getElementById(`ai-edit-in-${id}`);
+  if(input)input.value=instruction;
+  runAiEdit(id);
+}
+
+async function runAiEdit(id){
+  const s=sessions.find(x=>x.id===id);
+  if(!s)return;
+  const cl=K.clKey();
+  if(!cl){showToast('⚙️ Configure ta clé Claude dans Paramètres');return;}
+  const input=document.getElementById(`ai-edit-in-${id}`);
+  const instruction=input?.value.trim();
+  if(!instruction){showToast('Décris ta modification');return;}
+
+  const sendBtn=document.getElementById(`ai-edit-send-${id}`);
+  const txtEl=document.getElementById(`tx-txt-${id}`);
+  if(sendBtn){sendBtn.disabled=true;sendBtn.textContent='…';}
+
+  // Sauvegarder l'ancienne version pour pouvoir annuler
+  aiEditBackup[id]=s.transcript;
+
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'x-api-key':cl,'anthropic-version':'2023-06-01','Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({
+        model:'claude-haiku-4-5-20251001',max_tokens:2048,
+        system:`Tu modifies une transcription selon l'instruction de l'utilisateur. Réponds UNIQUEMENT avec le texte modifié, sans commentaire, sans préambule, sans guillemets. Conserve le sens et les informations, applique uniquement la transformation demandée.`,
+        messages:[{role:'user',content:`Instruction : ${instruction}\n\nTranscription à modifier :\n${s.transcript}`}]
+      })
+    });
+    if(!res.ok)throw new Error();
+    const data=await res.json();
+    const newText=(data.content?.[0]?.text||'').trim();
+    if(!newText)throw new Error();
+
+    // Appliquer
+    s.transcript=newText;
+    s.wordCount=newText.split(/\s+/).filter(Boolean).length;
+    K.saveSessions(sessions);
+    if(txtEl)txtEl.textContent=newText;
+    const wcEl=document.getElementById(`tx-wc-${id}`);
+    if(wcEl)wcEl.textContent=`${s.wordCount} mots`;
+    const undoBtn=document.getElementById(`ai-edit-undo-${id}`);
+    if(undoBtn)undoBtn.classList.add('show');
+    if(input)input.value='';
+    showToast('✅ Transcription modifiée');
+    renderStats();
+  }catch{
+    showToast('⚠️ Erreur — vérifie ta clé Claude');
+  }
+  if(sendBtn){sendBtn.disabled=false;sendBtn.textContent='Appliquer';}
+}
+
+function undoAiEdit(id){
+  const s=sessions.find(x=>x.id===id);
+  if(!s||!aiEditBackup[id])return;
+  s.transcript=aiEditBackup[id];
+  s.wordCount=s.transcript.split(/\s+/).filter(Boolean).length;
+  K.saveSessions(sessions);
+  const txtEl=document.getElementById(`tx-txt-${id}`);
+  if(txtEl)txtEl.textContent=s.transcript;
+  const wcEl=document.getElementById(`tx-wc-${id}`);
+  if(wcEl)wcEl.textContent=`${s.wordCount} mots`;
+  const undoBtn=document.getElementById(`ai-edit-undo-${id}`);
+  if(undoBtn)undoBtn.classList.remove('show');
+  delete aiEditBackup[id];
+  showToast('↺ Modification annulée');
+  renderStats();
+}
+
+// ══ ASSISTANT IA CENTRAL ══
+const ASST_LIMITS = { free: 5 };  // questions/jour pour le plan gratuit
+let asstHistory = [];
+
+function asstQuotaKey(){
+  const today = new Date().toISOString().slice(0,10);
+  return `nuro_asst_quota_${currentUser}_${today}`;
+}
+function getAsstUsed(){
+  return parseInt(localStorage.getItem(asstQuotaKey()) || '0', 10);
+}
+function incAsstUsed(){
+  localStorage.setItem(asstQuotaKey(), String(getAsstUsed()+1));
+}
+function asstUnlimited(){
+  // Fondateurs + (plus tard) plans payants = illimité
+  return isFounder();
+}
+function asstRemaining(){
+  if(asstUnlimited()) return Infinity;
+  return Math.max(0, ASST_LIMITS.free - getAsstUsed());
+}
+
+function updateAsstQuota(){
+  const el = document.getElementById('asst-quota');
+  if(!el) return;
+  if(asstUnlimited()){
+    el.textContent = '★ Illimité';
+    el.className = 'asst-quota founder';
+  } else {
+    const r = asstRemaining();
+    el.textContent = `${r}/${ASST_LIMITS.free} aujourd'hui`;
+    el.className = 'asst-quota ' + (r <= 1 ? 'low' : 'ok');
+  }
+}
+
+function openAssistant(){
+  document.getElementById('asst-overlay').classList.add('open');
+  document.getElementById('asst-panel').classList.add('open');
+  updateAsstQuota();
+  if(asstHistory.length === 0){
+    const c = document.getElementById('asst-msgs');
+    if(c) c.innerHTML = `<div class="asst-msg bot"><div class="asst-av">N</div><div class="asst-bubble">Bonjour ! Je connais tous vos enregistrements. Je peux les résumer, les trier, retrouver un sujet, lister vos actions en attente, ou répondre à n'importe quelle question. Que puis-je faire ?</div></div>`;
+  }
+  setTimeout(()=>document.getElementById('asst-input')?.focus(), 300);
+}
+function closeAssistant(){
+  document.getElementById('asst-overlay').classList.remove('open');
+  document.getElementById('asst-panel').classList.remove('open');
+}
+
+function asstAddMsg(role, text){
+  const c = document.getElementById('asst-msgs');
+  if(!c) return;
+  const d = document.createElement('div');
+  d.className = `asst-msg ${role==='user'?'user':'bot'}`;
+  d.innerHTML = `<div class="asst-av">${role==='user'?'Toi':'N'}</div><div class="asst-bubble">${text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>`;
+  c.appendChild(d);
+  c.scrollTop = c.scrollHeight;
+}
+
+function buildAsstContext(){
+  // Résumé compact de toutes les sessions pour donner le contexte à l'IA
+  if(sessions.length === 0) return "L'utilisateur n'a encore aucun enregistrement.";
+  return sessions.slice(0, 20).map((s,i) => {
+    const date = new Date(s.createdAt).toLocaleDateString('fr-FR');
+    const titre = s.summary?.titre || 'Sans titre';
+    const resume = s.summary?.resume || (s.transcript||'').substring(0,200);
+    const actions = (s.summary?.actions||[]).join('; ');
+    return `[Session ${i+1}] ${date} — "${titre}" (${fmtDur(s.duration)}, ${s.wordCount||0} mots)\nRésumé : ${resume}${actions?`\nActions : ${actions}`:''}`;
+  }).join('\n\n');
+}
+
+async function asstSend(){
+  const input = document.getElementById('asst-input');
+  const msg = input?.value.trim();
+  if(!msg) return;
+
+  // Vérifier le quota
+  if(!asstUnlimited() && asstRemaining() <= 0){
+    showAsstLimit();
+    return;
+  }
+
+  const cl = K.clKey();
+  if(!cl){ asstAddMsg('bot','⚙️ Configure ta clé Claude dans Paramètres pour utiliser l\\'assistant.'); return; }
+
+  input.value=''; input.style.height='auto';
+  const sendBtn = document.getElementById('asst-send');
+  if(sendBtn) sendBtn.disabled = true;
+
+  asstAddMsg('user', msg);
+  asstHistory.push({role:'user', content:msg});
+
+  const c = document.getElementById('asst-msgs');
+  const think = document.createElement('div');
+  think.className='asst-msg bot'; think.id='asst-think';
+  think.innerHTML=`<div class="asst-av">N</div><div class="asst-bubble thinking">Réflexion…</div>`;
+  if(c){c.appendChild(think);c.scrollTop=c.scrollHeight;}
+
+  const context = buildAsstContext();
+  const msgs = [...asstHistory.slice(-10).map(m=>({role:m.role==='user'?'user':'assistant',content:m.content}))];
+
+  try{
+    const res = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'x-api-key':cl,'anthropic-version':'2023-06-01','Content-Type':'application/json','anthropic-dangerous-direct-browser-access':'true'},
+      body:JSON.stringify({
+        model:'claude-haiku-4-5-20251001', max_tokens:1024,
+        system:`Tu es l'assistant IA de Nuro, une app d'enregistrement et transcription vocale. Tu aides l'utilisateur à exploiter TOUS ses enregistrements : les résumer, les trier, retrouver un sujet, lister ses actions en attente, répondre à ses questions.\n\nVoici les enregistrements de l'utilisateur :\n---\n${context}\n---\n\nRéponds en français, de façon concise et utile. Si l'utilisateur demande quelque chose qui concerne un enregistrement précis, réfère-t'y par son titre. Si l'information n'est pas dans les enregistrements, dis-le clairement.`,
+        messages: msgs
+      })
+    });
+    if(!res.ok) throw new Error();
+    const data = await res.json();
+    think.remove();
+    const reply = data.content?.[0]?.text || 'Désolé, je n\\'ai pas pu répondre.';
+    asstAddMsg('bot', reply);
+    asstHistory.push({role:'assistant', content:reply});
+    if(!asstUnlimited()){ incAsstUsed(); updateAsstQuota(); }
+  }catch{
+    think.remove();
+    asstAddMsg('bot','⚠️ Erreur de connexion. Vérifie ta clé Claude dans Paramètres.');
+  }
+  if(sendBtn) sendBtn.disabled = false;
+}
+
+function showAsstLimit(){
+  const c = document.getElementById('asst-msgs');
+  if(!c) return;
+  const d = document.createElement('div');
+  d.className = 'asst-limit';
+  d.innerHTML = `<div class="asst-limit-box">
+    <h4>🚀 Limite quotidienne atteinte</h4>
+    <p>Tu as utilisé tes ${ASST_LIMITS.free} questions gratuites du jour. Passe à un plan payant pour poser des questions en illimité.</p>
+    <button class="btn-upgrade" onclick="closeAssistant();showView('settings')">Voir les plans</button>
+  </div>`;
+  c.appendChild(d);
+  c.scrollTop = c.scrollHeight;
+}
+
+function asstChip(text){
+  const input = document.getElementById('asst-input');
+  if(input) input.value = text;
+  asstSend();
+}
+
+function asstKey(e){
+  if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); asstSend(); }
+  const t=e.target; t.style.height='auto'; t.style.height=Math.min(t.scrollHeight,120)+'px';
+}
+
 // ══ TOAST ══
 let toastT;
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),3200)}
@@ -854,8 +1244,43 @@ window.addEventListener('DOMContentLoaded',()=>{
   for(let i=0;i<22;i++){const b=document.createElement('div');b.className='viz-bar';viz.appendChild(b);vizBars.push(b)}
   document.getElementById('reg-pwd')?.addEventListener('keydown',e=>{if(e.key==='Enter')doRegister()});
   document.getElementById('log-pwd')?.addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
+
+  // Détecter les paramètres d'URL : ?login ou ?register
+  const params = new URLSearchParams(window.location.search);
+  const forceAuth = params.has('login') || params.has('register');
+  const wantRegister = params.has('register');
+
   const saved=localStorage.getItem('nuro_cu');
-  if(saved&&K.users()[saved]){currentUser=saved;enterDashboard()}
+
+  if(forceAuth){
+    // On vient du site via "Se connecter" ou "Commencer" → toujours montrer l'écran d'auth
+    prefillEmail();
+    if(wantRegister){
+      switchTab('register');
+      setTimeout(()=>{
+        const re=document.getElementById('reg-email');
+        if(re && !re.value) re.focus();
+      },100);
+    } else {
+      switchTab('login');
+      setTimeout(()=>{
+        const lp=document.getElementById('log-pwd');
+        if(lp) lp.focus();  // curseur sur le mot de passe, email déjà pré-rempli
+      },100);
+    }
+    showView('auth');
+  }
+  else if(saved&&K.users()[saved]){
+    currentUser=saved;enterDashboard();
+  }
+  else {
+    prefillEmail();
+    const last=localStorage.getItem('nuro_last_email');
+    if(last && K.users()[last]){
+      switchTab('login');
+      setTimeout(()=>document.getElementById('log-pwd')?.focus(),100);
+    }
+  }
 });
 </script>
 </body>
