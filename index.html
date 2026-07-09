@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#080C12">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="Nuro">
+<meta name="apple-mobile-web-app-title" content="kaideno">
 <link rel="manifest" href="manifest.json">
-<title>Nuro — Retient tout, pendant que tu parles</title>
+<title>kaideno — Retient tout, pendant que tu parles</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -334,7 +334,7 @@ a{color:var(--accent)}
         <rect x="7.7" y="7.7" width="12.6" height="12.6" rx="2.8" fill="none" stroke="#3D4D62" stroke-width="0.9" transform="rotate(8 14 14)"/>
         <rect x="8.7" y="8.7" width="10.6" height="10.6" rx="2.2" fill="none" stroke="#3B82F6" stroke-width="1.4" transform="rotate(-6 14 14)"/>
       </svg>
-      Nuro
+      kaideno
     </div>
     <div class="auth-panel">
       <div class="auth-tabs">
@@ -370,7 +370,7 @@ a{color:var(--accent)}
         <rect x="7.7" y="7.7" width="12.6" height="12.6" rx="2.8" fill="none" stroke="#3D4D62" stroke-width="0.9" transform="rotate(8 14 14)"/>
         <rect x="8.7" y="8.7" width="10.6" height="10.6" rx="2.2" fill="none" stroke="#3B82F6" stroke-width="1.4" transform="rotate(-6 14 14)"/>
       </svg>
-      Nuro
+      kaideno
     </div>
     <div class="nav-actions">
       <div class="user-pill"><span class="upill-dot"></span><span id="user-badge" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">—</span></div>
@@ -434,7 +434,7 @@ a{color:var(--accent)}
         <rect x="7.7" y="7.7" width="12.6" height="12.6" rx="2.8" fill="none" stroke="#3D4D62" stroke-width="0.9" transform="rotate(8 14 14)"/>
         <rect x="8.7" y="8.7" width="10.6" height="10.6" rx="2.2" fill="none" stroke="#3B82F6" stroke-width="1.4" transform="rotate(-6 14 14)"/>
       </svg>
-      Nuro
+      kaideno
     </div>
   </nav>
   <div class="detail-scroll"><div class="detail-inner" id="detail-content"></div></div>
@@ -449,7 +449,7 @@ a{color:var(--accent)}
         <rect x="7.7" y="7.7" width="12.6" height="12.6" rx="2.8" fill="none" stroke="#3D4D62" stroke-width="0.9" transform="rotate(8 14 14)"/>
         <rect x="8.7" y="8.7" width="10.6" height="10.6" rx="2.2" fill="none" stroke="#3B82F6" stroke-width="1.4" transform="rotate(-6 14 14)"/>
       </svg>
-      Nuro
+      kaideno
     </div>
     <div class="nav-actions">
       <button class="btn-icon" onclick="showView('dashboard')">
@@ -481,7 +481,7 @@ a{color:var(--accent)}
         <rect x="7.7" y="7.7" width="12.6" height="12.6" rx="2.8" fill="none" stroke="#3D4D62" stroke-width="0.9" transform="rotate(8 14 14)"/>
         <rect x="8.7" y="8.7" width="10.6" height="10.6" rx="2.2" fill="none" stroke="#3B82F6" stroke-width="1.4" transform="rotate(-6 14 14)"/>
       </svg>
-      Nuro
+      kaideno
     </div>
     <div class="nav-actions">
       <button class="btn-icon" onclick="showView('dashboard')">
@@ -497,7 +497,7 @@ a{color:var(--accent)}
         <details style="margin-top:8px">
           <summary style="cursor:pointer;font-size:.8rem;color:var(--ink2);font-weight:600;padding:6px 0">⚙️ Options avancées (clés API personnelles)</summary>
           <div style="padding-top:12px">
-            <div class="info-card" style="font-size:.8rem">Optionnel : si tu veux utiliser tes propres clés API au lieu du service Nuro, entre-les ici. Sinon, laisse vide — tout marche déjà.</div>
+            <div class="info-card" style="font-size:.8rem">Optionnel : si tu veux utiliser tes propres clés API au lieu du service kaideno, entre-les ici. Sinon, laisse vide — tout marche déjà.</div>
             <div class="field">
               <div class="key-row"><label style="font-size:.75rem;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.05em">Clé Deepgram</label><span class="key-status" id="dg-status">—</span></div>
               <input type="password" id="dg-key" placeholder="Optionnel…">
@@ -535,7 +535,7 @@ a{color:var(--accent)}
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9L12 3z" fill="#3B82F6"/></svg>
     </div>
     <div class="asst-hd-txt">
-      <div class="asst-hd-title">Assistant Nuro</div>
+      <div class="asst-hd-title">Assistant kaideno</div>
       <div class="asst-hd-sub">Connaît tous vos enregistrements</div>
     </div>
     <span class="asst-quota" id="asst-quota">—</span>
@@ -953,7 +953,7 @@ async function callAi(id,msg){
   try{
     const res=await callClaude({
         model:'claude-haiku-4-5-20251001',max_tokens:1024,
-        system:`Tu es un assistant IA intégré à Nuro. Tu aides à exploiter le contenu d'un enregistrement vocal.\n\nTranscription :\n---\n${s.transcript}\n---\n${s.summary?`Résumé : ${s.summary.resume}`:''}\n\nRéponds en français, de façon concise. Fournis directement le contenu demandé (email, traduction, etc).`,
+        system:`Tu es un assistant IA intégré à kaideno. Tu aides à exploiter le contenu d'un enregistrement vocal.\n\nTranscription :\n---\n${s.transcript}\n---\n${s.summary?`Résumé : ${s.summary.resume}`:''}\n\nRéponds en français, de façon concise. Fournis directement le contenu demandé (email, traduction, etc).`,
         messages:msgs
     });
     if(!res.ok)throw new Error();
@@ -1162,7 +1162,7 @@ function openAssistant(){
         <button class="asst-chip" onclick="asstChip('Aide-moi à rédiger un email')">Rédiger un email</button>`;
     } else {
       chips.innerHTML = `
-        <button class="asst-chip" onclick="asstChip('Comment fonctionne Nuro ?')">Comment ça marche ?</button>
+        <button class="asst-chip" onclick="asstChip('Comment fonctionne kaideno ?')">Comment ça marche ?</button>
         <button class="asst-chip" onclick="asstChip('Donne-moi des idées pour être plus productif')">Conseils productivité</button>
         <button class="asst-chip" onclick="asstChip('Aide-moi à rédiger un email professionnel')">Rédiger un email</button>
         <button class="asst-chip" onclick="asstChip('Traduis un texte en anglais')">Traduire un texte</button>`;
@@ -1237,7 +1237,7 @@ async function asstSend(){
   try{
     const res = await callClaude({
         model:'claude-haiku-4-5-20251001', max_tokens:1024,
-        system:`Tu es l'assistant IA de Nuro, une app d'enregistrement et transcription vocale. Tu es polyvalent et serviable comme un assistant général : tu réponds à TOUTES les questions de l'utilisateur, qu'elles concernent ses enregistrements ou non (culture générale, aide à la rédaction, traduction, conseils, explications, etc.).\n\nTu peux aussi aider l'utilisateur avec ses enregistrements : les résumer, les trier, retrouver un sujet, lister ses actions en attente.\n\nÉtat des enregistrements de l'utilisateur :\n---\n${context}\n---\n\nRéponds en français, de façon concise, claire et utile. Si la question concerne un enregistrement précis, réfère-t'y par son titre. Si l'utilisateur n'a pas encore d'enregistrement et pose une question générale, réponds simplement à sa question sans insister sur les enregistrements.`,
+        system:`Tu es l'assistant IA de kaideno, une app d'enregistrement et transcription vocale. Tu es polyvalent et serviable comme un assistant général : tu réponds à TOUTES les questions de l'utilisateur, qu'elles concernent ses enregistrements ou non (culture générale, aide à la rédaction, traduction, conseils, explications, etc.).\n\nTu peux aussi aider l'utilisateur avec ses enregistrements : les résumer, les trier, retrouver un sujet, lister ses actions en attente.\n\nÉtat des enregistrements de l'utilisateur :\n---\n${context}\n---\n\nRéponds en français, de façon concise, claire et utile. Si la question concerne un enregistrement précis, réfère-t'y par son titre. Si l'utilisateur n'a pas encore d'enregistrement et pose une question générale, réponds simplement à sa question sans insister sur les enregistrements.`,
         messages: msgs
     });
     if(!res.ok) throw new Error();
