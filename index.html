@@ -562,6 +562,13 @@ a{color:var(--accent)}
           </div>
         </details>
       </div>
+      <div class="settings-section" id="admin-section" style="display:none">
+        <p class="settings-lbl">★ Administration</p>
+        <div class="acct-card">
+          <div><div class="acct-email">Espace fondateur</div><div class="acct-info">Statistiques et gestion</div></div>
+          <button class="btn-logout" style="background:var(--accent);color:white;border:none" onclick="showView('admin')">Ouvrir</button>
+        </div>
+      </div>
       <div class="settings-section">
         <p class="settings-lbl">Compte</p>
         <div class="acct-card">
@@ -569,6 +576,23 @@ a{color:var(--accent)}
           <button class="btn-logout" onclick="doLogout()">Déconnexion</button>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- VUE ADMIN (fondateurs uniquement) -->
+<div id="view-admin" class="view">
+  <nav class="nav">
+    <div style="display:flex;align-items:center;gap:10px">
+      <button class="btn-icon" onclick="showView('settings')">
+        <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M9 11L5 7.5 9 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1rem">★ Administration</span>
+    </div>
+  </nav>
+  <div class="settings-scroll">
+    <div class="settings-inner" id="admin-content">
+      <!-- rempli par renderAdmin() -->
     </div>
   </div>
 </div>
@@ -749,6 +773,7 @@ function showView(name){
   document.getElementById(`view-${name}`).classList.add('active');
   if(name==='settings')refreshSettings();
   if(name==='history')renderHistory('');
+  if(name==='admin')renderAdmin();
   window.scrollTo(0,0);
 }
 
@@ -1182,6 +1207,77 @@ function refreshSettings(){
   const em=document.getElementById('s-email');const info=document.getElementById('s-info');
   if(em){em.textContent=currentUser||'—';if(isFounder())em.innerHTML+=' <span style="font-size:.7rem;background:rgba(240,180,41,0.12);color:#F0B429;border:1px solid rgba(240,180,41,0.3);border-radius:999px;padding:1px 7px;font-weight:700">★ Fondateur</span>'}
   if(info)info.textContent=`${sessions.length} enregistrement${sessions.length>1?'s':''}`;
+  // Afficher la section admin pour les fondateurs
+  const adminSec=document.getElementById('admin-section');
+  if(adminSec)adminSec.style.display=isFounder()?'block':'none';
+}
+
+function renderAdmin(){
+  if(!isFounder()){showView('dashboard');return}
+  const el=document.getElementById('admin-content');
+  if(!el)return;
+
+  // Stats de MON compte
+  const totalDur=sessions.reduce((a,s)=>a+(s.duration||0),0);
+  const totalWords=sessions.reduce((a,s)=>a+(s.wordCount||0),0);
+  const totalSummaries=sessions.filter(s=>s.summary).length;
+  const h=Math.floor(totalDur/3600),m=Math.floor((totalDur%3600)/60);
+
+  // Comptes créés sur CET appareil
+  const users=K.users();
+  const emails=Object.keys(users);
+
+  // Usage assistant (aujourd'hui)
+  const asstToday=parseInt(localStorage.getItem(asstQuotaKey())||'0',10);
+
+  el.innerHTML=`
+    <div class="settings-section">
+      <p class="settings-lbl">Mes statistiques</p>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
+        <div style="background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:16px">
+          <div style="font-size:1.6rem;font-weight:700;font-family:'Space Grotesk',sans-serif;color:var(--accent)">${sessions.length}</div>
+          <div style="font-size:.75rem;color:var(--ink3)">enregistrements</div>
+        </div>
+        <div style="background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:16px">
+          <div style="font-size:1.6rem;font-weight:700;font-family:'Space Grotesk',sans-serif;color:var(--accent)">${h>0?h+'h':''}${m}min</div>
+          <div style="font-size:.75rem;color:var(--ink3)">audio total</div>
+        </div>
+        <div style="background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:16px">
+          <div style="font-size:1.6rem;font-weight:700;font-family:'Space Grotesk',sans-serif;color:var(--accent)">${totalWords.toLocaleString('fr-FR')}</div>
+          <div style="font-size:.75rem;color:var(--ink3)">mots transcrits</div>
+        </div>
+        <div style="background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:16px">
+          <div style="font-size:1.6rem;font-weight:700;font-family:'Space Grotesk',sans-serif;color:var(--accent)">${totalSummaries}</div>
+          <div style="font-size:.75rem;color:var(--ink3)">résumés générés</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <p class="settings-lbl">Activité IA</p>
+      <div class="info-card">Questions à l'assistant aujourd'hui : <strong>${asstToday}</strong>${isFounder()?' (illimité — fondateur)':''}</div>
+    </div>
+
+    <div class="settings-section">
+      <p class="settings-lbl">Comptes sur cet appareil (${emails.length})</p>
+      <div class="info-card" style="font-size:.78rem;margin-bottom:10px">ℹ️ Seuls les comptes créés sur CE navigateur sont visibles. Pour voir tous les utilisateurs où qu'ils soient, il faudra une base de données centrale (étape future).</div>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        ${emails.length===0?'<div style="font-size:.85rem;color:var(--ink3)">Aucun compte enregistré.</div>':emails.map(em=>{
+          const u=users[em];
+          const date=u.createdAt?new Date(u.createdAt).toLocaleDateString('fr-FR'):'—';
+          const founder=FOUNDERS.includes(em.toLowerCase());
+          return `<div style="display:flex;align-items:center;justify-content:space-between;background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px">
+            <div><div style="font-size:.86rem;font-weight:600">${em}${founder?' <span style="font-size:.65rem;color:#F0B429">★</span>':''}</div><div style="font-size:.72rem;color:var(--ink3)">Inscrit le ${date}</div></div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <p class="settings-lbl">Surveillance des coûts</p>
+      <div class="info-card" style="font-size:.82rem">💡 Rappel : chaque enregistrement et résumé consomme ton crédit API (Deepgram + Anthropic). Surveille ta consommation sur <a href="https://console.deepgram.com" target="_blank" style="color:var(--accent)">console.deepgram.com</a> et <a href="https://console.anthropic.com" target="_blank" style="color:var(--accent)">console.anthropic.com</a>.</div>
+    </div>
+  `;
 }
 function saveKeys(){
   const dg=document.getElementById('dg-key').value.trim();
