@@ -1000,7 +1000,14 @@ function applyUILang(){
 }
 function setUILang(lang){
   localStorage.setItem('kaideno_ui_lang', lang);
-  location.reload();
+  // Retirer ?lang= de l'URL, sinon il écraserait le choix manuel au rechargement
+  try{
+    const url = new URL(window.location.href);
+    url.searchParams.delete('lang');
+    window.location.replace(url.toString());
+  }catch(e){
+    location.reload();
+  }
 }
 
 // ══ BACKEND CLOUDFLARE ══
