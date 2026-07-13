@@ -360,23 +360,23 @@ a{color:var(--accent)}
     </div>
     <div class="auth-panel">
       <div class="auth-tabs">
-        <button class="auth-tab active" id="tab-reg" onclick="switchTab('register')">Créer un compte</button>
-        <button class="auth-tab" id="tab-log" onclick="switchTab('login')">Se connecter</button>
+        <button class="auth-tab active" id="tab-reg" onclick="switchTab('register')" data-i18n="a1">Créer un compte</button>
+        <button class="auth-tab" id="tab-log" onclick="switchTab('login')" data-i18n="a2">Se connecter</button>
       </div>
       <div id="auth-error" class="auth-error"></div>
       <div id="auth-register">
-        <p class="auth-sub">Gratuit pour commencer — aucune carte bancaire.</p>
-        <div class="field"><label>Email</label><input type="email" id="reg-email" placeholder="ton@email.com" autocomplete="email"></div>
-        <div class="field"><label>Mot de passe</label><input type="password" id="reg-pwd" placeholder="Minimum 8 caractères" autocomplete="new-password"></div>
-        <button class="btn-submit" id="btn-reg" onclick="doRegister()">Créer mon compte</button>
+        <p class="auth-sub" data-i18n="a3">Gratuit pour commencer — aucune carte bancaire.</p>
+        <div class="field"><label data-i18n="a.email">Email</label><input type="email" id="reg-email" data-i18n-ph="a.emailph" placeholder="ton@email.com" autocomplete="email"></div>
+        <div class="field"><label data-i18n="a4">Mot de passe</label><input type="password" id="reg-pwd" data-i18n-ph="a.pwdph" placeholder="Minimum 8 caractères" autocomplete="new-password"></div>
+        <button class="btn-submit" id="btn-reg" onclick="doRegister()" data-i18n="a5">Créer mon compte</button>
       </div>
       <div id="auth-login" style="display:none">
-        <p class="auth-sub">Content de te revoir !</p>
-        <div class="field"><label>Email</label><input type="email" id="log-email" placeholder="ton@email.com" autocomplete="email"></div>
-        <div class="field"><label>Mot de passe</label><input type="password" id="log-pwd" placeholder="••••••••" autocomplete="current-password"></div>
-        <button class="btn-submit" id="btn-log" onclick="doLogin()">Se connecter</button>
+        <p class="auth-sub" data-i18n="a6">Content de te revoir !</p>
+        <div class="field"><label data-i18n="a.email">Email</label><input type="email" id="log-email" data-i18n-ph="a.emailph" placeholder="ton@email.com" autocomplete="email"></div>
+        <div class="field"><label data-i18n="a7">Mot de passe</label><input type="password" id="log-pwd" placeholder="••••••••" autocomplete="current-password"></div>
+        <button class="btn-submit" id="btn-log" onclick="doLogin()" data-i18n="a8">Se connecter</button>
         <p style="text-align:center;margin-top:14px;font-size:.8rem;color:var(--ink3)">
-          <button onclick="useOtherAccount()" style="background:none;border:none;color:var(--accent);font-size:.8rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif">Utiliser un autre compte</button>
+          <button onclick="useOtherAccount()" style="background:none;border:none;color:var(--accent);font-size:.8rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif" data-i18n="a9">Utiliser un autre compte</button>
         </p>
       </div>
     </div>
@@ -414,7 +414,7 @@ a{color:var(--accent)}
   <div class="dash-scroll">
     <div class="dash-hero">
       <div class="dash-hero-inner">
-        <p class="dash-greeting" id="dash-greeting">Prêt à enregistrer</p>
+        <p class="dash-greeting" id="dash-greeting" data-i18n="a10">Prêt à enregistrer</p>
         <div class="rec-wrap" id="rec-wrap">
           <div class="rec-ring rec-ring-1"></div>
           <div class="rec-ring rec-ring-2"></div>
@@ -430,11 +430,11 @@ a{color:var(--accent)}
             </svg>
           </button>
         </div>
-        <p class="rec-status" id="rec-status">Appuie pour enregistrer</p>
+        <p class="rec-status" id="rec-status" data-i18n="a11">Appuie pour enregistrer</p>
         <div class="rec-timer" id="rec-timer">00:00</div>
         <div class="audio-viz" id="audio-viz"></div>
         <div class="lang-selector" id="lang-selector">
-          <span class="lang-label">Langue :</span>
+          <span class="lang-label" data-i18n="a12">Langue :</span>
           <select id="rec-lang" onchange="saveRecLang()">
             <option value="fr">🇫🇷 Français</option>
             <option value="en">🇬🇧 English</option>
@@ -453,9 +453,9 @@ a{color:var(--accent)}
       </div>
     </div>
     <div class="dash-stats">
-      <div class="stat-cell"><div class="stat-v" id="s-count">0</div><div class="stat-l">Sessions</div></div>
-      <div class="stat-cell"><div class="stat-v" id="s-time">0m</div><div class="stat-l">Total audio</div></div>
-      <div class="stat-cell"><div class="stat-v" id="s-words">0</div><div class="stat-l">Mots</div></div>
+      <div class="stat-cell"><div class="stat-v" id="s-count">0</div><div class="stat-l" data-i18n="a13">Sessions</div></div>
+      <div class="stat-cell"><div class="stat-v" id="s-time">0m</div><div class="stat-l" data-i18n="a14">Total audio</div></div>
+      <div class="stat-cell"><div class="stat-v" id="s-words">0</div><div class="stat-l" data-i18n="a15">Mots</div></div>
     </div>
     <div class="dash-inner">
       <div class="live-box" id="live-box">
@@ -463,13 +463,13 @@ a{color:var(--accent)}
         <div class="live-txt" id="live-txt"></div>
         <div class="live-ai" id="live-ai">
           <div class="live-ai-row">
-            <input class="live-ai-input" id="live-ai-input" placeholder="Demander à l'IA pendant l'enregistrement…" onkeydown="if(event.key==='Enter')askLiveAi()">
-            <button class="live-ai-btn" onclick="askLiveAi()">Demander</button>
+            <input class="live-ai-input" id="live-ai-input" data-i18n-ph="js.asktrans" placeholder="Demander à l'IA pendant l'enregistrement…" onkeydown="if(event.key==='Enter')askLiveAi()">
+            <button class="live-ai-btn" onclick="askLiveAi()" data-i18n="a16">Demander</button>
           </div>
           <div class="live-ai-answer" id="live-ai-answer"></div>
         </div>
       </div>
-      <div class="sessions-hd"><span class="sessions-lbl">Enregistrements</span><span class="sessions-ct" id="s-ct">0</span></div>
+      <div class="sessions-hd"><span class="sessions-lbl" data-i18n="a17">Enregistrements</span><span class="sessions-ct" id="s-ct">0</span></div>
       <div id="sessions-list"></div>
     </div>
   </div>
@@ -509,12 +509,12 @@ a{color:var(--accent)}
   </nav>
   <div class="history-scroll">
     <div class="history-inner">
-      <h2 style="font-size:1.3rem;margin-bottom:5px">Historique</h2>
-      <p style="color:var(--ink2);font-size:.84rem;margin-bottom:20px">Tous tes enregistrements, classés et cherchables.</p>
+      <h2 style="font-size:1.3rem;margin-bottom:5px" data-i18n="a18">Historique</h2>
+      <p style="color:var(--ink2);font-size:.84rem;margin-bottom:20px" data-i18n="a19">Tous tes enregistrements, classés et cherchables.</p>
       <div class="h-stats" id="h-stats"></div>
       <div class="search-bar">
         <div class="search-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10 10l3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
-        <input class="search-input" id="h-search" placeholder="Cherche dans tes enregistrements…" oninput="filterHistory(this.value)">
+        <input class="search-input" id="h-search" data-i18n-ph="a.searchrec" placeholder="Cherche dans tes enregistrements…" oninput="filterHistory(this.value)">
         <button class="search-clear" onclick="clearSearch()">✕</button>
       </div>
       <div id="h-list"></div>
@@ -542,38 +542,49 @@ a{color:var(--accent)}
   <div class="settings-scroll">
     <div class="settings-inner">
       <div class="settings-section">
-        <p class="settings-lbl">Transcription & IA</p>
-        <div class="info-card">✅ <strong>Tout est prêt.</strong> La transcription et l'IA fonctionnent directement — aucune configuration nécessaire de ta part. Tes enregistrements sont transcrits et résumés automatiquement.</div>
+        <p class="settings-lbl" data-i18n="ui.lang.lbl">Langue de l'interface</p>
+        <div class="acct-card">
+          <div><div class="acct-email" data-i18n="ui.lang.desc">Langue des menus et boutons</div></div>
+          <select id="ui-lang" onchange="setUILang(this.value)" style="background:var(--bg2);border:1.5px solid var(--line);border-radius:var(--radius-sm);color:var(--ink);font-size:.85rem;font-weight:600;font-family:'Inter',sans-serif;padding:8px 10px;cursor:pointer;outline:none">
+            <option value="fr">🇫🇷 Français</option>
+            <option value="en">🇬🇧 English</option>
+            <option value="es">🇪🇸 Español</option>
+          </select>
+        </div>
+      </div>
+      <div class="settings-section">
+        <p class="settings-lbl" data-i18n="a20">Transcription & IA</p>
+        <div class="info-card" data-i18n-html="a.ready">✅ <strong>Tout est prêt.</strong> La transcription et l'IA fonctionnent directement — aucune configuration nécessaire de ta part. Tes enregistrements sont transcrits et résumés automatiquement.</div>
         <details style="margin-top:8px">
-          <summary style="cursor:pointer;font-size:.8rem;color:var(--ink2);font-weight:600;padding:6px 0">⚙️ Options avancées (clés API personnelles)</summary>
+          <summary style="cursor:pointer;font-size:.8rem;color:var(--ink2);font-weight:600;padding:6px 0" data-i18n="a21">⚙️ Options avancées (clés API personnelles)</summary>
           <div style="padding-top:12px">
-            <div class="info-card" style="font-size:.8rem">Optionnel : si tu veux utiliser tes propres clés API au lieu du service kaideno, entre-les ici. Sinon, laisse vide — tout marche déjà.</div>
+            <div class="info-card" style="font-size:.8rem" data-i18n="a22">Optionnel : si tu veux utiliser tes propres clés API au lieu du service kaideno, entre-les ici. Sinon, laisse vide — tout marche déjà.</div>
             <div class="field">
-              <div class="key-row"><label style="font-size:.75rem;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.05em">Clé Deepgram</label><span class="key-status" id="dg-status">—</span></div>
-              <input type="password" id="dg-key" placeholder="Optionnel…">
+              <div class="key-row"><label style="font-size:.75rem;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.05em" data-i18n="a23">Clé Deepgram</label><span class="key-status" id="dg-status">—</span></div>
+              <input type="password" id="dg-key" data-i18n-ph="a.optional" placeholder="Optionnel…">
               <p class="field-hint">→ <a href="https://console.deepgram.com" target="_blank">console.deepgram.com</a></p>
             </div>
             <div class="field">
-              <div class="key-row"><label style="font-size:.75rem;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.05em">Clé Claude (Anthropic)</label><span class="key-status" id="cl-status">—</span></div>
-              <input type="password" id="cl-key" placeholder="Optionnel…">
+              <div class="key-row"><label style="font-size:.75rem;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.05em" data-i18n="a24">Clé Claude (Anthropic)</label><span class="key-status" id="cl-status">—</span></div>
+              <input type="password" id="cl-key" data-i18n-ph="a.optional" placeholder="Optionnel…">
               <p class="field-hint">→ <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a></p>
             </div>
-            <button class="btn-save" onclick="saveKeys()">Sauvegarder</button>
+            <button class="btn-save" onclick="saveKeys()" data-i18n="a25">Sauvegarder</button>
           </div>
         </details>
       </div>
       <div class="settings-section" id="admin-section" style="display:none">
-        <p class="settings-lbl">★ Administration</p>
+        <p class="settings-lbl" data-i18n="a26">★ Administration</p>
         <div class="acct-card">
-          <div><div class="acct-email">Espace fondateur</div><div class="acct-info">Statistiques et gestion</div></div>
-          <button class="btn-logout" style="background:var(--accent);color:white;border:none" onclick="showView('admin')">Ouvrir</button>
+          <div><div class="acct-email" data-i18n="a27">Espace fondateur</div><div class="acct-info" data-i18n="a28">Statistiques et gestion</div></div>
+          <button class="btn-logout" style="background:var(--accent);color:white;border:none" onclick="showView('admin')" data-i18n="a29">Ouvrir</button>
         </div>
       </div>
       <div class="settings-section">
-        <p class="settings-lbl">Compte</p>
+        <p class="settings-lbl" data-i18n="a30">Compte</p>
         <div class="acct-card">
           <div><div class="acct-email" id="s-email">—</div><div class="acct-info" id="s-info">—</div></div>
-          <button class="btn-logout" onclick="doLogout()">Déconnexion</button>
+          <button class="btn-logout" onclick="doLogout()" data-i18n="a31">Déconnexion</button>
         </div>
       </div>
     </div>
@@ -587,7 +598,7 @@ a{color:var(--accent)}
       <button class="btn-icon" onclick="showView('settings')">
         <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M9 11L5 7.5 9 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1rem">★ Administration</span>
+      <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1rem" data-i18n="a32">★ Administration</span>
     </div>
   </nav>
   <div class="settings-scroll">
@@ -609,8 +620,8 @@ a{color:var(--accent)}
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9L12 3z" fill="#3B82F6"/></svg>
     </div>
     <div class="asst-hd-txt">
-      <div class="asst-hd-title">Assistant kaideno</div>
-      <div class="asst-hd-sub">Connaît tous vos enregistrements</div>
+      <div class="asst-hd-title" data-i18n="a33">Assistant kaideno</div>
+      <div class="asst-hd-sub" data-i18n="a34">Connaît tous vos enregistrements</div>
     </div>
     <span class="asst-quota" id="asst-quota">—</span>
     <button class="asst-close" onclick="closeAssistant()" aria-label="Fermer">
@@ -618,14 +629,14 @@ a{color:var(--accent)}
     </button>
   </div>
   <div class="asst-chips" id="asst-chips">
-    <button class="asst-chip" onclick="asstChip('Résume mes 3 derniers enregistrements')">Résumer mes sessions</button>
-    <button class="asst-chip" onclick="asstChip('Quelles actions ai-je en attente ?')">Mes actions en attente</button>
-    <button class="asst-chip" onclick="asstChip('Retrouve où je parle de budget')">Rechercher un sujet</button>
-    <button class="asst-chip" onclick="asstChip('Quel enregistrement était le plus long ?')">Trier mes sessions</button>
+    <button class="asst-chip" onclick="asstChip('Résume mes 3 derniers enregistrements')" data-i18n="a35">Résumer mes sessions</button>
+    <button class="asst-chip" onclick="asstChip('Quelles actions ai-je en attente ?')" data-i18n="a36">Mes actions en attente</button>
+    <button class="asst-chip" onclick="asstChip('Retrouve où je parle de budget')" data-i18n="a37">Rechercher un sujet</button>
+    <button class="asst-chip" onclick="asstChip('Quel enregistrement était le plus long ?')" data-i18n="a38">Trier mes sessions</button>
   </div>
   <div class="asst-msgs" id="asst-msgs"></div>
   <div class="asst-input-row" id="asst-input-row">
-    <textarea class="asst-input" id="asst-input" placeholder="Pose une question sur tes enregistrements…" rows="1" onkeydown="asstKey(event)"></textarea>
+    <textarea class="asst-input" id="asst-input" data-i18n-ph="js.askplaceholder" placeholder="Pose une question sur tes enregistrements…" rows="1" onkeydown="asstKey(event)"></textarea>
     <button class="asst-send" id="asst-send" onclick="asstSend()" aria-label="Envoyer">
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 9l14-6-6 14-2-6-6-2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/></svg>
     </button>
@@ -638,6 +649,359 @@ a{color:var(--accent)}
 // ══ FONDATEURS ══
 const FOUNDERS = ['vincent.naigeon@gmail.com','worldultimaterecords@outlook.com'];
 const isFounder = () => FOUNDERS.includes((currentUser||'').toLowerCase());
+
+
+// ══ TRADUCTION DE L'INTERFACE (FR / EN / ES) ══
+const UI = {
+  fr: {
+    'a.ready':'✅ <strong>Tout est prêt.</strong> La transcription et l\'IA fonctionnent directement — aucune configuration nécessaire de ta part.',
+    'a.searchrec':'Cherche dans tes enregistrements…',
+    'a.email':'Email',
+    'a.emailph':'ton@email.com',
+    'a.pwdph':'Minimum 8 caractères',
+    'a.optional':'Optionnel…',
+    'a.search':'Rechercher…',
+    'ui.lang.lbl':'Langue de l\'interface',
+    'ui.lang.desc':'Langue des menus et boutons',
+    'a1':'Créer un compte',
+    'a2':'Se connecter',
+    'a3':'Gratuit pour commencer — aucune carte bancaire.',
+    'a4':'Mot de passe',
+    'a5':'Créer mon compte',
+    'a6':'Content de te revoir !',
+    'a7':'Mot de passe',
+    'a8':'Se connecter',
+    'a9':'Utiliser un autre compte',
+    'a10':'Prêt à enregistrer',
+    'a11':'Appuie pour enregistrer',
+    'a12':'Langue :',
+    'a13':'Sessions',
+    'a14':'Total audio',
+    'a15':'Mots',
+    'a16':'Demander',
+    'a17':'Enregistrements',
+    'a18':'Historique',
+    'a19':'Tous tes enregistrements, classés et cherchables.',
+    'a20':'Transcription & IA',
+    'a21':'⚙️ Options avancées (clés API personnelles)',
+    'a22':'Optionnel : si tu veux utiliser tes propres clés API au lieu du service kaideno, entre-les ici. Sinon, laisse vide — tout marche déjà.',
+    'a23':'Clé Deepgram',
+    'a24':'Clé Claude (Anthropic)',
+    'a25':'Sauvegarder',
+    'a26':'★ Administration',
+    'a27':'Espace fondateur',
+    'a28':'Statistiques et gestion',
+    'a29':'Ouvrir',
+    'a30':'Compte',
+    'a31':'Déconnexion',
+    'a32':'★ Administration',
+    'a33':'Assistant kaideno',
+    'a34':'Connaît tous vos enregistrements',
+    'a35':'Résumer mes sessions',
+    'a36':'Mes actions en attente',
+    'a37':'Rechercher un sujet',
+    'a38':'Trier mes sessions',
+    'js.fields':'Remplis tous les champs.',
+    'js.pwdshort':'Mot de passe trop court (min. 8 caractères).',
+    'js.emailused':'Email déjà utilisé. Connecte-toi.',
+    'js.badlogin':'Email ou mot de passe incorrect.',
+    'js.night':'Bonne nuit 🌙',
+    'js.morning':'Bonjour ☀️',
+    'js.afternoon':'Bon après-midi 🌤',
+    'js.evening':'Bonne soirée 🌆',
+    'js.founder':'★ Accès Fondateur — bienvenue !',
+    'js.micdenied':'🎤 Autorise le micro dans ton navigateur',
+    'js.micerror':'⚠️ Impossible d\'accéder au micro',
+    'js.saved':'🎙️ Sauvegardé — résumé en cours…',
+    'js.summaryok':'✅ Résumé prêt !',
+    'js.summaryerr':'⚠️ Erreur lors du résumé',
+    'js.tooshort':'Enregistrement trop court',
+    'js.stoprec':'Appuie pour arrêter',
+    'js.taprec':'Appuie pour enregistrer',
+    'js.thinking':t('js.thinking'),
+    'js.noreply':t('js.noreply'),
+    'js.errretry':'⚠️ Erreur — réessaie.',
+    'js.empty':'Appuie sur le micro ci-dessus pour capturer ta première session.',
+    'js.summary':'Résumé',
+    'js.summaryready':'✓ Résumé prêt',
+    'js.keypoints':'Points clés',
+    'js.actions':'Actions',
+    'js.generating':'⟳ Génération du résumé en cours…',
+    'js.transcript':'Transcription',
+    'js.rawtext':'Texte brut',
+    'js.words':'mots',
+    'js.aiedit':'Modifier avec l\'IA',
+    'js.fixtypos':'Corriger les fautes',
+    'js.clean':'Nettoyer',
+    'js.rephrase':'Reformuler',
+    'js.punctuate':'Ponctuer',
+    'js.describe':'Ou décris ta modification…',
+    'js.apply':'Appliquer',
+    'js.undo':'↺ Annuler la modification',
+    'js.modified':'✅ Transcription modifiée',
+    'js.undone':'↺ Modification annulée',
+    'js.confirmdel':'Supprimer définitivement ?',
+    'js.deleted':'Supprimé',
+    'js.noresult':'Aucun résultat pour',
+    'js.keysaved':'✅ Clés sauvegardées',
+    'js.describechange':'Décris ta modification',
+    'js.limitreached':'🚀 Limite quotidienne atteinte',
+    'js.limittext':'Tu as utilisé tes questions gratuites du jour. Passe à un plan payant pour poser des questions en illimité.',
+    'js.seeplans':'Voir les plans',
+    'js.today':'aujourd\'hui',
+    'js.unlimited':'★ Illimité',
+    'js.welcome1':'Bonjour ! Je suis votre assistant. Je peux répondre à toutes vos questions, mais aussi exploiter vos enregistrements : les résumer, les trier, retrouver un sujet, lister vos actions. Que puis-je faire ?',
+    'js.welcome2':'Bonjour ! Je suis votre assistant IA. Posez-moi n\'importe quelle question — j\'y réponds. Et dès que vous ferez un enregistrement, je pourrai aussi le résumer et retrouver vos informations. Comment puis-je vous aider ?',
+    'js.asktrans':'Demander à l\'IA pendant l\'enregistrement…',
+    'js.askplaceholder':'Pose une question sur tes enregistrements…',
+    'js.langset':'🌍 Langue',
+  },
+  en: {
+    'a.ready':'✅ <strong>Everything is ready.</strong> Transcription and AI work right away — no setup needed on your side.',
+    'a.searchrec':'Search your recordings…',
+    'a.email':'Email',
+    'a.emailph':'you@email.com',
+    'a.pwdph':'Minimum 8 characters',
+    'a.optional':'Optional…',
+    'a.search':'Search…',
+    'ui.lang.lbl':'Interface language',
+    'ui.lang.desc':'Language of menus and buttons',
+    'a1':'Sign up',
+    'a2':'Log in',
+    'a3':'Free to start — no credit card.',
+    'a4':'Password',
+    'a5':'Create my account',
+    'a6':'Welcome back!',
+    'a7':'Password',
+    'a8':'Log in',
+    'a9':'Use another account',
+    'a10':'Ready to record',
+    'a11':'Tap to record',
+    'a12':'Language:',
+    'a13':'Sessions',
+    'a14':'Total audio',
+    'a15':'Words',
+    'a16':'Ask',
+    'a17':'Recordings',
+    'a18':'History',
+    'a19':'All your recordings, sorted and searchable.',
+    'a20':'Transcription & AI',
+    'a21':'⚙️ Advanced options (personal API keys)',
+    'a22':'Optional: if you want to use your own API keys instead of the kaideno service, enter them here. Otherwise leave blank — everything already works.',
+    'a23':'Deepgram key',
+    'a24':'Claude key (Anthropic)',
+    'a25':'Save',
+    'a26':'★ Admin',
+    'a27':'Founder space',
+    'a28':'Stats and management',
+    'a29':'Open',
+    'a30':'Account',
+    'a31':'Log out',
+    'a32':'★ Admin',
+    'a33':'kaideno Assistant',
+    'a34':'Knows all your recordings',
+    'a35':'Summarize my sessions',
+    'a36':'My pending actions',
+    'a37':'Search a topic',
+    'a38':'Sort my sessions',
+    'js.fields':'Please fill in all fields.',
+    'js.pwdshort':'Password too short (min. 8 characters).',
+    'js.emailused':'Email already used. Please log in.',
+    'js.badlogin':'Incorrect email or password.',
+    'js.night':'Good night 🌙',
+    'js.morning':'Good morning ☀️',
+    'js.afternoon':'Good afternoon 🌤',
+    'js.evening':'Good evening 🌆',
+    'js.founder':'★ Founder access — welcome!',
+    'js.micdenied':'🎤 Allow microphone access in your browser',
+    'js.micerror':'⚠️ Cannot access microphone',
+    'js.saved':'🎙️ Saved — generating summary…',
+    'js.summaryok':'✅ Summary ready!',
+    'js.summaryerr':'⚠️ Summary error',
+    'js.tooshort':'Recording too short',
+    'js.stoprec':'Tap to stop',
+    'js.taprec':'Tap to record',
+    'js.thinking':'Thinking…',
+    'js.noreply':'No response.',
+    'js.errretry':'⚠️ Error — please retry.',
+    'js.empty':'Tap the microphone above to capture your first session.',
+    'js.summary':'Summary',
+    'js.summaryready':'✓ Summary ready',
+    'js.keypoints':'Key points',
+    'js.actions':'Actions',
+    'js.generating':'⟳ Generating summary…',
+    'js.transcript':'Transcript',
+    'js.rawtext':'Raw text',
+    'js.words':'words',
+    'js.aiedit':'Edit with AI',
+    'js.fixtypos':'Fix typos',
+    'js.clean':'Clean up',
+    'js.rephrase':'Rephrase',
+    'js.punctuate':'Punctuate',
+    'js.describe':'Or describe your change…',
+    'js.apply':'Apply',
+    'js.undo':'↺ Undo change',
+    'js.modified':'✅ Transcript updated',
+    'js.undone':'↺ Change undone',
+    'js.confirmdel':'Delete permanently?',
+    'js.deleted':'Deleted',
+    'js.noresult':'No results for',
+    'js.keysaved':'✅ Keys saved',
+    'js.describechange':'Describe your change',
+    'js.limitreached':'🚀 Daily limit reached',
+    'js.limittext':'You have used your free questions for today. Upgrade to a paid plan for unlimited questions.',
+    'js.seeplans':'See plans',
+    'js.today':'today',
+    'js.unlimited':'★ Unlimited',
+    'js.welcome1':'Hi! I\'m your assistant. I can answer any question, and also work with your recordings: summarize, sort, find a topic, list your actions. What can I do for you?',
+    'js.welcome2':'Hi! I\'m your AI assistant. Ask me anything — I\'ll answer. And once you make a recording, I can summarize it and find your information too. How can I help?',
+    'js.asktrans':'Ask AI during recording…',
+    'js.askplaceholder':'Ask a question about your recordings…',
+    'js.langset':'🌍 Language',
+  },
+  es: {
+    'a.ready':'✅ <strong>Todo está listo.</strong> La transcripción y la IA funcionan directamente — sin configuración por tu parte.',
+    'a.searchrec':'Busca en tus grabaciones…',
+    'a.email':'Email',
+    'a.emailph':'tu@email.com',
+    'a.pwdph':'Mínimo 8 caracteres',
+    'a.optional':'Opcional…',
+    'a.search':'Buscar…',
+    'ui.lang.lbl':'Idioma de la interfaz',
+    'ui.lang.desc':'Idioma de menús y botones',
+    'a1':'Crear cuenta',
+    'a2':'Iniciar sesión',
+    'a3':'Gratis para empezar — sin tarjeta.',
+    'a4':'Contraseña',
+    'a5':'Crear mi cuenta',
+    'a6':'¡Bienvenido de nuevo!',
+    'a7':'Contraseña',
+    'a8':'Iniciar sesión',
+    'a9':'Usar otra cuenta',
+    'a10':'Listo para grabar',
+    'a11':'Pulsa para grabar',
+    'a12':'Idioma:',
+    'a13':'Sesiones',
+    'a14':'Audio total',
+    'a15':'Palabras',
+    'a16':'Preguntar',
+    'a17':'Grabaciones',
+    'a18':'Historial',
+    'a19':'Todas tus grabaciones, ordenadas y buscables.',
+    'a20':'Transcripción e IA',
+    'a21':'⚙️ Opciones avanzadas (claves API propias)',
+    'a22':'Opcional: si quieres usar tus propias claves API en lugar del servicio kaideno, introdúcelas aquí. Si no, déjalo en blanco — todo ya funciona.',
+    'a23':'Clave Deepgram',
+    'a24':'Clave Claude (Anthropic)',
+    'a25':'Guardar',
+    'a26':'★ Administración',
+    'a27':'Espacio fundador',
+    'a28':'Estadísticas y gestión',
+    'a29':'Abrir',
+    'a30':'Cuenta',
+    'a31':'Cerrar sesión',
+    'a32':'★ Administración',
+    'a33':'Asistente kaideno',
+    'a34':'Conoce todas tus grabaciones',
+    'a35':'Resumir mis sesiones',
+    'a36':'Mis acciones pendientes',
+    'a37':'Buscar un tema',
+    'a38':'Ordenar mis sesiones',
+    'js.fields':'Rellena todos los campos.',
+    'js.pwdshort':'Contraseña demasiado corta (mín. 8 caracteres).',
+    'js.emailused':'Email ya utilizado. Inicia sesión.',
+    'js.badlogin':'Email o contraseña incorrectos.',
+    'js.night':'Buenas noches 🌙',
+    'js.morning':'Buenos días ☀️',
+    'js.afternoon':'Buenas tardes 🌤',
+    'js.evening':'Buenas noches 🌆',
+    'js.founder':'★ Acceso Fundador — ¡bienvenido!',
+    'js.micdenied':'🎤 Permite el micrófono en tu navegador',
+    'js.micerror':'⚠️ No se puede acceder al micrófono',
+    'js.saved':'🎙️ Guardado — generando resumen…',
+    'js.summaryok':'✅ ¡Resumen listo!',
+    'js.summaryerr':'⚠️ Error al generar el resumen',
+    'js.tooshort':'Grabación demasiado corta',
+    'js.stoprec':'Pulsa para detener',
+    'js.taprec':'Pulsa para grabar',
+    'js.thinking':'Pensando…',
+    'js.noreply':'Sin respuesta.',
+    'js.errretry':'⚠️ Error — inténtalo de nuevo.',
+    'js.empty':'Pulsa el micrófono de arriba para capturar tu primera sesión.',
+    'js.summary':'Resumen',
+    'js.summaryready':'✓ Resumen listo',
+    'js.keypoints':'Puntos clave',
+    'js.actions':'Acciones',
+    'js.generating':'⟳ Generando resumen…',
+    'js.transcript':'Transcripción',
+    'js.rawtext':'Texto sin formato',
+    'js.words':'palabras',
+    'js.aiedit':'Editar con IA',
+    'js.fixtypos':'Corregir errores',
+    'js.clean':'Limpiar',
+    'js.rephrase':'Reformular',
+    'js.punctuate':'Puntuar',
+    'js.describe':'O describe tu cambio…',
+    'js.apply':'Aplicar',
+    'js.undo':'↺ Deshacer cambio',
+    'js.modified':'✅ Transcripción modificada',
+    'js.undone':'↺ Cambio deshecho',
+    'js.confirmdel':'¿Eliminar definitivamente?',
+    'js.deleted':'Eliminado',
+    'js.noresult':'Sin resultados para',
+    'js.keysaved':'✅ Claves guardadas',
+    'js.describechange':'Describe tu cambio',
+    'js.limitreached':'🚀 Límite diario alcanzado',
+    'js.limittext':'Has usado tus preguntas gratuitas de hoy. Cambia a un plan de pago para preguntas ilimitadas.',
+    'js.seeplans':'Ver planes',
+    'js.today':'hoy',
+    'js.unlimited':'★ Ilimitado',
+    'js.welcome1':'¡Hola! Soy tu asistente. Puedo responder cualquier pregunta y también trabajar con tus grabaciones: resumir, ordenar, buscar un tema, listar tus acciones. ¿Qué puedo hacer?',
+    'js.welcome2':'¡Hola! Soy tu asistente de IA. Pregúntame lo que quieras — te responderé. Y en cuanto hagas una grabación, también podré resumirla y encontrar tu información. ¿Cómo puedo ayudarte?',
+    'js.asktrans':'Pregunta a la IA durante la grabación…',
+    'js.askplaceholder':'Haz una pregunta sobre tus grabaciones…',
+    'js.langset':'🌍 Idioma',
+  }
+};
+function uiLang(){
+  const VALID = ['fr','en','es'];
+  // 1. Paramètre d'URL ?lang=en (transmis par le site) — le plus fiable
+  try{
+    const p = new URLSearchParams(window.location.search).get('lang');
+    if(p && VALID.includes(p)){
+      localStorage.setItem('kaideno_ui_lang', p);
+      return p;
+    }
+  }catch(e){}
+  // 2. Choix explicite dans les Paramètres de l'app
+  const appLang = localStorage.getItem('kaideno_ui_lang');
+  if(appLang && VALID.includes(appLang)) return appLang;
+  // 3. Langue choisie sur le site (même domaine)
+  const siteLang = localStorage.getItem('kaideno_site_lang');
+  if(siteLang && VALID.includes(siteLang)) return siteLang;
+  return 'fr';
+}
+function t(key){ const d = UI[uiLang()] || UI.fr; return d[key] || (UI.fr[key] || key); }
+function applyUILang(){
+  const d = UI[uiLang()] || UI.fr;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k = el.getAttribute('data-i18n');
+    if(d[k]) el.textContent = d[k];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+    const k = el.getAttribute('data-i18n-ph');
+    if(d[k]) el.placeholder = d[k];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{
+    const k = el.getAttribute('data-i18n-html');
+    if(d[k]) el.innerHTML = d[k];
+  });
+  document.documentElement.lang = uiLang();
+}
+function setUILang(lang){
+  localStorage.setItem('kaideno_ui_lang', lang);
+  location.reload();
+}
 
 // ══ BACKEND CLOUDFLARE ══
 const WORKER_URL = 'https://nuro-proxy.worldultimaterecords.workers.dev';
@@ -711,10 +1075,10 @@ function authErr(m){const e=document.getElementById('auth-error');e.textContent=
 function doRegister(){
   const email=document.getElementById('reg-email').value.trim().toLowerCase();
   const pwd=document.getElementById('reg-pwd').value;
-  if(!email||!pwd){authErr('Remplis tous les champs.');return}
-  if(pwd.length<8){authErr('Mot de passe trop court (min. 8 caractères).');return}
+  if(!email||!pwd){authErr(t('js.fields'));return}
+  if(pwd.length<8){authErr(t('js.pwdshort'));return}
   const users=K.users();
-  if(users[email]){authErr('Email déjà utilisé. Connecte-toi.');switchTab('login');return}
+  if(users[email]){authErr(t('js.emailused'));switchTab('login');return}
   users[email]={pwd:btoa(pwd),createdAt:Date.now()};
   K.saveUsers(users);
   currentUser=email; localStorage.setItem('nuro_cu',email); localStorage.setItem('nuro_last_email',email);
@@ -724,9 +1088,9 @@ function doRegister(){
 function doLogin(){
   const email=document.getElementById('log-email').value.trim().toLowerCase();
   const pwd=document.getElementById('log-pwd').value;
-  if(!email||!pwd){authErr('Remplis tous les champs.');return}
+  if(!email||!pwd){authErr(t('js.fields'));return}
   const users=K.users();
-  if(!users[email]||users[email].pwd!==btoa(pwd)){authErr('Email ou mot de passe incorrect.');return}
+  if(!users[email]||users[email].pwd!==btoa(pwd)){authErr(t('js.badlogin'));return}
   currentUser=email; localStorage.setItem('nuro_cu',email); localStorage.setItem('nuro_last_email',email);
   enterDashboard();
 }
@@ -781,12 +1145,12 @@ function enterDashboard(){
   sessions=K.sessions();
   document.getElementById('user-badge').textContent=currentUser.split('@')[0];
   const h=new Date().getHours();
-  const g=h<6?'Bonne nuit 🌙':h<12?'Bonjour ☀️':h<18?'Bon après-midi 🌤':'Bonne soirée 🌆';
+  const g=h<6?t('js.night'):h<12?t('js.morning'):h<18?t('js.afternoon'):t('js.evening');
   const el=document.getElementById('dash-greeting');if(el)el.textContent=g;
   renderStats();renderSessions();
   const fab=document.getElementById('fab-asst');if(fab)fab.style.display='flex';
   showView('dashboard');
-  if(isFounder()){setTimeout(()=>showToast('★ Accès Fondateur — bienvenue !'),400)}
+  if(isFounder()){setTimeout(()=>showToast(t('js.founder')),400)}
 }
 
 // ══ ENREGISTREMENT ══
@@ -841,8 +1205,8 @@ async function toggleRec(){
     dgWs.onerror=()=>showToast('⚠️ Erreur de transcription');
     dgWs.onclose=()=>{};
   }catch(err){
-    if(err.name==='NotAllowedError')showToast('🎤 Autorise le micro dans ton navigateur');
-    else showToast('⚠️ Impossible d\'accéder au micro');
+    if(err.name==='NotAllowedError')showToast(t('js.micdenied'));
+    else showToast(t('js.micerror'));
   }
 }
 
@@ -874,7 +1238,7 @@ async function finishRec(){
     tx=(finalTx+' '+interimTx).trim();
   }
   document.getElementById('live-box').classList.remove('show');
-  if(!tx||tx.length<5){showToast('Enregistrement trop court');return}
+  if(!tx||tx.length<5){showToast(t('js.tooshort'));return}
 
   // Construire un transcript formaté avec les locuteurs (si plusieurs détectés)
   let formattedTx = tx;
@@ -893,7 +1257,7 @@ async function finishRec(){
   const s={id:`s_${Date.now()}`,createdAt:Date.now(),duration:dur,transcript:formattedTx,wordCount:tx.split(/\s+/).length,status:'processing',summary:null,speakerCount:speakers.length};
   sessions.unshift(s);K.saveSessions(sessions);
   renderSessions();renderStats();
-  showToast('🎙️ Sauvegardé — résumé en cours…');
+  showToast(t('js.saved'));
   await genSummary(s);
 }
 
@@ -943,7 +1307,7 @@ async function askLiveAi(){
 
   input.value='';
   if(btn) btn.disabled=true;
-  if(answerEl){ answerEl.className='live-ai-answer show thinking'; answerEl.textContent='Réflexion…'; }
+  if(answerEl){ answerEl.className='live-ai-answer show thinking'; answerEl.textContent=t('js.thinking'); }
 
   try{
     const res=await callClaude({
@@ -953,10 +1317,10 @@ async function askLiveAi(){
     });
     if(!res.ok) throw new Error();
     const data=await res.json();
-    const reply=data.content?.[0]?.text || 'Pas de réponse.';
+    const reply=data.content?.[0]?.text || t('js.noreply');
     if(answerEl){ answerEl.className='live-ai-answer show'; answerEl.textContent=reply; }
   }catch{
-    if(answerEl){ answerEl.className='live-ai-answer show'; answerEl.textContent='⚠️ Erreur — réessaie.'; }
+    if(answerEl){ answerEl.className='live-ai-answer show'; answerEl.textContent=t('js.errretry'); }
   }
   if(btn) btn.disabled=false;
 }
@@ -983,7 +1347,7 @@ function renderStats(){
 }
 function renderSessions(){
   const c=document.getElementById('sessions-list');
-  if(!sessions.length){c.innerHTML=`<div class="empty-state"><div class="empty-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="8" y="2" width="8" height="13" rx="4" stroke="#3D4D62" stroke-width="1.5"/><path d="M4 12a8 8 0 0016 0" stroke="#3D4D62" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="20" x2="12" y2="23" stroke="#3D4D62" stroke-width="1.5" stroke-linecap="round"/></svg></div><h3 class="empty-title">Aucun enregistrement</h3><p class="empty-sub">Appuie sur le micro ci-dessus pour capturer ta première session.</p></div>`;return}
+  if(!sessions.length){c.innerHTML=`<div class="empty-state"><div class="empty-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="8" y="2" width="8" height="13" rx="4" stroke="#3D4D62" stroke-width="1.5"/><path d="M4 12a8 8 0 0016 0" stroke="#3D4D62" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="20" x2="12" y2="23" stroke="#3D4D62" stroke-width="1.5" stroke-linecap="round"/></svg></div><h3 class="empty-title">Aucun enregistrement</h3><p class="empty-sub">${t('js.empty')}</p></div>`;return}
   c.innerHTML=sessions.map(s=>{
     const date=new Date(s.createdAt).toLocaleDateString('fr-FR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
     const badge=s.status==='done'?'<span class="bdg bdg-done">✓ Résumé</span>':s.status==='processing'?'<span class="bdg bdg-proc">⟳ En cours</span>':'<span class="bdg bdg-err">⚠ Erreur</span>';
@@ -1030,41 +1394,41 @@ function openSession(id){
     <div class="detail-meta">
       <span class="meta-chip">${date} à ${time}</span>
       <span class="meta-chip">${fmtDur(s.duration)}</span>
-      ${wc?`<span class="meta-chip">${wc} mots</span>`:''}
-      ${s.status==='done'?'<span class="meta-chip" style="color:var(--green)">✓ Résumé prêt</span>':''}
+      ${wc?`<span class="meta-chip">${wc} ${t('js.words')}</span>`:''}
+      ${s.status==='done'?`<span class="meta-chip" style="color:var(--green)">${t('js.summaryready')}</span>`:''}
     </div>`;
   if(sum){
-    html+=`<div class="summary-box"><div class="summary-lbl">Résumé</div><p class="summary-txt">${sum.resume}</p></div>`;
-    if(sum.points_cles?.length)html+=`<div class="detail-block"><div class="block-lbl">Points clés</div><div class="kp-list">${sum.points_cles.map(p=>`<div class="kp-item"><span class="kp-dot"></span>${p}</div>`).join('')}</div></div>`;
+    html+=`<div class="summary-box"><div class="summary-lbl">${t('js.summary')}</div><p class="summary-txt">${sum.resume}</p></div>`;
+    if(sum.points_cles?.length)html+=`<div class="detail-block"><div class="block-lbl">${t('js.keypoints')}</div><div class="kp-list">${sum.points_cles.map(p=>`<div class="kp-item"><span class="kp-dot"></span>${p}</div>`).join('')}</div></div>`;
     if(sum.actions?.length)html+=`<div class="detail-block"><div class="block-lbl">Actions</div><div class="act-list">${sum.actions.map(a=>`<div class="act-item"><span class="act-arr">→</span>${a}</div>`).join('')}</div></div>`;
-  }else if(s.status==='processing'){html+=`<div style="background:var(--bg1);border:1px solid var(--line);border-radius:var(--radius);padding:16px;font-size:.85rem;color:var(--ink2);margin-bottom:24px">⟳ Génération du résumé en cours…</div>`}
+  }else if(s.status==='processing'){html+=`<div style="background:var(--bg1);border:1px solid var(--line);border-radius:var(--radius);padding:16px;font-size:.85rem;color:var(--ink2);margin-bottom:24px">${t('js.generating')}</div>`}
   html+=`
-    <div class="detail-block"><div class="block-lbl">Transcription</div>
+    <div class="detail-block"><div class="block-lbl">${t('js.transcript')}</div>
       <div class="transcript-box">
         <div class="transcript-hd">
-          <span class="transcript-lbl">Texte brut</span>
+          <span class="transcript-lbl">${t('js.rawtext')}</span>
           <div class="transcript-hd-actions">
-            <span class="transcript-wc" id="tx-wc-${id}">${wc} mots</span>
+            <span class="transcript-wc" id="tx-wc-${id}">${wc} ${t('js.words')}</span>
             <button class="btn-ai-edit" onclick="toggleAiEdit('${id}')">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1l1.3 3.2L10.5 5 7.3 6.3 6 9.5 4.7 6.3 1.5 5l3.2-.8L6 1z" fill="currentColor"/></svg>
-              Modifier avec l'IA
+              ${t('js.aiedit')}
             </button>
           </div>
         </div>
         <div class="ai-edit-bar" id="ai-edit-bar-${id}">
           <div class="ai-edit-chips">
-            <button class="ai-edit-chip" onclick="aiEditChip('${id}','Corrige les fautes d\'orthographe et de grammaire')">Corriger les fautes</button>
-            <button class="ai-edit-chip" onclick="aiEditChip('${id}','Enlève les hésitations, répétitions et mots parasites')">Nettoyer</button>
-            <button class="ai-edit-chip" onclick="aiEditChip('${id}','Reformule proprement en style écrit clair')">Reformuler</button>
-            <button class="ai-edit-chip" onclick="aiEditChip('${id}','Ajoute la ponctuation et découpe en paragraphes')">Ponctuer</button>
+            <button class="ai-edit-chip" onclick="aiEditChip('${id}','Corrige les fautes d\'orthographe et de grammaire')">${t('js.fixtypos')}</button>
+            <button class="ai-edit-chip" onclick="aiEditChip('${id}','Enlève les hésitations, répétitions et mots parasites')">${t('js.clean')}</button>
+            <button class="ai-edit-chip" onclick="aiEditChip('${id}','Reformule proprement en style écrit clair')">${t('js.rephrase')}</button>
+            <button class="ai-edit-chip" onclick="aiEditChip('${id}','Ajoute la ponctuation et découpe en paragraphes')">${t('js.punctuate')}</button>
           </div>
           <div class="ai-edit-input-row">
-            <input class="ai-edit-input" id="ai-edit-in-${id}" placeholder="Ou décris ta modification…" onkeydown="if(event.key==='Enter')runAiEdit('${id}')">
-            <button class="ai-edit-send" id="ai-edit-send-${id}" onclick="runAiEdit('${id}')">Appliquer</button>
+            <input class="ai-edit-input" id="ai-edit-in-${id}" placeholder="${t('js.describe')}" onkeydown="if(event.key==='Enter')runAiEdit('${id}')">
+            <button class="ai-edit-send" id="ai-edit-send-${id}" onclick="runAiEdit('${id}')">${t('js.apply')}</button>
           </div>
           <button class="ai-edit-undo" id="ai-edit-undo-${id}" onclick="undoAiEdit('${id}')">
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6a4 4 0 104-4M2 6l1.6-1.3M2 6l1.4 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            Annuler la modification
+            ${t('js.undo')}
           </button>
         </div>
         <div class="transcript-txt" id="tx-txt-${id}">${formatTranscript(s.transcript)}</div>
@@ -1107,9 +1471,9 @@ function openSession(id){
 }
 
 function confirmDel(id){
-  if(!confirm('Supprimer définitivement ?'))return;
+  if(!confirm(t('js.confirmdel')))return;
   sessions=sessions.filter(s=>s.id!==id);
-  K.saveSessions(sessions);renderSessions();renderStats();showView('dashboard');showToast('Supprimé');
+  K.saveSessions(sessions);renderSessions();renderStats();showView('dashboard');showToast(t('js.deleted'));
 }
 
 // ══ CHAT IA ══
@@ -1128,7 +1492,7 @@ async function callAi(id,msg){
   addMsg(id,'user',msg);
   const c=document.getElementById(`ai-msgs-${id}`);
   const th=document.createElement('div');th.className='ai-msg bot';th.id=`th-${id}`;
-  th.innerHTML=`<div class="ai-av">N</div><div class="ai-bubble thinking">Réflexion…</div>`;
+  th.innerHTML=`<div class="ai-av">N</div><div class="ai-bubble thinking">${t('js.thinking')}</div>`;
   if(c){c.appendChild(th);c.scrollTop=c.scrollHeight}
   const hist=K.aiHist(id);
   const msgs=[...hist.slice(-8).map(m=>({role:m.role==='user'?'user':'assistant',content:m.content})),{role:'user',content:msg}];
@@ -1284,7 +1648,7 @@ function saveKeys(){
   const cl=document.getElementById('cl-key').value.trim();
   if(dg)localStorage.setItem('nuro_dg',dg);
   if(cl)localStorage.setItem('nuro_cl',cl);
-  refreshSettings();showToast('✅ Clés sauvegardées');showView('dashboard');
+  refreshSettings();showToast(t('js.keysaved'));showView('dashboard');
 }
 
 // ══ MODIFICATION IA DE LA TRANSCRIPTION ══
@@ -1307,7 +1671,7 @@ async function runAiEdit(id){
 
   const input=document.getElementById(`ai-edit-in-${id}`);
   const instruction=input?.value.trim();
-  if(!instruction){showToast('Décris ta modification');return;}
+  if(!instruction){showToast(t('js.describechange'));return;}
 
   const sendBtn=document.getElementById(`ai-edit-send-${id}`);
   const txtEl=document.getElementById(`tx-txt-${id}`);
@@ -1337,7 +1701,7 @@ async function runAiEdit(id){
     const undoBtn=document.getElementById(`ai-edit-undo-${id}`);
     if(undoBtn)undoBtn.classList.add('show');
     if(input)input.value='';
-    showToast('✅ Transcription modifiée');
+    showToast(t('js.modified'));
     renderStats();
   }catch{
     showToast('⚠️ Erreur — vérifie ta clé Claude');
@@ -1358,7 +1722,7 @@ function undoAiEdit(id){
   const undoBtn=document.getElementById(`ai-edit-undo-${id}`);
   if(undoBtn)undoBtn.classList.remove('show');
   delete aiEditBackup[id];
-  showToast('↺ Modification annulée');
+  showToast(t('js.undone'));
   renderStats();
 }
 
@@ -1389,11 +1753,11 @@ function updateAsstQuota(){
   const el = document.getElementById('asst-quota');
   if(!el) return;
   if(asstUnlimited()){
-    el.textContent = '★ Illimité';
+    el.textContent = t('js.unlimited');
     el.className = 'asst-quota founder';
   } else {
     const r = asstRemaining();
-    el.textContent = `${r}/${ASST_LIMITS.free} aujourd'hui`;
+    el.textContent = `${r}/${ASST_LIMITS.free} ${t('js.today')}`;
     el.className = 'asst-quota ' + (r <= 1 ? 'low' : 'ok');
   }
 }
@@ -1481,7 +1845,7 @@ async function asstSend(){
   const c = document.getElementById('asst-msgs');
   const think = document.createElement('div');
   think.className='asst-msg bot'; think.id='asst-think';
-  think.innerHTML=`<div class="asst-av">N</div><div class="asst-bubble thinking">Réflexion…</div>`;
+  think.innerHTML=`<div class="asst-av">N</div><div class="asst-bubble thinking">${t('js.thinking')}</div>`;
   if(c){c.appendChild(think);c.scrollTop=c.scrollHeight;}
 
   const context = buildAsstContext();
@@ -1513,9 +1877,9 @@ function showAsstLimit(){
   const d = document.createElement('div');
   d.className = 'asst-limit';
   d.innerHTML = `<div class="asst-limit-box">
-    <h4>🚀 Limite quotidienne atteinte</h4>
+    <h4>${t('js.limitreached')}</h4>
     <p>Tu as utilisé tes ${ASST_LIMITS.free} questions gratuites du jour. Passe à un plan payant pour poser des questions en illimité.</p>
-    <button class="btn-upgrade" onclick="closeAssistant();showView('settings')">Voir les plans</button>
+    <button class="btn-upgrade" onclick="closeAssistant();showView('settings')">${t('js.seeplans')}</button>
   </div>`;
   c.appendChild(d);
   c.scrollTop = c.scrollHeight;
@@ -1568,6 +1932,10 @@ function showToast(m){const t=document.getElementById('toast');t.textContent=m;t
 
 // ══ INIT ══
 window.addEventListener('DOMContentLoaded',()=>{
+  // Appliquer la langue de l'interface
+  applyUILang();
+  const uiSel=document.getElementById('ui-lang');
+  if(uiSel) uiSel.value = uiLang();
   // Appliquer le thème sauvegardé
   applyTheme(localStorage.getItem('kaideno_theme')||'dark');
   // Restaurer la langue de transcription
