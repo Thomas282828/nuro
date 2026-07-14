@@ -119,7 +119,7 @@ a{color:var(--accent)}
 .live-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 1.1s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 .live-wc{font-size:.73rem;color:var(--ink3)}
-.live-txt{font-size:.88rem;line-height:1.72;color:var(--ink);max-height:110px;overflow-y:auto;word-break:break-word}
+.live-txt{font-size:.88rem;line-height:1.72;color:var(--ink);max-height:180px;overflow-y:auto;word-break:break-word}
 .live-ai{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
 .live-ai-row{display:flex;gap:7px}
 .live-ai-input{flex:1;background:var(--bg2);border:1.5px solid var(--line);border-radius:var(--radius-sm);padding:8px 12px;color:var(--ink);font-size:.82rem;font-family:'Inter',sans-serif;outline:none;transition:border-color .15s}
@@ -337,6 +337,69 @@ a{color:var(--accent)}
 .asst-limit-box p{font-size:.83rem;color:var(--ink2);line-height:1.6;margin-bottom:14px}
 .btn-upgrade{display:inline-block;background:var(--accent);color:white;padding:10px 22px;border-radius:999px;font-size:.85rem;font-weight:700;cursor:pointer;border:none}
 
+
+/* ── QUOTA ── */
+#quota-bar{padding:0 20px;margin-bottom:4px}
+.quota-inner{background:var(--bg1);border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px}
+.quota-inner.founder{display:flex;align-items:center;gap:7px;font-size:.82rem;font-weight:600;color:#F0B429;background:rgba(240,180,41,0.06);border-color:rgba(240,180,41,0.2)}
+.quota-star{font-size:.9rem}
+.quota-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px}
+.quota-lbl{font-size:.72rem;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.05em}
+.quota-val{font-size:.82rem;font-weight:700;color:var(--ink)}
+.quota-val.low{color:#F0A500}
+.quota-track{height:5px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.quota-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .4s}
+.quota-fill.low{background:#F0A500}
+.quota-warn{margin-top:9px;font-size:.78rem;color:#F87171;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.quota-cta{background:var(--accent);color:white;border:none;border-radius:999px;padding:4px 12px;font-size:.75rem;font-weight:600;cursor:pointer}
+.quota-cta:hover{opacity:.9}
+
+
+/* ── EXPORT ── */
+.export-zone{margin-top:20px;padding:16px;background:var(--bg1);border:1px solid var(--line);border-radius:var(--radius)}
+.export-lbl{font-size:.7rem;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:11px}
+.export-btns{display:flex;gap:8px;flex-wrap:wrap}
+.btn-export{display:inline-flex;align-items:center;gap:6px;background:var(--bg2);border:1px solid var(--line2);border-radius:999px;padding:8px 15px;font-size:.8rem;font-weight:600;color:var(--ink);cursor:pointer;transition:all .15s}
+.btn-export:hover{border-color:var(--accent);color:var(--accent);background:var(--accent2)}
+.btn-export-all{display:inline-flex;align-items:center;gap:6px;background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:.78rem;font-weight:600;color:var(--ink2);cursor:pointer;transition:all .15s}
+.btn-export-all:hover{border-color:var(--accent);color:var(--accent)}
+
+
+/* ── CONSENTEMENT ── */
+.consent-row{display:flex;align-items:flex-start;gap:9px;margin:4px 0 16px;cursor:pointer}
+.consent-row input[type=checkbox]{margin-top:2px;width:15px;height:15px;accent-color:var(--accent);cursor:pointer;flex-shrink:0}
+.consent-row span{font-size:.78rem;color:var(--ink2);line-height:1.55}
+.consent-row a{color:var(--accent);text-decoration:underline}
+
+
+/* ── SUPPRESSION DE COMPTE ── */
+.danger-card{display:flex;align-items:center;justify-content:space-between;gap:14px;background:rgba(248,113,113,0.05);border:1px solid rgba(248,113,113,0.2);border-radius:var(--radius);padding:16px}
+.danger-txt{flex:1}
+.danger-title{font-size:.9rem;font-weight:600;color:var(--ink);margin-bottom:3px}
+.danger-desc{font-size:.78rem;color:var(--ink2);line-height:1.5}
+.btn-danger-account{background:transparent;border:1.5px solid #F87171;color:#F87171;border-radius:999px;padding:8px 18px;font-size:.82rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .15s}
+.btn-danger-account:hover{background:#F87171;color:white}
+
+.del-overlay{position:fixed;inset:0;z-index:90;background:rgba(8,12,18,0.7);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .25s}
+.del-overlay.open{opacity:1;pointer-events:auto}
+.del-modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-48%);z-index:91;width:calc(100% - 40px);max-width:420px;background:var(--bg1);border:1px solid var(--line2);border-radius:var(--radius-lg);padding:28px 24px;opacity:0;pointer-events:none;transition:all .25s}
+.del-modal.open{opacity:1;pointer-events:auto;transform:translate(-50%,-50%)}
+.del-icon{font-size:2rem;text-align:center;margin-bottom:12px}
+.del-title{font-family:'Space Grotesk',sans-serif;font-size:1.15rem;text-align:center;margin-bottom:10px;color:var(--ink)}
+.del-text{font-size:.85rem;color:var(--ink2);text-align:center;line-height:1.6;margin-bottom:18px}
+.del-export-tip{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius-sm);padding:11px 13px;margin-bottom:18px;font-size:.78rem;color:var(--ink2);flex-wrap:wrap}
+.del-export-btn{background:var(--accent);color:white;border:none;border-radius:999px;padding:5px 13px;font-size:.75rem;font-weight:600;cursor:pointer;white-space:nowrap}
+.del-confirm-lbl{font-size:.82rem;color:var(--ink2);margin-bottom:8px}
+.del-confirm-lbl strong{color:#F87171;font-weight:700;letter-spacing:.05em}
+.del-input{width:100%;background:var(--bg2);border:1.5px solid var(--line);border-radius:var(--radius-sm);padding:10px 13px;color:var(--ink);font-size:.9rem;font-family:'Inter',sans-serif;outline:none;margin-bottom:18px;transition:border-color .15s}
+.del-input:focus{border-color:#F87171}
+.del-actions{display:flex;gap:9px}
+.del-cancel{flex:1;background:var(--bg2);border:1px solid var(--line);color:var(--ink);border-radius:var(--radius-sm);padding:11px;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .15s}
+.del-cancel:hover{background:var(--bg3)}
+.del-go{flex:1;background:#DC2626;border:none;color:white;border-radius:var(--radius-sm);padding:11px;font-size:.85rem;font-weight:600;cursor:pointer;transition:opacity .15s}
+.del-go:hover:not(:disabled){opacity:.9}
+.del-go:disabled{opacity:.35;cursor:not-allowed}
+
 /* TOAST */
 #toast{position:fixed;bottom:calc(var(--safe-bottom) + 22px);left:50%;transform:translateX(-50%) translateY(8px);background:var(--bg2);border:1px solid var(--line2);color:var(--ink);padding:11px 18px;border-radius:999px;font-size:.85rem;font-weight:500;opacity:0;transition:all .2s;pointer-events:none;white-space:nowrap;z-index:200;box-shadow:0 8px 28px rgba(0,0,0,0.4)}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -368,6 +431,10 @@ a{color:var(--accent)}
         <p class="auth-sub" data-i18n="a3">Gratuit pour commencer — aucune carte bancaire.</p>
         <div class="field"><label data-i18n="a.email">Email</label><input type="email" id="reg-email" data-i18n-ph="a.emailph" placeholder="ton@email.com" autocomplete="email"></div>
         <div class="field"><label data-i18n="a4">Mot de passe</label><input type="password" id="reg-pwd" data-i18n-ph="a.pwdph" placeholder="Minimum 8 caractères" autocomplete="new-password"></div>
+        <label class="consent-row">
+          <input type="checkbox" id="reg-consent">
+          <span data-i18n-html="l.consent">J'ai 15 ans ou plus et j'accepte les <a href="legal.html#cgu" target="_blank">conditions d'utilisation</a> et la <a href="legal.html#confidentialite" target="_blank">politique de confidentialité</a>.</span>
+        </label>
         <button class="btn-submit" id="btn-reg" onclick="doRegister()" data-i18n="a5">Créer mon compte</button>
       </div>
       <div id="auth-login" style="display:none">
@@ -452,6 +519,7 @@ a{color:var(--accent)}
         </div>
       </div>
     </div>
+    <div id="quota-bar"></div>
     <div class="dash-stats">
       <div class="stat-cell"><div class="stat-v" id="s-count">0</div><div class="stat-l" data-i18n="a13">Sessions</div></div>
       <div class="stat-cell"><div class="stat-v" id="s-time">0m</div><div class="stat-l" data-i18n="a14">Total audio</div></div>
@@ -512,6 +580,12 @@ a{color:var(--accent)}
       <h2 style="font-size:1.3rem;margin-bottom:5px" data-i18n="a18">Historique</h2>
       <p style="color:var(--ink2);font-size:.84rem;margin-bottom:20px" data-i18n="a19">Tous tes enregistrements, classés et cherchables.</p>
       <div class="h-stats" id="h-stats"></div>
+      <div style="display:flex;justify-content:flex-end;margin-bottom:12px">
+        <button class="btn-export-all" onclick="exportAll()">
+          <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M7 2v7M4 6.5L7 9.5l3-3M2.5 11.5h9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span data-i18n="x.exportall">Tout exporter</span>
+        </button>
+      </div>
       <div class="search-bar">
         <div class="search-icon"><svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.4"/><path d="M10 10l3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></div>
         <input class="search-input" id="h-search" data-i18n-ph="a.searchrec" placeholder="Cherche dans tes enregistrements…" oninput="filterHistory(this.value)">
@@ -581,10 +655,32 @@ a{color:var(--accent)}
         </div>
       </div>
       <div class="settings-section">
+        <p class="settings-lbl" data-i18n="q.myplan">Mon abonnement</p>
+        <div id="plan-info" class="info-card"></div>
+      </div>
+      <div class="settings-section">
+        <p class="settings-lbl" data-i18n="l.legal">Informations légales</p>
+        <div class="acct-card">
+          <div><div class="acct-email" data-i18n="l.legaldesc">Mentions, confidentialité, CGU</div></div>
+          <a href="legal.html" target="_blank" class="btn-logout" style="text-decoration:none;display:inline-flex;align-items:center" data-i18n="l.consult">Consulter</a>
+        </div>
+      </div>
+      <div class="settings-section">
         <p class="settings-lbl" data-i18n="a30">Compte</p>
         <div class="acct-card">
           <div><div class="acct-email" id="s-email">—</div><div class="acct-info" id="s-info">—</div></div>
           <button class="btn-logout" onclick="doLogout()" data-i18n="a31">Déconnexion</button>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <p class="settings-lbl" style="color:#F87171" data-i18n="d.zone">Zone de danger</p>
+        <div class="danger-card">
+          <div class="danger-txt">
+            <div class="danger-title" data-i18n="d.title">Supprimer mon compte</div>
+            <div class="danger-desc" data-i18n="d.desc">Supprime définitivement votre compte et tous vos enregistrements. Cette action est irréversible.</div>
+          </div>
+          <button class="btn-danger-account" onclick="openDeleteAccount()" data-i18n="d.btn">Supprimer</button>
         </div>
       </div>
     </div>
@@ -629,9 +725,9 @@ a{color:var(--accent)}
     </button>
   </div>
   <div class="asst-chips" id="asst-chips">
-    <button class="asst-chip" onclick="asstChip('Résume mes 3 derniers enregistrements')" data-i18n="a35">Résumer mes sessions</button>
-    <button class="asst-chip" onclick="asstChip('Quelles actions ai-je en attente ?')" data-i18n="a36">Mes actions en attente</button>
-    <button class="asst-chip" onclick="asstChip('Retrouve où je parle de budget')" data-i18n="a37">Rechercher un sujet</button>
+    <button class="asst-chip" onclick="asstChip('Résume mes 3 derniers enregistrements')" data-i18n="a35">${t('js.summarize')}</button>
+    <button class="asst-chip" onclick="asstChip('Quelles actions ai-je en attente ?')" data-i18n="a36">${t('js.pending')}</button>
+    <button class="asst-chip" onclick="asstChip('Retrouve où je parle de budget')" data-i18n="a37">${t('js.searchtopic')}</button>
     <button class="asst-chip" onclick="asstChip('Quel enregistrement était le plus long ?')" data-i18n="a38">Trier mes sessions</button>
   </div>
   <div class="asst-msgs" id="asst-msgs"></div>
@@ -640,6 +736,25 @@ a{color:var(--accent)}
     <button class="asst-send" id="asst-send" onclick="asstSend()" aria-label="Envoyer">
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2 9l14-6-6 14-2-6-6-2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/></svg>
     </button>
+  </div>
+</div>
+
+
+<!-- MODALE SUPPRESSION DE COMPTE -->
+<div class="del-overlay" id="del-overlay" onclick="closeDeleteAccount()"></div>
+<div class="del-modal" id="del-modal">
+  <div class="del-icon">⚠️</div>
+  <h3 class="del-title" data-i18n="d.confirmtitle">Supprimer définitivement votre compte ?</h3>
+  <p class="del-text" data-i18n="d.confirmtext">Tous vos enregistrements, transcriptions et résumés seront effacés. Cette action ne peut pas être annulée.</p>
+  <div class="del-export-tip">
+    <span data-i18n="d.exporttip">💡 Pensez à exporter vos données avant de supprimer.</span>
+    <button class="del-export-btn" onclick="exportAll()" data-i18n="x.exportall">Tout exporter</button>
+  </div>
+  <p class="del-confirm-lbl" data-i18n-html="d.typeconfirm">Tapez <strong>SUPPRIMER</strong> pour confirmer :</p>
+  <input type="text" class="del-input" id="del-confirm-input" autocomplete="off" oninput="checkDeleteConfirm()">
+  <div class="del-actions">
+    <button class="del-cancel" onclick="closeDeleteAccount()" data-i18n="d.cancel">Annuler</button>
+    <button class="del-go" id="del-go-btn" onclick="deleteAccount()" disabled data-i18n="d.confirmbtn">Supprimer définitivement</button>
   </div>
 </div>
 
@@ -654,6 +769,70 @@ const isFounder = () => FOUNDERS.includes((currentUser||'').toLowerCase());
 // ══ TRADUCTION DE L'INTERFACE (FR / EN / ES) ══
 const UI = {
   fr: {
+    'd.zone':'Zone de danger',
+    'd.title':'Supprimer mon compte',
+    'd.desc':'Supprime définitivement votre compte et tous vos enregistrements. Cette action est irréversible.',
+    'd.btn':'Supprimer',
+    'd.confirmtitle':'Supprimer définitivement votre compte ?',
+    'd.confirmtext':'Tous vos enregistrements, transcriptions et résumés seront effacés. Cette action ne peut pas être annulée.',
+    'd.exporttip':'💡 Pensez à exporter vos données avant de supprimer.',
+    'd.typeconfirm':'Tapez <strong>SUPPRIMER</strong> pour confirmer :',
+    'd.keyword':'SUPPRIMER',
+    'd.cancel':'Annuler',
+    'd.confirmbtn':'Supprimer définitivement',
+    'd.done':'Compte supprimé. Vos données ont été effacées.',
+    'l.legal':'Informations légales',
+    'l.legaldesc':'Mentions, confidentialité, CGU',
+    'l.consult':'Consulter',
+    'l.consent':'J\'ai 15 ans ou plus et j\'accepte les <a href="legal.html#cgu" target="_blank">conditions d\'utilisation</a> et la <a href="legal.html#confidentialite" target="_blank">politique de confidentialité</a>.',
+    'l.consentreq':'Vous devez accepter les conditions pour continuer.',
+    'x.export':'Exporter',
+    'x.copy':'Copier',
+    'x.download':'Télécharger (.txt)',
+    'x.copied':'✅ Copié dans le presse-papier',
+    'x.copyfail':'⚠️ Impossible de copier',
+    'x.downloaded':'✅ Fichier téléchargé',
+    'x.allexported':'✅ Tous les enregistrements exportés',
+    'x.exportall':'Tout exporter',
+    'x.date':'Date',
+    'x.duration':'Durée',
+    'x.danger':'Zone de danger',
+    'x.delete':'Supprimer',
+    'q.myplan':'Mon abonnement',
+    'q.plan':'Plan',
+    'q.used':'Utilisé ce mois-ci',
+    'q.left':'Restant',
+    'q.resets':'Le compteur se remet à zéro le 1er de chaque mois.',
+    'q.founderplan':'Accès Fondateur',
+    'q.thismonth':'Ce mois-ci',
+    'q.unlimited':'Utilisation illimitée',
+    'q.reached':'Limite mensuelle atteinte.',
+    'q.upgrade':'Passer au supérieur',
+    'q.blocked':'⛔ Limite mensuelle atteinte — passe à un plan supérieur pour continuer',
+    'q.almostdone':'⚠️ Il te reste moins de 5 minutes ce mois-ci',
+    'js.summarize':'Résumer mes sessions',
+    'js.pending':'Mes actions en attente',
+    'js.searchtopic':'Rechercher un sujet',
+    'js.writeemail':'Rédiger un email',
+    'js.howworks':'Comment ça marche ?',
+    'js.productivity':'Conseils productivité',
+    'js.translate':'Traduire un texte',
+    'js.shortsum':'Résumé court',
+    'js.listdec':'Lister les décisions',
+    'js.writereport':'Rédiger un compte-rendu',
+    'js.basedon':'Basé sur cette transcription',
+    'js.aiactivity':'Activité IA',
+    'js.noaccounts':'Aucun compte enregistré.',
+    'js.asstquestions':'Questions à l\'assistant aujourd\'hui :',
+    'js.costwatch':'Surveillance des coûts',
+    'js.mystats':'Mes statistiques',
+    'js.accountsdevice':'Comptes sur cet appareil',
+    'js.claudeerr':'⚠️ Erreur — réessaie plus tard',
+    'js.recordings':'enregistrements',
+    'js.audiototal':'audio total',
+    'js.wordstrans':'mots transcrits',
+    'js.summaries':'résumés générés',
+    'js.norec':'Aucun enregistrement',
     'a.ready':'✅ <strong>Tout est prêt.</strong> La transcription et l\'IA fonctionnent directement — aucune configuration nécessaire de ta part.',
     'a.searchrec':'Cherche dans tes enregistrements…',
     'a.email':'Email',
@@ -757,6 +936,70 @@ const UI = {
     'js.langset':'🌍 Langue',
   },
   en: {
+    'd.zone':'Danger zone',
+    'd.title':'Delete my account',
+    'd.desc':'Permanently deletes your account and all your recordings. This cannot be undone.',
+    'd.btn':'Delete',
+    'd.confirmtitle':'Permanently delete your account?',
+    'd.confirmtext':'All your recordings, transcripts and summaries will be erased. This action cannot be undone.',
+    'd.exporttip':'💡 Remember to export your data before deleting.',
+    'd.typeconfirm':'Type <strong>DELETE</strong> to confirm:',
+    'd.keyword':'DELETE',
+    'd.cancel':'Cancel',
+    'd.confirmbtn':'Delete permanently',
+    'd.done':'Account deleted. Your data has been erased.',
+    'l.legal':'Legal information',
+    'l.legaldesc':'Notice, privacy, terms',
+    'l.consult':'View',
+    'l.consent':'I am 15 or older and I accept the <a href="legal.html#cgu" target="_blank">terms of use</a> and the <a href="legal.html#confidentialite" target="_blank">privacy policy</a>.',
+    'l.consentreq':'You must accept the terms to continue.',
+    'x.export':'Export',
+    'x.copy':'Copy',
+    'x.download':'Download (.txt)',
+    'x.copied':'✅ Copied to clipboard',
+    'x.copyfail':'⚠️ Could not copy',
+    'x.downloaded':'✅ File downloaded',
+    'x.allexported':'✅ All recordings exported',
+    'x.exportall':'Export all',
+    'x.date':'Date',
+    'x.duration':'Duration',
+    'x.danger':'Danger zone',
+    'x.delete':'Delete',
+    'q.myplan':'My plan',
+    'q.plan':'Plan',
+    'q.used':'Used this month',
+    'q.left':'Remaining',
+    'q.resets':'Counter resets on the 1st of each month.',
+    'q.founderplan':'Founder access',
+    'q.thismonth':'This month',
+    'q.unlimited':'Unlimited usage',
+    'q.reached':'Monthly limit reached.',
+    'q.upgrade':'Upgrade',
+    'q.blocked':'⛔ Monthly limit reached — upgrade to keep recording',
+    'q.almostdone':'⚠️ Less than 5 minutes left this month',
+    'js.summarize':'Summarize my sessions',
+    'js.pending':'My pending actions',
+    'js.searchtopic':'Search a topic',
+    'js.writeemail':'Write an email',
+    'js.howworks':'How does it work?',
+    'js.productivity':'Productivity tips',
+    'js.translate':'Translate a text',
+    'js.shortsum':'Short summary',
+    'js.listdec':'List decisions',
+    'js.writereport':'Write a report',
+    'js.basedon':'Based on this transcript',
+    'js.aiactivity':'AI activity',
+    'js.noaccounts':'No accounts registered.',
+    'js.asstquestions':'Assistant questions today:',
+    'js.costwatch':'Cost monitoring',
+    'js.mystats':'My statistics',
+    'js.accountsdevice':'Accounts on this device',
+    'js.claudeerr':'⚠️ Error — please retry later',
+    'js.recordings':'recordings',
+    'js.audiototal':'total audio',
+    'js.wordstrans':'words transcribed',
+    'js.summaries':'summaries generated',
+    'js.norec':'No recordings',
     'a.ready':'✅ <strong>Everything is ready.</strong> Transcription and AI work right away — no setup needed on your side.',
     'a.searchrec':'Search your recordings…',
     'a.email':'Email',
@@ -860,6 +1103,70 @@ const UI = {
     'js.langset':'🌍 Language',
   },
   es: {
+    'd.zone':'Zona de peligro',
+    'd.title':'Eliminar mi cuenta',
+    'd.desc':'Elimina permanentemente tu cuenta y todas tus grabaciones. Esta acción es irreversible.',
+    'd.btn':'Eliminar',
+    'd.confirmtitle':'¿Eliminar tu cuenta permanentemente?',
+    'd.confirmtext':'Todas tus grabaciones, transcripciones y resúmenes se borrarán. Esta acción no se puede deshacer.',
+    'd.exporttip':'💡 Recuerda exportar tus datos antes de eliminar.',
+    'd.typeconfirm':'Escribe <strong>ELIMINAR</strong> para confirmar:',
+    'd.keyword':'ELIMINAR',
+    'd.cancel':'Cancelar',
+    'd.confirmbtn':'Eliminar permanentemente',
+    'd.done':'Cuenta eliminada. Tus datos han sido borrados.',
+    'l.legal':'Información legal',
+    'l.legaldesc':'Aviso, privacidad, términos',
+    'l.consult':'Consultar',
+    'l.consent':'Tengo 15 años o más y acepto las <a href="legal.html#cgu" target="_blank">condiciones de uso</a> y la <a href="legal.html#confidentialite" target="_blank">política de privacidad</a>.',
+    'l.consentreq':'Debes aceptar las condiciones para continuar.',
+    'x.export':'Exportar',
+    'x.copy':'Copiar',
+    'x.download':'Descargar (.txt)',
+    'x.copied':'✅ Copiado al portapapeles',
+    'x.copyfail':'⚠️ No se pudo copiar',
+    'x.downloaded':'✅ Archivo descargado',
+    'x.allexported':'✅ Todas las grabaciones exportadas',
+    'x.exportall':'Exportar todo',
+    'x.date':'Fecha',
+    'x.duration':'Duración',
+    'x.danger':'Zona de peligro',
+    'x.delete':'Eliminar',
+    'q.myplan':'Mi suscripción',
+    'q.plan':'Plan',
+    'q.used':'Usado este mes',
+    'q.left':'Restante',
+    'q.resets':'El contador se reinicia el día 1 de cada mes.',
+    'q.founderplan':'Acceso Fundador',
+    'q.thismonth':'Este mes',
+    'q.unlimited':'Uso ilimitado',
+    'q.reached':'Límite mensual alcanzado.',
+    'q.upgrade':'Mejorar plan',
+    'q.blocked':'⛔ Límite mensual alcanzado — mejora tu plan para continuar',
+    'q.almostdone':'⚠️ Te quedan menos de 5 minutos este mes',
+    'js.summarize':'Resumir mis sesiones',
+    'js.pending':'Mis acciones pendientes',
+    'js.searchtopic':'Buscar un tema',
+    'js.writeemail':'Redactar un email',
+    'js.howworks':'¿Cómo funciona?',
+    'js.productivity':'Consejos de productividad',
+    'js.translate':'Traducir un texto',
+    'js.shortsum':'Resumen corto',
+    'js.listdec':'Listar decisiones',
+    'js.writereport':'Redactar un informe',
+    'js.basedon':'Basado en esta transcripción',
+    'js.aiactivity':'Actividad IA',
+    'js.noaccounts':'Ninguna cuenta registrada.',
+    'js.asstquestions':'Preguntas al asistente hoy:',
+    'js.costwatch':'Control de costes',
+    'js.mystats':'Mis estadísticas',
+    'js.accountsdevice':'Cuentas en este dispositivo',
+    'js.claudeerr':'⚠️ Error — inténtalo más tarde',
+    'js.recordings':'grabaciones',
+    'js.audiototal':'audio total',
+    'js.wordstrans':'palabras transcritas',
+    'js.summaries':'resúmenes generados',
+    'js.norec':'Sin grabaciones',
     'a.ready':'✅ <strong>Todo está listo.</strong> La transcripción y la IA funcionan directamente — sin configuración por tu parte.',
     'a.searchrec':'Busca en tus grabaciones…',
     'a.email':'Email',
@@ -1065,6 +1372,7 @@ let currentUser=null, sessions=[];
 let isRec=false, mr=null, dgWs=null;
 let timerInt=null, startTime=null;
 let finalTx='', interimTx='';
+let liveUserScrolled = false;
 let speakerSegments=[];
 let vizBars=[], vizRaf=null, vizPhase=0;
 
@@ -1079,26 +1387,55 @@ function switchTab(t) {
 }
 function authErr(m){const e=document.getElementById('auth-error');e.textContent=m;e.classList.add('show')}
 
-function doRegister(){
+async function doRegister(){
   const email=document.getElementById('reg-email').value.trim().toLowerCase();
   const pwd=document.getElementById('reg-pwd').value;
   if(!email||!pwd){authErr(t('js.fields'));return}
   if(pwd.length<8){authErr(t('js.pwdshort'));return}
+  const consent=document.getElementById('reg-consent');
+  if(consent && !consent.checked){authErr(t('l.consentreq'));return}
   const users=K.users();
   if(users[email]){authErr(t('js.emailused'));switchTab('login');return}
-  users[email]={pwd:btoa(pwd),createdAt:Date.now()};
+  const salt = makeSalt();
+  const hash = await hashPassword(pwd, salt);
+  users[email]={salt, hash, createdAt:Date.now()};
   K.saveUsers(users);
   currentUser=email; localStorage.setItem('nuro_cu',email); localStorage.setItem('nuro_last_email',email);
+  // Enregistrer l'inscription dans la base (en arrière-plan, sans bloquer)
+  registerSignup(email);
   enterDashboard();
 }
 
-function doLogin(){
+// Signale l'inscription au serveur (pour le suivi admin).
+// Silencieux : si ça échoue, l'utilisateur n'est pas gêné.
+function registerSignup(email){
+  if(!WORKER_URL) return;
+  const lang = (typeof uiLang === 'function') ? uiLang() : 'fr';
+  fetch(WORKER_URL + '/signup', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ email, lang })
+  }).catch(()=>{ /* silencieux */ });
+}
+
+async function doLogin(){
   const email=document.getElementById('log-email').value.trim().toLowerCase();
   const pwd=document.getElementById('log-pwd').value;
   if(!email||!pwd){authErr(t('js.fields'));return}
   const users=K.users();
-  if(!users[email]||users[email].pwd!==btoa(pwd)){authErr(t('js.badlogin'));return}
+  const u = users[email];
+  const ok = await verifyPassword(pwd, u);
+  if(!ok){authErr(t('js.badlogin'));return}
+  // Migration : si le compte est en ancien format, le sécuriser maintenant
+  if(u && u.pwd && !u.hash){
+    const salt = makeSalt();
+    u.hash = await hashPassword(pwd, salt);
+    u.salt = salt;
+    delete u.pwd;
+    K.saveUsers(users);
+  }
   currentUser=email; localStorage.setItem('nuro_cu',email); localStorage.setItem('nuro_last_email',email);
+  registerSignup(email);   // met à jour la date de dernière visite
   enterDashboard();
 }
 
@@ -1154,15 +1491,118 @@ function enterDashboard(){
   const h=new Date().getHours();
   const g=h<6?t('js.night'):h<12?t('js.morning'):h<18?t('js.afternoon'):t('js.evening');
   const el=document.getElementById('dash-greeting');if(el)el.textContent=g;
-  renderStats();renderSessions();
+  renderStats();renderSessions();renderQuota();
   const fab=document.getElementById('fab-asst');if(fab)fab.style.display='flex';
   showView('dashboard');
   if(isFounder()){setTimeout(()=>showToast(t('js.founder')),400)}
 }
 
+
+
+// ══ SÉCURITÉ DES MOTS DE PASSE ══
+// Hachage SHA-256 avec sel aléatoire (non réversible, contrairement à btoa)
+async function hashPassword(pwd, salt){
+  const enc = new TextEncoder();
+  const data = enc.encode(salt + '::' + pwd);
+  const buf = await crypto.subtle.digest('SHA-256', data);
+  return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+function makeSalt(){
+  const a = new Uint8Array(16);
+  crypto.getRandomValues(a);
+  return Array.from(a).map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+// Vérifie un mot de passe (gère aussi les anciens comptes en btoa, pour ne casser personne)
+async function verifyPassword(pwd, user){
+  if(!user) return false;
+  // Nouveau format : hash + salt
+  if(user.salt && user.hash){
+    const h = await hashPassword(pwd, user.salt);
+    return h === user.hash;
+  }
+  // Ancien format (btoa) — on accepte puis on migrera au prochain login
+  if(user.pwd){
+    try{ return btoa(pwd) === user.pwd; }catch(e){ return false; }
+  }
+  return false;
+}
+
+// ══ QUOTAS D'UTILISATION (protection des coûts API) ══
+const PLAN_LIMITS = {
+  free:      { minutes: 30,   label: 'Gratuit' },     // 30 min/mois
+  essentiel: { minutes: 600,  label: 'Essentiel' },   // 10 h/mois
+  pro:       { minutes: 1800, label: 'Pro' },         // 30 h/mois
+};
+
+// Plan de l'utilisateur (pour l'instant tout le monde est en 'free',
+// sera lu depuis le paiement quand Stripe sera branché)
+function userPlan(){
+  return localStorage.getItem(`kaideno_plan_${currentUser}`) || 'free';
+}
+
+// Clé du quota : par utilisateur et par mois
+function quotaKey(){
+  const m = new Date().toISOString().slice(0,7); // "2026-07"
+  return `kaideno_usage_${currentUser}_${m}`;
+}
+
+// Secondes consommées ce mois-ci
+function usedSeconds(){
+  return parseInt(localStorage.getItem(quotaKey()) || '0', 10);
+}
+function addUsedSeconds(sec){
+  localStorage.setItem(quotaKey(), String(usedSeconds() + Math.max(0, sec)));
+}
+
+// Limite en secondes selon le plan (Infinity pour les fondateurs)
+function quotaLimitSec(){
+  if(isFounder()) return Infinity;
+  const plan = PLAN_LIMITS[userPlan()] || PLAN_LIMITS.free;
+  return plan.minutes * 60;
+}
+function remainingSec(){
+  const lim = quotaLimitSec();
+  if(lim === Infinity) return Infinity;
+  return Math.max(0, lim - usedSeconds());
+}
+function quotaExceeded(){
+  return remainingSec() <= 0;
+}
+
+// Affichage du quota dans le dashboard
+function renderQuota(){
+  const el = document.getElementById('quota-bar');
+  if(!el) return;
+  if(isFounder()){
+    el.innerHTML = `<div class="quota-inner founder"><span class="quota-star">★</span> ${t('q.unlimited')}</div>`;
+    return;
+  }
+  const lim = quotaLimitSec();
+  const used = Math.min(usedSeconds(), lim);
+  const pct = lim ? Math.min(100, (used / lim) * 100) : 0;
+  const usedMin = Math.floor(used / 60);
+  const limMin = Math.floor(lim / 60);
+  const low = pct >= 80;
+  el.innerHTML = `
+    <div class="quota-inner">
+      <div class="quota-head">
+        <span class="quota-lbl">${t('q.thismonth')}</span>
+        <span class="quota-val ${low?'low':''}">${usedMin} / ${limMin} min</span>
+      </div>
+      <div class="quota-track"><div class="quota-fill ${low?'low':''}" style="width:${pct}%"></div></div>
+      ${pct >= 100 ? `<div class="quota-warn">${t('q.reached')} <button class="quota-cta" onclick="showView('settings')">${t('q.upgrade')}</button></div>` : ''}
+    </div>`;
+}
+
 // ══ ENREGISTREMENT ══
 async function toggleRec(){
   if(isRec){stopRec();return}
+  // Vérifier le quota avant de démarrer
+  if(quotaExceeded()){
+    showToast(t('q.blocked'));
+    renderQuota();
+    return;
+  }
   try{
     const stream=await navigator.mediaDevices.getUserMedia({audio:true});
     finalTx='';interimTx='';
@@ -1173,6 +1613,8 @@ async function toggleRec(){
     const laa=document.getElementById('live-ai-answer'); if(laa){laa.className='live-ai-answer';laa.textContent='';}
     const lai=document.getElementById('live-ai-input'); if(lai) lai.value='';
     document.getElementById('live-box').classList.add('show');
+    liveUserScrolled = false;
+    initLiveScroll();
     const dg=await getDeepgramKey();
     if(!dg){showToast('⚠️ Service de transcription indisponible');document.getElementById('live-box').classList.remove('show');return}
     const recLang=localStorage.getItem('kaideno_rec_lang')||'fr';
@@ -1261,6 +1703,10 @@ async function finishRec(){
     formattedTx = merged.map(seg=>`— ${seg.text}`).join('\n');
   }
 
+  // Comptabiliser la consommation
+  addUsedSeconds(dur);
+  renderQuota();
+
   const s={id:`s_${Date.now()}`,createdAt:Date.now(),duration:dur,transcript:formattedTx,wordCount:tx.split(/\s+/).length,status:'processing',summary:null,speakerCount:speakers.length};
   sessions.unshift(s);K.saveSessions(sessions);
   renderSessions();renderStats();
@@ -1297,10 +1743,51 @@ function setRecUI(on){
 }
 function refreshLive(){
   const el=document.getElementById('live-txt');
-  el.innerHTML=`${finalTx}<span class="live-int">${interimTx}</span>`;
+  const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+  // Si plusieurs locuteurs détectés, afficher avec des tirets en direct
+  const speakers = [...new Set(speakerSegments.map(s=>s.speaker))];
+  if(speakerSegments.length && speakers.length > 1){
+    // Fusionner les segments consécutifs du même locuteur
+    const merged=[];
+    speakerSegments.forEach(seg=>{
+      if(!seg.text) return;
+      const last=merged[merged.length-1];
+      if(last && last.speaker===seg.speaker){ last.text += ' ' + seg.text; }
+      else merged.push({speaker:seg.speaker, text:seg.text});
+    });
+    let html = merged.map(seg=>
+      `<div style="display:flex;gap:7px;margin-bottom:7px"><span style="color:var(--accent);font-weight:700;flex-shrink:0">—</span><span>${esc(seg.text)}</span></div>`
+    ).join('');
+    // Ajouter le texte en cours (interim) à la suite
+    if(interimTx.trim()){
+      html += `<div style="display:flex;gap:7px"><span style="color:var(--accent);font-weight:700;flex-shrink:0;opacity:.5">—</span><span class="live-int">${esc(interimTx)}</span></div>`;
+    }
+    el.innerHTML = html;
+  } else {
+    // Un seul locuteur : affichage continu classique
+    el.innerHTML=`${esc(finalTx)}<span class="live-int">${esc(interimTx)}</span>`;
+  }
+
   const wc=(finalTx+interimTx).trim().split(/\s+/).filter(Boolean).length;
-  document.getElementById('live-wc').textContent=`${wc} mot${wc>1?'s':''}`;
-  el.scrollTop=el.scrollHeight;
+  document.getElementById('live-wc').textContent=`${wc} ${t('js.words')}`;
+  // Défilement automatique intelligent :
+  // on descend seulement si l'utilisateur est déjà en bas (sinon on le laisse relire)
+  const nearBottom = (el.scrollHeight - el.scrollTop - el.clientHeight) < 60;
+  if(nearBottom || !liveUserScrolled){
+    requestAnimationFrame(()=>{ el.scrollTop = el.scrollHeight; });
+  }
+}
+
+// Détecte si l'utilisateur a remonté manuellement dans la transcription live
+function initLiveScroll(){
+  const el = document.getElementById('live-txt');
+  if(!el || el.dataset.scrollInit) return;
+  el.dataset.scrollInit = '1';
+  el.addEventListener('scroll', ()=>{
+    const nearBottom = (el.scrollHeight - el.scrollTop - el.clientHeight) < 60;
+    liveUserScrolled = !nearBottom;
+  });
 }
 
 // IA en direct pendant l'enregistrement
@@ -1332,7 +1819,28 @@ async function askLiveAi(){
   if(btn) btn.disabled=false;
 }
 
-function startTimer(){timerInt=setInterval(()=>{const e=Math.floor((Date.now()-startTime)/1000);document.getElementById('rec-timer').textContent=`${String(Math.floor(e/60)).padStart(2,'0')}:${String(e%60).padStart(2,'0')}`},200)}
+function startTimer(){
+  let warned = false;
+  timerInt=setInterval(()=>{
+    const e=Math.floor((Date.now()-startTime)/1000);
+    document.getElementById('rec-timer').textContent=`${String(Math.floor(e/60)).padStart(2,'0')}:${String(e%60).padStart(2,'0')}`;
+
+    // Protection : couper automatiquement si le quota est épuisé pendant l'enregistrement
+    const rem = remainingSec();
+    if(rem !== Infinity){
+      const left = rem - e;
+      if(left <= 0){
+        showToast(t('q.blocked'));
+        stopRec();
+        return;
+      }
+      if(left <= 300 && !warned){   // avertir à 5 min restantes
+        warned = true;
+        showToast(t('q.almostdone'));
+      }
+    }
+  },200);
+}
 function stopTimer(){clearInterval(timerInt)}
 function startViz(){
   document.getElementById('audio-viz').classList.add('show');
@@ -1354,7 +1862,7 @@ function renderStats(){
 }
 function renderSessions(){
   const c=document.getElementById('sessions-list');
-  if(!sessions.length){c.innerHTML=`<div class="empty-state"><div class="empty-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="8" y="2" width="8" height="13" rx="4" stroke="#3D4D62" stroke-width="1.5"/><path d="M4 12a8 8 0 0016 0" stroke="#3D4D62" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="20" x2="12" y2="23" stroke="#3D4D62" stroke-width="1.5" stroke-linecap="round"/></svg></div><h3 class="empty-title">Aucun enregistrement</h3><p class="empty-sub">${t('js.empty')}</p></div>`;return}
+  if(!sessions.length){c.innerHTML=`<div class="empty-state"><div class="empty-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="8" y="2" width="8" height="13" rx="4" stroke="#3D4D62" stroke-width="1.5"/><path d="M4 12a8 8 0 0016 0" stroke="#3D4D62" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="20" x2="12" y2="23" stroke="#3D4D62" stroke-width="1.5" stroke-linecap="round"/></svg></div><h3 class="empty-title">${t('js.norec')}</h3><p class="empty-sub">${t('js.empty')}</p></div>`;return}
   c.innerHTML=sessions.map(s=>{
     const date=new Date(s.createdAt).toLocaleDateString('fr-FR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
     const badge=s.status==='done'?'<span class="bdg bdg-done">✓ Résumé</span>':s.status==='processing'?'<span class="bdg bdg-proc">⟳ En cours</span>':'<span class="bdg bdg-err">⚠ Erreur</span>';
@@ -1445,15 +1953,15 @@ function openSession(id){
       <div class="ai-hd">
         <div class="ai-hd-icon"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 2h10v8H8l-2 2-2-2H2V2z" stroke="#3B82F6" stroke-width="1.2" stroke-linejoin="round"/></svg></div>
         <div class="ai-hd-title">Assistant IA</div>
-        <div class="ai-hd-sub">Basé sur cette transcription</div>
+        <div class="ai-hd-sub">${t('js.basedon')}</div>
       </div>
       <div class="ai-chips">
         <button class="ai-chip" onclick="sendChip(this,'${id}')">Formater en email</button>
         <button class="ai-chip" onclick="sendChip(this,'${id}')">Extraire les chiffres</button>
         <button class="ai-chip" onclick="sendChip(this,'${id}')">Traduire en anglais</button>
-        <button class="ai-chip" onclick="sendChip(this,'${id}')">Rédiger un compte-rendu</button>
-        <button class="ai-chip" onclick="sendChip(this,'${id}')">Lister les décisions</button>
-        <button class="ai-chip" onclick="sendChip(this,'${id}')">Résumé court</button>
+        <button class="ai-chip" onclick="sendChip(this,'${id}')">${t('js.writereport')}</button>
+        <button class="ai-chip" onclick="sendChip(this,'${id}')">${t('js.listdec')}</button>
+        <button class="ai-chip" onclick="sendChip(this,'${id}')">${t('js.shortsum')}</button>
       </div>
       <div class="ai-msgs" id="ai-msgs-${id}">
         <div class="ai-msg bot"><div class="ai-av">N</div><div class="ai-bubble">Bonjour ! Je connais le contenu de cet enregistrement. Pose-moi une question ou choisis une action ci-dessus.</div></div>
@@ -1463,9 +1971,22 @@ function openSession(id){
         <button class="ai-send" onclick="sendAi('${id}')">Envoyer</button>
       </div>
     </div>
+    <div class="export-zone">
+      <div class="export-lbl">${t('x.export')}</div>
+      <div class="export-btns">
+        <button class="btn-export" onclick="copySession('${id}')">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="4.5" y="4.5" width="7.5" height="7.5" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M9.5 4.5V3a1 1 0 00-1-1H3a1 1 0 00-1 1v5.5a1 1 0 001 1h1.5" stroke="currentColor" stroke-width="1.3"/></svg>
+          ${t('x.copy')}
+        </button>
+        <button class="btn-export" onclick="downloadSession('${id}')">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v7M4 6.5L7 9.5l3-3M2.5 11.5h9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          ${t('x.download')}
+        </button>
+      </div>
+    </div>
     <div class="danger-zone">
-      <div class="danger-lbl">Zone de danger</div>
-      <button class="btn-danger" onclick="confirmDel('${id}')"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 3.5h10M5.5 3.5V2h3v1.5M5 5.5v5M9 5.5v5M3.5 3.5l.5 8h6l.5-8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg> Supprimer</button>
+      <div class="danger-lbl">${t('x.danger')}</div>
+      <button class="btn-danger" onclick="confirmDel('${id}')"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 3.5h10M5.5 3.5V2h3v1.5M5 5.5v5M9 5.5v5M3.5 3.5l.5 8h6l.5-8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg> ${t('x.delete')}</button>
     </div>`;
   document.getElementById('detail-content').innerHTML=html;
   showView('detail');
@@ -1581,6 +2102,22 @@ function refreshSettings(){
   // Afficher la section admin pour les fondateurs
   const adminSec=document.getElementById('admin-section');
   if(adminSec)adminSec.style.display=isFounder()?'block':'none';
+
+  // Infos sur le plan et la consommation
+  const pi=document.getElementById('plan-info');
+  if(pi){
+    if(isFounder()){
+      pi.innerHTML = `<strong>★ ${t('q.founderplan')}</strong><br>${t('q.unlimited')}`;
+    } else {
+      const plan = PLAN_LIMITS[userPlan()] || PLAN_LIMITS.free;
+      const usedMin = Math.floor(usedSeconds()/60);
+      const remMin = Math.floor(remainingSec()/60);
+      pi.innerHTML = `<strong>${t('q.plan')} : ${plan.label}</strong><br>
+        ${t('q.used')} : ${usedMin} min / ${plan.minutes} min<br>
+        ${t('q.left')} : <strong style="color:${remMin<5?'#F0A500':'var(--accent)'}">${remMin} min</strong>
+        <div style="margin-top:10px;font-size:.78rem;color:var(--ink3)">${t('q.resets')}</div>`;
+    }
+  }
 }
 
 function renderAdmin(){
@@ -1603,37 +2140,37 @@ function renderAdmin(){
 
   el.innerHTML=`
     <div class="settings-section">
-      <p class="settings-lbl">Mes statistiques</p>
+      <p class="settings-lbl">${t('js.mystats')}</p>
       <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
         <div style="background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:16px">
           <div style="font-size:1.6rem;font-weight:700;font-family:'Space Grotesk',sans-serif;color:var(--accent)">${sessions.length}</div>
-          <div style="font-size:.75rem;color:var(--ink3)">enregistrements</div>
+          <div style="font-size:.75rem;color:var(--ink3)">${t('js.recordings')}</div>
         </div>
         <div style="background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:16px">
           <div style="font-size:1.6rem;font-weight:700;font-family:'Space Grotesk',sans-serif;color:var(--accent)">${h>0?h+'h':''}${m}min</div>
-          <div style="font-size:.75rem;color:var(--ink3)">audio total</div>
+          <div style="font-size:.75rem;color:var(--ink3)">${t('js.audiototal')}</div>
         </div>
         <div style="background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:16px">
           <div style="font-size:1.6rem;font-weight:700;font-family:'Space Grotesk',sans-serif;color:var(--accent)">${totalWords.toLocaleString('fr-FR')}</div>
-          <div style="font-size:.75rem;color:var(--ink3)">mots transcrits</div>
+          <div style="font-size:.75rem;color:var(--ink3)">${t('js.wordstrans')}</div>
         </div>
         <div style="background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:16px">
           <div style="font-size:1.6rem;font-weight:700;font-family:'Space Grotesk',sans-serif;color:var(--accent)">${totalSummaries}</div>
-          <div style="font-size:.75rem;color:var(--ink3)">résumés générés</div>
+          <div style="font-size:.75rem;color:var(--ink3)">${t('js.summaries')}</div>
         </div>
       </div>
     </div>
 
     <div class="settings-section">
-      <p class="settings-lbl">Activité IA</p>
-      <div class="info-card">Questions à l'assistant aujourd'hui : <strong>${asstToday}</strong>${isFounder()?' (illimité — fondateur)':''}</div>
+      <p class="settings-lbl">${t('js.aiactivity')}</p>
+      <div class="info-card">${t('js.asstquestions')} <strong>${asstToday}</strong>${isFounder()?' (illimité — fondateur)':''}</div>
     </div>
 
     <div class="settings-section">
       <p class="settings-lbl">Comptes sur cet appareil (${emails.length})</p>
       <div class="info-card" style="font-size:.78rem;margin-bottom:10px">ℹ️ Seuls les comptes créés sur CE navigateur sont visibles. Pour voir tous les utilisateurs où qu'ils soient, il faudra une base de données centrale (étape future).</div>
       <div style="display:flex;flex-direction:column;gap:8px">
-        ${emails.length===0?'<div style="font-size:.85rem;color:var(--ink3)">Aucun compte enregistré.</div>':emails.map(em=>{
+        ${emails.length===0?`<div style="font-size:.85rem;color:var(--ink3)">${t('js.noaccounts')}</div>`:emails.map(em=>{
           const u=users[em];
           const date=u.createdAt?new Date(u.createdAt).toLocaleDateString('fr-FR'):'—';
           const founder=FOUNDERS.includes(em.toLowerCase());
@@ -1645,7 +2182,7 @@ function renderAdmin(){
     </div>
 
     <div class="settings-section">
-      <p class="settings-lbl">Surveillance des coûts</p>
+      <p class="settings-lbl">${t('js.costwatch')}</p>
       <div class="info-card" style="font-size:.82rem">💡 Rappel : chaque enregistrement et résumé consomme ton crédit API (Deepgram + Anthropic). Surveille ta consommation sur <a href="https://console.deepgram.com" target="_blank" style="color:var(--accent)">console.deepgram.com</a> et <a href="https://console.anthropic.com" target="_blank" style="color:var(--accent)">console.anthropic.com</a>.</div>
     </div>
   `;
@@ -1711,7 +2248,7 @@ async function runAiEdit(id){
     showToast(t('js.modified'));
     renderStats();
   }catch{
-    showToast('⚠️ Erreur — vérifie ta clé Claude');
+    showToast(t('js.claudeerr'));
   }
   if(sendBtn){sendBtn.disabled=false;sendBtn.textContent='Appliquer';}
 }
@@ -1780,16 +2317,16 @@ function openAssistant(){
   if(chips){
     if(hasSessions){
       chips.innerHTML = `
-        <button class="asst-chip" onclick="asstChip('Résume mes 3 derniers enregistrements')">Résumer mes sessions</button>
-        <button class="asst-chip" onclick="asstChip('Quelles actions ai-je en attente ?')">Mes actions en attente</button>
-        <button class="asst-chip" onclick="asstChip('Retrouve où je parle de budget')">Rechercher un sujet</button>
-        <button class="asst-chip" onclick="asstChip('Aide-moi à rédiger un email')">Rédiger un email</button>`;
+        <button class="asst-chip" onclick="asstChip('Résume mes 3 derniers enregistrements')">${t('js.summarize')}</button>
+        <button class="asst-chip" onclick="asstChip('Quelles actions ai-je en attente ?')">${t('js.pending')}</button>
+        <button class="asst-chip" onclick="asstChip('Retrouve où je parle de budget')">${t('js.searchtopic')}</button>
+        <button class="asst-chip" onclick="asstChip('Aide-moi à rédiger un email')">${t('js.writeemail')}</button>`;
     } else {
       chips.innerHTML = `
-        <button class="asst-chip" onclick="asstChip('Comment fonctionne kaideno ?')">Comment ça marche ?</button>
-        <button class="asst-chip" onclick="asstChip('Donne-moi des idées pour être plus productif')">Conseils productivité</button>
-        <button class="asst-chip" onclick="asstChip('Aide-moi à rédiger un email professionnel')">Rédiger un email</button>
-        <button class="asst-chip" onclick="asstChip('Traduis un texte en anglais')">Traduire un texte</button>`;
+        <button class="asst-chip" onclick="asstChip('Comment fonctionne kaideno ?')">${t('js.howworks')}</button>
+        <button class="asst-chip" onclick="asstChip('Donne-moi des idées pour être plus productif')">${t('js.productivity')}</button>
+        <button class="asst-chip" onclick="asstChip('Aide-moi à rédiger un email professionnel')">${t('js.writeemail')}</button>
+        <button class="asst-chip" onclick="asstChip('Traduis un texte en anglais')">${t('js.translate')}</button>`;
     }
   }
 
@@ -1933,6 +2470,177 @@ function toggleTheme(){
   applyTheme(next);
 }
 
+
+// ══ EXPORT DES ENREGISTREMENTS ══
+
+// Construit le texte complet d'une session (titre, résumé, points clés, actions, transcription)
+function buildExportText(s){
+  const date = new Date(s.createdAt).toLocaleString(uiLang()==='en'?'en-GB':uiLang()==='es'?'es-ES':'fr-FR');
+  const titre = s.summary?.titre || t('js.norec');
+  const L = [];
+  L.push(titre);
+  L.push('='.repeat(Math.min(titre.length, 60)));
+  L.push('');
+  L.push(`${t('x.date')} : ${date}`);
+  L.push(`${t('x.duration')} : ${fmtDur(s.duration)}`);
+  L.push(`${t('js.words')} : ${s.wordCount || 0}`);
+  L.push('');
+
+  if(s.summary){
+    if(s.summary.resume){
+      L.push(t('js.summary').toUpperCase());
+      L.push('-'.repeat(20));
+      L.push(s.summary.resume);
+      L.push('');
+    }
+    if(s.summary.points_cles?.length){
+      L.push(t('js.keypoints').toUpperCase());
+      L.push('-'.repeat(20));
+      s.summary.points_cles.forEach(p => L.push('• ' + p));
+      L.push('');
+    }
+    if(s.summary.actions?.length){
+      L.push(t('js.actions').toUpperCase());
+      L.push('-'.repeat(20));
+      s.summary.actions.forEach(a => L.push('→ ' + a));
+      L.push('');
+    }
+  }
+
+  L.push(t('js.transcript').toUpperCase());
+  L.push('-'.repeat(20));
+  L.push(s.transcript || '');
+  L.push('');
+  L.push('---');
+  L.push('kaideno');
+
+  return L.join('\n');
+}
+
+// Copier dans le presse-papier
+async function copySession(id){
+  const s = sessions.find(x=>x.id===id);
+  if(!s) return;
+  const txt = buildExportText(s);
+  try{
+    await navigator.clipboard.writeText(txt);
+    showToast(t('x.copied'));
+  }catch(e){
+    // Repli si l'API clipboard n'est pas disponible
+    const ta = document.createElement('textarea');
+    ta.value = txt; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); showToast(t('x.copied')); }
+    catch(e2){ showToast(t('x.copyfail')); }
+    ta.remove();
+  }
+}
+
+// Télécharger en .txt
+function downloadSession(id){
+  const s = sessions.find(x=>x.id===id);
+  if(!s) return;
+  const txt = buildExportText(s);
+  const titre = (s.summary?.titre || 'kaideno').replace(/[^\w\sàâéèêëîïôùûüç-]/gi,'').trim().slice(0,50) || 'kaideno';
+  const date = new Date(s.createdAt).toISOString().slice(0,10);
+  const blob = new Blob([txt], {type:'text/plain;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${date}_${titre}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  showToast(t('x.downloaded'));
+}
+
+// Exporter TOUS les enregistrements
+function exportAll(){
+  if(!sessions.length){ showToast(t('js.norec')); return; }
+  const parts = sessions.map(s => buildExportText(s));
+  const txt = parts.join('\n\n' + '═'.repeat(60) + '\n\n');
+  const blob = new Blob([txt], {type:'text/plain;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `kaideno_export_${new Date().toISOString().slice(0,10)}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  showToast(t('x.allexported'));
+}
+
+
+// ══ SUPPRESSION DE COMPTE (RGPD) ══
+function openDeleteAccount(){
+  document.getElementById('del-overlay')?.classList.add('open');
+  document.getElementById('del-modal')?.classList.add('open');
+  const inp = document.getElementById('del-confirm-input');
+  if(inp){ inp.value=''; setTimeout(()=>inp.focus(),250); }
+  const btn = document.getElementById('del-go-btn');
+  if(btn) btn.disabled = true;
+}
+function closeDeleteAccount(){
+  document.getElementById('del-overlay')?.classList.remove('open');
+  document.getElementById('del-modal')?.classList.remove('open');
+}
+// Le bouton ne s'active que si l'utilisateur tape le mot exact
+function checkDeleteConfirm(){
+  const inp = document.getElementById('del-confirm-input');
+  const btn = document.getElementById('del-go-btn');
+  if(!inp || !btn) return;
+  const expected = t('d.keyword').trim().toUpperCase();
+  btn.disabled = inp.value.trim().toUpperCase() !== expected;
+}
+function deleteAccount(){
+  if(!currentUser) return;
+  const email = currentUser;
+
+  // 1. Supprimer l'utilisateur de la liste des comptes
+  const users = K.users();
+  delete users[email];
+  K.saveUsers(users);
+
+  // 2. Effacer toutes les données liées à ce compte
+  const prefixes = [
+    `kaideno_sessions_${email}`,
+    `kaideno_usage_${email}`,
+    `kaideno_asst_quota_${email}`,
+    `kaideno_plan_${email}`,
+    `nuro_sessions_${email}`,
+  ];
+  // Balayer tout le stockage pour ne rien laisser
+  Object.keys(localStorage).forEach(k=>{
+    if(k.includes(email) || prefixes.some(p=>k.startsWith(p))){
+      localStorage.removeItem(k);
+    }
+  });
+
+  // 3. Nettoyer la session en cours
+  localStorage.removeItem('nuro_cu');
+  localStorage.removeItem('nuro_last_email');
+  localStorage.removeItem('kaideno_last_email');
+
+  // 4. Réinitialiser l'état de l'app
+  currentUser = null;
+  sessions = [];
+  closeDeleteAccount();
+  const fab = document.getElementById('fab-asst');
+  if(fab) fab.style.display = 'none';
+
+  showToast(t('d.done'));
+  setTimeout(()=>{
+    ['log-email','log-pwd','reg-email','reg-pwd'].forEach(id=>{
+      const el = document.getElementById(id);
+      if(el) el.value = '';
+    });
+    switchTab('register');
+    showView('auth');
+  }, 800);
+}
+
 // ══ TOAST ══
 let toastT;
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),3200)}
@@ -1993,3 +2701,4 @@ window.addEventListener('DOMContentLoaded',()=>{
 </script>
 </body>
 </html>
+
