@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Mentions légales, politique de confidentialité et conditions d'utilisation de kaideno.">
+<title>Informations légales — kaideno</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --c-bg:#FFFFFF; --c-surface:#F7F8FA; --c-surface2:#EEF1F5;
+  --c-border:rgba(15,23,42,0.09); --c-border2:rgba(15,23,42,0.16);
+  --c-text:#0F172A; --c-text2:#55637A; --c-text3:#94A3B8;
+  --c-blue:#2563EB; --c-blue-bg:rgba(37,99,235,0.07); --c-blue-b:rgba(37,99,235,0.18);
+  --c-amber:#B45309; --c-amber-bg:rgba(180,83,9,0.07); --c-amber-b:rgba(180,83,9,0.2);
+  --radius:12px;
+}
+body[data-theme="dark"]{
+  --c-bg:#080C12; --c-surface:#0E1420; --c-surface2:#141C2C;
+  --c-border:rgba(255,255,255,0.07); --c-border2:rgba(255,255,255,0.12);
+  --c-text:#EEF2F7; --c-text2:#7D8EA4; --c-text3:#3D4D62;
+  --c-blue:#3B82F6; --c-blue-bg:rgba(59,130,246,0.08); --c-blue-b:rgba(59,130,246,0.2);
+  --c-amber:#FBBF24; --c-amber-bg:rgba(251,191,36,0.07); --c-amber-b:rgba(251,191,36,0.2);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Inter',-apple-system,sans-serif;
+  background:var(--c-bg); color:var(--c-text);
+  line-height:1.7; -webkit-font-smoothing:antialiased;
+}
+a{color:var(--c-blue); text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* NAV */
+.nav{
+  position:sticky; top:0; z-index:50;
+  background:rgba(255,255,255,0.9); backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--c-border);
+  padding:14px 0;
+}
+body[data-theme="dark"] .nav{background:rgba(8,12,18,0.9)}
+.wrap{max-width:820px; margin:0 auto; padding:0 24px}
+.nav-inner{display:flex; align-items:center; justify-content:space-between}
+.nav-logo{
+  display:flex; align-items:center; gap:9px;
+  font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.1rem;
+  color:var(--c-text); text-decoration:none;
+}
+.nav-logo:hover{text-decoration:none}
+.nav-back{
+  font-size:.86rem; font-weight:600; color:var(--c-text2);
+  padding:8px 14px; border-radius:8px; border:1px solid var(--c-border);
+  transition:all .15s;
+}
+.nav-back:hover{color:var(--c-text); border-color:var(--c-border2); text-decoration:none}
+
+/* HERO */
+.head{padding:56px 0 32px; text-align:center; border-bottom:1px solid var(--c-border)}
+.head h1{
+  font-family:'Space Grotesk',sans-serif; font-size:2.1rem;
+  letter-spacing:-0.02em; margin-bottom:10px;
+}
+.head p{color:var(--c-text2); font-size:.95rem}
+.updated{
+  display:inline-block; margin-top:14px; font-size:.78rem; color:var(--c-text3);
+  background:var(--c-surface2); padding:5px 13px; border-radius:999px;
+}
+
+/* SOMMAIRE */
+.toc{
+  background:var(--c-surface); border:1px solid var(--c-border);
+  border-radius:var(--radius); padding:20px 22px; margin:36px 0;
+}
+.toc-title{
+  font-size:.72rem; font-weight:700; text-transform:uppercase;
+  letter-spacing:.08em; color:var(--c-text3); margin-bottom:12px;
+}
+.toc ol{list-style:none; counter-reset:toc}
+.toc li{counter-increment:toc; margin-bottom:7px}
+.toc li::before{
+  content:counter(toc) ". "; color:var(--c-text3);
+  font-weight:600; font-size:.85rem;
+}
+.toc a{font-size:.9rem; font-weight:500}
+
+/* CONTENU */
+main{padding-bottom:72px}
+section{margin-bottom:52px; scroll-margin-top:80px}
+section h2{
+  font-family:'Space Grotesk',sans-serif; font-size:1.45rem;
+  margin-bottom:18px; padding-bottom:10px;
+  border-bottom:1px solid var(--c-border); letter-spacing:-0.01em;
+}
+section h3{
+  font-size:1.02rem; font-weight:600; margin:26px 0 10px;
+  color:var(--c-text);
+}
+section p{margin-bottom:14px; color:var(--c-text2); font-size:.93rem}
+section ul{margin:0 0 16px 20px; color:var(--c-text2); font-size:.93rem}
+section li{margin-bottom:8px}
+strong{color:var(--c-text); font-weight:600}
+
+.callout{
+  background:var(--c-blue-bg); border:1px solid var(--c-blue-b);
+  border-radius:var(--radius); padding:16px 18px; margin:20px 0;
+  font-size:.9rem; color:var(--c-text2);
+}
+.callout strong{color:var(--c-blue)}
+
+.warning{
+  background:var(--c-amber-bg); border:1px solid var(--c-amber-b);
+  border-radius:var(--radius); padding:16px 18px; margin:20px 0;
+  font-size:.9rem; color:var(--c-text2);
+}
+.warning strong{color:var(--c-amber)}
+
+.todo{
+  display:inline-block; background:rgba(220,38,38,0.08);
+  border:1px dashed rgba(220,38,38,0.4); border-radius:6px;
+  padding:1px 8px; font-size:.85rem; color:#DC2626; font-weight:600;
+}
+body[data-theme="dark"] .todo{color:#F87171; background:rgba(248,113,113,0.08)}
+
+table{
+  width:100%; border-collapse:collapse; margin:18px 0;
+  font-size:.88rem;
+}
+th,td{
+  text-align:left; padding:11px 13px;
+  border:1px solid var(--c-border);
+}
+th{background:var(--c-surface2); font-weight:600; color:var(--c-text)}
+td{color:var(--c-text2)}
+
+/* FOOTER */
+footer{
+  border-top:1px solid var(--c-border); padding:28px 0;
+  text-align:center; font-size:.84rem; color:var(--c-text3);
+}
+footer a{color:var(--c-text2); margin:0 10px}
+
+@media(max-width:640px){
+  .head h1{font-size:1.7rem}
+  section h2{font-size:1.25rem}
+  table{font-size:.82rem}
+  th,td{padding:9px 10px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a href="home.html" class="nav-logo">
+      <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
+        <rect width="28" height="28" rx="7" fill="#EEF1F5"/>
+        <rect x="9" y="9" width="10" height="10" rx="3" stroke="#2563EB" stroke-width="1.6"/>
+      </svg>
+      kaideno
+    </a>
+    <a href="home.html" class="nav-back">← Retour au site</a>
+  </div>
+</nav>
+
+<div class="head">
+  <div class="wrap">
+    <h1>Informations légales</h1>
+    <p>Mentions légales, confidentialité et conditions d'utilisation</p>
+    <div class="updated">Dernière mise à jour : juillet 2026</div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="toc">
+    <div class="toc-title">Sommaire</div>
+    <ol>
+      <li><a href="#mentions">Mentions légales</a></li>
+      <li><a href="#confidentialite">Politique de confidentialité</a></li>
+      <li><a href="#cgu">Conditions d'utilisation</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ol>
+  </div>
+
+  <main>
+
+  <!-- ─────────── MENTIONS LÉGALES ─────────── -->
+  <section id="mentions">
+    <h2>1. Mentions légales</h2>
+
+    <h3>Éditeur du service</h3>
+    <p>
+      Le service <strong>kaideno</strong> est édité par un particulier, dans le cadre d'un
+      projet en phase de validation (bêta).
+    </p>
+    <ul>
+      <li><strong>Éditeur</strong> : <span class="todo">[Nom et prénom à compléter]</span></li>
+      <li><strong>Statut</strong> : <span class="todo">[À compléter — auto-entrepreneur / société]</span></li>
+      <li><strong>SIRET</strong> : <span class="todo">[À compléter lors de l'immatriculation]</span></li>
+      <li><strong>Contact</strong> : <a href="mailto:contact.kaideno@gmail.com">contact.kaideno@gmail.com</a></li>
+    </ul>
+
+    <div class="warning">
+      <strong>⚠️ Phase bêta.</strong> kaideno est actuellement un projet en cours de validation.
+      Aucun produit n'est commercialisé à ce jour. Ces mentions seront complétées avant toute
+      mise en vente.
+    </div>
+
+    <h3>Hébergement</h3>
+    <ul>
+      <li><strong>Site et application</strong> : GitHub Pages — GitHub Inc., 88 Colin P. Kelly Jr. St, San Francisco, CA 94107, États-Unis</li>
+      <li><strong>Serveur applicatif</strong> : Cloudflare Workers — Cloudflare Inc., 101 Townsend St, San Francisco, CA 94107, États-Unis</li>
+    </ul>
+
+    <h3>Propriété intellectuelle</h3>
+    <p>
+      L'ensemble des éléments du service (structure, textes, interface, code) est protégé par le
+      droit de la propriété intellectuelle. Toute reproduction non autorisée est interdite.
+    </p>
+    <p>
+      Les contenus que vous produisez (enregistrements, transcriptions, résumés) <strong>vous
+      appartiennent</strong>. kaideno ne revendique aucun droit sur vos données.
+    </p>
+  </section>
+
+  <!-- ─────────── CONFIDENTIALITÉ ─────────── -->
+  <section id="confidentialite">
+    <h2>2. Politique de confidentialité</h2>
+
+    <p>
+      Cette politique explique quelles données kaideno traite, pourquoi, et quels sont vos droits.
+      Elle est conforme au Règlement général sur la protection des données (RGPD).
+    </p>
+
+    <h3>Données que nous traitons</h3>
+    <table>
+      <thead>
+        <tr><th>Donnée</th><th>Finalité</th><th>Conservation</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Adresse email</td>
+          <td>Créer et identifier votre compte</td>
+          <td>Jusqu'à suppression du compte</td>
+        </tr>
+        <tr>
+          <td>Mot de passe</td>
+          <td>Sécuriser l'accès à votre compte</td>
+          <td>Jusqu'à suppression du compte</td>
+        </tr>
+        <tr>
+          <td>Flux audio</td>
+          <td>Transcription en temps réel</td>
+          <td><strong>Non conservé</strong> — traité puis écarté</td>
+        </tr>
+        <tr>
+          <td>Transcriptions et résumés</td>
+          <td>Vous permettre de les consulter</td>
+          <td>Jusqu'à suppression par vos soins</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <strong>Vos enregistrements audio ne sont jamais stockés.</strong> Le flux est transmis
+      directement au service de transcription, converti en texte, puis écarté. Seul le texte est
+      conservé, dans le navigateur de votre appareil.
+    </div>
+
+    <h3>Où sont stockées vos données</h3>
+    <p>
+      Vos transcriptions et résumés sont enregistrés <strong>localement, dans le navigateur de
+      votre appareil</strong> (stockage local). Ils ne transitent pas par nos serveurs et ne sont
+      pas accessibles par l'éditeur.
+    </p>
+    <p>
+      Conséquence : si vous effacez les données de votre navigateur, vos enregistrements sont
+      définitivement perdus. Pensez à les exporter régulièrement.
+    </p>
+
+    <h3>Sous-traitants</h3>
+    <p>Pour fonctionner, kaideno transmet certaines données à des prestataires techniques :</p>
+    <ul>
+      <li>
+        <strong>Deepgram</strong> (États-Unis) — reçoit le flux audio pour le transcrire en texte.
+        <a href="https://deepgram.com/privacy" target="_blank" rel="noopener">Politique de confidentialité</a>
+      </li>
+      <li>
+        <strong>Anthropic</strong> (États-Unis) — reçoit les transcriptions pour générer les
+        résumés et répondre à vos questions.
+        <a href="https://www.anthropic.com/legal/privacy" target="_blank" rel="noopener">Politique de confidentialité</a>
+      </li>
+      <li>
+        <strong>Cloudflare</strong> (États-Unis) — relaie les requêtes vers ces services.
+      </li>
+    </ul>
+    <p>
+      Ces transferts hors Union européenne sont encadrés par les clauses contractuelles types de
+      la Commission européenne.
+    </p>
+
+    <h3>Base légale</h3>
+    <p>
+      Le traitement de vos données repose sur l'<strong>exécution du service</strong> que vous
+      demandez : sans transmission de l'audio, aucune transcription n'est possible.
+    </p>
+
+    <h3>Vos droits</h3>
+    <p>Conformément au RGPD, vous disposez des droits suivants :</p>
+    <ul>
+      <li><strong>Accès</strong> — vos données sont visibles à tout moment dans l'application</li>
+      <li><strong>Rectification</strong> — vous pouvez modifier vos transcriptions</li>
+      <li><strong>Suppression</strong> — supprimez un enregistrement ou tout votre compte, à tout moment</li>
+      <li><strong>Portabilité</strong> — exportez vos données au format texte depuis l'application</li>
+      <li><strong>Opposition</strong> — cessez simplement d'utiliser le service</li>
+    </ul>
+    <p>
+      Pour exercer ces droits ou poser une question :
+      <a href="mailto:contact.kaideno@gmail.com">contact.kaideno@gmail.com</a>.
+      Vous pouvez également introduire une réclamation auprès de la
+      <a href="https://www.cnil.fr" target="_blank" rel="noopener">CNIL</a>.
+    </p>
+
+    <h3>Cookies</h3>
+    <p>
+      kaideno n'utilise <strong>aucun cookie publicitaire ni traceur</strong>. Seul le stockage
+      local du navigateur est utilisé, pour mémoriser votre session et vos préférences
+      (langue, thème). Il est indispensable au fonctionnement du service.
+    </p>
+  </section>
+
+  <!-- ─────────── CGU ─────────── -->
+  <section id="cgu">
+    <h2>3. Conditions d'utilisation</h2>
+
+    <h3>Objet</h3>
+    <p>
+      kaideno est un service de transcription et de résumé automatique de contenus audio,
+      accessible depuis un navigateur web. En créant un compte, vous acceptez les présentes
+      conditions.
+    </p>
+
+    <h3>Âge minimum</h3>
+    <p>
+      Le service est <strong>réservé aux personnes âgées de 18 ans ou plus</strong>. En créant un
+      compte, vous certifiez avoir atteint cet âge.
+    </p>
+
+    <h3>Enregistrement de tiers — votre responsabilité</h3>
+
+    <div class="warning">
+      <strong>⚠️ Point essentiel.</strong> En France, enregistrer une conversation à l'insu de ses
+      participants est <strong>pénalement répréhensible</strong> (article 226-1 du Code pénal :
+      jusqu'à un an d'emprisonnement et 45 000 € d'amende).
+    </div>
+
+    <p>
+      Vous êtes <strong>seul responsable</strong> de l'usage que vous faites de kaideno. Avant
+      d'enregistrer une conversation impliquant d'autres personnes, vous devez :
+    </p>
+    <ul>
+      <li><strong>Informer</strong> tous les participants que la conversation est enregistrée</li>
+      <li><strong>Obtenir leur accord</strong> avant de démarrer</li>
+      <li>Respecter la législation applicable dans votre pays</li>
+    </ul>
+    <p>
+      L'éditeur ne saurait être tenu responsable d'un usage illicite du service.
+    </p>
+
+    <h3>Usages interdits</h3>
+    <p>Il est notamment interdit d'utiliser kaideno pour :</p>
+    <ul>
+      <li>Enregistrer des personnes à leur insu</li>
+      <li>Porter atteinte à la vie privée d'autrui</li>
+      <li>Traiter des contenus illicites, haineux ou diffamatoires</li>
+      <li>Contourner les limites d'usage du service</li>
+      <li>Perturber le fonctionnement technique du service</li>
+    </ul>
+    <p>
+      Tout manquement peut entraîner la suspension immédiate de votre accès.
+    </p>
+
+    <h3>Limites du service</h3>
+    <p>
+      kaideno repose sur des technologies d'intelligence artificielle. Malgré leur qualité,
+      <strong>la transcription et les résumés peuvent comporter des erreurs</strong> :
+      mots mal reconnus, contresens, omissions.
+    </p>
+    <p>
+      Ne vous fiez pas aveuglément aux résultats pour des usages critiques (juridiques, médicaux,
+      contractuels). Vérifiez toujours les informations importantes.
+    </p>
+
+    <h3>Disponibilité</h3>
+    <p>
+      Le service est fourni <strong>« en l'état »</strong>, sans garantie de disponibilité
+      continue. En phase bêta, des interruptions, pertes de données ou modifications peuvent
+      survenir sans préavis.
+    </p>
+
+    <h3>Tarifs</h3>
+    <p>
+      Le service est actuellement <strong>gratuit</strong>, dans la limite des quotas indiqués
+      dans l'application. Aucun produit payant n'est commercialisé à ce jour. Des conditions
+      générales de vente seront publiées avant toute mise en vente.
+    </p>
+
+    <h3>Suppression du compte</h3>
+    <p>
+      Vous pouvez supprimer votre compte et vos données à tout moment depuis les paramètres de
+      l'application, sans justification.
+    </p>
+
+    <h3>Droit applicable</h3>
+    <p>
+      Les présentes conditions sont régies par le <strong>droit français</strong>. En cas de
+      litige, une solution amiable sera recherchée en priorité.
+    </p>
+  </section>
+
+  <!-- ─────────── CONTACT ─────────── -->
+  <section id="contact">
+    <h2>4. Contact</h2>
+    <p>
+      Pour toute question relative à ces informations légales, à vos données personnelles, ou
+      pour signaler un problème :
+    </p>
+    <p style="font-size:1.05rem">
+      📧 <a href="mailto:contact.kaideno@gmail.com"><strong>contact.kaideno@gmail.com</strong></a>
+    </p>
+    <p>Nous répondons généralement sous 24 à 48 heures.</p>
+  </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p style="margin-bottom:10px">© 2026 kaideno — Projet en phase de validation</p>
+    <p>
+      <a href="home.html">Accueil</a>
+      <a href="#mentions">Mentions légales</a>
+      <a href="#confidentialite">Confidentialité</a>
+      <a href="#cgu">CGU</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+// Thème partagé avec le reste du site
+(function(){
+  const theme = localStorage.getItem('kaideno_theme') || 'light';
+  if(theme === 'dark') document.body.setAttribute('data-theme','dark');
+})();
+</script>
+
+</body>
+</html>
