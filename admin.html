@@ -1,1 +1,356 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin — kaideno</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080C12; --bg1:#0E1420; --bg2:#141C2C; --bg3:#1A2438;
+  --ink:#EEF2F7; --ink2:#7D8EA4; --ink3:#3D4D62;
+  --accent:#3B82F6; --accent2:rgba(59,130,246,0.12); --accent-b:rgba(59,130,246,0.25);
+  --green:#34D399; --red:#F87171;
+  --line:rgba(255,255,255,0.07); --line2:rgba(255,255,255,0.12);
+  --radius:14px; --radius-sm:9px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Inter',-apple-system,sans-serif;
+  background:var(--bg); color:var(--ink);
+  min-height:100vh; -webkit-font-smoothing:antialiased;
+}
+button{font-family:inherit;cursor:pointer;border:none}
+
+/* ── LOGIN ── */
+.login-wrap{
+  min-height:100vh; display:flex; align-items:center; justify-content:center;
+  padding:24px;
+}
+.login-card{
+  width:100%; max-width:380px;
+  background:var(--bg1); border:1px solid var(--line2);
+  border-radius:20px; padding:32px 28px;
+}
+.login-logo{
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  margin-bottom:8px;
+}
+.login-logo span{
+  font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.3rem;
+}
+.login-sub{
+  text-align:center; font-size:.85rem; color:var(--ink2); margin-bottom:26px;
+}
+.login-lbl{
+  display:block; font-size:.72rem; font-weight:700; color:var(--ink3);
+  text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px;
+}
+.login-input{
+  width:100%; background:var(--bg2); border:1.5px solid var(--line);
+  border-radius:var(--radius-sm); padding:12px 14px;
+  color:var(--ink); font-size:.92rem; font-family:inherit;
+  outline:none; transition:border-color .15s; margin-bottom:16px;
+}
+.login-input:focus{border-color:var(--accent)}
+.login-btn{
+  width:100%; background:var(--accent); color:#fff;
+  border-radius:var(--radius-sm); padding:12px;
+  font-size:.92rem; font-weight:600; transition:opacity .15s;
+}
+.login-btn:hover{opacity:.9}
+.login-btn:disabled{opacity:.4;cursor:not-allowed}
+.login-err{
+  display:none; margin-top:14px; padding:10px 13px;
+  background:rgba(248,113,113,0.1); border:1px solid rgba(248,113,113,0.3);
+  border-radius:var(--radius-sm); color:var(--red); font-size:.82rem;
+}
+.login-err.show{display:block}
+
+/* ── DASHBOARD ── */
+.dash{display:none}
+.dash.show{display:block}
+.topbar{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:16px 24px; border-bottom:1px solid var(--line);
+  background:var(--bg1); position:sticky; top:0; z-index:10;
+  flex-wrap:wrap; gap:12px;
+}
+.topbar-left{display:flex;align-items:center;gap:10px}
+.topbar-title{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1.05rem}
+.topbar-actions{display:flex;gap:8px}
+.btn-sm{
+  background:var(--bg2); border:1px solid var(--line);
+  color:var(--ink2); border-radius:999px; padding:7px 14px;
+  font-size:.8rem; font-weight:600; transition:all .15s;
+}
+.btn-sm:hover{border-color:var(--accent);color:var(--accent)}
+.btn-sm.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn-sm.primary:hover{opacity:.9;color:#fff}
+
+.container{max-width:900px;margin:0 auto;padding:28px 24px 60px}
+
+.stats{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:12px; margin-bottom:28px;
+}
+.stat{
+  background:var(--bg1); border:1px solid var(--line);
+  border-radius:var(--radius); padding:18px;
+}
+.stat-val{
+  font-family:'Space Grotesk',sans-serif; font-size:1.9rem; font-weight:700;
+  color:var(--accent); line-height:1.1; margin-bottom:4px;
+}
+.stat-lbl{font-size:.75rem;color:var(--ink3);text-transform:uppercase;letter-spacing:.05em}
+
+.section-title{
+  font-size:.75rem; font-weight:700; color:var(--ink3);
+  text-transform:uppercase; letter-spacing:.08em; margin-bottom:12px;
+}
+
+.table-wrap{
+  background:var(--bg1); border:1px solid var(--line);
+  border-radius:var(--radius); overflow:hidden;
+}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+th{
+  text-align:left; padding:12px 16px; background:var(--bg2);
+  font-size:.72rem; font-weight:700; color:var(--ink3);
+  text-transform:uppercase; letter-spacing:.05em;
+  border-bottom:1px solid var(--line);
+}
+td{padding:13px 16px;border-bottom:1px solid var(--line);color:var(--ink2)}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--bg2)}
+.email-cell{color:var(--ink);font-weight:500}
+.lang-badge{
+  display:inline-block; font-size:.7rem; font-weight:600;
+  background:var(--accent2); color:var(--accent);
+  border:1px solid var(--accent-b); border-radius:999px; padding:2px 8px;
+}
+.empty{
+  text-align:center; padding:48px 24px; color:var(--ink3); font-size:.9rem;
+}
+.loading{
+  text-align:center; padding:48px; color:var(--ink2); font-size:.9rem;
+}
+.error-box{
+  background:rgba(248,113,113,0.08); border:1px solid rgba(248,113,113,0.25);
+  border-radius:var(--radius); padding:16px; color:var(--red); font-size:.85rem;
+}
+
+@media(max-width:600px){
+  .container{padding:20px 16px 48px}
+  th,td{padding:10px 11px;font-size:.82rem}
+  .stat-val{font-size:1.6rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ÉCRAN DE CONNEXION -->
+<div class="login-wrap" id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">
+      <svg width="30" height="30" viewBox="0 0 28 28" fill="none">
+        <rect width="28" height="28" rx="7" fill="#0E1420" stroke="#3B82F6" stroke-width="1"/>
+        <rect x="9" y="9" width="10" height="10" rx="3" stroke="#3B82F6" stroke-width="1.6"/>
+      </svg>
+      <span>kaideno</span>
+    </div>
+    <p class="login-sub">Espace administrateur</p>
+
+    <label class="login-lbl" for="pass">Mot de passe admin</label>
+    <input type="password" id="pass" class="login-input" placeholder="••••••••••" autocomplete="current-password">
+    <button class="login-btn" id="login-btn" onclick="login()">Accéder</button>
+
+    <div class="login-err" id="login-err"></div>
+  </div>
+</div>
+
+<!-- TABLEAU DE BORD -->
+<div class="dash" id="dash">
+  <div class="topbar">
+    <div class="topbar-left">
+      <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
+        <rect width="28" height="28" rx="7" fill="#0E1420" stroke="#3B82F6" stroke-width="1"/>
+        <rect x="9" y="9" width="10" height="10" rx="3" stroke="#3B82F6" stroke-width="1.6"/>
+      </svg>
+      <span class="topbar-title">Admin kaideno</span>
+    </div>
+    <div class="topbar-actions">
+      <button class="btn-sm" onclick="loadUsers()">↻ Actualiser</button>
+      <button class="btn-sm primary" onclick="exportCSV()">⬇ Export CSV</button>
+      <button class="btn-sm" onclick="logout()">Quitter</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="stats" id="stats"></div>
+    <div class="section-title">Comptes créés</div>
+    <div id="content"></div>
+  </div>
+</div>
+
+<script>
+const WORKER_URL = 'https://nuro-proxy.worldultimaterecords.workers.dev';
+let adminKey = '';
+let usersData = [];
+
+// ── Connexion ──
+async function login(){
+  const inp = document.getElementById('pass');
+  const btn = document.getElementById('login-btn');
+  const err = document.getElementById('login-err');
+  const key = inp.value.trim();
+
+  if(!key){ showErr('Entre ton mot de passe.'); return; }
+
+  btn.disabled = true;
+  btn.textContent = 'Vérification…';
+  err.classList.remove('show');
+
+  try{
+    const r = await fetch(`${WORKER_URL}/admin-users?key=${encodeURIComponent(key)}`);
+    if(r.status === 401){
+      showErr('Mot de passe incorrect.');
+      btn.disabled = false; btn.textContent = 'Accéder';
+      return;
+    }
+    if(!r.ok) throw new Error('Erreur serveur');
+
+    const data = await r.json();
+    adminKey = key;
+    sessionStorage.setItem('kaideno_admin_key', key);
+    usersData = data.users || [];
+
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('dash').classList.add('show');
+    render();
+  }catch(e){
+    showErr('Impossible de contacter le serveur. Réessaie.');
+    btn.disabled = false; btn.textContent = 'Accéder';
+  }
+}
+
+function showErr(msg){
+  const err = document.getElementById('login-err');
+  err.textContent = msg;
+  err.classList.add('show');
+}
+
+function logout(){
+  adminKey = '';
+  sessionStorage.removeItem('kaideno_admin_key');
+  location.reload();
+}
+
+// ── Charger les utilisateurs ──
+async function loadUsers(){
+  if(!adminKey) return;
+  document.getElementById('content').innerHTML = '<div class="loading">Chargement…</div>';
+  try{
+    const r = await fetch(`${WORKER_URL}/admin-users?key=${encodeURIComponent(adminKey)}`);
+    if(!r.ok) throw new Error();
+    const data = await r.json();
+    usersData = data.users || [];
+    render();
+  }catch(e){
+    document.getElementById('content').innerHTML =
+      '<div class="error-box">Impossible de charger les données. Vérifie ta connexion.</div>';
+  }
+}
+
+// ── Affichage ──
+function render(){
+  const total = usersData.length;
+
+  // Inscrits aujourd'hui
+  const today = new Date().toISOString().slice(0,10);
+  const todayCount = usersData.filter(u => (u.created_at||'').slice(0,10) === today).length;
+
+  // Inscrits cette semaine
+  const weekAgo = new Date(Date.now() - 7*24*3600*1000).toISOString();
+  const weekCount = usersData.filter(u => (u.created_at||'') >= weekAgo).length;
+
+  document.getElementById('stats').innerHTML = `
+    <div class="stat"><div class="stat-val">${total}</div><div class="stat-lbl">Comptes au total</div></div>
+    <div class="stat"><div class="stat-val">${weekCount}</div><div class="stat-lbl">Cette semaine</div></div>
+    <div class="stat"><div class="stat-val">${todayCount}</div><div class="stat-lbl">Aujourd'hui</div></div>
+  `;
+
+  if(!total){
+    document.getElementById('content').innerHTML =
+      '<div class="table-wrap"><div class="empty">Aucun compte pour le moment.<br>Les inscriptions apparaîtront ici.</div></div>';
+    return;
+  }
+
+  const rows = usersData.map(u => {
+    const created = u.created_at ? new Date(u.created_at).toLocaleString('fr-FR', {
+      day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit'
+    }) : '—';
+    const seen = u.last_seen ? new Date(u.last_seen).toLocaleDateString('fr-FR') : '—';
+    const lang = (u.lang || 'fr').toUpperCase();
+    return `<tr>
+      <td class="email-cell">${esc(u.email)}</td>
+      <td>${created}</td>
+      <td><span class="lang-badge">${lang}</span></td>
+      <td>${seen}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('content').innerHTML = `
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Email</th><th>Inscrit le</th><th>Langue</th><th>Vu le</th></tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+}
+
+function esc(s){
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ── Export CSV ──
+function exportCSV(){
+  if(!usersData.length) return;
+  const header = 'Email,Inscrit le,Langue,Derniere visite\n';
+  const rows = usersData.map(u =>
+    `"${u.email}","${u.created_at||''}","${u.lang||'fr'}","${u.last_seen||''}"`
+  ).join('\n');
+  const blob = new Blob([header + rows], {type:'text/csv;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `kaideno_inscrits_${new Date().toISOString().slice(0,10)}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+// ── Entrée = valider ──
+document.getElementById('pass').addEventListener('keydown', e => {
+  if(e.key === 'Enter') login();
+});
+
+// ── Reconnexion automatique dans la session ──
+(function(){
+  const saved = sessionStorage.getItem('kaideno_admin_key');
+  if(saved){
+    document.getElementById('pass').value = saved;
+    login();
+  }
+})();
+</script>
+
+</body>
+</html>
 
