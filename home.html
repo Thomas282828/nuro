@@ -654,9 +654,9 @@ section{padding:96px 0}
       kaideno
     </a>
     <div class="nav-right">
-      <a href="#features" class="nav-link">Fonctionnalités</a>
-      <a href="#pricing" class="nav-link">Tarifs</a>
-      <select id="site-lang" onchange="saveSiteLang()" title="Langue de transcription" style="background:transparent;border:1px solid var(--c-border);border-radius:8px;color:var(--c-text2);font-size:.82rem;font-weight:600;font-family:'Inter',sans-serif;padding:7px 8px;cursor:pointer;outline:none">
+      <a href="#features" class="nav-link" data-i18n="nav.features">Fonctionnalités</a>
+      <a href="#pricing" class="nav-link" data-i18n="nav.pricing">Tarifs</a>
+      <select id="site-lang" onchange="setSiteLang(this.value)" title="Langue du site" style="background:transparent;border:1px solid var(--c-border);border-radius:8px;color:var(--c-text2);font-size:.82rem;font-weight:600;font-family:'Inter',sans-serif;padding:7px 8px;cursor:pointer;outline:none">
         <option value="fr">🇫🇷 FR</option>
         <option value="en">🇬🇧 EN</option>
         <option value="es">🇪🇸 ES</option>
@@ -664,18 +664,15 @@ section{padding:96px 0}
         <option value="it">🇮🇹 IT</option>
         <option value="pt">🇵🇹 PT</option>
         <option value="nl">🇳🇱 NL</option>
-        <option value="ru">🇷🇺 RU</option>
-        <option value="ja">🇯🇵 JA</option>
         <option value="zh">🇨🇳 ZH</option>
-        <option value="ar">🇸🇦 AR</option>
-        <option value="hi">🇮🇳 HI</option>
+        <option value="ja">🇯🇵 JA</option>
       </select>
       <button onclick="toggleSiteTheme()" title="Thème clair/sombre" style="background:transparent;border:1px solid var(--c-border);border-radius:8px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--c-text2);transition:all .15s" onmouseover="this.style.color='var(--c-text)';this.style.borderColor='var(--c-border2)'" onmouseout="this.style.color='var(--c-text2)';this.style.borderColor='var(--c-border)'">
         <svg id="site-moon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13 9.5A5.5 5.5 0 016.5 3a5.5 5.5 0 106.5 6.5z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
         <svg id="site-sun" width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.4"/><path d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3.05 3.05l1.06 1.06M11.89 11.89l1.06 1.06M12.95 3.05l-1.06 1.06M4.11 11.89l-1.06 1.06" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
       </button>
-      <a href="https://thomas282828.github.io/nuro/?login" class="nav-link">Se connecter</a>
-      <a href="https://thomas282828.github.io/nuro/?register" class="btn-nav">Essai gratuit</a>
+      <a href="https://thomas282828.github.io/nuro/?login" class="nav-link" data-i18n="nav.login">Se connecter</a>
+      <a href="https://thomas282828.github.io/nuro/?register" class="btn-nav" data-i18n="nav.trial">Essai gratuit</a>
     </div>
   </div>
 </nav>
@@ -685,22 +682,22 @@ section{padding:96px 0}
   <div class="wrap">
     <div class="hero">
       <div class="hero-left">
-        <div class="hero-badge" role="status"><span class="badge-dot" aria-hidden="true"></span>Bêta ouverte — Inscription gratuite</div>
-        <h1 id="hero-h1">Ne prenez plus jamais<br>de notes, <em>kaideno le fait.</em></h1>
-        <p class="hero-sub">kaideno transcrit et résume vos réunions, cours et idées en temps réel — directement depuis le micro de votre téléphone. Aucun boîtier. Aucune prise de notes.</p>
+        <div class="hero-badge" role="status"><span class="badge-dot" aria-hidden="true"></span><span data-i18n="hero.badge">Bêta ouverte — Inscription gratuite</span></div>
+        <h1 id="hero-h1" data-i18n-html="hero.title">Ne prenez plus jamais<br>de notes, <em>kaideno le fait.</em></h1>
+        <p class="hero-sub" data-i18n="hero.sub">kaideno transcrit et résume vos réunions, cours et idées en temps réel — directement depuis le micro de votre téléphone. Aucun boîtier. Aucune prise de notes.</p>
         <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(52,211,153,0.08);border:1px solid rgba(52,211,153,0.2);border-radius:999px;padding:8px 18px;margin-bottom:28px">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v4l3 3" stroke="#34D399" stroke-width="1.4" stroke-linecap="round"/><circle cx="8" cy="8" r="6" stroke="#34D399" stroke-width="1.4"/></svg>
-          <span style="font-size:.85rem;font-weight:600;color:#34D399">Ressortez de chaque réunion avec l'essentiel, sans lever le stylo</span>
+          <span style="font-size:.85rem;font-weight:600;color:#34D399" data-i18n="hero.pitch">Ressortez de chaque réunion avec l'essentiel, sans lever le stylo</span>
         </div>
         <div class="hero-actions">
-          <a href="https://thomas282828.github.io/nuro/?register" class="btn-primary">Commencer gratuitement</a>
-          <a href="https://thomas282828.github.io/nuro/?login" class="btn-secondary">Se connecter</a>
-          <a href="#video" class="btn-secondary">Voir la démo →</a>
+          <a href="https://thomas282828.github.io/nuro/?register" class="btn-primary" data-i18n="hero.cta1">Commencer gratuitement</a>
+          <a href="https://thomas282828.github.io/nuro/?login" class="btn-secondary" data-i18n="hero.cta2">Se connecter</a>
+          <a href="#video" class="btn-secondary" data-i18n="hero.cta3">Voir la démo →</a>
         </div>
         <div class="hero-proof" aria-label="Sans engagement">
           <div style="display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--c-text2)">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 8l2.5 2.5L12 5" stroke="#34D399" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            30 minutes offertes · sans carte bancaire · sans engagement
+            <span data-i18n="hero.proof">30 minutes offertes · sans carte bancaire · sans engagement</span>
           </div>
         </div>
       </div>
@@ -732,11 +729,11 @@ section{padding:96px 0}
                 <div style="background:#0E1420;border:1.5px solid rgba(255,255,255,0.08);border-radius:10px;padding:14px;width:190px">
                   <div style="font-size:8px;font-weight:700;color:#4A5A6E;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Email</div>
                   <div style="background:#141C2C;border-radius:6px;padding:6px 10px;font-size:9px;color:#EEF2F7;margin-bottom:8px">marie.dupont@gmail.com</div>
-                  <div style="font-size:8px;font-weight:700;color:#4A5A6E;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Mot de passe</div>
+                  <div style="font-size:8px;font-weight:700;color:#4A5A6E;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px" data-i18n="t1">Mot de passe</div>
                   <div style="background:#141C2C;border-radius:6px;padding:6px 10px;font-size:9px;color:#7D8EA4;margin-bottom:12px">••••••••</div>
-                  <div id="hp-login-btn" style="background:#3B82F6;border-radius:999px;padding:7px;font-size:8px;font-weight:700;color:white;text-align:center;cursor:pointer;transition:opacity .15s">Se connecter</div>
+                  <div id="hp-login-btn" style="background:#3B82F6;border-radius:999px;padding:7px;font-size:8px;font-weight:700;color:white;text-align:center;cursor:pointer;transition:opacity .15s" data-i18n="t2">Se connecter</div>
                 </div>
-                <div style="font-size:7.5px;color:#3D4D62;text-align:center">Gratuit pour commencer — aucune CB</div>
+                <div style="font-size:7.5px;color:#3D4D62;text-align:center" data-i18n="t3">Gratuit pour commencer — aucune CB</div>
               </div>
 
               <!-- Phase 1 : Enregistrement -->
@@ -753,7 +750,7 @@ section{padding:96px 0}
                 </div>
 
                 <div style="text-align:center;padding:8px 0">
-                  <div id="hp-rec-lbl" style="font-size:7px;font-weight:600;color:#7D8EA4;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px">Appuie pour enregistrer</div>
+                  <div id="hp-rec-lbl" style="font-size:7px;font-weight:600;color:#7D8EA4;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px" data-i18n="t4">Appuie pour enregistrer</div>
                   <div style="position:relative;display:inline-flex;align-items:center;justify-content:center">
                     <div id="hp-ring1" style="position:absolute;width:68px;height:68px;border-radius:50%;border:1px solid rgba(59,130,246,0);transition:border-color .4s"></div>
                     <div id="hp-ring2" style="position:absolute;width:84px;height:84px;border-radius:50%;border:1px solid rgba(59,130,246,0);transition:border-color .5s .1s"></div>
@@ -771,9 +768,9 @@ section{padding:96px 0}
                 <div style="width:100%;background:rgba(59,130,246,0.04);border:1px solid rgba(59,130,246,0.1);border-radius:10px;padding:10px;min-height:90px">
                   <div style="display:flex;align-items:center;gap:5px;margin-bottom:6px">
                     <div id="hp-live-dot" style="width:5px;height:5px;border-radius:50%;background:#3B82F6;opacity:.2;transition:opacity .3s"></div>
-                    <span style="font-size:7px;font-weight:700;color:#3B82F6;text-transform:uppercase;letter-spacing:.07em">Transcription live</span>
+                    <span style="font-size:7px;font-weight:700;color:#3B82F6;text-transform:uppercase;letter-spacing:.07em" data-i18n="t5">Transcription live</span>
                   </div>
-                  <div id="hp-live-txt" style="font-size:8px;color:#7D8EA4;line-height:1.7"><span style="color:#3D4D62;font-style:italic">En attente…</span></div>
+                  <div id="hp-live-txt" style="font-size:8px;color:#7D8EA4;line-height:1.7"><span style="color:#3D4D62;font-style:italic" data-i18n="t6">En attente…</span></div>
                 </div>
               </div>
 
@@ -782,25 +779,25 @@ section{padding:96px 0}
                 <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
                   <div style="width:16px;height:16px;border-radius:4px;background:#0E1420;border:1px solid rgba(59,130,246,0.3)"></div>
                   <span style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:10px;color:#EEF2F7">kaideno</span>
-                  <span style="margin-left:auto;font-size:7px;color:#34D399;font-weight:600">✓ Résumé prêt</span>
+                  <span style="margin-left:auto;font-size:7px;color:#34D399;font-weight:600" data-i18n="t7">✓ Résumé prêt</span>
                 </div>
                 <div style="background:linear-gradient(135deg,rgba(59,130,246,0.06),transparent);border:1.5px solid rgba(59,130,246,0.2);border-radius:10px;padding:10px">
-                  <div style="font-size:7px;font-weight:700;color:#3B82F6;text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px">Résumé</div>
-                  <div style="font-size:8px;color:#EEF2F7;line-height:1.65">Réunion de planification — lancement fixé au 15, budget de 15 000€ à valider avant jeudi.</div>
+                  <div style="font-size:7px;font-weight:700;color:#3B82F6;text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px" data-i18n="t8">Résumé</div>
+                  <div style="font-size:8px;color:#EEF2F7;line-height:1.65" data-i18n="t9">Réunion de planification — lancement fixé au 15, budget de 15 000€ à valider avant jeudi.</div>
                 </div>
                 <div style="background:#141C2C;border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:10px">
-                  <div style="font-size:7px;font-weight:700;color:#3B82F6;text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px">Points clés</div>
+                  <div style="font-size:7px;font-weight:700;color:#3B82F6;text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px" data-i18n="t10">Points clés</div>
                   <div style="display:flex;flex-direction:column;gap:6px">
-                    <div style="display:flex;gap:6px;align-items:flex-start;font-size:7.5px;color:#C8D8E8"><span style="width:5px;height:5px;border-radius:50%;background:#3B82F6;flex-shrink:0;margin-top:3px"></span>Lancement produit fixé au 15 du mois</div>
+                    <div style="display:flex;gap:6px;align-items:flex-start;font-size:7.5px;color:#C8D8E8"><span style="width:5px;height:5px;border-radius:50%;background:#3B82F6;flex-shrink:0;margin-top:3px"></span><span data-i18n="v1">Lancement produit fixé au 15 du mois</span></div>
                     <div style="display:flex;gap:6px;align-items:flex-start;font-size:7.5px;color:#C8D8E8"><span style="width:5px;height:5px;border-radius:50%;background:#3B82F6;flex-shrink:0;margin-top:3px"></span>Budget marketing : 15 000€</div>
                     <div style="display:flex;gap:6px;align-items:flex-start;font-size:7.5px;color:#C8D8E8"><span style="width:5px;height:5px;border-radius:50%;background:#3B82F6;flex-shrink:0;margin-top:3px"></span>Validation requise avant jeudi</div>
                   </div>
                 </div>
                 <div style="background:#141C2C;border:1px solid rgba(52,211,153,0.15);border-radius:10px;padding:10px">
-                  <div style="font-size:7px;font-weight:700;color:#34D399;text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px">Actions identifiées</div>
+                  <div style="font-size:7px;font-weight:700;color:#34D399;text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px" data-i18n="t11">Actions identifiées</div>
                   <div style="display:flex;flex-direction:column;gap:5px">
-                    <div style="display:flex;gap:6px;font-size:7.5px;color:#C8D8E8"><span style="color:#34D399;font-weight:700;flex-shrink:0">→</span>Envoyer le brief au marketing</div>
-                    <div style="display:flex;gap:6px;font-size:7.5px;color:#C8D8E8"><span style="color:#34D399;font-weight:700;flex-shrink:0">→</span>Valider le budget avant jeudi</div>
+                    <div style="display:flex;gap:6px;font-size:7.5px;color:#C8D8E8"><span style="color:#34D399;font-weight:700;flex-shrink:0">→</span><span data-i18n="v2">Envoyer le brief au marketing</span></div>
+                    <div style="display:flex;gap:6px;font-size:7.5px;color:#C8D8E8"><span style="color:#34D399;font-weight:700;flex-shrink:0">→</span><span data-i18n="v3">Valider le budget avant jeudi</span></div>
                   </div>
                 </div>
               </div>
@@ -810,7 +807,7 @@ section{padding:96px 0}
 
           <!-- Étiquette interactive -->
           <div style="position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.72rem;color:#4A5A6E;font-weight:500">
-            <span id="hp-hint">Clique sur "Se connecter" pour voir la démo</span>
+            <span id="hp-hint" data-i18n="t12">Clique sur "Se connecter" pour voir la démo</span>
           </div>
         </div>
       </div>
@@ -824,22 +821,22 @@ section{padding:96px 0}
     <div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:48px">
       <div style="display:flex;align-items:center;gap:9px;background:var(--c-surface2);border:1px solid var(--c-border);border-radius:999px;padding:9px 18px">
         <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M9 1.5l6 2.5v4c0 3.5-2.5 6.5-6 7.5-3.5-1-6-4-6-7.5v-4l6-2.5z" stroke="var(--c-blue)" stroke-width="1.4" stroke-linejoin="round"/><path d="M6.5 9l1.8 1.8L12 7" stroke="var(--c-blue)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <span style="font-size:.82rem;font-weight:600;color:var(--c-text2)">Sans carte bancaire</span>
+        <span style="font-size:.82rem;font-weight:600;color:var(--c-text2)" data-i18n="trust.nocard">Sans carte bancaire</span>
       </div>
       <div style="display:flex;align-items:center;gap:9px;background:var(--c-surface2);border:1px solid var(--c-border);border-radius:999px;padding:9px 18px">
         <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><rect x="3.5" y="7.5" width="11" height="8" rx="1.5" stroke="var(--c-blue)" stroke-width="1.4"/><path d="M6 7.5V5a3 3 0 016 0v2.5" stroke="var(--c-blue)" stroke-width="1.4"/></svg>
-        <span style="font-size:.82rem;font-weight:600;color:var(--c-text2)">Vos données restent privées</span>
+        <span style="font-size:.82rem;font-weight:600;color:var(--c-text2)" data-i18n="trust.private">Vos données restent privées</span>
       </div>
       <div style="display:flex;align-items:center;gap:9px;background:var(--c-surface2);border:1px solid var(--c-border);border-radius:999px;padding:9px 18px">
         <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M9 2v14M2 9h14" stroke="var(--c-blue)" stroke-width="1.4" stroke-linecap="round"/><circle cx="9" cy="9" r="7" stroke="var(--c-blue)" stroke-width="1.4"/></svg>
-        <span style="font-size:.82rem;font-weight:600;color:var(--c-text2)">Aucun boîtier à acheter</span>
+        <span style="font-size:.82rem;font-weight:600;color:var(--c-text2)" data-i18n="trust.nodevice">Aucun boîtier à acheter</span>
       </div>
     </div>
-    <p class="logos-label">Conçu pour</p>
+    <p class="logos-label" data-i18n="trust.builtfor">Conçu pour</p>
     <div class="logos-row">
       <div class="logo-item">
         <svg class="logo-icon" viewBox="0 0 18 18" fill="none"><rect width="18" height="18" rx="4" fill="#1E3A5F"/><path d="M4 5h10M4 9h7M4 13h5" stroke="#60A5FA" stroke-width="1.4" stroke-linecap="round"/></svg>
-        Réunions
+        <span data-i18n="v6">Réunions</span>
       </div>
       <div class="logo-item">
         <svg class="logo-icon" viewBox="0 0 18 18" fill="none"><rect width="18" height="18" rx="4" fill="#1A3A2E"/><circle cx="9" cy="9" r="5" stroke="#34D399" stroke-width="1.4"/><path d="M9 6v3l2 2" stroke="#34D399" stroke-width="1.4" stroke-linecap="round"/></svg>
@@ -869,29 +866,29 @@ section{padding:96px 0}
 <section style="padding:80px 0;background:var(--c-surface);border-top:1px solid var(--c-border);border-bottom:1px solid var(--c-border)">
   <div class="wrap">
     <div class="sh" style="margin-bottom:48px">
-      <div class="sh-tag">Pour qui</div>
-      <h2>Conçu pour les professionnels qui ont mieux à faire que prendre des notes</h2>
+      <div class="sh-tag" data-i18n="t13">Pour qui</div>
+      <h2 data-i18n="t14">Conçu pour les professionnels qui ont mieux à faire que prendre des notes</h2>
     </div>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
       <div style="background:var(--c-surface2);border:1px solid var(--c-border);border-radius:var(--radius-lg);padding:28px 22px;transition:border-color .2s" onmouseover="this.style.borderColor='rgba(59,130,246,0.35)'" onmouseout="this.style.borderColor='var(--c-border)'">
         <div style="font-size:1.8rem;margin-bottom:14px">💼</div>
-        <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.95rem;margin-bottom:8px">Dirigeants & Managers</div>
-        <p style="font-size:.82rem;color:var(--c-text2);line-height:1.65">Plus de 8 réunions par semaine. kaideno extrait les décisions et actions sans que vous leviez la plume.</p>
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.95rem;margin-bottom:8px" data-i18n="t15">Dirigeants & Managers</div>
+        <p style="font-size:.82rem;color:var(--c-text2);line-height:1.65" data-i18n="t16">Plus de 8 réunions par semaine. kaideno extrait les décisions et actions sans que vous leviez la plume.</p>
       </div>
       <div style="background:var(--c-surface2);border:1px solid var(--c-border);border-radius:var(--radius-lg);padding:28px 22px;transition:border-color .2s" onmouseover="this.style.borderColor='rgba(59,130,246,0.35)'" onmouseout="this.style.borderColor='var(--c-border)'">
         <div style="font-size:1.8rem;margin-bottom:14px">⚖️</div>
-        <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.95rem;margin-bottom:8px">Juristes & Consultants</div>
-        <p style="font-size:.82rem;color:var(--c-text2);line-height:1.65">Transcription précise des entretiens clients, comptes-rendus structurés en quelques secondes.</p>
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.95rem;margin-bottom:8px" data-i18n="t17">Juristes & Consultants</div>
+        <p style="font-size:.82rem;color:var(--c-text2);line-height:1.65" data-i18n="t18">Transcription précise des entretiens clients, comptes-rendus structurés en quelques secondes.</p>
       </div>
       <div style="background:var(--c-surface2);border:1px solid var(--c-border);border-radius:var(--radius-lg);padding:28px 22px;transition:border-color .2s" onmouseover="this.style.borderColor='rgba(59,130,246,0.35)'" onmouseout="this.style.borderColor='var(--c-border)'">
         <div style="font-size:1.8rem;margin-bottom:14px">🎓</div>
-        <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.95rem;margin-bottom:8px">Étudiants & Chercheurs</div>
-        <p style="font-size:.82rem;color:var(--c-text2);line-height:1.65">Cours, conférences, interviews de terrain — transcription complète pour réviser et citer.</p>
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.95rem;margin-bottom:8px" data-i18n="t19">Étudiants & Chercheurs</div>
+        <p style="font-size:.82rem;color:var(--c-text2);line-height:1.65" data-i18n="t20">Cours, conférences, interviews de terrain — transcription complète pour réviser et citer.</p>
       </div>
       <div style="background:var(--c-surface2);border:1px solid var(--c-border);border-radius:var(--radius-lg);padding:28px 22px;transition:border-color .2s" onmouseover="this.style.borderColor='rgba(59,130,246,0.35)'" onmouseout="this.style.borderColor='var(--c-border)'">
         <div style="font-size:1.8rem;margin-bottom:14px">🎙️</div>
-        <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.95rem;margin-bottom:8px">Créateurs & Journalistes</div>
-        <p style="font-size:.82rem;color:var(--c-text2);line-height:1.65">Interviews, podcasts, idées vocales — transformées en contenu structuré et cherchable.</p>
+        <div style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.95rem;margin-bottom:8px" data-i18n="t21">Créateurs & Journalistes</div>
+        <p style="font-size:.82rem;color:var(--c-text2);line-height:1.65" data-i18n="t22">Interviews, podcasts, idées vocales — transformées en contenu structuré et cherchable.</p>
       </div>
     </div>
   </div>
@@ -901,9 +898,9 @@ section{padding:96px 0}
 <section id="features" aria-labelledby="feat-title">
   <div class="wrap">
     <div class="sh">
-      <div class="sh-tag">Fonctionnalités</div>
-      <h2 id="feat-title">Tout ce qu'il faut.<br>Rien de superflu.</h2>
-      <p>Conçu pour les professionnels qui veulent capturer l'essentiel sans friction.</p>
+      <div class="sh-tag" data-i18n="t23">Fonctionnalités</div>
+      <h2 id="feat-title" data-i18n-html="h.feat">Tout ce qu'il faut.<br>Rien de superflu.</h2>
+      <p data-i18n="t24">Conçu pour les professionnels qui veulent capturer l'essentiel sans friction.</p>
     </div>
     <div style="height:48px"></div>
     <div class="features-grid">
@@ -911,8 +908,8 @@ section{padding:96px 0}
         <div class="feat-icon" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="6" y="2" width="8" height="11" rx="4" stroke="#3B82F6" stroke-width="1.4"/><path d="M2 10a8 8 0 0016 0" stroke="#3B82F6" stroke-width="1.4" stroke-linecap="round"/><line x1="10" y1="18" x2="10" y2="20" stroke="#3B82F6" stroke-width="1.4" stroke-linecap="round"/></svg>
         </div>
-        <div class="feat-title">Transcription en temps réel</div>
-        <div class="feat-body">Chaque mot apparaît à mesure que vous parlez, en temps réel. La transcription est disponible en 12 langues, avec ponctuation et mise en forme automatiques.</div>
+        <div class="feat-title" data-i18n="t25">Transcription en temps réel</div>
+        <div class="feat-body" data-i18n="t26">Chaque mot apparaît à mesure que vous parlez, en temps réel. La transcription est disponible en 12 langues, avec ponctuation et mise en forme automatiques.</div>
         <div class="feat-visual" aria-label="Visualisation d'une forme d'onde audio">
           <svg width="100%" height="100%" viewBox="0 0 500 120" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
             <g fill="#3B82F6" id="wave-bars">
@@ -964,32 +961,32 @@ section{padding:96px 0}
         <div class="feat-icon" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 9h10M3 13h7" stroke="#3B82F6" stroke-width="1.4" stroke-linecap="round"/></svg>
         </div>
-        <div class="feat-title">Résumé structuré par IA</div>
-        <div class="feat-body">Points clés, décisions prises, actions à suivre — extraits automatiquement à la fin de chaque session.</div>
+        <div class="feat-title" data-i18n="t27">Résumé structuré par IA</div>
+        <div class="feat-body" data-i18n="t28">Points clés, décisions prises, actions à suivre — extraits automatiquement à la fin de chaque session.</div>
       </div>
 
       <div class="feat">
         <div class="feat-icon" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="#3B82F6" stroke-width="1.4"/><path d="M10 6v4l3 3" stroke="#3B82F6" stroke-width="1.4" stroke-linecap="round"/></svg>
         </div>
-        <div class="feat-title">Historique consultable</div>
-        <div class="feat-body">Toutes vos sessions sont archivées, searchables par mot-clé, accessibles depuis n'importe quel appareil.</div>
+        <div class="feat-title" data-i18n="t29">Historique consultable</div>
+        <div class="feat-body" data-i18n="t30">Toutes vos sessions sont archivées, searchables par mot-clé, accessibles depuis n'importe quel appareil.</div>
       </div>
 
       <div class="feat">
         <div class="feat-icon" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="14" height="14" rx="3" stroke="#3B82F6" stroke-width="1.4"/><path d="M7 10l2.5 2.5L14 7" stroke="#3B82F6" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <div class="feat-title">Zéro boîtier requis</div>
-        <div class="feat-body">Le micro de votre smartphone suffit. Pas d'objet supplémentaire à acheter, charger ou emporter.</div>
+        <div class="feat-title" data-i18n="t31">Zéro boîtier requis</div>
+        <div class="feat-body" data-i18n="t32">Le micro de votre smartphone suffit. Pas d'objet supplémentaire à acheter, charger ou emporter.</div>
       </div>
 
       <div class="feat">
         <div class="feat-icon" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.4 7H18l-5.3 3.9 2 6.1L10 15l-4.7 4L7.3 13 2 9.1h5.6L10 2z" stroke="#3B82F6" stroke-width="1.4" stroke-linejoin="round"/></svg>
         </div>
-        <div class="feat-title">Installable sur mobile</div>
-        <div class="feat-body">Application PWA — s'installe sur l'écran d'accueil iOS et Android comme une app native, sans passer par l'App Store.</div>
+        <div class="feat-title" data-i18n="t33">Installable sur mobile</div>
+        <div class="feat-body" data-i18n="t34">Application PWA — s'installe sur l'écran d'accueil iOS et Android comme une app native, sans passer par l'App Store.</div>
       </div>
     </div>
   </div>
@@ -999,27 +996,27 @@ section{padding:96px 0}
 <section style="padding:96px 0">
   <div class="wrap">
     <div class="sh" style="margin-bottom:56px">
-      <div class="sh-tag">Le workflow kaideno</div>
-      <h2>Trois étapes.<br>Zéro effort manuel.</h2>
+      <div class="sh-tag" data-i18n="t35">Le workflow kaideno</div>
+      <h2 data-i18n-html="h.workflow">Trois étapes.<br>Zéro effort manuel.</h2>
     </div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--c-border);border:1px solid var(--c-border);border-radius:var(--radius-xl);overflow:hidden">
       <div style="background:var(--c-surface);padding:40px 36px">
         <div style="width:48px;height:48px;border-radius:14px;background:var(--c-blue-bg);border:1px solid var(--c-blue-b);display:flex;align-items:center;justify-content:center;margin-bottom:22px;font-size:1.2rem">🎤</div>
-        <div style="font-size:.72rem;font-weight:700;color:var(--c-blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px">01 — Capturer</div>
-        <h3 style="font-size:1.2rem;margin-bottom:12px">Audio · Temps réel · 12 langues</h3>
-        <p style="font-size:.88rem;color:var(--c-text2);line-height:1.7">Appuyez sur enregistrer. kaideno transcrit mot à mot en temps réel, depuis le micro de votre téléphone. Pas de boîtier, pas d'installation.</p>
+        <div style="font-size:.72rem;font-weight:700;color:var(--c-blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px" data-i18n="t36">01 — Capturer</div>
+        <h3 style="font-size:1.2rem;margin-bottom:12px" data-i18n="t37">Audio · Temps réel · 12 langues</h3>
+        <p style="font-size:.88rem;color:var(--c-text2);line-height:1.7" data-i18n="t38">Appuyez sur enregistrer. kaideno transcrit mot à mot en temps réel, depuis le micro de votre téléphone. Pas de boîtier, pas d'installation.</p>
       </div>
       <div style="background:var(--c-surface);padding:40px 36px">
         <div style="width:48px;height:48px;border-radius:14px;background:var(--c-blue-bg);border:1px solid var(--c-blue-b);display:flex;align-items:center;justify-content:center;margin-bottom:22px;font-size:1.2rem">🧠</div>
-        <div style="font-size:.72rem;font-weight:700;color:var(--c-blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px">02 — Extraire</div>
-        <h3 style="font-size:1.2rem;margin-bottom:12px">Résumé · Points clés · Actions</h3>
-        <p style="font-size:.88rem;color:var(--c-text2);line-height:1.7">L'IA analyse automatiquement la transcription et génère un résumé structuré avec les points essentiels et les actions à suivre identifiées.</p>
+        <div style="font-size:.72rem;font-weight:700;color:var(--c-blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px" data-i18n="t39">02 — Extraire</div>
+        <h3 style="font-size:1.2rem;margin-bottom:12px" data-i18n="t40">Résumé · Points clés · Actions</h3>
+        <p style="font-size:.88rem;color:var(--c-text2);line-height:1.7" data-i18n="t41">L'IA analyse automatiquement la transcription et génère un résumé structuré avec les points essentiels et les actions à suivre identifiées.</p>
       </div>
       <div style="background:var(--c-surface);padding:40px 36px">
         <div style="width:48px;height:48px;border-radius:14px;background:var(--c-blue-bg);border:1px solid var(--c-blue-b);display:flex;align-items:center;justify-content:center;margin-bottom:22px;font-size:1.2rem">💬</div>
-        <div style="font-size:.72rem;font-weight:700;color:var(--c-blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px">03 — Utiliser</div>
-        <h3 style="font-size:1.2rem;margin-bottom:12px">Ask kaideno · Export · Recherche</h3>
-        <p style="font-size:.88rem;color:var(--c-text2);line-height:1.7">Posez des questions sur vos enregistrements, reformatez en email, traduisez, recherchez dans tout votre historique vocal.</p>
+        <div style="font-size:.72rem;font-weight:700;color:var(--c-blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px" data-i18n="t42">03 — Utiliser</div>
+        <h3 style="font-size:1.2rem;margin-bottom:12px" data-i18n="t43">Ask kaideno · Export · Recherche</h3>
+        <p style="font-size:.88rem;color:var(--c-text2);line-height:1.7" data-i18n="t44">Posez des questions sur vos enregistrements, reformatez en email, traduisez, recherchez dans tout votre historique vocal.</p>
       </div>
     </div>
   </div>
@@ -1029,25 +1026,25 @@ section{padding:96px 0}
 <section aria-label="Chiffres clés" style="background:var(--c-surface);border-top:1px solid var(--c-border);border-bottom:1px solid var(--c-border)">
   <div class="wrap">
     <div class="sh">
-      <div class="sh-tag">Performance</div>
-      <h2>Des chiffres concrets</h2>
+      <div class="sh-tag" data-i18n="t45">Performance</div>
+      <h2 data-i18n="t46">Des chiffres concrets</h2>
     </div>
     <div class="metrics-grid">
       <div class="metric">
         <div class="metric-val" id="m1">0<span class="unit">min</span></div>
-        <div class="metric-label">d'audio offerts à l'inscription pour tester sans engagement</div>
+        <div class="metric-label" data-i18n="t47">d'audio offerts à l'inscription pour tester sans engagement</div>
       </div>
       <div class="metric">
         <div class="metric-val" id="m3">0<span class="unit"></span></div>
-        <div class="metric-label">langues de transcription disponibles, avec ponctuation automatique</div>
+        <div class="metric-label" data-i18n="t48">langues de transcription disponibles, avec ponctuation automatique</div>
       </div>
       <div class="metric">
-        <div class="metric-val" style="font-size:1.9rem">Temps réel</div>
-        <div class="metric-label">la transcription s'affiche à mesure que vous parlez</div>
+        <div class="metric-val" style="font-size:1.9rem" data-i18n="t49">Temps réel</div>
+        <div class="metric-label" data-i18n="t50">la transcription s'affiche à mesure que vous parlez</div>
       </div>
       <div class="metric">
-        <div class="metric-val" style="font-size:1.9rem">Zéro boîtier</div>
-        <div class="metric-label">tout se passe depuis le micro de votre téléphone</div>
+        <div class="metric-val" style="font-size:1.9rem" data-i18n="t51">Zéro boîtier</div>
+        <div class="metric-label" data-i18n="t52">tout se passe depuis le micro de votre téléphone</div>
       </div>
     </div>
   </div>
@@ -1057,25 +1054,25 @@ section{padding:96px 0}
 <section aria-labelledby="how-title">
   <div class="wrap">
     <div class="sh">
-      <div class="sh-tag">Comment ça marche</div>
-      <h2 id="how-title">Opérationnel en 2 minutes</h2>
-      <p>Trois étapes, pas de configuration complexe.</p>
+      <div class="sh-tag" data-i18n="t53">Comment ça marche</div>
+      <h2 id="how-title" data-i18n="t54">Opérationnel en 2 minutes</h2>
+      <p data-i18n="t55">Trois étapes, pas de configuration complexe.</p>
     </div>
     <div class="how-steps">
       <div class="step">
         <div class="step-num" aria-label="Étape 1">1</div>
-        <div class="step-title">Créez votre compte</div>
-        <div class="step-body">Inscription en 30 secondes avec votre email. Aucune carte bancaire requise. Vous appuyez sur enregistrer et c'est parti — aucune configuration technique.</div>
+        <div class="step-title" data-i18n="t56">Créez votre compte</div>
+        <div class="step-body" data-i18n="t57">Inscription en 30 secondes avec votre email. Aucune carte bancaire requise. Vous appuyez sur enregistrer et c'est parti — aucune configuration technique.</div>
       </div>
       <div class="step">
         <div class="step-num" aria-label="Étape 2">2</div>
-        <div class="step-title">Appuyez sur enregistrer</div>
-        <div class="step-body">Autorisez l'accès au micro de votre téléphone, une seule fois. La transcription commence instantanément — vous voyez les mots apparaître pendant que vous parlez.</div>
+        <div class="step-title" data-i18n="t58">Appuyez sur enregistrer</div>
+        <div class="step-body" data-i18n="t59">Autorisez l'accès au micro de votre téléphone, une seule fois. La transcription commence instantanément — vous voyez les mots apparaître pendant que vous parlez.</div>
       </div>
       <div class="step">
         <div class="step-num" aria-label="Étape 3">3</div>
-        <div class="step-title">Récupérez le résumé</div>
-        <div class="step-body">Dès que vous stoppez l'enregistrement, l'IA analyse la transcription et génère un résumé structuré avec points clés et actions identifiées.</div>
+        <div class="step-title" data-i18n="t60">Récupérez le résumé</div>
+        <div class="step-body" data-i18n="t61">Dès que vous stoppez l'enregistrement, l'IA analyse la transcription et génère un résumé structuré avec points clés et actions identifiées.</div>
       </div>
     </div>
   </div>
@@ -1085,9 +1082,9 @@ section{padding:96px 0}
 <section class="video-section" id="video" aria-labelledby="video-title">
   <div class="wrap">
     <div class="sh" style="margin-bottom:40px">
-      <div class="sh-tag">Démo</div>
-      <h2 id="video-title">Une réunion. Zéro note. Tout retenu.</h2>
-      <p>Regardez ce qui se passe quand vous posez simplement votre téléphone.</p>
+      <div class="sh-tag" data-i18n="t62">Démo</div>
+      <h2 id="video-title" data-i18n="video.title">Une réunion. Zéro note. Tout retenu.</h2>
+      <p data-i18n="video.sub">Regardez ce qui se passe quand vous posez simplement votre téléphone.</p>
     </div>
 
     <div style="max-width:840px;margin:0 auto;background:#0A0F1A;border:1px solid rgba(15,23,42,0.1);border-radius:18px;overflow:hidden;box-shadow:0 30px 70px rgba(15,23,42,0.18)">
@@ -1107,13 +1104,13 @@ section{padding:96px 0}
         <div id="v2-s0" class="v2-scene" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:40px;opacity:0;transition:opacity 1s ease,transform 1s ease">
           <div style="text-align:center;max-width:420px">
             <div style="font-size:32px;margin-bottom:20px">😰</div>
-            <div style="font-size:17px;color:#EEF2F7;font-weight:600;margin-bottom:12px;font-family:'Space Grotesk',sans-serif;line-height:1.4">« Attends, qu'est-ce qui a été décidé, déjà ? »</div>
-            <div style="font-size:13px;color:#7D8EA4;line-height:1.6">Vous connaissez ça. La réunion file, vous notez à moitié, et à la fin il manque toujours l'essentiel.</div>
+            <div style="font-size:17px;color:#EEF2F7;font-weight:600;margin-bottom:12px;font-family:'Space Grotesk',sans-serif;line-height:1.4" data-i18n="t63">« Attends, qu'est-ce qui a été décidé, déjà ? »</div>
+            <div style="font-size:13px;color:#7D8EA4;line-height:1.6" data-i18n="t64">Vous connaissez ça. La réunion file, vous notez à moitié, et à la fin il manque toujours l'essentiel.</div>
           </div>
         </div>
 
         <div id="v2-s1" class="v2-scene" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px;opacity:0;transition:opacity 1s ease,transform 1s ease">
-          <div style="font-size:13px;color:#7D8EA4;margin-bottom:22px;text-align:center">Cette fois, vous posez juste votre téléphone.</div>
+          <div style="font-size:13px;color:#7D8EA4;margin-bottom:22px;text-align:center" data-i18n="t65">Cette fois, vous posez juste votre téléphone.</div>
           <div style="position:relative;display:inline-flex;align-items:center;justify-content:center;margin-bottom:20px">
             <div style="position:absolute;width:90px;height:90px;border-radius:50%;border:1.5px solid rgba(59,130,246,0.3)"></div>
             <div style="position:absolute;width:118px;height:118px;border-radius:50%;border:1px solid rgba(59,130,246,0.15)"></div>
@@ -1127,7 +1124,7 @@ section{padding:96px 0}
           </div>
           <div style="display:flex;align-items:center;gap:6px;background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.25);border-radius:999px;padding:5px 14px">
             <div style="width:6px;height:6px;border-radius:50%;background:#3B82F6;animation:v2-blink 1s infinite"></div>
-            <span style="font-size:12px;font-weight:700;color:#60A5FA">Enregistrement…</span>
+            <span style="font-size:12px;font-weight:700;color:#60A5FA" data-i18n="t66">Enregistrement…</span>
           </div>
         </div>
 
@@ -1137,7 +1134,7 @@ section{padding:96px 0}
               <div style="width:6px;height:6px;border-radius:50%;background:#3B82F6;animation:v2-blink 1s infinite"></div>
               <span style="font-size:11px;font-weight:700;color:#60A5FA" id="v2-timer">00:38</span>
             </div>
-            <span style="font-size:11px;color:#7D8EA4">Transcription en direct — plusieurs voix distinguées</span>
+            <span style="font-size:11px;color:#7D8EA4" data-i18n="t67">Transcription en direct — plusieurs voix distinguées</span>
           </div>
           <div id="v2-viz" style="display:flex;align-items:center;justify-content:center;gap:3px;height:32px;margin-bottom:20px"></div>
           <div style="max-width:440px;width:100%;background:rgba(59,130,246,0.05);border:1px solid rgba(59,130,246,0.15);border-radius:14px;padding:20px;min-height:120px">
@@ -1150,24 +1147,24 @@ section{padding:96px 0}
             <div style="width:22px;height:22px;border-radius:6px;background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.3);display:flex;align-items:center;justify-content:center">
               <svg width="13" height="13" viewBox="0 0 12 12" fill="none"><path d="M2.5 6l2.5 2.5 4.5-5" stroke="#34D399" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
-            <span style="font-size:15px;font-weight:600;color:#EEF2F7;font-family:'Space Grotesk',sans-serif">Tout est prêt. Vous n'avez rien noté.</span>
+            <span style="font-size:15px;font-weight:600;color:#EEF2F7;font-family:'Space Grotesk',sans-serif" data-i18n="t68">Tout est prêt. Vous n'avez rien noté.</span>
           </div>
           <div class="v2-card" style="background:linear-gradient(135deg,rgba(59,130,246,0.08),transparent);border:1px solid rgba(59,130,246,0.2);border-radius:12px;padding:15px;margin-bottom:11px;opacity:0;transform:translateY(12px);transition:all .6s">
-            <div style="font-size:10px;font-weight:700;color:#60A5FA;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px">Résumé</div>
-            <div style="font-size:13px;color:#EEF2F7;line-height:1.6">Réunion de lancement produit. Date fixée au 15, budget marketing de 15 000€ validé, campagne à préparer avant jeudi.</div>
+            <div style="font-size:10px;font-weight:700;color:#60A5FA;text-transform:uppercase;letter-spacing:.08em;margin-bottom:7px" data-i18n="t69">Résumé</div>
+            <div style="font-size:13px;color:#EEF2F7;line-height:1.6" data-i18n="t70">Réunion de lancement produit. Date fixée au 15, budget marketing de 15 000€ validé, campagne à préparer avant jeudi.</div>
           </div>
           <div class="v2-card" style="background:#141C2C;border:1px solid rgba(52,211,153,0.15);border-radius:12px;padding:15px;margin-bottom:11px;opacity:0;transform:translateY(12px);transition:all .6s">
-            <div style="font-size:10px;font-weight:700;color:#34D399;text-transform:uppercase;letter-spacing:.08em;margin-bottom:9px">Vos actions</div>
+            <div style="font-size:10px;font-weight:700;color:#34D399;text-transform:uppercase;letter-spacing:.08em;margin-bottom:9px" data-i18n="t71">Vos actions</div>
             <div style="display:flex;flex-direction:column;gap:7px">
-              <div style="display:flex;gap:8px;font-size:12.5px;color:#C8D8E8"><span style="color:#34D399;font-weight:700">→</span>Préparer la campagne avant jeudi</div>
-              <div style="display:flex;gap:8px;font-size:12.5px;color:#C8D8E8"><span style="color:#34D399;font-weight:700">→</span>Envoyer le budget validé à la direction</div>
+              <div style="display:flex;gap:8px;font-size:12.5px;color:#C8D8E8"><span style="color:#34D399;font-weight:700">→</span><span data-i18n="v4">Préparer la campagne avant jeudi</span></div>
+              <div style="display:flex;gap:8px;font-size:12.5px;color:#C8D8E8"><span style="color:#34D399;font-weight:700">→</span><span data-i18n="v5">Envoyer le budget validé à la direction</span></div>
             </div>
           </div>
           <div class="v2-card" style="background:#141C2C;border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px;opacity:0;transform:translateY(12px);transition:all .6s;display:flex;align-items:center;gap:10px">
             <div style="width:26px;height:26px;border-radius:7px;background:rgba(59,130,246,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 3l1.9 4.6L18.5 9.5l-4.6 1.9L12 16l-1.9-4.6L5.5 9.5l4.6-1.9L12 3z" fill="#60A5FA"/></svg>
             </div>
-            <div style="font-size:12px;color:#7D8EA4;font-style:italic">« Rédige-moi un email de compte-rendu pour l'équipe » — et c'est fait.</div>
+            <div style="font-size:12px;color:#7D8EA4;font-style:italic" data-i18n="t72">« Rédige-moi un email de compte-rendu pour l'équipe » — et c'est fait.</div>
           </div>
         </div>
 
@@ -1193,67 +1190,67 @@ section{padding:96px 0}
 <section id="pricing" aria-labelledby="pricing-title">
   <div class="wrap">
     <div class="sh">
-      <div class="sh-tag">Tarifs</div>
-      <h2 id="pricing-title">Transparent. Sans surprise.</h2>
-      <p>Aucun boîtier à acheter. Résiliable à tout moment.</p>
+      <div class="sh-tag" data-i18n="t73">Tarifs</div>
+      <h2 id="pricing-title" data-i18n="t74">Transparent. Sans surprise.</h2>
+      <p data-i18n="t75">Aucun boîtier à acheter. Résiliable à tout moment.</p>
     </div>
     <div class="pricing-toggle" role="group" aria-label="Fréquence de facturation">
-      <span class="toggle-label active" id="lbl-monthly">Mensuel</span>
+      <span class="toggle-label active" id="lbl-monthly" data-i18n="t76">Mensuel</span>
       <div class="toggle-track" id="billing-toggle" role="switch" aria-checked="false" tabindex="0" onclick="toggleBilling()" onkeydown="if(event.key==='Enter'||event.key===' ')toggleBilling()">
         <div class="toggle-thumb"></div>
       </div>
-      <span class="toggle-label" id="lbl-annual">Annuel <span class="annual-badge">−20%</span></span>
+      <span class="toggle-label" id="lbl-annual"><span data-i18n="lbl.annual">Annuel</span> <span class="annual-badge" data-i18n="t77">−20%</span></span>
     </div>
     <div class="pricing-grid">
       <div class="plan">
         <div class="plan-badge-wrap"></div>
-        <div class="plan-name">Gratuit</div>
-        <div class="plan-tagline">Pour découvrir</div>
-        <div class="plan-price">0€ <small>/mois</small></div>
-        <div class="plan-billing">Pour toujours</div>
+        <div class="plan-name" data-i18n="plan.free">Gratuit</div>
+        <div class="plan-tagline" data-i18n="plan.free.tag">Pour découvrir</div>
+        <div class="plan-price">0€ <small data-i18n="lbl.month">/mois</small></div>
+        <div class="plan-billing" data-i18n="plan.free.bill">Pour toujours</div>
         <div class="plan-divider"></div>
         <ul class="plan-features" aria-label="Fonctionnalités du plan Gratuit">
-          <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>30 minutes d'audio par mois</li>
-          <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Transcription + résumé IA</li>
-          <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>5 questions à l'assistant / jour</li>
-          <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Sans carte bancaire</li>
+          <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p1">30 minutes d'audio par mois</span></li>
+          <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p2">Transcription + résumé IA</span></li>
+          <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p3">5 questions à l'assistant / jour</span></li>
+          <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p4">Sans carte bancaire</span></li>
         </ul>
-        <button class="btn-plan" onclick="window.location.href='https://thomas282828.github.io/nuro/?register'">Commencer gratuitement</button>
+        <button class="btn-plan" onclick="window.location.href='https://thomas282828.github.io/nuro/?register'" data-i18n="plan.cta.free">Commencer gratuitement</button>
       </div>
 
       <div class="plan popular" aria-label="Plan recommandé">
-        <div class="plan-badge-wrap"><span class="plan-badge">Recommandé</span></div>
-        <div class="plan-name">Essentiel</div>
-        <div class="plan-tagline">Usage régulier</div>
-        <div class="plan-price" id="price-essentiel">9€ <small>/mois</small></div>
+        <div class="plan-badge-wrap"><span class="plan-badge" data-i18n="plan.recommended">Recommandé</span></div>
+        <div class="plan-name" data-i18n="plan.ess">Essentiel</div>
+        <div class="plan-tagline" data-i18n="plan.ess.tag">Usage régulier</div>
+        <div class="plan-price" id="price-essentiel">9€ <small data-i18n="lbl.month">/mois</small></div>
         <div class="plan-billing" id="bill-essentiel"></div>
         <div class="plan-divider"></div>
         <ul class="plan-features" aria-label="Fonctionnalités du plan Essentiel">
-          <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>10 heures d'audio par mois</li>
-          <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Assistant IA illimité</li>
-          <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Distinction des locuteurs</li>
-          <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Export + recherche</li>
+          <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p5">10 heures d'audio par mois</span></li>
+          <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p6">Assistant IA illimité</span></li>
+          <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p7">Distinction des locuteurs</span></li>
+          <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p8">Export + recherche</span></li>
         </ul>
-        <button class="btn-plan" onclick="window.location.href='https://thomas282828.github.io/nuro/?register'">Choisir Essentiel</button>
+        <button class="btn-plan" onclick="window.location.href='https://thomas282828.github.io/nuro/?register'" data-i18n="plan.cta.ess">Choisir Essentiel</button>
       </div>
 
       <div class="plan">
         <div class="plan-badge-wrap"></div>
-        <div class="plan-name">Pro</div>
-        <div class="plan-tagline">Usage intensif</div>
-        <div class="plan-price" id="price-pro">19€ <small>/mois</small></div>
+        <div class="plan-name" data-i18n="plan.pro">Pro</div>
+        <div class="plan-tagline" data-i18n="plan.pro.tag">Usage intensif</div>
+        <div class="plan-price" id="price-pro">19€ <small data-i18n="lbl.month">/mois</small></div>
         <div class="plan-billing" id="bill-pro"></div>
         <div class="plan-divider"></div>
         <ul class="plan-features" aria-label="Fonctionnalités du plan Pro">
-          <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>30 heures d'audio par mois</li>
-          <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Tout ce qui est dans Essentiel</li>
-          <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>12 langues de transcription</li>
-          <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Support prioritaire</li>
+          <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p9">30 heures d'audio par mois</span></li>
+          <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p10">Tout ce qui est dans Essentiel</span></li>
+          <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p11">12 langues de transcription</span></li>
+          <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p12">Support prioritaire</span></li>
         </ul>
-        <button class="btn-plan" onclick="window.location.href='https://thomas282828.github.io/nuro/?register'">Choisir Pro</button>
+        <button class="btn-plan" onclick="window.location.href='https://thomas282828.github.io/nuro/?register'" data-i18n="plan.cta.pro">Choisir Pro</button>
       </div>
     </div>
-    <p class="pricing-note">Sans carte bancaire pour le plan gratuit · Sans engagement · Résiliable à tout moment · Besoin de plus ? <a href="https://thomas282828.github.io/nuro/?register" style="color:var(--c-blue)">Contactez-nous</a> pour une offre sur mesure</p>
+    <p class="pricing-note" data-i18n-html="note.pricing">Sans carte bancaire pour le plan gratuit · Sans engagement · Résiliable à tout moment · Besoin de plus ? <a href="https://thomas282828.github.io/nuro/?register" style="color:var(--c-blue)">Contactez-nous</a> pour une offre sur mesure</p>
   </div>
 </section>
 
@@ -1262,57 +1259,43 @@ section{padding:96px 0}
   <div class="wrap">
     <div class="sh">
       <div class="sh-tag">FAQ</div>
-      <h2 id="faq-title">Questions fréquentes</h2>
+      <h2 id="faq-title" data-i18n="t79">Questions fréquentes</h2>
     </div>
     <div class="faq-list" role="list">
       <div class="faq-item" role="listitem">
-        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
-          Mes données audio sont-elles stockées quelque part ?
-          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)"><span data-i18n="q1">Mes données audio sont-elles stockées quelque part ?</span><svg class="faq-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <div class="faq-a">Non. L'audio est transmis directement à Deepgram pour transcription en streaming, sans être enregistré sur nos serveurs. Seule la transcription textuelle est sauvegardée dans votre compte, et vous pouvez la supprimer à tout moment.</div>
+        <div class="faq-a" data-i18n="t80">Non. L'audio est transmis directement à Deepgram pour transcription en streaming, sans être enregistré sur nos serveurs. Seule la transcription textuelle est sauvegardée dans votre compte, et vous pouvez la supprimer à tout moment.</div>
       </div>
       <div class="faq-item" role="listitem">
-        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
-          Ai-je besoin d'une connexion internet pour enregistrer ?
-          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)"><span data-i18n="q2">Ai-je besoin d'une connexion internet pour enregistrer ?</span><svg class="faq-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <div class="faq-a">Oui, une connexion internet est requise pour la transcription en temps réel — l'audio est streamé vers l'API Deepgram. La qualité de connexion influe directement sur la latence. Une 4G stable suffit largement.</div>
+        <div class="faq-a" data-i18n="t81">Oui, une connexion internet est requise pour la transcription en temps réel — l'audio est streamé vers l'API Deepgram. La qualité de connexion influe directement sur la latence. Une 4G stable suffit largement.</div>
       </div>
       <div class="faq-item" role="listitem">
-        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
-          Dois-je configurer quelque chose pour commencer ?
-          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)"><span data-i18n="q3">Dois-je configurer quelque chose pour commencer ?</span><svg class="faq-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <div class="faq-a">Non, rien du tout. Vous créez un compte et vous appuyez sur enregistrer — c'est tout. La transcription et les résumés fonctionnent immédiatement, sans aucune configuration technique de votre part.</div>
+        <div class="faq-a" data-i18n="t82">Non, rien du tout. Vous créez un compte et vous appuyez sur enregistrer — c'est tout. La transcription et les résumés fonctionnent immédiatement, sans aucune configuration technique de votre part.</div>
       </div>
       <div class="faq-item" role="listitem">
-        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
-          Pourquoi ne pas utiliser Plaud ou un boîtier similaire ?
-          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)"><span data-i18n="q4">Pourquoi ne pas utiliser Plaud ou un boîtier similaire ?</span><svg class="faq-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <div class="faq-a">Plaud et ses concurrents nécessitent un achat matériel de 150 à 200€ avant même de payer l'abonnement, plus un objet supplémentaire à charger et transporter. kaideno offre la même fonctionnalité de transcription + résumé IA, directement depuis le téléphone que vous avez déjà en poche.</div>
+        <div class="faq-a" data-i18n="t83">Plaud et ses concurrents nécessitent un achat matériel de 150 à 200€ avant même de payer l'abonnement, plus un objet supplémentaire à charger et transporter. kaideno offre la même fonctionnalité de transcription + résumé IA, directement depuis le téléphone que vous avez déjà en poche.</div>
       </div>
       <div class="faq-item" role="listitem">
-        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
-          Fonctionne-t-il sur iPhone et Android ?
-          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)"><span data-i18n="q5">Fonctionne-t-il sur iPhone et Android ?</span><svg class="faq-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <div class="faq-a">Oui. kaideno est une application web progressive (PWA) qui fonctionne dans le navigateur de n'importe quel smartphone. Sur iOS, vous l'installez via Safari → "Sur l'écran d'accueil". Sur Android, via Chrome → "Ajouter à l'écran d'accueil". Elle se comporte alors comme une application native.</div>
+        <div class="faq-a" data-i18n="t84">Oui. kaideno est une application web progressive (PWA) qui fonctionne dans le navigateur de n'importe quel smartphone. Sur iOS, vous l'installez via Safari → "Sur l'écran d'accueil". Sur Android, via Chrome → "Ajouter à l'écran d'accueil". Elle se comporte alors comme une application native.</div>
       </div>
       <div class="faq-item" role="listitem">
-        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
-          kaideno distingue-t-il les différentes personnes qui parlent ?
-          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)"><span data-i18n="q6">kaideno distingue-t-il les différentes personnes qui parlent ?</span><svg class="faq-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <div class="faq-a">Oui. Quand plusieurs personnes aux voix distinctes participent à une réunion, kaideno sépare automatiquement les prises de parole dans la transcription. Vous voyez clairement qui a dit quoi.</div>
+        <div class="faq-a" data-i18n="t85">Oui. Quand plusieurs personnes aux voix distinctes participent à une réunion, kaideno sépare automatiquement les prises de parole dans la transcription. Vous voyez clairement qui a dit quoi.</div>
       </div>
       <div class="faq-item" role="listitem">
-        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)">
-          Dans quelles langues puis-je enregistrer ?
-          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)"><span data-i18n="q7">Dans quelles langues puis-je enregistrer ?</span><svg class="faq-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <div class="faq-a">kaideno transcrit dans 12 langues : français, anglais, espagnol, allemand, italien, portugais, néerlandais, russe, japonais, chinois, arabe et hindi. L'assistant IA répond également dans la langue que vous avez choisie.</div>
+        <div class="faq-a" data-i18n="t86">kaideno transcrit dans 12 langues : français, anglais, espagnol, allemand, italien, portugais, néerlandais, russe, japonais, chinois, arabe et hindi. L'assistant IA répond également dans la langue que vous avez choisie.</div>
       </div>
     </div>
   </div>
@@ -1321,12 +1304,12 @@ section{padding:96px 0}
 <!-- ─── CTA FINAL ──────────────────────────── -->
 <section class="cta-final" aria-labelledby="cta-title">
   <div class="wrap-xs">
-    <h2 id="cta-title">Commencez à écouter.<br>kaideno retient le reste.</h2>
-    <p>Gratuit pour démarrer. Aucun boîtier. Aucun engagement.</p>
+    <h2 id="cta-title" data-i18n-html="h.cta">Commencez à écouter.<br>kaideno retient le reste.</h2>
+    <p data-i18n="t87">Gratuit pour démarrer. Aucun boîtier. Aucun engagement.</p>
     <div class="cta-actions">
-      <a href="https://thomas282828.github.io/nuro/?register" class="btn-primary" style="display:inline-flex;align-items:center">Créer un compte gratuit</a>
-      <a href="https://thomas282828.github.io/nuro/?login" class="btn-secondary" style="display:inline-flex;align-items:center">Se connecter</a>
-      <a href="#pricing" class="btn-secondary">Voir les tarifs</a>
+      <a href="https://thomas282828.github.io/nuro/?register" class="btn-primary" style="display:inline-flex;align-items:center" data-i18n="t88">Créer un compte gratuit</a>
+      <a href="https://thomas282828.github.io/nuro/?login" class="btn-secondary" style="display:inline-flex;align-items:center" data-i18n="t89">Se connecter</a>
+      <a href="#pricing" class="btn-secondary" data-i18n="t90">Voir les tarifs</a>
     </div>
   </div>
 </section>
@@ -1335,36 +1318,71 @@ section{padding:96px 0}
 <section style="padding:72px 0;background:var(--c-surface);border-top:1px solid var(--c-border)">
   <div class="wrap">
     <div style="text-align:center;margin-bottom:40px">
-      <div class="sh-tag" style="font-size:.73rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--c-text3);display:block;margin-bottom:12px">Confiance & Sécurité</div>
-      <h2 style="font-size:1.6rem;margin-bottom:8px">Vos données vous appartiennent</h2>
-      <p style="color:var(--c-text2);font-size:.9rem">Vos enregistrements audio ne sont jamais stockés sur nos serveurs. Seules vos transcriptions sont sauvegardées dans votre compte, et vous pouvez les supprimer à tout moment.</p>
+      <div class="sh-tag" style="font-size:.73rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--c-text3);display:block;margin-bottom:12px" data-i18n="t91">Confiance & Sécurité</div>
+      <h2 style="font-size:1.6rem;margin-bottom:8px" data-i18n="t92">Vos données vous appartiennent</h2>
+      <p style="color:var(--c-text2);font-size:.9rem" data-i18n="t93">Vos enregistrements audio ne sont jamais stockés sur nos serveurs. Seules vos transcriptions sont sauvegardées dans votre compte, et vous pouvez les supprimer à tout moment.</p>
     </div>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:900px;margin:0 auto">
       <div style="text-align:center;padding:24px 16px;background:var(--c-surface2);border:1px solid var(--c-border);border-radius:var(--radius)">
         <div style="font-size:1.5rem;margin-bottom:10px">🔒</div>
-        <div style="font-size:.82rem;font-weight:700;color:var(--c-text);margin-bottom:4px">Données locales</div>
-        <div style="font-size:.75rem;color:var(--c-text2)">Stockées dans votre navigateur uniquement</div>
+        <div style="font-size:.82rem;font-weight:700;color:var(--c-text);margin-bottom:4px" data-i18n="t94">Données locales</div>
+        <div style="font-size:.75rem;color:var(--c-text2)" data-i18n="t95">Stockées dans votre navigateur uniquement</div>
       </div>
       <div style="text-align:center;padding:24px 16px;background:var(--c-surface2);border:1px solid var(--c-border);border-radius:var(--radius)">
         <div style="font-size:1.5rem;margin-bottom:10px">🛡️</div>
-        <div style="font-size:.82rem;font-weight:700;color:var(--c-text);margin-bottom:4px">API directe</div>
-        <div style="font-size:.75rem;color:var(--c-text2)">Connexion directe à Deepgram & Anthropic</div>
+        <div style="font-size:.82rem;font-weight:700;color:var(--c-text);margin-bottom:4px" data-i18n="t96">API directe</div>
+        <div style="font-size:.75rem;color:var(--c-text2)" data-i18n="t97">Connexion directe à Deepgram & Anthropic</div>
       </div>
       <div style="text-align:center;padding:24px 16px;background:var(--c-surface2);border:1px solid var(--c-border);border-radius:var(--radius)">
         <div style="font-size:1.5rem;margin-bottom:10px">🔑</div>
-        <div style="font-size:.82rem;font-weight:700;color:var(--c-text);margin-bottom:4px">Clés privées</div>
-        <div style="font-size:.75rem;color:var(--c-text2)">Jamais partagées, jamais transmises</div>
+        <div style="font-size:.82rem;font-weight:700;color:var(--c-text);margin-bottom:4px" data-i18n="t98">Clés privées</div>
+        <div style="font-size:.75rem;color:var(--c-text2)" data-i18n="t99">Jamais partagées, jamais transmises</div>
       </div>
       <div style="text-align:center;padding:24px 16px;background:var(--c-surface2);border:1px solid var(--c-border);border-radius:var(--radius)">
         <div style="font-size:1.5rem;margin-bottom:10px">🗑️</div>
-        <div style="font-size:.82rem;font-weight:700;color:var(--c-text);margin-bottom:4px">Suppression totale</div>
-        <div style="font-size:.75rem;color:var(--c-text2)">Supprimez vos données à tout moment</div>
+        <div style="font-size:.82rem;font-weight:700;color:var(--c-text);margin-bottom:4px" data-i18n="t100">Suppression totale</div>
+        <div style="font-size:.75rem;color:var(--c-text2)" data-i18n="t101">Supprimez vos données à tout moment</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ─── FOOTER ─────────────────────────────── -->
+
+
+<!-- ─── RESTER INFORMÉ ───────────────────────────── -->
+<section id="notify" style="padding:56px 0;background:var(--c-bg)">
+  <div class="wrap">
+    <div style="max-width:520px;margin:0 auto;text-align:center;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius-lg);padding:34px 28px">
+      <div style="font-size:1.8rem;margin-bottom:12px">📬</div>
+      <h3 style="font-family:'Space Grotesk',sans-serif;font-size:1.3rem;margin-bottom:9px" data-i18n="n.title">Pas encore prêt à tester ?</h3>
+      <p style="color:var(--c-text2);font-size:.9rem;line-height:1.65;margin-bottom:20px" data-i18n="n.sub">Laissez-nous votre email, nous vous préviendrons des nouveautés et de la sortie officielle.</p>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+        <input type="email" id="notify-email" placeholder="votre@email.com" data-i18n-ph="n.placeholder"
+          style="flex:1;min-width:200px;background:var(--c-bg);border:1.5px solid var(--c-border2);border-radius:999px;padding:11px 18px;color:var(--c-text);font-size:.9rem;font-family:'Inter',sans-serif;outline:none">
+        <button onclick="notifyMe()" class="btn-primary" style="white-space:nowrap" data-i18n="n.btn">Me prévenir</button>
+      </div>
+      <p style="margin-top:12px;font-size:.76rem;color:var(--c-text3)" data-i18n="n.privacy">Aucun spam. Désinscription en un clic.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ───────────────────────────── -->
+<section id="contact" style="padding:64px 0;background:var(--c-surface);border-top:1px solid var(--c-border)">
+  <div class="wrap">
+    <div style="max-width:560px;margin:0 auto;text-align:center">
+      <div class="sh-tag" data-i18n="c.tag">Contact</div>
+      <h2 style="font-size:1.9rem;margin:10px 0 12px" data-i18n="c.title">Une question ? Un retour ?</h2>
+      <p style="color:var(--c-text2);font-size:.95rem;line-height:1.7;margin-bottom:26px" data-i18n="c.sub">kaideno est en bêta. Vos retours nous aident à l'améliorer — n'hésitez pas à nous écrire, nous répondons à chaque message.</p>
+      <a href="mailto:contact.kaideno@gmail.com?subject=Contact%20kaideno" class="btn-primary" style="display:inline-flex;align-items:center;gap:9px">
+        <svg width="17" height="17" viewBox="0 0 18 18" fill="none"><rect x="2" y="4" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M2.5 5l6.5 4.5L15.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        contact.kaideno@gmail.com
+      </a>
+      <p style="margin-top:18px;font-size:.82rem;color:var(--c-text3)" data-i18n="c.reply">Nous répondons généralement sous 24-48h.</p>
+    </div>
+  </div>
+</section>
+
 <footer class="footer" aria-label="Pied de page">
   <div class="wrap">
     <div class="footer-top">
@@ -1377,25 +1395,32 @@ section{padding:96px 0}
           </svg>
           kaideno
         </div>
-        <p class="footer-desc">Transcription et résumé vocal en temps réel, depuis votre téléphone. Conçu pour les professionnels qui ont mieux à faire que prendre des notes.</p>
+        <p class="footer-desc" data-i18n="t102">Transcription et résumé vocal en temps réel, depuis votre téléphone. Conçu pour les professionnels qui ont mieux à faire que prendre des notes.</p>
       </div>
       <div class="footer-col">
-        <div class="footer-col-title">Produit</div>
-        <a href="#features">Fonctionnalités</a>
-        <a href="#pricing">Tarifs</a>
-        <a href="#video">Démo</a>
-        <a href="https://thomas282828.github.io/nuro/?login">Se connecter</a>
+        <div class="footer-col-title" data-i18n="t103">Produit</div>
+        <a href="#features" data-i18n="t104">Fonctionnalités</a>
+        <a href="#pricing" data-i18n="t105">Tarifs</a>
+        <a href="#video" data-i18n="t106">Démo</a>
+        <a href="https://thomas282828.github.io/nuro/?login" data-i18n="t107">Se connecter</a>
       </div>
       <div class="footer-col">
-        <div class="footer-col-title">Ressources</div>
-        <a href="https://console.deepgram.com" target="_blank" rel="noopener">API Deepgram</a>
-        <a href="https://console.anthropic.com" target="_blank" rel="noopener">API Anthropic</a>
+        <div class="footer-col-title" data-i18n="c.support">Support</div>
         <a href="#faq">FAQ</a>
+        <a href="mailto:contact.kaideno@gmail.com?subject=Question%20sur%20kaideno" data-i18n="c.contactus">Nous contacter</a>
+        <a href="mailto:contact.kaideno@gmail.com?subject=Bug%20kaideno" data-i18n="c.reportbug">Signaler un bug</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="footer-legal">© 2025 kaideno. Page de validation produit.</p>
-      <p class="footer-notice">⚠️ Aucun produit commercial n'est encore vendu. Les données collectées servent uniquement à orienter le développement.</p>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <p class="footer-legal" data-i18n="t111">© 2025 kaideno. Page de validation produit.</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap">
+          <a href="legal.html#mentions" style="font-size:.78rem;color:var(--c-text3)" data-i18n="l.mentions">Mentions légales</a>
+          <a href="legal.html#confidentialite" style="font-size:.78rem;color:var(--c-text3)" data-i18n="l.privacy">Confidentialité</a>
+          <a href="legal.html#cgu" style="font-size:.78rem;color:var(--c-text3)" data-i18n="l.terms">CGU</a>
+        </div>
+      </div>
+      <p class="footer-notice" data-i18n="t112">⚠️ Aucun produit commercial n'est encore vendu. Les données collectées servent uniquement à orienter le développement.</p>
     </div>
   </div>
 </footer>
@@ -1460,8 +1485,12 @@ function toggleBilling(){
     const v = isAnnual ? a : m;
     const sm = priceEl.querySelector('small');
     priceEl.childNodes[0].textContent = v+'€ ';
-    if(sm) sm.textContent = '/mois';
-    if(billEl) billEl.textContent = isAnnual ? `Facturé ${v*12}€/an · économisez ${(m-a)*12}€` : '';
+    if(sm){ const lang=localStorage.getItem('kaideno_site_lang')||'fr'; sm.textContent = (I18N[lang]&&I18N[lang]['lbl.month'])||'/mois'; }
+    if(billEl){
+      const lang=localStorage.getItem('kaideno_site_lang')||'fr';
+      const tpl = {fr:`Facturé ${v*12}€/an · économisez ${(m-a)*12}€`, en:`Billed ${v*12}€/year · save ${(m-a)*12}€`, es:`Facturado ${v*12}€/año · ahorra ${(m-a)*12}€`};
+      billEl.textContent = isAnnual ? (tpl[lang]||tpl.fr) : '';
+    }
   });
 }
 
@@ -1640,7 +1669,7 @@ function resetDemo() {
   document.getElementById('mic-timer').textContent = '00:00';
   document.getElementById('mic-status').textContent = 'Prêt à enregistrer';
   document.getElementById('mic-status').style.color = '#4A5A6E';
-  document.getElementById('live-text').innerHTML = '<span style="color:#3D4D62;font-style:italic">En attente…</span>';
+  document.getElementById('live-text').innerHTML = '<span style="color:#3D4D62;font-style:italic" data-i18n="t113">En attente…</span>';
   document.getElementById('live-zone').style.borderColor = 'rgba(59,130,246,0.08)';
   document.getElementById('demo-badge-text').textContent = 'Prêt';
   document.getElementById('resume-text').textContent = '—';
@@ -1777,8 +1806,8 @@ function doLogin() {
 
     <!-- Tabs -->
     <div class="modal-tabs" role="tablist">
-      <button class="modal-tab active" id="tab-register" role="tab" onclick="switchTab('register')">Créer un compte</button>
-      <button class="modal-tab" id="tab-login" role="tab" onclick="switchTab('login')">Se connecter</button>
+      <button class="modal-tab active" id="tab-register" role="tab" onclick="switchTab('register')" data-i18n="t114">Créer un compte</button>
+      <button class="modal-tab" id="tab-login" role="tab" onclick="switchTab('login')" data-i18n="t115">Se connecter</button>
     </div>
 
     <!-- Erreur -->
@@ -1786,7 +1815,7 @@ function doLogin() {
 
     <!-- Formulaire inscription -->
     <div id="modal-register">
-      <p class="modal-sub">Gratuit pour commencer — aucune carte bancaire.</p>
+      <p class="modal-sub" data-i18n="t116">Gratuit pour commencer — aucune carte bancaire.</p>
       <div class="modal-field">
         <label>Email</label>
         <input type="email" id="modal-reg-email" placeholder="ton@email.com" autocomplete="email">
@@ -1795,12 +1824,12 @@ function doLogin() {
         <label>Mot de passe</label>
         <input type="password" id="modal-reg-password" placeholder="Minimum 8 caractères" autocomplete="new-password">
       </div>
-      <button class="modal-submit" id="modal-reg-btn" onclick="doRegister()">Créer mon compte gratuit</button>
+      <button class="modal-submit" id="modal-reg-btn" onclick="doRegister()" data-i18n="t117">Créer mon compte gratuit</button>
     </div>
 
     <!-- Formulaire connexion -->
     <div id="modal-login" style="display:none">
-      <p class="modal-sub">Content de te revoir !</p>
+      <p class="modal-sub" data-i18n="t118">Content de te revoir !</p>
       <div class="modal-field">
         <label>Email</label>
         <input type="email" id="modal-log-email" placeholder="ton@email.com" autocomplete="email">
@@ -1809,7 +1838,7 @@ function doLogin() {
         <label>Mot de passe</label>
         <input type="password" id="modal-log-password" placeholder="••••••••" autocomplete="current-password">
       </div>
-      <button class="modal-submit" id="modal-log-btn" onclick="doLogin()">Se connecter</button>
+      <button class="modal-submit" id="modal-log-btn" onclick="doLogin()" data-i18n="t119">Se connecter</button>
     </div>
   </div>
 </div>
@@ -1824,14 +1853,18 @@ function doLogin() {
 <script>
 (function(){
   let hpRunning=false, hpTimer=null, hpTypeInt=null, hpSec=0;
-  const TX=[
-    "Bonjour à tous,",
-    " on commence la réunion.",
-    " Le lancement est prévu pour le 15.",
-    " Budget de 15 000€",
-    " à valider avant jeudi.",
-    " Thomas, tu peux t'en occuper ?"
-  ];
+  const HP_TX_LANG = {
+    fr: ["Bonjour à tous,"," on commence la réunion."," Le lancement est prévu pour le 15."," Budget de 15 000\u20ac"," à valider avant jeudi."," Thomas, tu peux t'en occuper ?"],
+    en: ["Hi everyone,"," let's start the meeting."," The launch is set for the 15th."," Budget of \u20ac15,000"," to approve before Thursday."," Thomas, can you handle it?"],
+    es: ["Hola a todos,"," empezamos la reunión."," El lanzamiento es el día 15."," Presupuesto de 15.000\u20ac"," a validar antes del jueves."," Thomas, ¿puedes encargarte?"],
+    de: ["Hallo zusammen,"," wir beginnen das Meeting."," Der Start ist für den 15. geplant."," Budget von 15.000\u20ac"," vor Donnerstag freizugeben."," Thomas, kannst du das übernehmen?"],
+    it: ["Ciao a tutti,"," iniziamo la riunione."," Il lancio è previsto per il 15."," Budget di 15.000\u20ac"," da approvare entro giovedì."," Thomas, puoi occupartene?"],
+    pt: ["Olá a todos,"," vamos começar a reunião."," O lançamento está previsto para o dia 15."," Orçamento de 15.000\u20ac"," a validar antes de quinta."," Thomas, podes tratar disso?"],
+    nl: ["Hallo allemaal,"," we beginnen de vergadering."," De lancering staat gepland voor de 15e."," Budget van \u20ac15.000"," voor donderdag goed te keuren."," Thomas, kun jij dat regelen?"],
+    zh: ["大家好，","我们开始会议。","发布定于 15 号。","预算 15,000 欧元，","需在周四前确认。","Thomas，你能负责吗？"],
+    ja: ["皆さん、こんにちは。","会議を始めましょう。","ローンチは15日を予定しています。","予算は1万5千ユーロ、","木曜までに承認が必要です。","Thomasさん、対応できますか？"]
+  };
+  const TX = (function(){ const l=localStorage.getItem('kaideno_site_lang')||'fr'; return HP_TX_LANG[l]||HP_TX_LANG.fr; })();
 
   function hpShow(n){
     [0,1,2].forEach(i=>{
@@ -1931,12 +1964,66 @@ function doLogin() {
 (function(){
   const DUR=26000;
   const scenes=[{start:0,end:5000},{start:5000,end:9000},{start:9000,end:19000},{start:19000,end:26000}];
-  const TX=[
-    {who:1,t:"On lance le produit le 15."},
-    {who:2,t:"Parfait. Le budget marketing est validé, 15 000€."},
-    {who:1,t:"Il faut préparer la campagne avant jeudi."},
-    {who:2,t:"Je m'en occupe. J'envoie le budget à la direction."}
-  ];
+  const TX_LANG = {
+    fr: [
+      {who:1,t:"On lance le produit le 15."},
+      {who:2,t:"Parfait. Le budget marketing est validé, 15 000€."},
+      {who:1,t:"Il faut préparer la campagne avant jeudi."},
+      {who:2,t:"Je m'en occupe. J'envoie le budget à la direction."}
+    ],
+    en: [
+      {who:1,t:"We're launching the product on the 15th."},
+      {who:2,t:"Perfect. The marketing budget is approved, \u20ac15,000."},
+      {who:1,t:"We need to prepare the campaign before Thursday."},
+      {who:2,t:"I'll handle it. I'll send the budget to management."}
+    ],
+    es: [
+      {who:1,t:"Lanzamos el producto el 15."},
+      {who:2,t:"Perfecto. El presupuesto de marketing está aprobado, 15.000\u20ac."},
+      {who:1,t:"Hay que preparar la campaña antes del jueves."},
+      {who:2,t:"Yo me encargo. Envío el presupuesto a dirección."}
+    ],
+    de: [
+      {who:1,t:"Wir starten das Produkt am 15."},
+      {who:2,t:"Perfekt. Das Marketingbudget ist genehmigt, 15.000\u20ac."},
+      {who:1,t:"Die Kampagne muss vor Donnerstag fertig sein."},
+      {who:2,t:"Ich kümmere mich darum. Ich schicke das Budget an die Leitung."}
+    ],
+    it: [
+      {who:1,t:"Lanciamo il prodotto il 15."},
+      {who:2,t:"Perfetto. Il budget marketing è approvato, 15.000\u20ac."},
+      {who:1,t:"Bisogna preparare la campagna entro giovedì."},
+      {who:2,t:"Me ne occupo io. Invio il budget alla direzione."}
+    ],
+    pt: [
+      {who:1,t:"Lançamos o produto no dia 15."},
+      {who:2,t:"Perfeito. O orçamento de marketing está aprovado, 15.000\u20ac."},
+      {who:1,t:"É preciso preparar a campanha antes de quinta."},
+      {who:2,t:"Eu trato disso. Envio o orçamento à direção."}
+    ],
+    nl: [
+      {who:1,t:"We lanceren het product op de 15e."},
+      {who:2,t:"Perfect. Het marketingbudget is goedgekeurd, \u20ac15.000."},
+      {who:1,t:"De campagne moet voor donderdag klaar zijn."},
+      {who:2,t:"Ik regel het. Ik stuur het budget naar de directie."}
+    ],
+    zh: [
+      {who:1,t:"我们 15 号发布产品。"},
+      {who:2,t:"很好。营销预算已批准，15,000 欧元。"},
+      {who:1,t:"活动方案要在周四前准备好。"},
+      {who:2,t:"我来处理。我把预算发给管理层。"}
+    ],
+    ja: [
+      {who:1,t:"製品は15日にローンチします。"},
+      {who:2,t:"了解です。マーケティング予算は1万5千ユーロで承認済みです。"},
+      {who:1,t:"キャンペーンは木曜までに準備が必要です。"},
+      {who:2,t:"私が対応します。予算を経営陣に送ります。"}
+    ]
+  };
+  function getTX(){
+    const lang = localStorage.getItem('kaideno_site_lang') || 'fr';
+    return TX_LANG[lang] || TX_LANG.fr;
+  }
   let playing=false,startT=null,raf=null,curScene=-1,vizMade=false,lastTx=-1,cardsShown=false;
 
   function makeViz(){
@@ -1968,10 +2055,10 @@ function doLogin() {
     if(si===2){
       const se=el-scenes[2].start;
       const t=38+Math.floor(se/1000);const tEl=document.getElementById('v2-timer');if(tEl)tEl.textContent='00:'+String(t).padStart(2,'0');
-      const tc=Math.min(TX.length,Math.floor(se/2200)+1);
+      const TXC=getTX();const tc=Math.min(TXC.length,Math.floor(se/2200)+1);
       if(tc!==lastTx){
         lastTx=tc;const e=document.getElementById('v2-transcript');
-        if(e)e.innerHTML=TX.slice(0,tc).map((seg,idx)=>{
+        if(e)e.innerHTML=TXC.slice(0,tc).map((seg,idx)=>{
           const isLast=idx===tc-1;
           const cursor=isLast?'<span style="display:inline-block;width:2px;height:14px;background:#3B82F6;margin-left:2px;vertical-align:middle;animation:v2-blink .8s step-end infinite"></span>':'';
           return '<div style="margin-bottom:8px;display:flex;gap:8px"><span style="color:#3B82F6;font-weight:700;flex-shrink:0">\u2014</span><span>'+seg.t+cursor+'</span></div>';
@@ -2019,25 +2106,1814 @@ function doLogin() {
   };
   // Appliquer au chargement (partagé avec l'app via la même clé)
   applySiteTheme(localStorage.getItem('kaideno_theme')||'light');
-
-  // ── Langue de transcription (partagée avec l'app) ──
-  window.saveSiteLang=function(){
-    const sel=document.getElementById('site-lang');
-    if(sel){
-      localStorage.setItem('kaideno_rec_lang', sel.value);
-      const names={fr:'Français',en:'English',es:'Español',de:'Deutsch',it:'Italiano',pt:'Português',nl:'Nederlands',ru:'Русский',ja:'日本語',zh:'中文',ar:'العربية',hi:'हिन्दी'};
-      // Petit retour visuel
-      const t=document.createElement('div');
-      t.textContent='🌍 '+(names[sel.value]||sel.value);
-      t.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--c-text);color:var(--c-bg);padding:10px 18px;border-radius:999px;font-size:.85rem;font-weight:600;z-index:9999;box-shadow:0 8px 28px rgba(0,0,0,0.2)';
-      document.body.appendChild(t);
-      setTimeout(()=>t.remove(),2000);
-    }
-  };
-  // Restaurer la langue choisie
-  const siteLang=document.getElementById('site-lang');
-  if(siteLang) siteLang.value=localStorage.getItem('kaideno_rec_lang')||'fr';
 })();
 </script>
+
+<script>
+// ══ TRADUCTION DU SITE (FR / EN / ES) ══
+const I18N = {
+  fr: {
+    'n.title':'Pas encore prêt à tester ?',
+    'n.sub':'Laissez-nous votre email, nous vous préviendrons des nouveautés et de la sortie officielle.',
+    'n.placeholder':'votre@email.com',
+    'n.btn':'Me prévenir',
+    'n.privacy':'Aucun spam. Désinscription en un clic.',
+    'l.mentions':'Mentions légales',
+    'l.privacy':'Confidentialité',
+    'l.terms':'CGU',
+    'c.tag':'Contact',
+    'c.title':'Une question ? Un retour ?',
+    'c.sub':'kaideno est en bêta. Vos retours nous aident à l\'améliorer — n\'hésitez pas à nous écrire, nous répondons à chaque message.',
+    'c.reply':'Nous répondons généralement sous 24-48h.',
+    'c.support':'Support',
+    'c.contactus':'Nous contacter',
+    'c.reportbug':'Signaler un bug',
+    'note.pricing':'Sans carte bancaire pour le plan gratuit · Sans engagement · Résiliable à tout moment · Besoin de plus ? <a href="https://thomas282828.github.io/nuro/?register" style="color:var(--c-blue)">Contactez-nous</a> pour une offre sur mesure',
+    'v1':'Lancement produit fixé au 15 du mois',
+    'v2':'Envoyer le brief au marketing',
+    'v3':'Valider le budget avant jeudi',
+    'v4':'Préparer la campagne avant jeudi',
+    'v5':'Envoyer le budget validé à la direction',
+    'v6':'Réunions',
+    'v7':'Sans carte bancaire pour le plan gratuit · Sans engagement · Résiliable à tout moment · Besoin de plus ?',
+    'p1':'30 minutes d\'audio par mois',
+    'p2':'Transcription + résumé IA',
+    'p3':'5 questions à l\'assistant / jour',
+    'p4':'Sans carte bancaire',
+    'p5':'10 heures d\'audio par mois',
+    'p6':'Assistant IA illimité',
+    'p7':'Distinction des locuteurs',
+    'p8':'Export + recherche',
+    'p9':'30 heures d\'audio par mois',
+    'p10':'Tout ce qui est dans Essentiel',
+    'p11':'12 langues de transcription',
+    'p12':'Support prioritaire',
+    'q1':'Mes données audio sont-elles stockées quelque part ?',
+    'q2':'Ai-je besoin d\'une connexion internet pour enregistrer ?',
+    'q3':'Dois-je configurer quelque chose pour commencer ?',
+    'q4':'Pourquoi ne pas utiliser Plaud ou un boîtier similaire ?',
+    'q5':'Fonctionne-t-il sur iPhone et Android ?',
+    'q6':'kaideno distingue-t-il les différentes personnes qui parlent ?',
+    'q7':'Dans quelles langues puis-je enregistrer ?',
+    'lbl.annual':'Annuel',
+    'lbl.month':'/mois',
+    'h.feat':"Tout ce qu'il faut.<br>Rien de superflu.",
+    'h.workflow':'Trois étapes.<br>Zéro effort manuel.',
+    'h.cta':'Commencez à écouter.<br>kaideno retient le reste.',
+    'nav.features':'Fonctionnalités', 'nav.pricing':'Tarifs', 'nav.login':'Se connecter', 'nav.trial':'Essai gratuit',
+    'hero.badge':'Bêta ouverte — Inscription gratuite',
+    'hero.title':'Ne prenez plus jamais<br>de notes, <em>kaideno le fait.</em>',
+    'hero.sub':'kaideno transcrit et résume vos réunions, cours et idées en temps réel — directement depuis le micro de votre téléphone. Aucun boîtier. Aucune prise de notes.',
+    'hero.pitch':"Ressortez de chaque réunion avec l'essentiel, sans lever le stylo",
+    'hero.cta1':'Commencer gratuitement', 'hero.cta2':'Se connecter', 'hero.cta3':'Voir la démo →',
+    'hero.proof':'30 minutes offertes · sans carte bancaire · sans engagement',
+    'trust.nocard':'Sans carte bancaire', 'trust.private':'Vos données restent privées', 'trust.nodevice':'Aucun boîtier à acheter',
+    'trust.builtfor':'Conçu pour',
+    'video.title':'Une réunion. Zéro note. Tout retenu.',
+    'video.sub':'Regardez ce qui se passe quand vous posez simplement votre téléphone.',
+    'plan.free':'Gratuit', 'plan.free.tag':'Pour découvrir', 'plan.free.bill':'Pour toujours',
+    'plan.ess':'Essentiel', 'plan.ess.tag':'Usage régulier',
+    'plan.pro':'Pro', 'plan.pro.tag':'Usage intensif',
+    'plan.recommended':'Recommandé',
+    'plan.cta.free':'Commencer gratuitement', 'plan.cta.ess':'Choisir Essentiel', 'plan.cta.pro':'Choisir Pro',
+    't1':'Mot de passe',
+    't2':'Se connecter',
+    't3':'Gratuit pour commencer — aucune CB',
+    't4':'Appuie pour enregistrer',
+    't5':'Transcription live',
+    't6':'En attente…',
+    't7':'✓ Résumé prêt',
+    't8':'Résumé',
+    't9':'Réunion de planification — lancement fixé au 15, budget de 15 000€ à valider avant jeudi.',
+    't10':'Points clés',
+    't11':'Actions identifiées',
+    't12':'Clique sur "Se connecter" pour voir la démo',
+    't13':'Pour qui',
+    't14':'Conçu pour les professionnels qui ont mieux à faire que prendre des notes',
+    't15':'Dirigeants & Managers',
+    't16':'Plus de 8 réunions par semaine. kaideno extrait les décisions et actions sans que vous ayez à noter.',
+    't17':'Juristes & Consultants',
+    't18':'Transcription précise des entretiens clients, comptes-rendus structurés en quelques secondes.',
+    't19':'Étudiants & Chercheurs',
+    't20':'Cours, conférences, interviews de terrain — transcription complète pour réviser et citer.',
+    't21':'Créateurs & Journalistes',
+    't22':'Interviews, podcasts, idées vocales — transformées en contenu structuré et cherchable.',
+    't23':'Fonctionnalités',
+    't24':'Conçu pour les professionnels qui veulent capturer l\'essentiel sans friction.',
+    't25':'Transcription en temps réel',
+    't26':'Chaque mot apparaît à mesure que vous parlez, en temps réel. La transcription est disponible en 12 langues, avec ponctuation et mise en forme automatiques.',
+    't27':'Résumé structuré par IA',
+    't28':'Points clés, décisions prises, actions à suivre — extraits automatiquement à la fin de chaque enregistrement.',
+    't29':'Historique consultable',
+    't30':'Toutes vos sessions sont archivées, searchables par mot-clé, accessibles depuis n\'importe quel appareil.',
+    't31':'Zéro boîtier requis',
+    't32':'Le micro de votre smartphone suffit. Pas d\'objet supplémentaire à acheter, charger ou transporter.',
+    't33':'Installable sur mobile',
+    't34':'Application PWA — s\'installe sur l\'écran d\'accueil iOS et Android comme une app native.',
+    't35':'Le workflow kaideno',
+    't36':'01 — Capturer',
+    't37':'Audio · Temps réel · 12 langues',
+    't38':'Appuyez sur enregistrer. kaideno transcrit mot à mot en temps réel, depuis le micro de votre téléphone. Pas de boîtier, pas d\'installation.',
+    't39':'02 — Extraire',
+    't40':'Résumé · Points clés · Actions',
+    't41':'L\'IA analyse automatiquement la transcription et génère un résumé structuré avec les points clés et les actions à suivre.',
+    't42':'03 — Utiliser',
+    't43':'Ask kaideno · Export · Recherche',
+    't44':'Posez des questions sur vos enregistrements, reformatez en email, traduisez, recherchez dans tout votre historique.',
+    't45':'Performance',
+    't46':'Des chiffres concrets',
+    't47':'d\'audio offerts à l\'inscription pour tester sans engagement',
+    't48':'langues de transcription disponibles, avec ponctuation automatique',
+    't49':'Temps réel',
+    't50':'la transcription s\'affiche à mesure que vous parlez',
+    't51':'Zéro boîtier',
+    't52':'tout se passe depuis le micro de votre téléphone',
+    't53':'Comment ça marche',
+    't54':'Opérationnel en 2 minutes',
+    't55':'Trois étapes, pas de configuration complexe.',
+    't56':'Créez votre compte',
+    't57':'Inscription en 30 secondes avec votre email. Aucune carte bancaire requise. Vous appuyez sur enregistrer et c\'est parti — aucune configuration technique.',
+    't58':'Appuyez sur enregistrer',
+    't59':'Autorisez l\'accès au micro de votre téléphone, une seule fois. La transcription démarre instantanément.',
+    't60':'Récupérez le résumé',
+    't61':'Dès que vous stoppez l\'enregistrement, l\'IA analyse la transcription et génère un résumé structuré en quelques secondes.',
+    't62':'Démo',
+    't63':'« Attends, qu\'est-ce qui a été décidé, déjà ? »',
+    't64':'Vous connaissez ça. La réunion file, vous notez à moitié, et à la fin il manque toujours l\'essentiel.',
+    't65':'Cette fois, vous posez juste votre téléphone.',
+    't66':'Enregistrement…',
+    't67':'Transcription en direct — plusieurs voix distinguées',
+    't68':'Tout est prêt. Vous n\'avez rien noté.',
+    't69':'Résumé',
+    't70':'Réunion de lancement produit. Date fixée au 15, budget marketing de 15 000€ validé, campagne à préparer avant jeudi.',
+    't71':'Vos actions',
+    't72':'« Rédige-moi un email de compte-rendu pour l\'équipe » — et c\'est fait.',
+    't73':'Tarifs',
+    't74':'Transparent. Sans surprise.',
+    't75':'Aucun boîtier à acheter. Résiliable à tout moment.',
+    't76':'Mensuel',
+    't78':'Contactez-nous',
+    't79':'Questions fréquentes',
+    't80':'Non. L\'audio est transmis directement à Deepgram pour transcription en streaming, puis immédiatement écarté. Aucun fichier audio n\'est conservé.',
+    't81':'Oui, une connexion internet est requise pour la transcription en temps réel — l\'audio doit être transmis au service de reconnaissance vocale.',
+    't82':'Non, rien du tout. Vous créez un compte et vous appuyez sur enregistrer — c\'est tout. La transcription et les résumés fonctionnent immédiatement, sans aucune configuration technique de votre part.',
+    't83':'Plaud et ses concurrents nécessitent un achat matériel de 150 à 200€ avant même de commencer. kaideno utilise le micro que vous avez déjà dans votre poche.',
+    't84':'Oui. kaideno est une application web progressive (PWA) qui fonctionne dans le navigateur de n\'importe quel smartphone. Sur iOS, vous l\'installez via Safari → "Sur l\'écran d\'accueil". Sur Android, via Chrome → "Ajouter à l\'écran d\'accueil". Elle se comporte alors comme une application native.',
+    't85':'Oui. Quand plusieurs personnes aux voix distinctes participent à une réunion, kaideno sépare automatiquement les prises de parole dans la transcription. Vous voyez clairement qui a dit quoi.',
+    't86':'kaideno transcrit dans 12 langues : français, anglais, espagnol, allemand, italien, portugais, néerlandais, russe, japonais, chinois, arabe et hindi. L\'assistant IA répond également dans la langue que vous avez choisie.',
+    't87':'Gratuit pour démarrer. Aucun boîtier. Aucun engagement.',
+    't88':'Créer un compte gratuit',
+    't89':'Se connecter',
+    't90':'Voir les tarifs',
+    't91':'Confiance & Sécurité',
+    't92':'Vos données vous appartiennent',
+    't93':'Vos enregistrements audio ne sont jamais stockés sur nos serveurs. Seules vos transcriptions sont sauvegardées dans votre compte, et vous pouvez les supprimer à tout moment.',
+    't94':'Données locales',
+    't95':'Stockées dans votre navigateur uniquement',
+    't96':'API directe',
+    't97':'Connexion directe à Deepgram & Anthropic',
+    't98':'Clés privées',
+    't99':'Jamais partagées, jamais transmises',
+    't100':'Suppression totale',
+    't101':'Supprimez vos données à tout moment',
+    't102':'Transcription et résumé vocal en temps réel, depuis votre téléphone. Conçu pour les professionnels.',
+    't103':'Produit',
+    't104':'Fonctionnalités',
+    't105':'Tarifs',
+    't106':'Démo',
+    't107':'Se connecter',
+    't108':'Ressources',
+    't111':'© 2025 kaideno. Page de validation produit.',
+    't112':'⚠️ Aucun produit commercial n\'est encore vendu. Les données collectées servent uniquement à valider l\'intérêt pour le produit.',
+    't113':'En attente…',
+    't114':'Créer un compte',
+    't115':'Se connecter',
+    't116':'Gratuit pour commencer — aucune carte bancaire.',
+    't117':'Créer mon compte gratuit',
+    't118':'Content de te revoir !',
+    't119':'Se connecter',
+  },
+  en: {
+    'n.title':'Not ready to try it yet?',
+    'n.sub':'Leave us your email and we will let you know about updates and the official launch.',
+    'n.placeholder':'your@email.com',
+    'n.btn':'Notify me',
+    'n.privacy':'No spam. Unsubscribe in one click.',
+    'l.mentions':'Legal notice',
+    'l.privacy':'Privacy',
+    'l.terms':'Terms',
+    'c.tag':'Contact',
+    'c.title':'A question? Feedback?',
+    'c.sub':'kaideno is in beta. Your feedback helps us improve — feel free to write to us, we reply to every message.',
+    'c.reply':'We usually reply within 24-48h.',
+    'c.support':'Support',
+    'c.contactus':'Contact us',
+    'c.reportbug':'Report a bug',
+    'note.pricing':'No credit card for the free plan · No commitment · Cancel anytime · Need more? <a href="https://thomas282828.github.io/nuro/?register" style="color:var(--c-blue)">Contact us</a> for a custom offer',
+    'v1':'Product launch set for the 15th',
+    'v2':'Send the brief to marketing',
+    'v3':'Approve the budget before Thursday',
+    'v4':'Prepare the campaign before Thursday',
+    'v5':'Send the approved budget to management',
+    'v6':'Meetings',
+    'v7':'No credit card for the free plan · No commitment · Cancel anytime · Need more?',
+    'p1':'30 minutes of audio per month',
+    'p2':'Transcription + AI summary',
+    'p3':'5 assistant questions / day',
+    'p4':'No credit card',
+    'p5':'10 hours of audio per month',
+    'p6':'Unlimited AI assistant',
+    'p7':'Speaker detection',
+    'p8':'Export + search',
+    'p9':'30 hours of audio per month',
+    'p10':'Everything in Essential',
+    'p11':'12 transcription languages',
+    'p12':'Priority support',
+    'q1':'Is my audio data stored anywhere?',
+    'q2':'Do I need an internet connection to record?',
+    'q3':'Do I need to set anything up to get started?',
+    'q4':'Why not use Plaud or a similar device?',
+    'q5':'Does it work on iPhone and Android?',
+    'q6':'Does kaideno tell different speakers apart?',
+    'q7':'Which languages can I record in?',
+    'lbl.annual':'Annual',
+    'lbl.month':'/month',
+    'h.feat':'Everything you need.<br>Nothing you do not.',
+    'h.workflow':'Three steps.<br>Zero manual effort.',
+    'h.cta':'Start listening.<br>kaideno remembers the rest.',
+    'nav.features':'Features', 'nav.pricing':'Pricing', 'nav.login':'Log in', 'nav.trial':'Free trial',
+    'hero.badge':'Open beta — Free sign-up',
+    'hero.title':'Never take notes<br>again, <em>kaideno does it.</em>',
+    'hero.sub':'kaideno transcribes and summarizes your meetings, lectures and ideas in real time — straight from your phone\'s microphone. No device. No note-taking.',
+    'hero.pitch':'Leave every meeting with the essentials, without lifting a pen',
+    'hero.cta1':'Start for free', 'hero.cta2':'Log in', 'hero.cta3':'Watch the demo →',
+    'hero.proof':'30 free minutes · no credit card · no commitment',
+    'trust.nocard':'No credit card', 'trust.private':'Your data stays private', 'trust.nodevice':'No device to buy',
+    'trust.builtfor':'Built for',
+    'video.title':'One meeting. Zero notes. Everything captured.',
+    'video.sub':'See what happens when you simply put down your phone.',
+    'plan.free':'Free', 'plan.free.tag':'To get started', 'plan.free.bill':'Forever',
+    'plan.ess':'Essential', 'plan.ess.tag':'Regular use',
+    'plan.pro':'Pro', 'plan.pro.tag':'Heavy use',
+    'plan.recommended':'Recommended',
+    'plan.cta.free':'Start for free', 'plan.cta.ess':'Choose Essential', 'plan.cta.pro':'Choose Pro',
+    't1':'Password',
+    't2':'Log in',
+    't3':'Free to start — no credit card',
+    't4':'Tap to record',
+    't5':'Live transcription',
+    't6':'Waiting…',
+    't7':'✓ Summary ready',
+    't8':'Summary',
+    't9':'Planning meeting — launch set for the 15th, €15,000 budget to approve before Thursday.',
+    't10':'Key points',
+    't11':'Action items',
+    't12':'Click "Log in" to see the demo',
+    't13':'Who it\'s for',
+    't14':'Built for professionals who have better things to do than take notes',
+    't15':'Executives & Managers',
+    't16':'More than 8 meetings a week. kaideno extracts decisions and actions without you taking a single note.',
+    't17':'Lawyers & Consultants',
+    't18':'Accurate transcription of client meetings, structured reports in seconds.',
+    't19':'Students & Researchers',
+    't20':'Lectures, conferences, field interviews — full transcription to review and cite.',
+    't21':'Creators & Journalists',
+    't22':'Interviews, podcasts, voice notes — turned into structured, searchable content.',
+    't23':'Features',
+    't24':'Built for professionals who want to capture what matters, effortlessly.',
+    't25':'Real-time transcription',
+    't26':'Every word appears as you speak, in real time. Transcription is available in 12 languages, with automatic punctuation and formatting.',
+    't27':'AI-structured summary',
+    't28':'Key points, decisions made, action items — automatically extracted at the end of each recording.',
+    't29':'Searchable history',
+    't30':'All your sessions are archived, searchable by keyword, accessible from any device.',
+    't31':'No device required',
+    't32':'Your smartphone microphone is enough. Nothing extra to buy, charge or carry.',
+    't33':'Installable on mobile',
+    't34':'PWA app — installs on your iOS and Android home screen like a native app.',
+    't35':'The kaideno workflow',
+    't36':'01 — Capture',
+    't37':'Audio · Real time · 12 languages',
+    't38':'Tap record. kaideno transcribes word by word in real time, from your phone microphone. No device, no installation.',
+    't39':'02 — Extract',
+    't40':'Summary · Key points · Actions',
+    't41':'AI automatically analyzes the transcript and generates a structured summary with key points and action items.',
+    't42':'03 — Use',
+    't43':'Ask kaideno · Export · Search',
+    't44':'Ask questions about your recordings, reformat as email, translate, search your entire history.',
+    't45':'Performance',
+    't46':'Concrete numbers',
+    't47':'of free audio on sign-up to test without commitment',
+    't48':'transcription languages available, with automatic punctuation',
+    't49':'Real time',
+    't50':'transcription appears as you speak',
+    't51':'No device',
+    't52':'everything runs from your phone microphone',
+    't53':'How it works',
+    't54':'Up and running in 2 minutes',
+    't55':'Three steps, no complex setup.',
+    't56':'Create your account',
+    't57':'Sign up in 30 seconds with your email. No credit card required. Tap record and you are good to go — zero technical setup.',
+    't58':'Tap record',
+    't59':'Allow microphone access once. Transcription starts instantly.',
+    't60':'Get your summary',
+    't61':'As soon as you stop recording, AI analyzes the transcript and generates a structured summary in seconds.',
+    't62':'Demo',
+    't63':'"Wait, what did we decide again?"',
+    't64':'You know the feeling. The meeting flies by, you take half-notes, and the essentials are always missing at the end.',
+    't65':'This time, you just put down your phone.',
+    't66':'Recording…',
+    't67':'Live transcription — multiple speakers detected',
+    't68':'Everything is ready. You took no notes.',
+    't69':'Summary',
+    't70':'Product launch meeting. Date set for the 15th, €15,000 marketing budget approved, campaign to prepare before Thursday.',
+    't71':'Your actions',
+    't72':'"Write me a summary email for the team" — and it is done.',
+    't73':'Pricing',
+    't74':'Transparent. No surprises.',
+    't75':'No device to buy. Cancel anytime.',
+    't76':'Monthly',
+    't78':'Contact us',
+    't79':'Frequently asked questions',
+    't80':'No. Audio is streamed directly to Deepgram for transcription, then immediately discarded. No audio file is kept.',
+    't81':'Yes, an internet connection is required for real-time transcription — audio must be sent to the speech recognition service.',
+    't82':'No, nothing at all. You create an account and tap record — that is it. Transcription and summaries work immediately, with zero technical setup on your side.',
+    't83':'Plaud and its competitors require a €150–200 hardware purchase before you even start. kaideno uses the microphone already in your pocket.',
+    't84':'Yes. kaideno is a progressive web app (PWA) that runs in any smartphone browser. On iOS, install it via Safari → "Add to Home Screen". On Android, via Chrome → "Add to Home screen". It then behaves like a native app.',
+    't85':'Yes. When several people with distinct voices take part in a meeting, kaideno automatically separates who says what in the transcript.',
+    't86':'kaideno transcribes in 12 languages: French, English, Spanish, German, Italian, Portuguese, Dutch, Russian, Japanese, Chinese, Arabic and Hindi. The AI assistant also replies in your chosen language.',
+    't87':'Free to start. No device. No commitment.',
+    't88':'Create a free account',
+    't89':'Log in',
+    't90':'See pricing',
+    't91':'Trust & Security',
+    't92':'Your data belongs to you',
+    't93':'Your audio recordings are never stored on our servers. Only your transcripts are saved to your account, and you can delete them at any time.',
+    't94':'Local data',
+    't95':'Stored in your browser only',
+    't96':'Direct API',
+    't97':'Direct connection to Deepgram & Anthropic',
+    't98':'Private keys',
+    't99':'Never shared, never transmitted',
+    't100':'Full deletion',
+    't101':'Delete your data at any time',
+    't102':'Real-time voice transcription and summaries, from your phone. Built for professionals.',
+    't103':'Product',
+    't104':'Features',
+    't105':'Pricing',
+    't106':'Demo',
+    't107':'Log in',
+    't108':'Resources',
+    't111':'© 2025 kaideno. Product validation page.',
+    't112':'⚠️ No commercial product is being sold yet. Collected data is used only to validate interest in the product.',
+    't113':'Waiting…',
+    't114':'Create account',
+    't115':'Log in',
+    't116':'Free to start — no credit card.',
+    't117':'Create my free account',
+    't118':'Welcome back!',
+    't119':'Log in',
+  },
+  es: {
+    'n.title':'¿Aún no listo para probarlo?',
+    'n.sub':'Déjanos tu email y te avisaremos de las novedades y del lanzamiento oficial.',
+    'n.placeholder':'tu@email.com',
+    'n.btn':'Avisarme',
+    'n.privacy':'Sin spam. Baja con un clic.',
+    'l.mentions':'Aviso legal',
+    'l.privacy':'Privacidad',
+    'l.terms':'Términos',
+    'c.tag':'Contacto',
+    'c.title':'¿Una pregunta? ¿Comentarios?',
+    'c.sub':'kaideno está en beta. Tus comentarios nos ayudan a mejorar — escríbenos, respondemos a cada mensaje.',
+    'c.reply':'Solemos responder en 24-48h.',
+    'c.support':'Soporte',
+    'c.contactus':'Contáctanos',
+    'c.reportbug':'Reportar un error',
+    'note.pricing':'Sin tarjeta para el plan gratis · Sin compromiso · Cancela cuando quieras · ¿Necesitas más? <a href="https://thomas282828.github.io/nuro/?register" style="color:var(--c-blue)">Contáctanos</a> para una oferta a medida',
+    'v1':'Lanzamiento fijado el día 15',
+    'v2':'Enviar el brief a marketing',
+    'v3':'Validar el presupuesto antes del jueves',
+    'v4':'Preparar la campaña antes del jueves',
+    'v5':'Enviar el presupuesto aprobado a dirección',
+    'v6':'Reuniones',
+    'v7':'Sin tarjeta para el plan gratis · Sin compromiso · Cancela cuando quieras · ¿Necesitas más?',
+    'p1':'30 minutos de audio al mes',
+    'p2':'Transcripción + resumen IA',
+    'p3':'5 preguntas al asistente / día',
+    'p4':'Sin tarjeta de crédito',
+    'p5':'10 horas de audio al mes',
+    'p6':'Asistente IA ilimitado',
+    'p7':'Distinción de hablantes',
+    'p8':'Exportar + buscar',
+    'p9':'30 horas de audio al mes',
+    'p10':'Todo lo de Esencial',
+    'p11':'12 idiomas de transcripción',
+    'p12':'Soporte prioritario',
+    'q1':'¿Se almacenan mis datos de audio en algún sitio?',
+    'q2':'¿Necesito conexión a internet para grabar?',
+    'q3':'¿Tengo que configurar algo para empezar?',
+    'q4':'¿Por qué no usar Plaud o un dispositivo similar?',
+    'q5':'¿Funciona en iPhone y Android?',
+    'q6':'¿kaideno distingue a las distintas personas que hablan?',
+    'q7':'¿En qué idiomas puedo grabar?',
+    'lbl.annual':'Anual',
+    'lbl.month':'/mes',
+    'h.feat':'Todo lo necesario.<br>Nada superfluo.',
+    'h.workflow':'Tres pasos.<br>Cero esfuerzo manual.',
+    'h.cta':'Empieza a escuchar.<br>kaideno recuerda lo demás.',
+    'nav.features':'Funciones', 'nav.pricing':'Precios', 'nav.login':'Iniciar sesión', 'nav.trial':'Prueba gratis',
+    'hero.badge':'Beta abierta — Registro gratuito',
+    'hero.title':'No vuelvas a tomar<br>notas, <em>kaideno lo hace.</em>',
+    'hero.sub':'kaideno transcribe y resume tus reuniones, clases e ideas en tiempo real — directamente desde el micrófono de tu teléfono. Sin dispositivo. Sin tomar notas.',
+    'hero.pitch':'Sal de cada reunión con lo esencial, sin levantar el bolígrafo',
+    'hero.cta1':'Empezar gratis', 'hero.cta2':'Iniciar sesión', 'hero.cta3':'Ver la demo →',
+    'hero.proof':'30 minutos gratis · sin tarjeta · sin compromiso',
+    'trust.nocard':'Sin tarjeta de crédito', 'trust.private':'Tus datos son privados', 'trust.nodevice':'Sin dispositivo que comprar',
+    'trust.builtfor':'Diseñado para',
+    'video.title':'Una reunión. Cero notas. Todo capturado.',
+    'video.sub':'Mira lo que pasa cuando simplemente dejas tu teléfono.',
+    'plan.free':'Gratis', 'plan.free.tag':'Para descubrir', 'plan.free.bill':'Para siempre',
+    'plan.ess':'Esencial', 'plan.ess.tag':'Uso regular',
+    'plan.pro':'Pro', 'plan.pro.tag':'Uso intensivo',
+    'plan.recommended':'Recomendado',
+    'plan.cta.free':'Empezar gratis', 'plan.cta.ess':'Elegir Esencial', 'plan.cta.pro':'Elegir Pro',
+    't1':'Contraseña',
+    't2':'Iniciar sesión',
+    't3':'Gratis para empezar — sin tarjeta',
+    't4':'Pulsa para grabar',
+    't5':'Transcripción en vivo',
+    't6':'Esperando…',
+    't7':'✓ Resumen listo',
+    't8':'Resumen',
+    't9':'Reunión de planificación — lanzamiento el día 15, presupuesto de 15.000€ a validar antes del jueves.',
+    't10':'Puntos clave',
+    't11':'Acciones identificadas',
+    't12':'Haz clic en "Iniciar sesión" para ver la demo',
+    't13':'Para quién',
+    't14':'Diseñado para profesionales que tienen algo mejor que hacer que tomar notas',
+    't15':'Directivos y Gerentes',
+    't16':'Más de 8 reuniones por semana. kaideno extrae decisiones y acciones sin que tengas que anotar nada.',
+    't17':'Abogados y Consultores',
+    't18':'Transcripción precisa de reuniones con clientes, informes estructurados en segundos.',
+    't19':'Estudiantes e Investigadores',
+    't20':'Clases, conferencias, entrevistas de campo — transcripción completa para repasar y citar.',
+    't21':'Creadores y Periodistas',
+    't22':'Entrevistas, podcasts, ideas por voz — convertidas en contenido estructurado y buscable.',
+    't23':'Funciones',
+    't24':'Diseñado para profesionales que quieren capturar lo esencial sin fricción.',
+    't25':'Transcripción en tiempo real',
+    't26':'Cada palabra aparece mientras hablas, en tiempo real. La transcripción está disponible en 12 idiomas, con puntuación y formato automáticos.',
+    't27':'Resumen estructurado por IA',
+    't28':'Puntos clave, decisiones tomadas, acciones a seguir — extraídos automáticamente al final de cada grabación.',
+    't29':'Historial consultable',
+    't30':'Todas tus sesiones se archivan, se pueden buscar por palabra clave y son accesibles desde cualquier dispositivo.',
+    't31':'Sin dispositivo',
+    't32':'El micrófono de tu smartphone es suficiente. Nada más que comprar, cargar o llevar.',
+    't33':'Instalable en móvil',
+    't34':'Aplicación PWA — se instala en la pantalla de inicio de iOS y Android como una app nativa.',
+    't35':'El flujo de trabajo kaideno',
+    't36':'01 — Capturar',
+    't37':'Audio · Tiempo real · 12 idiomas',
+    't38':'Pulsa grabar. kaideno transcribe palabra por palabra en tiempo real, desde el micrófono de tu teléfono. Sin dispositivo, sin instalación.',
+    't39':'02 — Extraer',
+    't40':'Resumen · Puntos clave · Acciones',
+    't41':'La IA analiza automáticamente la transcripción y genera un resumen estructurado con los puntos clave y las acciones.',
+    't42':'03 — Usar',
+    't43':'Ask kaideno · Exportar · Buscar',
+    't44':'Haz preguntas sobre tus grabaciones, reformatea como email, traduce, busca en todo tu historial.',
+    't45':'Rendimiento',
+    't46':'Cifras concretas',
+    't47':'de audio gratis al registrarte para probar sin compromiso',
+    't48':'idiomas de transcripción disponibles, con puntuación automática',
+    't49':'Tiempo real',
+    't50':'la transcripción aparece mientras hablas',
+    't51':'Sin dispositivo',
+    't52':'todo funciona desde el micrófono de tu teléfono',
+    't53':'Cómo funciona',
+    't54':'Operativo en 2 minutos',
+    't55':'Tres pasos, sin configuración compleja.',
+    't56':'Crea tu cuenta',
+    't57':'Regístrate en 30 segundos con tu email. Sin tarjeta de crédito. Pulsa grabar y listo — sin configuración técnica.',
+    't58':'Pulsa grabar',
+    't59':'Permite el acceso al micrófono una sola vez. La transcripción empieza al instante.',
+    't60':'Recupera el resumen',
+    't61':'En cuanto detienes la grabación, la IA analiza la transcripción y genera un resumen estructurado en segundos.',
+    't62':'Demo',
+    't63':'«Espera, ¿qué habíamos decidido?»',
+    't64':'Ya lo conoces. La reunión pasa volando, tomas notas a medias, y al final siempre falta lo esencial.',
+    't65':'Esta vez, solo dejas tu teléfono.',
+    't66':'Grabando…',
+    't67':'Transcripción en vivo — varias voces distinguidas',
+    't68':'Todo está listo. No anotaste nada.',
+    't69':'Resumen',
+    't70':'Reunión de lanzamiento de producto. Fecha fijada el 15, presupuesto de marketing de 15.000€ aprobado, campaña a preparar antes del jueves.',
+    't71':'Tus acciones',
+    't72':'«Escríbeme un email de resumen para el equipo» — y ya está.',
+    't73':'Precios',
+    't74':'Transparente. Sin sorpresas.',
+    't75':'Sin dispositivo que comprar. Cancela cuando quieras.',
+    't76':'Mensual',
+    't78':'Contáctanos',
+    't79':'Preguntas frecuentes',
+    't80':'No. El audio se transmite directamente a Deepgram para su transcripción y luego se descarta de inmediato. No se guarda ningún archivo de audio.',
+    't81':'Sí, se requiere conexión a internet para la transcripción en tiempo real — el audio debe enviarse al servicio de reconocimiento de voz.',
+    't82':'No, nada en absoluto. Creas una cuenta y pulsas grabar — eso es todo. La transcripción y los resúmenes funcionan de inmediato, sin ninguna configuración técnica.',
+    't83':'Plaud y sus competidores requieren comprar un dispositivo de 150 a 200€ antes de empezar. kaideno usa el micrófono que ya llevas en el bolsillo.',
+    't84':'Sí. kaideno es una aplicación web progresiva (PWA) que funciona en el navegador de cualquier smartphone. En iOS, la instalas con Safari → "Añadir a pantalla de inicio". En Android, con Chrome → "Añadir a pantalla de inicio". Funciona como una app nativa.',
+    't85':'Sí. Cuando varias personas con voces distintas participan en una reunión, kaideno separa automáticamente las intervenciones en la transcripción.',
+    't86':'kaideno transcribe en 12 idiomas: francés, inglés, español, alemán, italiano, portugués, neerlandés, ruso, japonés, chino, árabe e hindi. El asistente de IA también responde en el idioma que elijas.',
+    't87':'Gratis para empezar. Sin dispositivo. Sin compromiso.',
+    't88':'Crear una cuenta gratis',
+    't89':'Iniciar sesión',
+    't90':'Ver precios',
+    't91':'Confianza y Seguridad',
+    't92':'Tus datos te pertenecen',
+    't93':'Tus grabaciones de audio nunca se almacenan en nuestros servidores. Solo se guardan tus transcripciones en tu cuenta, y puedes eliminarlas cuando quieras.',
+    't94':'Datos locales',
+    't95':'Almacenados solo en tu navegador',
+    't96':'API directa',
+    't97':'Conexión directa con Deepgram y Anthropic',
+    't98':'Claves privadas',
+    't99':'Nunca compartidas, nunca transmitidas',
+    't100':'Eliminación total',
+    't101':'Elimina tus datos cuando quieras',
+    't102':'Transcripción y resumen de voz en tiempo real, desde tu teléfono. Diseñado para profesionales.',
+    't103':'Producto',
+    't104':'Funciones',
+    't105':'Precios',
+    't106':'Demo',
+    't107':'Iniciar sesión',
+    't108':'Recursos',
+    't111':'© 2025 kaideno. Página de validación de producto.',
+    't112':'⚠️ Todavía no se vende ningún producto comercial. Los datos recogidos solo sirven para validar el interés en el producto.',
+    't113':'Esperando…',
+    't114':'Crear cuenta',
+    't115':'Iniciar sesión',
+    't116':'Gratis para empezar — sin tarjeta de crédito.',
+    't117':'Crear mi cuenta gratis',
+    't118':'¡Bienvenido de nuevo!',
+    't119':'Iniciar sesión',
+  },
+  de: {
+    'n.title':'Noch nicht bereit zum Testen?',
+    'n.sub':'Hinterlassen Sie uns Ihre E-Mail-Adresse, wir informieren Sie über Neuigkeiten und den offiziellen Start.',
+    'n.placeholder':'ihre@email.com',
+    'n.btn':'Benachrichtigen',
+    'n.privacy':'Kein Spam. Abmeldung mit einem Klick.',
+    'l.mentions':'Impressum',
+    'l.privacy':'Datenschutz',
+    'l.terms':'AGB',
+    'c.tag':'Kontakt',
+    'c.title':'Eine Frage? Ein Feedback?',
+    'c.sub':'kaideno ist in der Beta-Phase. Ihr Feedback hilft uns, besser zu werden — schreiben Sie uns, wir antworten auf jede Nachricht.',
+    'c.reply':'Wir antworten in der Regel innerhalb von 24-48 Stunden.',
+    'c.support':'Support',
+    'c.contactus':'Kontakt aufnehmen',
+    'c.reportbug':'Fehler melden',
+    'note.pricing':'Keine Kreditkarte für den Gratis-Plan · Keine Bindung · Jederzeit kündbar · Mehr nötig? <a href="https://thomas282828.github.io/nuro/?register" style="color:var(--c-blue)">Kontaktieren Sie uns</a> für ein maßgeschneidertes Angebot',
+    'v1':'Produktstart auf den 15. festgelegt',
+    'v2':'Briefing an das Marketing senden',
+    'v3':'Budget vor Donnerstag freigeben',
+    'v4':'Kampagne vor Donnerstag vorbereiten',
+    'v5':'Freigegebenes Budget an die Leitung senden',
+    'v6':'Meetings',
+    'v7':'Keine Kreditkarte für den Gratis-Plan · Keine Bindung · Jederzeit kündbar · Mehr nötig?',
+    'p1':'30 Minuten Audio pro Monat',
+    'p2':'Transkription + KI-Zusammenfassung',
+    'p3':'5 Fragen an den Assistenten / Tag',
+    'p4':'Keine Kreditkarte',
+    'p5':'10 Stunden Audio pro Monat',
+    'p6':'Unbegrenzter KI-Assistent',
+    'p7':'Sprechererkennung',
+    'p8':'Export + Suche',
+    'p9':'30 Stunden Audio pro Monat',
+    'p10':'Alles aus Essential',
+    'p11':'12 Transkriptionssprachen',
+    'p12':'Priority-Support',
+    'q1':'Werden meine Audiodaten irgendwo gespeichert?',
+    'q2':'Brauche ich eine Internetverbindung zum Aufnehmen?',
+    'q3':'Muss ich etwas einrichten, um zu starten?',
+    'q4':'Warum nicht Plaud oder ein ähnliches Gerät verwenden?',
+    'q5':'Funktioniert es auf iPhone und Android?',
+    'q6':'Unterscheidet kaideno verschiedene Sprecher?',
+    'q7':'In welchen Sprachen kann ich aufnehmen?',
+    'lbl.annual':'Jährlich',
+    'lbl.month':'/Monat',
+    'h.workflow':'Drei Schritte.<br>Null manueller Aufwand.',
+    'h.cta':'Hören Sie einfach zu.<br>kaideno merkt sich den Rest.',
+    'h.feat':'Alles, was Sie brauchen.<br>Nichts Überflüssiges.',
+    'nav.features':'Funktionen',
+    'nav.pricing':'Preise',
+    'nav.login':'Anmelden',
+    'nav.trial':'Kostenlos testen',
+    'hero.badge':'Offene Beta — Kostenlose Anmeldung',
+    'hero.title':'Machen Sie nie wieder<br>Notizen, <em>kaideno tut es.</em>',
+    'hero.sub':'kaideno transkribiert und fasst Ihre Meetings, Vorlesungen und Ideen in Echtzeit zusammen — direkt über das Mikrofon Ihres Smartphones. Kein Gerät. Keine Notizen.',
+    'hero.pitch':'Verlassen Sie jedes Meeting mit dem Wesentlichen, ohne einen Stift zu heben',
+    'hero.cta1':'Kostenlos starten',
+    'hero.cta2':'Anmelden',
+    'hero.cta3':'Demo ansehen →',
+    'hero.proof':'30 Gratis-Minuten · keine Kreditkarte · keine Bindung',
+    'trust.nocard':'Keine Kreditkarte',
+    'trust.private':'Ihre Daten bleiben privat',
+    'trust.nodevice':'Kein Gerät zu kaufen',
+    'trust.builtfor':'Entwickelt für',
+    'video.title':'Ein Meeting. Null Notizen. Alles erfasst.',
+    'video.sub':'Sehen Sie, was passiert, wenn Sie einfach Ihr Handy hinlegen.',
+    'plan.free':'Kostenlos',
+    'plan.free.tag':'Zum Entdecken',
+    'plan.free.bill':'Für immer',
+    'plan.ess':'Essential',
+    'plan.ess.tag':'Regelmäßige Nutzung',
+    'plan.pro':'Pro',
+    'plan.pro.tag':'Intensive Nutzung',
+    'plan.recommended':'Empfohlen',
+    'plan.cta.free':'Kostenlos starten',
+    'plan.cta.ess':'Essential wählen',
+    'plan.cta.pro':'Pro wählen',
+    't1':'Passwort',
+    't2':'Anmelden',
+    't3':'Kostenlos starten — keine Kreditkarte',
+    't4':'Zum Aufnehmen tippen',
+    't5':'Live-Transkription',
+    't6':'Wartet…',
+    't7':'✓ Zusammenfassung bereit',
+    't8':'Zusammenfassung',
+    't9':'Planungsmeeting — Start auf den 15. festgelegt, Budget von 15 000 € vor Donnerstag freizugeben.',
+    't10':'Kernpunkte',
+    't11':'Erkannte Aufgaben',
+    't12':'Klicken Sie auf "Anmelden", um die Demo zu sehen',
+    't13':'Für wen',
+    't14':'Entwickelt für Profis, die Besseres zu tun haben, als Notizen zu machen',
+    't15':'Führungskräfte & Manager',
+    't16':'Mehr als 8 Meetings pro Woche. kaideno extrahiert Entscheidungen und Aufgaben, ohne dass Sie mitschreiben müssen.',
+    't17':'Juristen & Berater',
+    't18':'Präzise Transkription von Kundengesprächen, strukturierte Protokolle in Sekunden.',
+    't19':'Studierende & Forschende',
+    't20':'Vorlesungen, Konferenzen, Feldinterviews — vollständige Transkription zum Lernen und Zitieren.',
+    't21':'Creators & Journalisten',
+    't22':'Interviews, Podcasts, Sprachnotizen — in strukturierte, durchsuchbare Inhalte verwandelt.',
+    't23':'Funktionen',
+    't24':'Entwickelt für Profis, die das Wesentliche mühelos erfassen wollen.',
+    't25':'Echtzeit-Transkription',
+    't26':'Jedes Wort erscheint, während Sie sprechen, in Echtzeit. Die Transkription ist in 12 Sprachen verfügbar, mit automatischer Zeichensetzung und Formatierung.',
+    't27':'KI-strukturierte Zusammenfassung',
+    't28':'Kernpunkte, getroffene Entscheidungen, Folgeaufgaben — am Ende jeder Aufnahme automatisch extrahiert.',
+    't29':'Durchsuchbarer Verlauf',
+    't30':'Alle Ihre Sitzungen werden archiviert, per Stichwort durchsuchbar, von jedem Gerät aus zugänglich.',
+    't31':'Kein Gerät erforderlich',
+    't32':'Das Mikrofon Ihres Smartphones genügt. Nichts zusätzlich zu kaufen, laden oder tragen.',
+    't33':'Auf Mobilgeräten installierbar',
+    't34':'PWA-App — installiert sich wie eine native App auf dem iOS- und Android-Startbildschirm.',
+    't35':'Der kaideno-Workflow',
+    't36':'01 — Erfassen',
+    't37':'Audio · Echtzeit · 12 Sprachen',
+    't38':'Auf Aufnahme tippen. kaideno transkribiert Wort für Wort in Echtzeit, über das Mikrofon Ihres Handys. Kein Gerät, keine Installation.',
+    't39':'02 — Extrahieren',
+    't40':'Zusammenfassung · Kernpunkte · Aufgaben',
+    't41':'Die KI analysiert die Transkription automatisch und erstellt eine strukturierte Zusammenfassung mit Kernpunkten und Folgeaufgaben.',
+    't42':'03 — Nutzen',
+    't43':'Ask kaideno · Export · Suche',
+    't44':'Stellen Sie Fragen zu Ihren Aufnahmen, formatieren Sie sie als E-Mail um, übersetzen Sie, durchsuchen Sie Ihren gesamten Verlauf.',
+    't45':'Leistung',
+    't46':'Konkrete Zahlen',
+    't47':'kostenloses Audio bei der Anmeldung zum unverbindlichen Testen',
+    't48':'verfügbare Transkriptionssprachen, mit automatischer Zeichensetzung',
+    't49':'Echtzeit',
+    't50':'die Transkription erscheint, während Sie sprechen',
+    't51':'Kein Gerät',
+    't52':'alles läuft über das Mikrofon Ihres Handys',
+    't53':'So funktioniert es',
+    't54':'In 2 Minuten einsatzbereit',
+    't55':'Drei Schritte, keine komplexe Einrichtung.',
+    't56':'Konto erstellen',
+    't57':'Anmeldung in 30 Sekunden mit Ihrer E-Mail. Keine Kreditkarte nötig. Auf Aufnahme tippen und los — keine technische Einrichtung.',
+    't58':'Auf Aufnahme tippen',
+    't59':'Erlauben Sie einmalig den Mikrofonzugriff. Die Transkription startet sofort.',
+    't60':'Zusammenfassung erhalten',
+    't61':'Sobald Sie die Aufnahme stoppen, analysiert die KI die Transkription und erstellt in Sekunden eine strukturierte Zusammenfassung.',
+    't62':'Demo',
+    't63':'« Warte, was hatten wir nochmal entschieden? »',
+    't64':'Sie kennen das. Das Meeting rast vorbei, Sie schreiben halb mit, und am Ende fehlt immer das Wichtigste.',
+    't65':'Diesmal legen Sie einfach Ihr Handy hin.',
+    't66':'Aufnahme läuft…',
+    't67':'Live-Transkription — mehrere Sprecher erkannt',
+    't68':'Alles ist fertig. Sie haben nichts notiert.',
+    't69':'Zusammenfassung',
+    't70':'Produktlaunch-Meeting. Termin auf den 15. festgelegt, Marketingbudget von 15 000 € freigegeben, Kampagne vor Donnerstag vorzubereiten.',
+    't71':'Ihre Aufgaben',
+    't72':'« Schreib mir eine Zusammenfassungs-E-Mail fürs Team » — und fertig.',
+    't73':'Preise',
+    't74':'Transparent. Keine Überraschungen.',
+    't75':'Kein Gerät zu kaufen. Jederzeit kündbar.',
+    't76':'Monatlich',
+    't78':'Kontaktieren Sie uns',
+    't79':'Häufige Fragen',
+    't80':'Nein. Das Audio wird direkt zur Transkription an Deepgram gestreamt und dann sofort verworfen. Es wird keine Audiodatei gespeichert.',
+    't81':'Ja, für die Echtzeit-Transkription ist eine Internetverbindung erforderlich — das Audio muss an den Spracherkennungsdienst gesendet werden.',
+    't82':'Nein, überhaupt nichts. Sie erstellen ein Konto und tippen auf Aufnahme — das war\'s. Transkription und Zusammenfassungen funktionieren sofort, ohne jede technische Einrichtung.',
+    't83':'Plaud und seine Konkurrenten erfordern einen Hardwarekauf von 150 bis 200 €, bevor Sie überhaupt loslegen. kaideno nutzt das Mikrofon, das Sie bereits in der Tasche haben.',
+    't84':'Ja. kaideno ist eine Progressive Web App (PWA), die in jedem Smartphone-Browser läuft. Auf iOS installieren Sie sie über Safari → "Zum Home-Bildschirm". Auf Android über Chrome → "Zum Startbildschirm hinzufügen". Sie verhält sich dann wie eine native App.',
+    't85':'Ja. Wenn mehrere Personen mit unterschiedlichen Stimmen an einem Meeting teilnehmen, trennt kaideno die Redebeiträge automatisch in der Transkription.',
+    't86':'kaideno transkribiert in 12 Sprachen: Französisch, Englisch, Spanisch, Deutsch, Italienisch, Portugiesisch, Niederländisch, Russisch, Japanisch, Chinesisch, Arabisch und Hindi. Der KI-Assistent antwortet ebenfalls in der von Ihnen gewählten Sprache.',
+    't87':'Kostenlos starten. Kein Gerät. Keine Bindung.',
+    't88':'Kostenloses Konto erstellen',
+    't89':'Anmelden',
+    't90':'Preise ansehen',
+    't91':'Vertrauen & Sicherheit',
+    't92':'Ihre Daten gehören Ihnen',
+    't93':'Ihre Audioaufnahmen werden nie auf unseren Servern gespeichert. Nur Ihre Transkriptionen werden in Ihrem Konto gesichert, und Sie können sie jederzeit löschen.',
+    't94':'Lokale Daten',
+    't95':'Nur in Ihrem Browser gespeichert',
+    't96':'Direkte API',
+    't97':'Direkte Verbindung zu Deepgram & Anthropic',
+    't98':'Private Schlüssel',
+    't99':'Nie geteilt, nie übertragen',
+    't100':'Vollständige Löschung',
+    't101':'Löschen Sie Ihre Daten jederzeit',
+    't102':'Echtzeit-Sprachtranskription und -zusammenfassung, direkt vom Handy. Für Profis entwickelt.',
+    't103':'Produkt',
+    't104':'Funktionen',
+    't105':'Preise',
+    't106':'Demo',
+    't107':'Anmelden',
+    't108':'Ressourcen',
+    't111':'© 2025 kaideno. Produktvalidierungsseite.',
+    't112':'⚠️ Es wird noch kein kommerzielles Produkt verkauft. Die erhobenen Daten dienen ausschließlich der Validierung des Produktinteresses.',
+    't113':'Wartet…',
+    't114':'Konto erstellen',
+    't115':'Anmelden',
+    't116':'Kostenlos starten — keine Kreditkarte.',
+    't117':'Mein kostenloses Konto erstellen',
+    't118':'Schön, Sie wiederzusehen!',
+    't119':'Anmelden',
+  },
+  it: {
+    'n.title':'Non ancora pronto a provare?',
+    'n.sub':'Lasciaci la tua email, ti informeremo sulle novità e sul lancio ufficiale.',
+    'n.placeholder':'tua@email.com',
+    'n.btn':'Avvisami',
+    'n.privacy':'Niente spam. Disiscrizione con un clic.',
+    'l.mentions':'Note legali',
+    'l.privacy':'Privacy',
+    'l.terms':'Termini',
+    'c.tag':'Contatto',
+    'c.title':'Una domanda? Un feedback?',
+    'c.sub':'kaideno è in beta. I tuoi feedback ci aiutano a migliorare — scrivici, rispondiamo a ogni messaggio.',
+    'c.reply':'Rispondiamo generalmente entro 24-48 ore.',
+    'c.support':'Supporto',
+    'c.contactus':'Contattaci',
+    'c.reportbug':'Segnala un bug',
+    'note.pricing':'Nessuna carta per il piano gratuito · Nessun vincolo · Disdetta in qualsiasi momento · Serve di più? <a href="https://thomas282828.github.io/nuro/?register" style="color:var(--c-blue)">Contattaci</a> per un\'offerta su misura',
+    'v1':'Lancio prodotto fissato al 15',
+    'v2':'Inviare il brief al marketing',
+    'v3':'Approvare il budget entro giovedì',
+    'v4':'Preparare la campagna entro giovedì',
+    'v5':'Inviare il budget approvato alla direzione',
+    'v6':'Riunioni',
+    'v7':'Nessuna carta per il piano gratuito · Nessun vincolo · Disdetta quando vuoi · Serve di più?',
+    'p1':'30 minuti di audio al mese',
+    'p2':'Trascrizione + riassunto IA',
+    'p3':'5 domande all\'assistente / giorno',
+    'p4':'Nessuna carta di credito',
+    'p5':'10 ore di audio al mese',
+    'p6':'Assistente IA illimitato',
+    'p7':'Distinzione dei parlanti',
+    'p8':'Esportazione + ricerca',
+    'p9':'30 ore di audio al mese',
+    'p10':'Tutto ciò che c\'è in Essenziale',
+    'p11':'12 lingue di trascrizione',
+    'p12':'Supporto prioritario',
+    'q1':'I miei dati audio vengono memorizzati da qualche parte?',
+    'q2':'Ho bisogno di una connessione internet per registrare?',
+    'q3':'Devo configurare qualcosa per iniziare?',
+    'q4':'Perché non usare Plaud o un dispositivo simile?',
+    'q5':'Funziona su iPhone e Android?',
+    'q6':'kaideno distingue le diverse persone che parlano?',
+    'q7':'In quali lingue posso registrare?',
+    'lbl.annual':'Annuale',
+    'lbl.month':'/mese',
+    'h.workflow':'Tre passaggi.<br>Zero sforzo manuale.',
+    'h.cta':'Ascolta e basta.<br>kaideno ricorda il resto.',
+    'h.feat':'Tutto il necessario.<br>Niente di superfluo.',
+    'nav.features':'Funzioni',
+    'nav.pricing':'Prezzi',
+    'nav.login':'Accedi',
+    'nav.trial':'Prova gratis',
+    'hero.badge':'Beta aperta — Registrazione gratuita',
+    'hero.title':'Non prendere<br>più appunti, <em>ci pensa kaideno.</em>',
+    'hero.sub':'kaideno trascrive e riassume le tue riunioni, lezioni e idee in tempo reale — direttamente dal microfono del tuo telefono. Nessun dispositivo. Nessun appunto.',
+    'hero.pitch':'Esci da ogni riunione con l\'essenziale, senza alzare la penna',
+    'hero.cta1':'Inizia gratis',
+    'hero.cta2':'Accedi',
+    'hero.cta3':'Guarda la demo →',
+    'hero.proof':'30 minuti gratis · nessuna carta · nessun vincolo',
+    'trust.nocard':'Nessuna carta di credito',
+    'trust.private':'I tuoi dati restano privati',
+    'trust.nodevice':'Nessun dispositivo da comprare',
+    'trust.builtfor':'Progettato per',
+    'video.title':'Una riunione. Zero appunti. Tutto catturato.',
+    'video.sub':'Guarda cosa succede quando appoggi semplicemente il telefono.',
+    'plan.free':'Gratuito',
+    'plan.free.tag':'Per scoprire',
+    'plan.free.bill':'Per sempre',
+    'plan.ess':'Essenziale',
+    'plan.ess.tag':'Uso regolare',
+    'plan.pro':'Pro',
+    'plan.pro.tag':'Uso intensivo',
+    'plan.recommended':'Consigliato',
+    'plan.cta.free':'Inizia gratis',
+    'plan.cta.ess':'Scegli Essenziale',
+    'plan.cta.pro':'Scegli Pro',
+    't1':'Password',
+    't2':'Accedi',
+    't3':'Inizia gratis — nessuna carta',
+    't4':'Tocca per registrare',
+    't5':'Trascrizione live',
+    't6':'In attesa…',
+    't7':'✓ Riassunto pronto',
+    't8':'Riassunto',
+    't9':'Riunione di pianificazione — lancio fissato al 15, budget di 15 000€ da approvare entro giovedì.',
+    't10':'Punti chiave',
+    't11':'Azioni identificate',
+    't12':'Clicca su "Accedi" per vedere la demo',
+    't13':'Per chi',
+    't14':'Progettato per professionisti che hanno di meglio da fare che prendere appunti',
+    't15':'Dirigenti & Manager',
+    't16':'Più di 8 riunioni a settimana. kaideno estrae decisioni e azioni senza che tu debba prendere appunti.',
+    't17':'Avvocati & Consulenti',
+    't18':'Trascrizione precisa dei colloqui con i clienti, verbali strutturati in pochi secondi.',
+    't19':'Studenti & Ricercatori',
+    't20':'Lezioni, conferenze, interviste sul campo — trascrizione completa per ripassare e citare.',
+    't21':'Creator & Giornalisti',
+    't22':'Interviste, podcast, idee vocali — trasformate in contenuti strutturati e ricercabili.',
+    't23':'Funzioni',
+    't24':'Progettato per professionisti che vogliono catturare l\'essenziale senza attriti.',
+    't25':'Trascrizione in tempo reale',
+    't26':'Ogni parola appare mentre parli, in tempo reale. La trascrizione è disponibile in 12 lingue, con punteggiatura e formattazione automatiche.',
+    't27':'Riassunto strutturato dall\'IA',
+    't28':'Punti chiave, decisioni prese, azioni da seguire — estratti automaticamente al termine di ogni registrazione.',
+    't29':'Cronologia consultabile',
+    't30':'Tutte le tue sessioni sono archiviate, ricercabili per parola chiave, accessibili da qualsiasi dispositivo.',
+    't31':'Nessun dispositivo richiesto',
+    't32':'Basta il microfono del tuo smartphone. Niente da comprare, caricare o portare con sé.',
+    't33':'Installabile su mobile',
+    't34':'App PWA — si installa sulla schermata iniziale di iOS e Android come un\'app nativa.',
+    't35':'Il workflow kaideno',
+    't36':'01 — Catturare',
+    't37':'Audio · Tempo reale · 12 lingue',
+    't38':'Tocca registra. kaideno trascrive parola per parola in tempo reale, dal microfono del tuo telefono. Nessun dispositivo, nessuna installazione.',
+    't39':'02 — Estrarre',
+    't40':'Riassunto · Punti chiave · Azioni',
+    't41':'L\'IA analizza automaticamente la trascrizione e genera un riassunto strutturato con punti chiave e azioni da seguire.',
+    't42':'03 — Usare',
+    't43':'Ask kaideno · Esportazione · Ricerca',
+    't44':'Fai domande sulle tue registrazioni, riformatta come email, traduci, cerca in tutta la cronologia.',
+    't45':'Prestazioni',
+    't46':'Numeri concreti',
+    't47':'di audio gratis all\'iscrizione per provare senza impegno',
+    't48':'lingue di trascrizione disponibili, con punteggiatura automatica',
+    't49':'Tempo reale',
+    't50':'la trascrizione appare mentre parli',
+    't51':'Nessun dispositivo',
+    't52':'tutto avviene dal microfono del tuo telefono',
+    't53':'Come funziona',
+    't54':'Operativo in 2 minuti',
+    't55':'Tre passaggi, nessuna configurazione complessa.',
+    't56':'Crea il tuo account',
+    't57':'Iscrizione in 30 secondi con la tua email. Nessuna carta richiesta. Tocca registra e via — nessuna configurazione tecnica.',
+    't58':'Tocca registra',
+    't59':'Autorizza l\'accesso al microfono, una sola volta. La trascrizione parte subito.',
+    't60':'Ricevi il riassunto',
+    't61':'Non appena interrompi la registrazione, l\'IA analizza la trascrizione e genera un riassunto strutturato in pochi secondi.',
+    't62':'Demo',
+    't63':'« Aspetta, cosa avevamo deciso? »',
+    't64':'Lo conosci. La riunione vola, prendi appunti a metà, e alla fine manca sempre l\'essenziale.',
+    't65':'Questa volta appoggi semplicemente il telefono.',
+    't66':'Registrazione…',
+    't67':'Trascrizione live — più voci distinte',
+    't68':'È tutto pronto. Non hai preso appunti.',
+    't69':'Riassunto',
+    't70':'Riunione lancio prodotto. Data fissata al 15, budget marketing di 15 000€ approvato, campagna da preparare entro giovedì.',
+    't71':'Le tue azioni',
+    't72':'« Scrivimi un\'email di resoconto per il team » — e fatto.',
+    't73':'Prezzi',
+    't74':'Trasparente. Senza sorprese.',
+    't75':'Nessun dispositivo da comprare. Disdetta quando vuoi.',
+    't76':'Mensile',
+    't78':'Contattaci',
+    't79':'Domande frequenti',
+    't80':'No. L\'audio viene trasmesso direttamente a Deepgram per la trascrizione, poi scartato immediatamente. Nessun file audio viene conservato.',
+    't81':'Sì, è necessaria una connessione internet per la trascrizione in tempo reale — l\'audio deve essere inviato al servizio di riconoscimento vocale.',
+    't82':'No, assolutamente nulla. Crei un account e tocchi registra — tutto qui. Trascrizione e riassunti funzionano subito, senza alcuna configurazione tecnica.',
+    't83':'Plaud e i suoi concorrenti richiedono un acquisto hardware da 150 a 200€ prima ancora di iniziare. kaideno usa il microfono che hai già in tasca.',
+    't84':'Sì. kaideno è un\'app web progressiva (PWA) che funziona nel browser di qualsiasi smartphone. Su iOS, la installi tramite Safari → "Aggiungi a Home". Su Android, tramite Chrome → "Aggiungi a schermata Home". Si comporta come un\'app nativa.',
+    't85':'Sì. Quando più persone con voci distinte partecipano a una riunione, kaideno separa automaticamente gli interventi nella trascrizione.',
+    't86':'kaideno trascrive in 12 lingue: francese, inglese, spagnolo, tedesco, italiano, portoghese, olandese, russo, giapponese, cinese, arabo e hindi. L\'assistente IA risponde anche nella lingua scelta.',
+    't87':'Inizia gratis. Nessun dispositivo. Nessun vincolo.',
+    't88':'Crea un account gratuito',
+    't89':'Accedi',
+    't90':'Vedi i prezzi',
+    't91':'Fiducia & Sicurezza',
+    't92':'I tuoi dati ti appartengono',
+    't93':'Le tue registrazioni audio non vengono mai memorizzate sui nostri server. Solo le trascrizioni sono salvate nel tuo account, e puoi eliminarle quando vuoi.',
+    't94':'Dati locali',
+    't95':'Memorizzati solo nel tuo browser',
+    't96':'API diretta',
+    't97':'Connessione diretta a Deepgram e Anthropic',
+    't98':'Chiavi private',
+    't99':'Mai condivise, mai trasmesse',
+    't100':'Eliminazione totale',
+    't101':'Elimina i tuoi dati quando vuoi',
+    't102':'Trascrizione e riassunto vocale in tempo reale, dal tuo telefono. Progettato per professionisti.',
+    't103':'Prodotto',
+    't104':'Funzioni',
+    't105':'Prezzi',
+    't106':'Demo',
+    't107':'Accedi',
+    't108':'Risorse',
+    't111':'© 2025 kaideno. Pagina di validazione prodotto.',
+    't112':'⚠️ Nessun prodotto commerciale è ancora in vendita. I dati raccolti servono solo a validare l\'interesse per il prodotto.',
+    't113':'In attesa…',
+    't114':'Crea account',
+    't115':'Accedi',
+    't116':'Inizia gratis — nessuna carta di credito.',
+    't117':'Crea il mio account gratuito',
+    't118':'Bentornato!',
+    't119':'Accedi',
+  },
+  pt: {
+    'n.title':'Ainda não está pronto para testar?',
+    'n.sub':'Deixe-nos o seu email, avisaremos sobre novidades e o lançamento oficial.',
+    'n.placeholder':'seu@email.com',
+    'n.btn':'Avisar-me',
+    'n.privacy':'Sem spam. Cancelamento com um clique.',
+    'l.mentions':'Aviso legal',
+    'l.privacy':'Privacidade',
+    'l.terms':'Termos',
+    'c.tag':'Contacto',
+    'c.title':'Uma questão? Um comentário?',
+    'c.sub':'O kaideno está em beta. Os seus comentários ajudam-nos a melhorar — escreva-nos, respondemos a todas as mensagens.',
+    'c.reply':'Respondemos normalmente em 24-48h.',
+    'c.support':'Suporte',
+    'c.contactus':'Contacte-nos',
+    'c.reportbug':'Reportar um erro',
+    'note.pricing':'Sem cartão para o plano gratuito · Sem compromisso · Cancele quando quiser · Precisa de mais? <a href="https://thomas282828.github.io/nuro/?register" style="color:var(--c-blue)">Contacte-nos</a> para uma oferta personalizada',
+    'v1':'Lançamento do produto marcado para o dia 15',
+    'v2':'Enviar o briefing ao marketing',
+    'v3':'Validar o orçamento antes de quinta',
+    'v4':'Preparar a campanha antes de quinta',
+    'v5':'Enviar o orçamento aprovado à direção',
+    'v6':'Reuniões',
+    'v7':'Sem cartão para o plano gratuito · Sem compromisso · Cancele quando quiser · Precisa de mais?',
+    'p1':'30 minutos de áudio por mês',
+    'p2':'Transcrição + resumo IA',
+    'p3':'5 perguntas ao assistente / dia',
+    'p4':'Sem cartão de crédito',
+    'p5':'10 horas de áudio por mês',
+    'p6':'Assistente IA ilimitado',
+    'p7':'Distinção de oradores',
+    'p8':'Exportação + pesquisa',
+    'p9':'30 horas de áudio por mês',
+    'p10':'Tudo o que está em Essencial',
+    'p11':'12 idiomas de transcrição',
+    'p12':'Suporte prioritário',
+    'q1':'Os meus dados de áudio são armazenados em algum lugar?',
+    'q2':'Preciso de ligação à internet para gravar?',
+    'q3':'Preciso de configurar algo para começar?',
+    'q4':'Porquê não usar o Plaud ou um dispositivo similar?',
+    'q5':'Funciona no iPhone e Android?',
+    'q6':'O kaideno distingue as diferentes pessoas que falam?',
+    'q7':'Em que idiomas posso gravar?',
+    'lbl.annual':'Anual',
+    'lbl.month':'/mês',
+    'h.workflow':'Três passos.<br>Zero esforço manual.',
+    'h.cta':'Basta ouvir.<br>O kaideno lembra o resto.',
+    'h.feat':'Tudo o que precisa.<br>Nada supérfluo.',
+    'nav.features':'Funcionalidades',
+    'nav.pricing':'Preços',
+    'nav.login':'Entrar',
+    'nav.trial':'Testar grátis',
+    'hero.badge':'Beta aberta — Registo gratuito',
+    'hero.title':'Nunca mais tire<br>notas, <em>o kaideno faz isso.</em>',
+    'hero.sub':'O kaideno transcreve e resume as suas reuniões, aulas e ideias em tempo real — diretamente do microfone do seu telemóvel. Sem dispositivo. Sem notas.',
+    'hero.pitch':'Saia de cada reunião com o essencial, sem levantar a caneta',
+    'hero.cta1':'Começar grátis',
+    'hero.cta2':'Entrar',
+    'hero.cta3':'Ver a demo →',
+    'hero.proof':'30 minutos grátis · sem cartão · sem compromisso',
+    'trust.nocard':'Sem cartão de crédito',
+    'trust.private':'Os seus dados são privados',
+    'trust.nodevice':'Sem dispositivo para comprar',
+    'trust.builtfor':'Concebido para',
+    'video.title':'Uma reunião. Zero notas. Tudo capturado.',
+    'video.sub':'Veja o que acontece quando simplesmente pousa o telemóvel.',
+    'plan.free':'Gratuito',
+    'plan.free.tag':'Para descobrir',
+    'plan.free.bill':'Para sempre',
+    'plan.ess':'Essencial',
+    'plan.ess.tag':'Uso regular',
+    'plan.pro':'Pro',
+    'plan.pro.tag':'Uso intensivo',
+    'plan.recommended':'Recomendado',
+    'plan.cta.free':'Começar grátis',
+    'plan.cta.ess':'Escolher Essencial',
+    'plan.cta.pro':'Escolher Pro',
+    't1':'Palavra-passe',
+    't2':'Entrar',
+    't3':'Começar grátis — sem cartão',
+    't4':'Toque para gravar',
+    't5':'Transcrição ao vivo',
+    't6':'A aguardar…',
+    't7':'✓ Resumo pronto',
+    't8':'Resumo',
+    't9':'Reunião de planeamento — lançamento marcado para o dia 15, orçamento de 15 000€ a validar antes de quinta.',
+    't10':'Pontos-chave',
+    't11':'Ações identificadas',
+    't12':'Clique em "Entrar" para ver a demo',
+    't13':'Para quem',
+    't14':'Concebido para profissionais que têm mais que fazer do que tirar notas',
+    't15':'Diretores e Gestores',
+    't16':'Mais de 8 reuniões por semana. O kaideno extrai decisões e ações sem que precise de anotar.',
+    't17':'Juristas e Consultores',
+    't18':'Transcrição precisa de reuniões com clientes, relatórios estruturados em segundos.',
+    't19':'Estudantes e Investigadores',
+    't20':'Aulas, conferências, entrevistas de campo — transcrição completa para rever e citar.',
+    't21':'Criadores e Jornalistas',
+    't22':'Entrevistas, podcasts, ideias por voz — transformadas em conteúdo estruturado e pesquisável.',
+    't23':'Funcionalidades',
+    't24':'Concebido para profissionais que querem capturar o essencial sem esforço.',
+    't25':'Transcrição em tempo real',
+    't26':'Cada palavra aparece enquanto fala, em tempo real. A transcrição está disponível em 12 idiomas, com pontuação e formatação automáticas.',
+    't27':'Resumo estruturado por IA',
+    't28':'Pontos-chave, decisões tomadas, ações a seguir — extraídos automaticamente no final de cada gravação.',
+    't29':'Histórico consultável',
+    't30':'Todas as suas sessões são arquivadas, pesquisáveis por palavra-chave, acessíveis de qualquer dispositivo.',
+    't31':'Sem dispositivo necessário',
+    't32':'O microfone do seu smartphone é suficiente. Nada mais para comprar, carregar ou transportar.',
+    't33':'Instalável no telemóvel',
+    't34':'Aplicação PWA — instala-se no ecrã inicial do iOS e Android como uma app nativa.',
+    't35':'O fluxo kaideno',
+    't36':'01 — Capturar',
+    't37':'Áudio · Tempo real · 12 idiomas',
+    't38':'Toque em gravar. O kaideno transcreve palavra a palavra em tempo real, do microfone do seu telemóvel. Sem dispositivo, sem instalação.',
+    't39':'02 — Extrair',
+    't40':'Resumo · Pontos-chave · Ações',
+    't41':'A IA analisa automaticamente a transcrição e gera um resumo estruturado com pontos-chave e ações.',
+    't42':'03 — Usar',
+    't43':'Ask kaideno · Exportar · Pesquisar',
+    't44':'Faça perguntas sobre as suas gravações, reformate como email, traduza, pesquise em todo o histórico.',
+    't45':'Desempenho',
+    't46':'Números concretos',
+    't47':'de áudio grátis no registo para testar sem compromisso',
+    't48':'idiomas de transcrição disponíveis, com pontuação automática',
+    't49':'Tempo real',
+    't50':'a transcrição aparece enquanto fala',
+    't51':'Sem dispositivo',
+    't52':'tudo funciona a partir do microfone do seu telemóvel',
+    't53':'Como funciona',
+    't54':'Operacional em 2 minutos',
+    't55':'Três passos, sem configuração complexa.',
+    't56':'Crie a sua conta',
+    't57':'Registo em 30 segundos com o seu email. Sem cartão necessário. Toque em gravar e pronto — sem configuração técnica.',
+    't58':'Toque em gravar',
+    't59':'Autorize o acesso ao microfone, apenas uma vez. A transcrição começa instantaneamente.',
+    't60':'Receba o resumo',
+    't61':'Assim que parar a gravação, a IA analisa a transcrição e gera um resumo estruturado em segundos.',
+    't62':'Demo',
+    't63':'« Espera, o que foi decidido? »',
+    't64':'Já conhece isto. A reunião passa a voar, anota metade, e no fim falta sempre o essencial.',
+    't65':'Desta vez, basta pousar o telemóvel.',
+    't66':'A gravar…',
+    't67':'Transcrição ao vivo — várias vozes distinguidas',
+    't68':'Está tudo pronto. Não anotou nada.',
+    't69':'Resumo',
+    't70':'Reunião de lançamento de produto. Data marcada para o dia 15, orçamento de marketing de 15 000€ aprovado, campanha a preparar antes de quinta.',
+    't71':'As suas ações',
+    't72':'« Escreve-me um email de resumo para a equipa » — e está feito.',
+    't73':'Preços',
+    't74':'Transparente. Sem surpresas.',
+    't75':'Sem dispositivo para comprar. Cancele quando quiser.',
+    't76':'Mensal',
+    't78':'Contacte-nos',
+    't79':'Perguntas frequentes',
+    't80':'Não. O áudio é transmitido diretamente ao Deepgram para transcrição e depois descartado imediatamente. Nenhum ficheiro de áudio é guardado.',
+    't81':'Sim, é necessária ligação à internet para a transcrição em tempo real — o áudio tem de ser enviado ao serviço de reconhecimento de voz.',
+    't82':'Não, absolutamente nada. Cria uma conta e toca em gravar — é tudo. A transcrição e os resumos funcionam imediatamente, sem qualquer configuração técnica.',
+    't83':'O Plaud e os seus concorrentes exigem a compra de um dispositivo de 150 a 200€ antes mesmo de começar. O kaideno usa o microfone que já tem no bolso.',
+    't84':'Sim. O kaideno é uma aplicação web progressiva (PWA) que funciona no navegador de qualquer smartphone. No iOS, instala-a via Safari → "Adicionar ao ecrã principal". No Android, via Chrome → "Adicionar ao ecrã principal". Comporta-se como uma app nativa.',
+    't85':'Sim. Quando várias pessoas com vozes distintas participam numa reunião, o kaideno separa automaticamente as intervenções na transcrição.',
+    't86':'O kaideno transcreve em 12 idiomas: francês, inglês, espanhol, alemão, italiano, português, neerlandês, russo, japonês, chinês, árabe e hindi. O assistente de IA também responde no idioma escolhido.',
+    't87':'Começar grátis. Sem dispositivo. Sem compromisso.',
+    't88':'Criar uma conta gratuita',
+    't89':'Entrar',
+    't90':'Ver preços',
+    't91':'Confiança e Segurança',
+    't92':'Os seus dados pertencem-lhe',
+    't93':'As suas gravações de áudio nunca são armazenadas nos nossos servidores. Apenas as transcrições são guardadas na sua conta, e pode eliminá-las quando quiser.',
+    't94':'Dados locais',
+    't95':'Armazenados apenas no seu navegador',
+    't96':'API direta',
+    't97':'Ligação direta ao Deepgram e Anthropic',
+    't98':'Chaves privadas',
+    't99':'Nunca partilhadas, nunca transmitidas',
+    't100':'Eliminação total',
+    't101':'Elimine os seus dados quando quiser',
+    't102':'Transcrição e resumo de voz em tempo real, do seu telemóvel. Concebido para profissionais.',
+    't103':'Produto',
+    't104':'Funcionalidades',
+    't105':'Preços',
+    't106':'Demo',
+    't107':'Entrar',
+    't108':'Recursos',
+    't111':'© 2025 kaideno. Página de validação de produto.',
+    't112':'⚠️ Ainda não é vendido nenhum produto comercial. Os dados recolhidos servem apenas para validar o interesse no produto.',
+    't113':'A aguardar…',
+    't114':'Criar conta',
+    't115':'Entrar',
+    't116':'Começar grátis — sem cartão de crédito.',
+    't117':'Criar a minha conta gratuita',
+    't118':'Bem-vindo de volta!',
+    't119':'Entrar',
+  },
+  nl: {
+    'n.title':'Nog niet klaar om te testen?',
+    'n.sub':'Laat uw e-mailadres achter, we houden u op de hoogte van nieuws en de officiële lancering.',
+    'n.placeholder':'jouw@email.com',
+    'n.btn':'Houd me op de hoogte',
+    'n.privacy':'Geen spam. Uitschrijven met één klik.',
+    'l.mentions':'Juridische kennisgeving',
+    'l.privacy':'Privacy',
+    'l.terms':'Voorwaarden',
+    'c.tag':'Contact',
+    'c.title':'Een vraag? Feedback?',
+    'c.sub':'kaideno is in bèta. Uw feedback helpt ons te verbeteren — schrijf ons, we beantwoorden elk bericht.',
+    'c.reply':'We reageren meestal binnen 24-48 uur.',
+    'c.support':'Ondersteuning',
+    'c.contactus':'Neem contact op',
+    'c.reportbug':'Bug melden',
+    'note.pricing':'Geen creditcard voor het gratis plan · Geen verplichting · Altijd opzegbaar · Meer nodig? <a href="https://thomas282828.github.io/nuro/?register" style="color:var(--c-blue)">Neem contact op</a> voor een offerte op maat',
+    'v1':'Productlancering vastgesteld op de 15e',
+    'v2':'Briefing naar marketing sturen',
+    'v3':'Budget voor donderdag goedkeuren',
+    'v4':'Campagne voor donderdag voorbereiden',
+    'v5':'Goedgekeurd budget naar directie sturen',
+    'v6':'Vergaderingen',
+    'v7':'Geen creditcard voor het gratis plan · Geen verplichting · Altijd opzegbaar · Meer nodig?',
+    'p1':'30 minuten audio per maand',
+    'p2':'Transcriptie + AI-samenvatting',
+    'p3':'5 vragen aan de assistent / dag',
+    'p4':'Geen creditcard',
+    'p5':'10 uur audio per maand',
+    'p6':'Onbeperkte AI-assistent',
+    'p7':'Sprekerherkenning',
+    'p8':'Export + zoeken',
+    'p9':'30 uur audio per maand',
+    'p10':'Alles uit Essentieel',
+    'p11':'12 transcriptietalen',
+    'p12':'Prioriteitsondersteuning',
+    'q1':'Worden mijn audiogegevens ergens opgeslagen?',
+    'q2':'Heb ik een internetverbinding nodig om op te nemen?',
+    'q3':'Moet ik iets instellen om te beginnen?',
+    'q4':'Waarom geen Plaud of vergelijkbaar apparaat gebruiken?',
+    'q5':'Werkt het op iPhone en Android?',
+    'q6':'Onderscheidt kaideno verschillende sprekers?',
+    'q7':'In welke talen kan ik opnemen?',
+    'lbl.annual':'Jaarlijks',
+    'lbl.month':'/maand',
+    'h.workflow':'Drie stappen.<br>Nul handmatig werk.',
+    'h.cta':'Luister gewoon.<br>kaideno onthoudt de rest.',
+    'h.feat':'Alles wat u nodig hebt.<br>Niets overbodigs.',
+    'nav.features':'Functies',
+    'nav.pricing':'Prijzen',
+    'nav.login':'Inloggen',
+    'nav.trial':'Gratis proberen',
+    'hero.badge':'Open bèta — Gratis registratie',
+    'hero.title':'Maak nooit meer<br>notities, <em>kaideno doet het.</em>',
+    'hero.sub':'kaideno transcribeert en vat uw vergaderingen, colleges en ideeën samen in realtime — rechtstreeks via de microfoon van uw telefoon. Geen apparaat. Geen notities.',
+    'hero.pitch':'Verlaat elke vergadering met het essentiële, zonder pen op te pakken',
+    'hero.cta1':'Gratis beginnen',
+    'hero.cta2':'Inloggen',
+    'hero.cta3':'Bekijk de demo →',
+    'hero.proof':'30 gratis minuten · geen creditcard · geen verplichting',
+    'trust.nocard':'Geen creditcard',
+    'trust.private':'Uw gegevens blijven privé',
+    'trust.nodevice':'Geen apparaat te kopen',
+    'trust.builtfor':'Ontworpen voor',
+    'video.title':'Eén vergadering. Nul notities. Alles vastgelegd.',
+    'video.sub':'Zie wat er gebeurt als u gewoon uw telefoon neerlegt.',
+    'plan.free':'Gratis',
+    'plan.free.tag':'Om te ontdekken',
+    'plan.free.bill':'Voor altijd',
+    'plan.ess':'Essentieel',
+    'plan.ess.tag':'Regelmatig gebruik',
+    'plan.pro':'Pro',
+    'plan.pro.tag':'Intensief gebruik',
+    'plan.recommended':'Aanbevolen',
+    'plan.cta.free':'Gratis beginnen',
+    'plan.cta.ess':'Kies Essentieel',
+    'plan.cta.pro':'Kies Pro',
+    't1':'Wachtwoord',
+    't2':'Inloggen',
+    't3':'Gratis starten — geen creditcard',
+    't4':'Tik om op te nemen',
+    't5':'Live transcriptie',
+    't6':'Wachten…',
+    't7':'✓ Samenvatting klaar',
+    't8':'Samenvatting',
+    't9':'Planningsvergadering — lancering op de 15e, budget van € 15.000 voor donderdag goed te keuren.',
+    't10':'Kernpunten',
+    't11':'Geïdentificeerde acties',
+    't12':'Klik op "Inloggen" om de demo te zien',
+    't13':'Voor wie',
+    't14':'Ontworpen voor professionals die beter te doen hebben dan notities maken',
+    't15':'Directie & Managers',
+    't16':'Meer dan 8 vergaderingen per week. kaideno haalt beslissingen en acties eruit zonder dat u hoeft te noteren.',
+    't17':'Juristen & Consultants',
+    't18':'Nauwkeurige transcriptie van klantgesprekken, gestructureerde verslagen in seconden.',
+    't19':'Studenten & Onderzoekers',
+    't20':'Colleges, conferenties, veldinterviews — volledige transcriptie om te herhalen en citeren.',
+    't21':'Creators & Journalisten',
+    't22':'Interviews, podcasts, spraakideeën — omgezet in gestructureerde, doorzoekbare inhoud.',
+    't23':'Functies',
+    't24':'Ontworpen voor professionals die moeiteloos het essentiële willen vastleggen.',
+    't25':'Realtime transcriptie',
+    't26':'Elk woord verschijnt terwijl u spreekt, in realtime. Transcriptie is beschikbaar in 12 talen, met automatische interpunctie en opmaak.',
+    't27':'AI-gestructureerde samenvatting',
+    't28':'Kernpunten, genomen beslissingen, vervolgacties — automatisch geëxtraheerd aan het einde van elke opname.',
+    't29':'Doorzoekbare geschiedenis',
+    't30':'Al uw sessies worden gearchiveerd, doorzoekbaar op trefwoord, toegankelijk vanaf elk apparaat.',
+    't31':'Geen apparaat nodig',
+    't32':'De microfoon van uw smartphone volstaat. Niets extra te kopen, opladen of meenemen.',
+    't33':'Installeerbaar op mobiel',
+    't34':'PWA-app — installeert op het startscherm van iOS en Android als een native app.',
+    't35':'De kaideno-workflow',
+    't36':'01 — Vastleggen',
+    't37':'Audio · Realtime · 12 talen',
+    't38':'Tik op opnemen. kaideno transcribeert woord voor woord in realtime, via de microfoon van uw telefoon. Geen apparaat, geen installatie.',
+    't39':'02 — Extraheren',
+    't40':'Samenvatting · Kernpunten · Acties',
+    't41':'De AI analyseert de transcriptie automatisch en genereert een gestructureerde samenvatting met kernpunten en acties.',
+    't42':'03 — Gebruiken',
+    't43':'Ask kaideno · Export · Zoeken',
+    't44':'Stel vragen over uw opnames, formatteer als e-mail, vertaal, doorzoek uw hele geschiedenis.',
+    't45':'Prestaties',
+    't46':'Concrete cijfers',
+    't47':'gratis audio bij aanmelding om vrijblijvend te testen',
+    't48':'beschikbare transcriptietalen, met automatische interpunctie',
+    't49':'Realtime',
+    't50':'de transcriptie verschijnt terwijl u spreekt',
+    't51':'Geen apparaat',
+    't52':'alles werkt via de microfoon van uw telefoon',
+    't53':'Hoe het werkt',
+    't54':'Binnen 2 minuten operationeel',
+    't55':'Drie stappen, geen complexe installatie.',
+    't56':'Maak uw account aan',
+    't57':'Aanmelden in 30 seconden met uw e-mail. Geen creditcard nodig. Tik op opnemen en klaar — geen technische instellingen.',
+    't58':'Tik op opnemen',
+    't59':'Geef eenmalig toegang tot de microfoon. De transcriptie start meteen.',
+    't60':'Ontvang uw samenvatting',
+    't61':'Zodra u de opname stopt, analyseert de AI de transcriptie en genereert binnen seconden een gestructureerde samenvatting.',
+    't62':'Demo',
+    't63':'« Wacht, wat hadden we ook alweer besloten? »',
+    't64':'U kent het wel. De vergadering vliegt voorbij, u noteert half, en op het eind ontbreekt altijd het belangrijkste.',
+    't65':'Deze keer legt u gewoon uw telefoon neer.',
+    't66':'Opnemen…',
+    't67':'Live transcriptie — meerdere sprekers herkend',
+    't68':'Alles is klaar. U hebt niets genoteerd.',
+    't69':'Samenvatting',
+    't70':'Productlanceringsvergadering. Datum op de 15e, marketingbudget van € 15.000 goedgekeurd, campagne voor donderdag voorbereiden.',
+    't71':'Uw acties',
+    't72':'« Schrijf een samenvattingsmail voor het team » — en klaar.',
+    't73':'Prijzen',
+    't74':'Transparant. Geen verrassingen.',
+    't75':'Geen apparaat te kopen. Altijd opzegbaar.',
+    't76':'Maandelijks',
+    't78':'Neem contact op',
+    't79':'Veelgestelde vragen',
+    't80':'Nee. De audio wordt direct naar Deepgram gestreamd voor transcriptie en daarna meteen verwijderd. Er wordt geen audiobestand bewaard.',
+    't81':'Ja, een internetverbinding is nodig voor realtime transcriptie — de audio moet naar de spraakherkenningsdienst worden verzonden.',
+    't82':'Nee, helemaal niets. U maakt een account aan en tikt op opnemen — dat is alles. Transcriptie en samenvattingen werken meteen, zonder technische instellingen.',
+    't83':'Plaud en concurrenten vereisen een hardware-aankoop van € 150 tot 200 voordat u zelfs maar begint. kaideno gebruikt de microfoon die u al op zak hebt.',
+    't84':'Ja. kaideno is een progressive web app (PWA) die in elke smartphonebrowser werkt. Op iOS installeert u het via Safari → "Zet op beginscherm". Op Android via Chrome → "Toevoegen aan startscherm". Het gedraagt zich dan als een native app.',
+    't85':'Ja. Wanneer meerdere personen met verschillende stemmen deelnemen aan een vergadering, scheidt kaideno automatisch wie wat zegt in de transcriptie.',
+    't86':'kaideno transcribeert in 12 talen: Frans, Engels, Spaans, Duits, Italiaans, Portugees, Nederlands, Russisch, Japans, Chinees, Arabisch en Hindi. De AI-assistent antwoordt ook in de door u gekozen taal.',
+    't87':'Gratis beginnen. Geen apparaat. Geen verplichting.',
+    't88':'Gratis account aanmaken',
+    't89':'Inloggen',
+    't90':'Bekijk prijzen',
+    't91':'Vertrouwen & Beveiliging',
+    't92':'Uw gegevens zijn van u',
+    't93':'Uw audio-opnames worden nooit op onze servers opgeslagen. Alleen uw transcripties worden in uw account bewaard, en u kunt ze altijd verwijderen.',
+    't94':'Lokale gegevens',
+    't95':'Alleen in uw browser opgeslagen',
+    't96':'Directe API',
+    't97':'Directe verbinding met Deepgram & Anthropic',
+    't98':'Privésleutels',
+    't99':'Nooit gedeeld, nooit verzonden',
+    't100':'Volledige verwijdering',
+    't101':'Verwijder uw gegevens wanneer u wilt',
+    't102':'Realtime spraaktranscriptie en samenvatting, vanaf uw telefoon. Ontworpen voor professionals.',
+    't103':'Product',
+    't104':'Functies',
+    't105':'Prijzen',
+    't106':'Demo',
+    't107':'Inloggen',
+    't108':'Bronnen',
+    't111':'© 2025 kaideno. Productvalidatiepagina.',
+    't112':'⚠️ Er wordt nog geen commercieel product verkocht. De verzamelde gegevens dienen alleen om de interesse in het product te valideren.',
+    't113':'Wachten…',
+    't114':'Account aanmaken',
+    't115':'Inloggen',
+    't116':'Gratis starten — geen creditcard.',
+    't117':'Mijn gratis account aanmaken',
+    't118':'Welkom terug!',
+    't119':'Inloggen',
+  },
+  zh: {
+    'n.title':'还没准备好试用？',
+    'n.sub':'留下您的邮箱，我们会通知您最新动态和正式发布。',
+    'n.placeholder':'您的@邮箱.com',
+    'n.btn':'通知我',
+    'n.privacy':'无垃圾邮件。一键退订。',
+    'l.mentions':'法律声明',
+    'l.privacy':'隐私政策',
+    'l.terms':'使用条款',
+    'c.tag':'联系我们',
+    'c.title':'有疑问？有反馈？',
+    'c.sub':'kaideno 目前处于测试阶段。您的反馈能帮助我们改进——欢迎来信，我们会回复每一条消息。',
+    'c.reply':'我们通常在 24-48 小时内回复。',
+    'c.support':'支持',
+    'c.contactus':'联系我们',
+    'c.reportbug':'报告问题',
+    'note.pricing':'免费方案无需信用卡 · 无需承诺 · 随时取消 · 需要更多？<a href="https://thomas282828.github.io/nuro/?register" style="color:var(--c-blue)">联系我们</a>获取定制方案',
+    'v1':'产品发布定于 15 号',
+    'v2':'将简报发送给市场部',
+    'v3':'周四前确认预算',
+    'v4':'周四前准备好活动方案',
+    'v5':'将已批准的预算发送给管理层',
+    'v6':'会议',
+    'v7':'免费方案无需信用卡 · 无需承诺 · 随时取消 · 需要更多？',
+    'p1':'每月 30 分钟录音',
+    'p2':'转录 + AI 摘要',
+    'p3':'每天 5 次助手提问',
+    'p4':'无需信用卡',
+    'p5':'每月 10 小时录音',
+    'p6':'无限 AI 助手',
+    'p7':'说话人区分',
+    'p8':'导出 + 搜索',
+    'p9':'每月 30 小时录音',
+    'p10':'包含基础版所有功能',
+    'p11':'12 种转录语言',
+    'p12':'优先支持',
+    'q1':'我的音频数据会被存储吗？',
+    'q2':'录音需要网络连接吗？',
+    'q3':'开始使用前需要配置什么吗？',
+    'q4':'为什么不用 Plaud 或类似设备？',
+    'q5':'支持 iPhone 和 Android 吗？',
+    'q6':'kaideno 能区分不同说话人吗？',
+    'q7':'我可以用哪些语言录音？',
+    'lbl.annual':'年付',
+    'lbl.month':'/月',
+    'h.workflow':'三个步骤。<br>零手动操作。',
+    'h.cta':'专心倾听。<br>其余交给 kaideno。',
+    'h.feat':'所需俱全。<br>毫无冗余。',
+    'nav.features':'功能',
+    'nav.pricing':'价格',
+    'nav.login':'登录',
+    'nav.trial':'免费试用',
+    'hero.badge':'公开测试版 — 免费注册',
+    'hero.title':'再也不用记笔记，<br><em>kaideno 帮你搞定。</em>',
+    'hero.sub':'kaideno 实时转录并总结您的会议、课程和想法——直接通过手机麦克风。无需设备。无需记笔记。',
+    'hero.pitch':'每场会议都能带走重点，无需动笔',
+    'hero.cta1':'免费开始',
+    'hero.cta2':'登录',
+    'hero.cta3':'观看演示 →',
+    'hero.proof':'赠送 30 分钟 · 无需信用卡 · 无需承诺',
+    'trust.nocard':'无需信用卡',
+    'trust.private':'您的数据保持私密',
+    'trust.nodevice':'无需购买设备',
+    'trust.builtfor':'适用场景',
+    'video.title':'一场会议。零笔记。全部记录。',
+    'video.sub':'看看只需放下手机会发生什么。',
+    'plan.free':'免费版',
+    'plan.free.tag':'体验试用',
+    'plan.free.bill':'永久免费',
+    'plan.ess':'基础版',
+    'plan.ess.tag':'常规使用',
+    'plan.pro':'专业版',
+    'plan.pro.tag':'高频使用',
+    'plan.recommended':'推荐',
+    'plan.cta.free':'免费开始',
+    'plan.cta.ess':'选择基础版',
+    'plan.cta.pro':'选择专业版',
+    't1':'密码',
+    't2':'登录',
+    't3':'免费开始 — 无需信用卡',
+    't4':'点击开始录音',
+    't5':'实时转录',
+    't6':'等待中…',
+    't7':'✓ 摘要已生成',
+    't8':'摘要',
+    't9':'规划会议 — 发布定于 15 号，15,000 欧元预算需在周四前确认。',
+    't10':'要点',
+    't11':'已识别的行动项',
+    't12':'点击"登录"查看演示',
+    't13':'适合谁',
+    't14':'为那些不该把时间浪费在记笔记上的专业人士打造',
+    't15':'管理者与主管',
+    't16':'每周超过 8 场会议。kaideno 自动提取决策和行动项，您无需动笔。',
+    't17':'律师与顾问',
+    't18':'精准转录客户会谈，几秒生成结构化纪要。',
+    't19':'学生与研究人员',
+    't20':'课程、讲座、实地访谈——完整转录，便于复习和引用。',
+    't21':'创作者与记者',
+    't22':'访谈、播客、语音灵感——转化为结构化、可搜索的内容。',
+    't23':'功能',
+    't24':'为想要毫不费力抓住重点的专业人士打造。',
+    't25':'实时转录',
+    't26':'每个字都随您说话即时显现。支持 12 种语言转录，自动添加标点和格式。',
+    't27':'AI 结构化摘要',
+    't28':'要点、决策、待办事项——每次录音结束后自动提取。',
+    't29':'可搜索的历史记录',
+    't30':'所有会话均已归档，可按关键词搜索，任何设备均可访问。',
+    't31':'无需任何设备',
+    't32':'您手机的麦克风就够了。无需额外购买、充电或携带任何东西。',
+    't33':'可安装到手机',
+    't34':'PWA 应用 — 像原生应用一样安装到 iOS 和 Android 主屏幕。',
+    't35':'kaideno 工作流',
+    't36':'01 — 采集',
+    't37':'音频 · 实时 · 12 种语言',
+    't38':'点击录音。kaideno 通过手机麦克风逐字实时转录。无需设备，无需安装。',
+    't39':'02 — 提炼',
+    't40':'摘要 · 要点 · 行动项',
+    't41':'AI 自动分析转录内容，生成包含要点和待办事项的结构化摘要。',
+    't42':'03 — 使用',
+    't43':'Ask kaideno · 导出 · 搜索',
+    't44':'针对录音提问、改写成邮件、翻译、在全部历史记录中搜索。',
+    't45':'性能',
+    't46':'具体数据',
+    't47':'注册即赠录音时长，可无承诺试用',
+    't48':'可用转录语言，支持自动标点',
+    't49':'实时',
+    't50':'转录内容随您说话即时显现',
+    't51':'无需设备',
+    't52':'一切都通过您手机的麦克风完成',
+    't53':'如何使用',
+    't54':'2 分钟即可上手',
+    't55':'三个步骤，无需复杂配置。',
+    't56':'创建账户',
+    't57':'用邮箱 30 秒完成注册。无需信用卡。点击录音即可开始——零技术配置。',
+    't58':'点击录音',
+    't59':'授权一次麦克风访问权限。转录立即开始。',
+    't60':'获取摘要',
+    't61':'停止录音后，AI 会立即分析转录内容，几秒内生成结构化摘要。',
+    't62':'演示',
+    't63':'「等等，我们刚才决定了什么？」',
+    't64':'你懂这种感觉。会议飞快，笔记只记一半，最后总是漏掉最重要的。',
+    't65':'这一次，你只需放下手机。',
+    't66':'录音中…',
+    't67':'实时转录 — 已识别多位说话人',
+    't68':'一切就绪。你一个字都没记。',
+    't69':'摘要',
+    't70':'产品发布会议。日期定于 15 号，15,000 欧元营销预算已批准，活动需在周四前准备好。',
+    't71':'你的行动项',
+    't72':'「帮我写一封给团队的会议纪要邮件」——搞定。',
+    't73':'价格',
+    't74':'透明定价。没有意外。',
+    't75':'无需购买设备。随时取消。',
+    't76':'月付',
+    't78':'联系我们',
+    't79':'常见问题',
+    't80':'不会。音频直接传输给 Deepgram 进行转录，随后立即丢弃。不保存任何音频文件。',
+    't81':'是的，实时转录需要网络连接——音频必须发送到语音识别服务。',
+    't82':'完全不需要。创建账户，点击录音——就这么简单。转录和摘要立即可用，无需任何技术配置。',
+    't83':'Plaud 及其竞争对手要求先花 150-200 欧元购买硬件才能开始。kaideno 使用您口袋里已有的麦克风。',
+    't84':'支持。kaideno 是渐进式网页应用（PWA），可在任何手机浏览器中运行。iOS 用 Safari →「添加到主屏幕」。Android 用 Chrome →「添加到主屏幕」。之后就像原生应用一样使用。',
+    't85':'可以。当多位声音不同的人参与会议时，kaideno 会在转录中自动区分每个人的发言。',
+    't86':'kaideno 支持 12 种语言转录：法语、英语、西班牙语、德语、意大利语、葡萄牙语、荷兰语、俄语、日语、中文、阿拉伯语和印地语。AI 助手也会用您选择的语言回复。',
+    't87':'免费开始。无需设备。无需承诺。',
+    't88':'创建免费账户',
+    't89':'登录',
+    't90':'查看价格',
+    't91':'信任与安全',
+    't92':'您的数据归您所有',
+    't93':'您的录音永不存储在我们的服务器上。只有转录内容保存在您的账户中，且可随时删除。',
+    't94':'本地数据',
+    't95':'仅存储在您的浏览器中',
+    't96':'直连 API',
+    't97':'直接连接 Deepgram 与 Anthropic',
+    't98':'私钥',
+    't99':'从不共享，从不传输',
+    't100':'彻底删除',
+    't101':'随时删除您的数据',
+    't102':'实时语音转录与摘要，直接在手机上完成。为专业人士打造。',
+    't103':'产品',
+    't104':'功能',
+    't105':'价格',
+    't106':'演示',
+    't107':'登录',
+    't108':'资源',
+    't111':'© 2025 kaideno。产品验证页面。',
+    't112':'⚠️ 目前尚未销售任何商业产品。收集的数据仅用于验证产品需求。',
+    't113':'等待中…',
+    't114':'创建账户',
+    't115':'登录',
+    't116':'免费开始 — 无需信用卡。',
+    't117':'创建我的免费账户',
+    't118':'欢迎回来！',
+    't119':'登录',
+  },
+  ja: {
+    'n.title':'まだ試す準備ができていませんか？',
+    'n.sub':'メールアドレスをご登録いただければ、最新情報と正式リリースをお知らせします。',
+    'n.placeholder':'your@email.com',
+    'n.btn':'通知を受け取る',
+    'n.privacy':'スパムなし。ワンクリックで解除できます。',
+    'l.mentions':'法的事項',
+    'l.privacy':'プライバシー',
+    'l.terms':'利用規約',
+    'c.tag':'お問い合わせ',
+    'c.title':'ご質問やご意見はありますか？',
+    'c.sub':'kaideno はベータ版です。皆様のご意見が改善につながります。お気軽にご連絡ください。すべてのメッセージにお返事します。',
+    'c.reply':'通常24〜48時間以内にご返信します。',
+    'c.support':'サポート',
+    'c.contactus':'お問い合わせ',
+    'c.reportbug':'不具合を報告',
+    'note.pricing':'無料プランはクレジットカード不要 · 契約の縛りなし · いつでも解約可能 · さらに必要ですか？<a href="https://thomas282828.github.io/nuro/?register" style="color:var(--c-blue)">お問い合わせ</a>ください',
+    'v1':'製品ローンチは15日に決定',
+    'v2':'マーケティングにブリーフを送付',
+    'v3':'木曜までに予算を承認',
+    'v4':'木曜までにキャンペーンを準備',
+    'v5':'承認済みの予算を経営陣に送付',
+    'v6':'会議',
+    'v7':'無料プランはクレジットカード不要 · 契約の縛りなし · いつでも解約可能 · さらに必要ですか？',
+    'p1':'月30分の音声',
+    'p2':'文字起こし + AI要約',
+    'p3':'1日5回のアシスタント質問',
+    'p4':'クレジットカード不要',
+    'p5':'月10時間の音声',
+    'p6':'無制限のAIアシスタント',
+    'p7':'話者の識別',
+    'p8':'エクスポート + 検索',
+    'p9':'月30時間の音声',
+    'p10':'エッセンシャルの全機能',
+    'p11':'12言語の文字起こし',
+    'p12':'優先サポート',
+    'q1':'音声データはどこかに保存されますか？',
+    'q2':'録音にインターネット接続は必要ですか？',
+    'q3':'始めるのに何か設定が必要ですか？',
+    'q4':'Plaudのような機器を使わない理由は？',
+    'q5':'iPhoneとAndroidで使えますか？',
+    'q6':'kaidenoは話者を区別できますか？',
+    'q7':'どの言語で録音できますか？',
+    'lbl.annual':'年払い',
+    'lbl.month':'/月',
+    'h.workflow':'3ステップ。<br>手作業はゼロ。',
+    'h.cta':'聞くことに集中。<br>あとは kaideno が覚えています。',
+    'h.feat':'必要なものすべて。<br>余計なものはなし。',
+    'nav.features':'機能',
+    'nav.pricing':'料金',
+    'nav.login':'ログイン',
+    'nav.trial':'無料で試す',
+    'hero.badge':'オープンベータ — 無料登録',
+    'hero.title':'メモはもう不要。<br><em>kaideno がすべて記録します。</em>',
+    'hero.sub':'kaideno は会議・講義・アイデアをリアルタイムで文字起こしし、要約します。スマートフォンのマイクだけで完結。専用機器も、メモ取りも不要です。',
+    'hero.pitch':'ペンを持たずに、会議の要点を持ち帰る',
+    'hero.cta1':'無料で始める',
+    'hero.cta2':'ログイン',
+    'hero.cta3':'デモを見る →',
+    'hero.proof':'30分無料 · クレジットカード不要 · 契約の縛りなし',
+    'trust.nocard':'クレジットカード不要',
+    'trust.private':'あなたのデータは非公開',
+    'trust.nodevice':'専用機器の購入は不要',
+    'trust.builtfor':'対応シーン',
+    'video.title':'会議はひとつ。メモはゼロ。すべてが残る。',
+    'video.sub':'スマートフォンを置くだけで何が起きるか、ご覧ください。',
+    'plan.free':'無料',
+    'plan.free.tag':'お試し用',
+    'plan.free.bill':'ずっと無料',
+    'plan.ess':'エッセンシャル',
+    'plan.ess.tag':'通常利用',
+    'plan.pro':'プロ',
+    'plan.pro.tag':'ヘビーユース',
+    'plan.recommended':'おすすめ',
+    'plan.cta.free':'無料で始める',
+    'plan.cta.ess':'エッセンシャルを選ぶ',
+    'plan.cta.pro':'プロを選ぶ',
+    't1':'パスワード',
+    't2':'ログイン',
+    't3':'無料で開始 — カード不要',
+    't4':'タップして録音',
+    't5':'リアルタイム文字起こし',
+    't6':'待機中…',
+    't7':'✓ 要約完了',
+    't8':'要約',
+    't9':'企画会議 — ローンチは15日に決定、1万5千ユーロの予算を木曜までに承認。',
+    't10':'要点',
+    't11':'抽出されたアクション',
+    't12':'「ログイン」をクリックしてデモを見る',
+    't13':'対象ユーザー',
+    't14':'メモ取りより大切な仕事があるプロフェッショナルのために',
+    't15':'経営者・マネージャー',
+    't16':'週8回以上の会議。kaideno がメモなしで決定事項とアクションを抽出します。',
+    't17':'弁護士・コンサルタント',
+    't18':'クライアントとの面談を正確に文字起こしし、数秒で構造化された議事録に。',
+    't19':'学生・研究者',
+    't20':'講義、カンファレンス、フィールド調査 — 復習や引用のための完全な文字起こし。',
+    't21':'クリエイター・ジャーナリスト',
+    't22':'インタビュー、ポッドキャスト、音声メモ — 構造化され検索可能なコンテンツに。',
+    't23':'機能',
+    't24':'要点を手間なく捉えたいプロフェッショナルのために。',
+    't25':'リアルタイム文字起こし',
+    't26':'話すそばから文字が現れます。12言語に対応し、句読点と書式も自動で整います。',
+    't27':'AIによる構造化要約',
+    't28':'要点、決定事項、アクション項目 — 録音終了時に自動で抽出されます。',
+    't29':'検索可能な履歴',
+    't30':'すべてのセッションが保存され、キーワード検索でき、どの端末からもアクセスできます。',
+    't31':'専用機器は不要',
+    't32':'スマートフォンのマイクだけで十分。買い足すもの、充電するもの、持ち歩くものはありません。',
+    't33':'スマホにインストール可能',
+    't34':'PWAアプリ — iOSとAndroidのホーム画面にネイティブアプリのようにインストールできます。',
+    't35':'kaideno のワークフロー',
+    't36':'01 — 記録',
+    't37':'音声 · リアルタイム · 12言語',
+    't38':'録音をタップ。kaideno がスマホのマイクから一語一語リアルタイムで文字起こしします。機器も設定も不要。',
+    't39':'02 — 抽出',
+    't40':'要約 · 要点 · アクション',
+    't41':'AIが文字起こしを自動分析し、要点とアクション項目を含む構造化された要約を生成します。',
+    't42':'03 — 活用',
+    't43':'Ask kaideno · エクスポート · 検索',
+    't44':'録音について質問したり、メール形式に整えたり、翻訳したり、履歴全体を検索できます。',
+    't45':'パフォーマンス',
+    't46':'具体的な数字',
+    't47':'登録時に無料でお試しいただける音声時間',
+    't48':'対応する文字起こし言語（自動句読点付き）',
+    't49':'リアルタイム',
+    't50':'話すそばから文字起こしが表示されます',
+    't51':'機器不要',
+    't52':'すべてスマートフォンのマイクで完結します',
+    't53':'使い方',
+    't54':'2分で使い始められます',
+    't55':'3ステップ、複雑な設定は不要です。',
+    't56':'アカウントを作成',
+    't57':'メールアドレスで30秒登録。クレジットカード不要。録音をタップするだけ — 技術的な設定は一切ありません。',
+    't58':'録音をタップ',
+    't59':'マイクへのアクセスを一度許可するだけ。文字起こしがすぐに始まります。',
+    't60':'要約を受け取る',
+    't61':'録音を停止すると、AIが文字起こしを分析し、数秒で構造化された要約を生成します。',
+    't62':'デモ',
+    't63':'「あれ、何が決まったんだっけ？」',
+    't64':'よくあることです。会議はあっという間に進み、メモは中途半端。結局、大事なことが抜け落ちる。',
+    't65':'今回は、スマホを置くだけ。',
+    't66':'録音中…',
+    't67':'リアルタイム文字起こし — 複数話者を識別',
+    't68':'すべて準備完了。メモは一切取っていません。',
+    't69':'要約',
+    't70':'製品ローンチ会議。日程は15日、マーケティング予算1万5千ユーロを承認、キャンペーンは木曜までに準備。',
+    't71':'あなたのアクション',
+    't72':'「チーム向けの議事録メールを書いて」— それだけで完成。',
+    't73':'料金',
+    't74':'明朗な料金。追加費用なし。',
+    't75':'機器の購入は不要。いつでも解約できます。',
+    't76':'月払い',
+    't78':'お問い合わせ',
+    't79':'よくある質問',
+    't80':'いいえ。音声はDeepgramに直接送られて文字起こしされ、その後すぐに破棄されます。音声ファイルは保存されません。',
+    't81':'はい、リアルタイム文字起こしにはインターネット接続が必要です。音声を音声認識サービスに送信するためです。',
+    't82':'何も必要ありません。アカウントを作成して録音をタップするだけ。文字起こしと要約はすぐに使えます。技術的な設定は一切不要です。',
+    't83':'Plaudなどの競合製品は、始める前に150〜200ユーロの機器購入が必要です。kaidenoはすでにお持ちのスマホのマイクを使います。',
+    't84':'対応しています。kaidenoはPWA（プログレッシブウェブアプリ）で、どのスマホのブラウザでも動作します。iOSはSafariから「ホーム画面に追加」、AndroidはChromeから「ホーム画面に追加」。ネイティブアプリのように使えます。',
+    't85':'はい。声の異なる複数の人が会議に参加している場合、kaidenoは文字起こしで発言者を自動的に区別します。',
+    't86':'kaidenoは12言語に対応：フランス語、英語、スペイン語、ドイツ語、イタリア語、ポルトガル語、オランダ語、ロシア語、日本語、中国語、アラビア語、ヒンディー語。AIアシスタントも選択した言語で回答します。',
+    't87':'無料で開始。機器不要。契約の縛りなし。',
+    't88':'無料アカウントを作成',
+    't89':'ログイン',
+    't90':'料金を見る',
+    't91':'信頼とセキュリティ',
+    't92':'データはあなたのものです',
+    't93':'音声録音が当社のサーバーに保存されることはありません。保存されるのは文字起こしのみで、いつでも削除できます。',
+    't94':'ローカルデータ',
+    't95':'ブラウザ内にのみ保存',
+    't96':'直接API接続',
+    't97':'DeepgramとAnthropicに直接接続',
+    't98':'秘密鍵',
+    't99':'共有も送信も一切なし',
+    't100':'完全削除',
+    't101':'いつでもデータを削除できます',
+    't102':'スマホで完結するリアルタイム音声文字起こしと要約。プロフェッショナルのために。',
+    't103':'製品',
+    't104':'機能',
+    't105':'料金',
+    't106':'デモ',
+    't107':'ログイン',
+    't108':'リソース',
+    't111':'© 2025 kaideno. 製品検証ページ。',
+    't112':'⚠️ まだ商用製品は販売していません。収集したデータは製品への関心を検証する目的でのみ使用します。',
+    't113':'待機中…',
+    't114':'アカウント作成',
+    't115':'ログイン',
+    't116':'無料で開始 — クレジットカード不要。',
+    't117':'無料アカウントを作成',
+    't118':'おかえりなさい！',
+    't119':'ログイン',
+  }
+};
+
+function applySiteLang(lang){
+  const dict = I18N[lang] || I18N.fr;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    if(dict[key]) el.textContent = dict[key];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{
+    const key = el.getAttribute('data-i18n-html');
+    if(dict[key]) el.innerHTML = dict[key];
+  });
+  document.documentElement.lang = lang;
+}
+
+window.setSiteLang = function(lang){
+  localStorage.setItem('kaideno_site_lang', lang);
+  // Recharger la page : garantit que TOUS les textes (y compris les simulations
+  // générées en JS comme la vidéo et le mockup) passent dans la nouvelle langue.
+  location.reload();
+};
+
+(function(){
+  const saved = localStorage.getItem('kaideno_site_lang') || 'fr';
+  const sel = document.getElementById('site-lang');
+  if(sel) sel.value = saved;
+  applySiteLang(saved);
+})();
+</script>
+
+
+<script>
+// Transmettre la langue du site à l'app via l'URL (fiable partout, même en local)
+(function(){
+  function updateAppLinks(){
+    const lang = localStorage.getItem('kaideno_site_lang') || 'fr';
+    document.querySelectorAll('a[href*="github.io/nuro"], button[onclick*="github.io/nuro"]').forEach(el=>{
+      if(el.tagName === 'A'){
+        try{
+          const u = new URL(el.href);
+          u.searchParams.set('lang', lang);
+          el.href = u.toString();
+        }catch(e){}
+      }
+    });
+    // Boutons avec onclick (plans tarifaires)
+    document.querySelectorAll('button[onclick]').forEach(b=>{
+      const oc = b.getAttribute('onclick') || '';
+      if(oc.includes('github.io/nuro') && !oc.includes('lang=')){
+        b.setAttribute('onclick', oc.replace(/(\?register|\?login)/, '$1&lang=' + lang));
+      }
+    });
+  }
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', updateAppLinks);
+  } else {
+    updateAppLinks();
+  }
+})();
+</script>
+
+
+<script>
+// Capture d'email : ouvre la messagerie avec un mail pré-rempli
+function notifyMe(){
+  const inp = document.getElementById('notify-email');
+  const email = (inp?.value || '').trim();
+  const lang = localStorage.getItem('kaideno_site_lang') || 'fr';
+  const msgs = {
+    fr: {bad:'Merci d\'entrer un email valide.', ok:'✅ Merci ! Votre messagerie va s\'ouvrir.'},
+    en: {bad:'Please enter a valid email.', ok:'✅ Thanks! Your mail app will open.'},
+    es: {bad:'Introduce un email válido.', ok:'✅ ¡Gracias! Se abrirá tu correo.'}
+  };
+  const m = msgs[lang] || msgs.fr;
+  if(!email || !email.includes('@') || !email.includes('.')){
+    siteToast(m.bad, true);
+    return;
+  }
+  const subject = encodeURIComponent('Tenez-moi informé — kaideno');
+  const body = encodeURIComponent('Bonjour,\n\nJe souhaite être informé des nouveautés de kaideno.\n\nMon email : ' + email + '\n\nMerci !');
+  window.location.href = 'mailto:contact.kaideno@gmail.com?subject=' + subject + '&body=' + body;
+  siteToast(m.ok);
+  if(inp) inp.value = '';
+}
+
+function siteToast(msg, isError){
+  const t = document.createElement('div');
+  t.textContent = msg;
+  t.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:' +
+    (isError ? '#DC2626' : 'var(--c-text)') + ';color:' + (isError ? '#fff' : 'var(--c-bg)') +
+    ';padding:11px 20px;border-radius:999px;font-size:.85rem;font-weight:600;z-index:9999;box-shadow:0 8px 28px rgba(0,0,0,0.2)';
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(), 2800);
+}
+</script>
+
 </body>
 </html>
