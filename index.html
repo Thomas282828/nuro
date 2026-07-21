@@ -7,6 +7,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="kaideno">
 <link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>kaideno — Retient tout, pendant que tu parles</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,6 +24,7 @@
   --radius:14px;--radius-sm:9px;--radius-lg:20px;
   --safe-top:env(safe-area-inset-top,0px);
   --safe-bottom:env(safe-area-inset-bottom,0px);
+  --safe-bottom-extra:0px;
 }
 body[data-theme="light"]{
   --bg:#FFFFFF;--bg1:#F7F8FA;--bg2:#EEF1F5;--bg3:#E2E7EE;
@@ -291,7 +294,7 @@ a{color:var(--accent)}
 .btn-logout:hover{background:var(--red2)}
 
 /* ── ASSISTANT IA FLOTTANT ── */
-.fab-assistant{position:fixed;bottom:calc(var(--safe-bottom) + 20px);right:20px;z-index:60;width:56px;height:56px;border-radius:50%;background:var(--accent);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 28px rgba(59,130,246,0.45);transition:transform .2s}
+.fab-assistant{position:fixed;bottom:calc(var(--safe-bottom) + var(--safe-bottom-extra) + 20px);right:20px;z-index:60;width:56px;height:56px;border-radius:50%;background:var(--accent);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 8px 28px rgba(59,130,246,0.45);transition:transform .2s}
 .fab-assistant:hover{transform:scale(1.06)}
 .fab-assistant:active{transform:scale(.96)}
 .asst-overlay{position:fixed;inset:0;z-index:70;background:rgba(8,12,18,0.6);backdrop-filter:blur(4px);opacity:0;pointer-events:none;transition:opacity .25s}
@@ -401,7 +404,7 @@ a{color:var(--accent)}
 .del-go:disabled{opacity:.35;cursor:not-allowed}
 
 /* TOAST */
-#toast{position:fixed;bottom:calc(var(--safe-bottom) + 22px);left:50%;transform:translateX(-50%) translateY(8px);background:var(--bg2);border:1px solid var(--line2);color:var(--ink);padding:11px 18px;border-radius:999px;font-size:.85rem;font-weight:500;opacity:0;transition:all .2s;pointer-events:none;white-space:nowrap;z-index:200;box-shadow:0 8px 28px rgba(0,0,0,0.4)}
+#toast{position:fixed;bottom:calc(var(--safe-bottom) + var(--safe-bottom-extra) + 22px);left:50%;transform:translateX(-50%) translateY(8px);background:var(--bg2);border:1px solid var(--line2);color:var(--ink);padding:11px 18px;border-radius:999px;font-size:.85rem;font-weight:500;opacity:0;transition:all .2s;pointer-events:none;white-space:nowrap;z-index:200;box-shadow:0 8px 28px rgba(0,0,0,0.4)}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 @media(max-width:600px){.h-stats{grid-template-columns:repeat(3,1fr)}}
@@ -433,18 +436,37 @@ a{color:var(--accent)}
         <div class="field"><label data-i18n="a4">Mot de passe</label><input type="password" id="reg-pwd" data-i18n-ph="a.pwdph" placeholder="Minimum 8 caractères" autocomplete="new-password"></div>
         <label class="consent-row">
           <input type="checkbox" id="reg-consent">
-          <span data-i18n-html="l.consent">J'ai 15 ans ou plus et j'accepte les <a href="legal.html#cgu" target="_blank">conditions d'utilisation</a> et la <a href="legal.html#confidentialite" target="_blank">politique de confidentialité</a>.</span>
+          <span data-i18n-html="l.consent">J'ai 15 ans ou plus et j'accepte les <a href="https://kaideno.com/legal.html#cgu" target="_blank">conditions d'utilisation</a> et la <a href="https://kaideno.com/legal.html#confidentialite" target="_blank">politique de confidentialité</a>.</span>
         </label>
         <button class="btn-submit" id="btn-reg" onclick="doRegister()" data-i18n="a5">Créer mon compte</button>
       </div>
       <div id="auth-login" style="display:none">
         <p class="auth-sub" data-i18n="a6">Content de te revoir !</p>
         <div class="field"><label data-i18n="a.email">Email</label><input type="email" id="log-email" data-i18n-ph="a.emailph" placeholder="ton@email.com" autocomplete="email"></div>
-        <div class="field"><label data-i18n="a7">Mot de passe</label><input type="password" id="log-pwd" placeholder="••••••••" autocomplete="current-password"></div>
+        <div class="field">
+          <label data-i18n="a7">Mot de passe</label>
+          <input type="password" id="log-pwd" placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <p style="text-align:right;margin:-10px 0 14px">
+          <button onclick="showForgotPassword()" style="background:none;border:none;color:var(--ink3);font-size:.76rem;cursor:pointer;font-family:'Inter',sans-serif;text-decoration:underline" data-i18n="js.forgotlink">Mot de passe oublié ?</button>
+        </p>
         <button class="btn-submit" id="btn-log" onclick="doLogin()" data-i18n="a8">Se connecter</button>
         <p style="text-align:center;margin-top:14px;font-size:.8rem;color:var(--ink3)">
           <button onclick="useOtherAccount()" style="background:none;border:none;color:var(--accent);font-size:.8rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif" data-i18n="a9">Utiliser un autre compte</button>
         </p>
+      </div>
+      <div id="auth-forgot" style="display:none">
+        <p class="auth-sub" data-i18n="js.forgotsub">Reçois un lien pour choisir un nouveau mot de passe.</p>
+        <div class="field"><label data-i18n="a.email">Email</label><input type="email" id="forgot-email" data-i18n-ph="a.emailph" placeholder="ton@email.com" autocomplete="email"></div>
+        <button class="btn-submit" id="btn-forgot" onclick="submitForgotPassword()" data-i18n="js.forgotbtn">Envoyer le lien</button>
+        <p style="text-align:center;margin-top:14px">
+          <button onclick="backToLogin()" style="background:none;border:none;color:var(--accent);font-size:.8rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif" data-i18n="js.backtologin">Retour à la connexion</button>
+        </p>
+      </div>
+      <div id="auth-reset" style="display:none">
+        <p class="auth-sub" data-i18n="js.newpwd">Choisis un nouveau mot de passe.</p>
+        <div class="field"><label data-i18n="a4">Mot de passe</label><input type="password" id="reset-pwd" data-i18n-ph="a.pwdph" placeholder="Minimum 8 caractères" autocomplete="new-password"></div>
+        <button class="btn-submit" id="btn-reset" onclick="submitResetPassword()" data-i18n="js.resetbtn">Réinitialiser le mot de passe</button>
       </div>
     </div>
   </div>
@@ -463,17 +485,17 @@ a{color:var(--accent)}
     </div>
     <div class="nav-actions">
       <div class="user-pill"><span class="upill-dot"></span><span id="user-badge" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">—</span></div>
-      <button class="btn-icon" onclick="toggleTheme()" title="Thème clair/sombre" id="theme-btn">
+      <button class="btn-icon" onclick="toggleTheme()" title="Thème clair/sombre" data-i18n-title="nav.theme" id="theme-btn">
         <svg id="theme-icon-moon" width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M13 9.5A5.5 5.5 0 016.5 3a5.5 5.5 0 106.5 6.5z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
         <svg id="theme-icon-sun" width="15" height="15" viewBox="0 0 16 16" fill="none" style="display:none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.4"/><path d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3.05 3.05l1.06 1.06M11.89 11.89l1.06 1.06M12.95 3.05l-1.06 1.06M4.11 11.89l-1.06 1.06" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
       </button>
-      <button class="btn-icon" onclick="showView('history')" title="Historique">
+      <button class="btn-icon" onclick="showView('history')" title="Historique" data-i18n-title="a18">
         <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.4"/><path d="M8 4.5V8l2.5 2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
       </button>
-      <button class="btn-icon" onclick="showView('settings')" title="Paramètres">
+      <button class="btn-icon" onclick="showView('settings')" title="Paramètres" data-i18n-title="nav.settings">
         <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="2.5" stroke="currentColor" stroke-width="1.4"/><path d="M8 1.5v1M8 13.5v1M1.5 8h1M13.5 8h1M3.4 3.4l.7.7M11.9 11.9l.7.7M11.9 3.4l-.7.7M3.4 11.9l.7-.7" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
       </button>
-      <button class="btn-icon" onclick="doLogout()" title="Déconnexion">
+      <button class="btn-icon" onclick="doLogout()" title="Déconnexion" data-i18n-title="a31">
         <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M6 2H3a1 1 0 00-1 1v10a1 1 0 001 1h3M10 11l3-3-3-3M13 8H6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
     </div>
@@ -502,7 +524,7 @@ a{color:var(--accent)}
         <div class="audio-viz" id="audio-viz"></div>
         <div class="lang-selector" id="lang-selector">
           <span class="lang-label" data-i18n="a12">Langue :</span>
-          <select id="rec-lang" onchange="saveRecLang()">
+          <select id="dash-lang" onchange="setUILang(this.value)">
             <option value="fr">🇫🇷 Français</option>
             <option value="en">🇬🇧 English</option>
             <option value="es">🇪🇸 Español</option>
@@ -510,11 +532,8 @@ a{color:var(--accent)}
             <option value="it">🇮🇹 Italiano</option>
             <option value="pt">🇵🇹 Português</option>
             <option value="nl">🇳🇱 Nederlands</option>
-            <option value="ru">🇷🇺 Русский</option>
-            <option value="ja">🇯🇵 日本語</option>
             <option value="zh">🇨🇳 中文</option>
-            <option value="ar">🇸🇦 العربية</option>
-            <option value="hi">🇮🇳 हिन्दी</option>
+            <option value="ja">🇯🇵 日本語</option>
           </select>
         </div>
       </div>
@@ -530,6 +549,10 @@ a{color:var(--accent)}
         <div class="live-hd"><div class="live-lbl"><span class="live-dot"></span>En direct</div><span class="live-wc" id="live-wc">0 mot</span></div>
         <div class="live-txt" id="live-txt"></div>
         <div class="live-ai" id="live-ai">
+          <label style="display:flex;align-items:center;gap:7px;margin-bottom:10px;cursor:pointer;font-size:.76rem;color:var(--ink2)">
+            <input type="checkbox" id="auto-answer-toggle" onchange="toggleAutoAnswer(this.checked)" style="accent-color:var(--accent);cursor:pointer">
+            <span data-i18n="js.autoanswer">🤖 Répondre automatiquement aux questions</span>
+          </label>
           <div class="live-ai-row">
             <input class="live-ai-input" id="live-ai-input" data-i18n-ph="js.asktrans" placeholder="Demander à l'IA pendant l'enregistrement…" onkeydown="if(event.key==='Enter')askLiveAi()">
             <button class="live-ai-btn" onclick="askLiveAi()" data-i18n="a16">Demander</button>
@@ -591,6 +614,7 @@ a{color:var(--accent)}
         <input class="search-input" id="h-search" data-i18n-ph="a.searchrec" placeholder="Cherche dans tes enregistrements…" oninput="filterHistory(this.value)">
         <button class="search-clear" onclick="clearSearch()">✕</button>
       </div>
+      <div id="h-tagbar" style="display:flex;gap:7px;flex-wrap:wrap;margin:14px 0"></div>
       <div id="h-list"></div>
     </div>
   </div>
@@ -654,10 +678,10 @@ a{color:var(--accent)}
         </details>
       </div>
       <div class="settings-section" id="admin-section" style="display:none">
-        <p class="settings-lbl" data-i18n="a26">★ Administration</p>
+        <p class="settings-lbl">★ Administration</p>
         <div class="acct-card">
-          <div><div class="acct-email" data-i18n="a27">Espace fondateur</div><div class="acct-info" data-i18n="a28">Statistiques et gestion</div></div>
-          <button class="btn-logout" style="background:var(--accent);color:white;border:none" onclick="showView('admin')" data-i18n="a29">Ouvrir</button>
+          <div><div class="acct-email">Espace fondateur</div><div class="acct-info">Statistiques et gestion</div></div>
+          <button class="btn-logout" style="background:var(--accent);color:white;border:none" onclick="showView('admin')">Ouvrir</button>
         </div>
       </div>
       <div class="settings-section">
@@ -665,10 +689,18 @@ a{color:var(--accent)}
         <div id="plan-info" class="info-card"></div>
       </div>
       <div class="settings-section">
+        <p class="settings-lbl" data-i18n="ref.title">Inviter un ami</p>
+        <div class="info-card" style="margin-bottom:12px" data-i18n="ref.desc">Partage ton lien pour faire découvrir kaideno. 🚧 Le programme de minutes offertes arrive bientôt.</div>
+        <div class="acct-card">
+          <div style="flex:1;min-width:0"><div class="acct-email" id="ref-link" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">—</div></div>
+          <button class="btn-logout" style="background:var(--accent);color:white;border:none;white-space:nowrap" onclick="copyReferralLink()" data-i18n="ref.copy">Copier le lien</button>
+        </div>
+      </div>
+      <div class="settings-section">
         <p class="settings-lbl" data-i18n="l.legal">Informations légales</p>
         <div class="acct-card">
           <div><div class="acct-email" data-i18n="l.legaldesc">Mentions, confidentialité, CGU</div></div>
-          <a href="legal.html" target="_blank" class="btn-logout" style="text-decoration:none;display:inline-flex;align-items:center" data-i18n="l.consult">Consulter</a>
+          <a href="https://kaideno.com/legal.html" target="_blank" rel="noopener" class="btn-logout" style="text-decoration:none;display:inline-flex;align-items:center" data-i18n="l.consult">Consulter</a>
         </div>
       </div>
       <div class="settings-section">
@@ -700,7 +732,7 @@ a{color:var(--accent)}
       <button class="btn-icon" onclick="showView('settings')">
         <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M9 11L5 7.5 9 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
-      <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1rem" data-i18n="a32">★ Administration</span>
+      <span style="font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:1rem">★ Administration</span>
     </div>
   </nav>
   <div class="settings-scroll">
@@ -790,7 +822,7 @@ const UI = {
     'l.legal':'Informations légales',
     'l.legaldesc':'Mentions, confidentialité, CGU',
     'l.consult':'Consulter',
-    'l.consent':'J\'ai 15 ans ou plus et j\'accepte les <a href="legal.html#cgu" target="_blank">conditions d\'utilisation</a> et la <a href="legal.html#confidentialite" target="_blank">politique de confidentialité</a>.',
+    'l.consent':'J\'ai 15 ans ou plus et j\'accepte les <a href="https://kaideno.com/legal.html#cgu" target="_blank">conditions d\'utilisation</a> et la <a href="https://kaideno.com/legal.html#confidentialite" target="_blank">politique de confidentialité</a>.',
     'l.consentreq':'Vous devez accepter les conditions pour continuer.',
     'x.export':'Exporter',
     'x.copy':'Copier',
@@ -815,6 +847,7 @@ const UI = {
     'q.reached':'Limite mensuelle atteinte.',
     'q.upgrade':'Passer au supérieur',
     'q.blocked':'⛔ Limite mensuelle atteinte — passe à un plan supérieur pour continuer',
+    'plan.free':'Gratuit', 'plan.ess':'Essentiel', 'plan.pro':'Pro',
     'q.almostdone':'⚠️ Il te reste moins de 5 minutes ce mois-ci',
     'js.summarize':'Résumer mes sessions',
     'js.pending':'Mes actions en attente',
@@ -879,6 +912,13 @@ const UI = {
     'a29':'Ouvrir',
     'a30':'Compte',
     'a31':'Déconnexion',
+    'nav.theme':'Thème clair/sombre', 'nav.settings':'Paramètres',
+    'js.noresponse':"Désolé, je n'ai pas pu répondre.", 'js.chatconnerr':"⚠️ Erreur de connexion à l'assistant. Réessaie dans un instant.", 'js.asstconnerr':'⚠️ Erreur de connexion. Vérifie ta clé Claude dans Paramètres.', 'js.keyok':'✓ Configurée', 'js.keymissing':'Manquante',
+    'js.aiwelcome':"Bonjour ! Je connais le contenu de cet enregistrement. Pose-moi une question ou choisis une action ci-dessus.", 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
+    'js.speaker':'Locuteur', 'js.renamespeakers':'Renommer les locuteurs',
+    'js.tag':'Catégorie', 'js.alltags':'Toutes', 'tag.meeting':'Réunion', 'tag.course':'Cours', 'tag.interview':'Interview', 'tag.brainstorm':'Brainstorm', 'tag.podcast':'Podcast', 'tag.consultation':'Consultation',
+    'ref.title':'Inviter un ami', 'ref.desc':'Partage ton lien : ton ami reçoit 30 minutes offertes, et toi aussi, dès qu\'il s\'inscrit.', 'ref.copy':'Copier le lien', 'js.grouptoday':'Aujourd\'hui', 'js.yesterday':'Hier', 'js.aiconv':'Conv. IA', 'js.audio':'Audio', 'js.noresultsfor':'Aucun résultat pour', 'js.recfallback':'Enregistrement', 'js.aimsg':'msg IA', 'js.forgotlink':'Mot de passe oublié ?', 'js.forgotsub':'Reçois un lien pour choisir un nouveau mot de passe.', 'js.forgotbtn':'Envoyer le lien', 'js.sending':'Envoi…', 'js.resetsent':'Si un compte existe avec cet email, un lien de réinitialisation vient d\'être envoyé. Vérifie ta boîte mail (et tes spams).', 'js.backtologin':'Retour à la connexion', 'js.newpwd':'Choisis un nouveau mot de passe.', 'js.resetbtn':'Réinitialiser le mot de passe', 'js.resetdone':'Mot de passe changé ! Tu peux maintenant te connecter.', 'js.resetexpired':'Ce lien n\'est plus valable. Redemande un nouveau lien de réinitialisation.',
+    'js.autoanswer':'🤖 Répondre automatiquement aux questions',
     'a32':'★ Administration',
     'a33':'Assistant kaideno',
     'a34':'Connaît tous vos enregistrements',
@@ -957,7 +997,7 @@ const UI = {
     'l.legal':'Legal information',
     'l.legaldesc':'Notice, privacy, terms',
     'l.consult':'View',
-    'l.consent':'I am 15 or older and I accept the <a href="legal.html#cgu" target="_blank">terms of use</a> and the <a href="legal.html#confidentialite" target="_blank">privacy policy</a>.',
+    'l.consent':'I am 15 or older and I accept the <a href="https://kaideno.com/legal.html#cgu" target="_blank">terms of use</a> and the <a href="https://kaideno.com/legal.html#confidentialite" target="_blank">privacy policy</a>.',
     'l.consentreq':'You must accept the terms to continue.',
     'x.export':'Export',
     'x.copy':'Copy',
@@ -982,6 +1022,7 @@ const UI = {
     'q.reached':'Monthly limit reached.',
     'q.upgrade':'Upgrade',
     'q.blocked':'⛔ Monthly limit reached — upgrade to keep recording',
+    'plan.free':'Free', 'plan.ess':'Essential', 'plan.pro':'Pro',
     'q.almostdone':'⚠️ Less than 5 minutes left this month',
     'js.summarize':'Summarize my sessions',
     'js.pending':'My pending actions',
@@ -1046,6 +1087,13 @@ const UI = {
     'a29':'Open',
     'a30':'Account',
     'a31':'Log out',
+    'nav.theme':'Light/dark theme', 'nav.settings':'Settings',
+    'js.noresponse':"Sorry, I couldn't respond.", 'js.chatconnerr':'⚠️ Connection error with the assistant. Try again in a moment.', 'js.asstconnerr':'⚠️ Connection error. Check your Claude key in Settings.', 'js.keyok':'✓ Configured', 'js.keymissing':'Missing',
+    'js.aiwelcome':'Hi! I know the content of this recording. Ask me a question or pick an action above.', 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
+    'js.speaker':'Speaker', 'js.renamespeakers':'Rename speakers',
+    'js.tag':'Category', 'js.alltags':'All', 'tag.meeting':'Meeting', 'tag.course':'Course', 'tag.interview':'Interview', 'tag.brainstorm':'Brainstorm', 'tag.podcast':'Podcast', 'tag.consultation':'Consultation',
+    'ref.title':'Invite a friend', 'ref.desc':'Share your link: your friend gets 30 free minutes, and so do you, as soon as they sign up.', 'ref.copy':'Copy link', 'js.grouptoday':'Today', 'js.yesterday':'Yesterday', 'js.aiconv':'AI chats', 'js.audio':'Audio', 'js.noresultsfor':'No results for', 'js.recfallback':'Recording', 'js.aimsg':'AI msg', 'js.forgotlink':'Forgot password?', 'js.forgotsub':'Get a link to choose a new password.', 'js.forgotbtn':'Send link', 'js.sending':'Sending…', 'js.resetsent':'If an account exists with this email, a reset link was just sent. Check your inbox (and spam folder).', 'js.backtologin':'Back to login', 'js.newpwd':'Choose a new password.', 'js.resetbtn':'Reset password', 'js.resetdone':'Password changed! You can now log in.', 'js.resetexpired':'This link is no longer valid. Request a new reset link.',
+    'js.autoanswer':'🤖 Automatically answer questions',
     'a32':'★ Admin',
     'a33':'kaideno Assistant',
     'a34':'Knows all your recordings',
@@ -1124,7 +1172,7 @@ const UI = {
     'l.legal':'Información legal',
     'l.legaldesc':'Aviso, privacidad, términos',
     'l.consult':'Consultar',
-    'l.consent':'Tengo 15 años o más y acepto las <a href="legal.html#cgu" target="_blank">condiciones de uso</a> y la <a href="legal.html#confidentialite" target="_blank">política de privacidad</a>.',
+    'l.consent':'Tengo 15 años o más y acepto las <a href="https://kaideno.com/legal.html#cgu" target="_blank">condiciones de uso</a> y la <a href="https://kaideno.com/legal.html#confidentialite" target="_blank">política de privacidad</a>.',
     'l.consentreq':'Debes aceptar las condiciones para continuar.',
     'x.export':'Exportar',
     'x.copy':'Copiar',
@@ -1149,6 +1197,7 @@ const UI = {
     'q.reached':'Límite mensual alcanzado.',
     'q.upgrade':'Mejorar plan',
     'q.blocked':'⛔ Límite mensual alcanzado — mejora tu plan para continuar',
+    'plan.free':'Gratis', 'plan.ess':'Esencial', 'plan.pro':'Pro',
     'q.almostdone':'⚠️ Te quedan menos de 5 minutos este mes',
     'js.summarize':'Resumir mis sesiones',
     'js.pending':'Mis acciones pendientes',
@@ -1213,6 +1262,13 @@ const UI = {
     'a29':'Abrir',
     'a30':'Cuenta',
     'a31':'Cerrar sesión',
+    'nav.theme':'Tema claro/oscuro', 'nav.settings':'Ajustes',
+    'js.noresponse':'Lo siento, no he podido responder.', 'js.chatconnerr':'⚠️ Error de conexión con el asistente. Inténtalo de nuevo en un momento.', 'js.asstconnerr':'⚠️ Error de conexión. Verifica tu clave de Claude en Ajustes.', 'js.keyok':'✓ Configurada', 'js.keymissing':'Falta',
+    'js.aiwelcome':'¡Hola! Conozco el contenido de esta grabación. Hazme una pregunta o elige una acción arriba.', 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
+    'js.speaker':'Interlocutor', 'js.renamespeakers':'Renombrar interlocutores',
+    'js.tag':'Categoría', 'js.alltags':'Todas', 'tag.meeting':'Reunión', 'tag.course':'Clase', 'tag.interview':'Entrevista', 'tag.brainstorm':'Lluvia de ideas', 'tag.podcast':'Podcast', 'tag.consultation':'Consulta',
+    'ref.title':'Invitar a un amigo', 'ref.desc':'Comparte tu enlace: tu amigo recibe 30 minutos gratis, y tú también, en cuanto se registre.', 'ref.copy':'Copiar enlace', 'js.grouptoday':'Hoy', 'js.yesterday':'Ayer', 'js.aiconv':'Chats IA', 'js.audio':'Audio', 'js.noresultsfor':'Sin resultados para', 'js.recfallback':'Grabación', 'js.aimsg':'msg IA', 'js.forgotlink':'¿Olvidaste tu contraseña?', 'js.forgotsub':'Recibe un enlace para elegir una nueva contraseña.', 'js.forgotbtn':'Enviar enlace', 'js.sending':'Enviando…', 'js.resetsent':'Si existe una cuenta con este email, se acaba de enviar un enlace de restablecimiento. Revisa tu bandeja (y spam).', 'js.backtologin':'Volver a iniciar sesión', 'js.newpwd':'Elige una nueva contraseña.', 'js.resetbtn':'Restablecer contraseña', 'js.resetdone':'¡Contraseña cambiada! Ya puedes iniciar sesión.', 'js.resetexpired':'Este enlace ya no es válido. Solicita un nuevo enlace de restablecimiento.',
+    'js.autoanswer':'🤖 Responder automáticamente a las preguntas',
     'a32':'★ Administración',
     'a33':'Asistente kaideno',
     'a34':'Conoce todas tus grabaciones',
@@ -1291,7 +1347,7 @@ const UI = {
     'l.legal':'Rechtliche Hinweise',
     'l.legaldesc':'Impressum, Datenschutz, AGB',
     'l.consult':'Ansehen',
-    'l.consent':'Ich bin 15 Jahre oder älter und akzeptiere die <a href="legal.html#cgu" target="_blank">Nutzungsbedingungen</a> und die <a href="legal.html#confidentialite" target="_blank">Datenschutzerklärung</a>.',
+    'l.consent':'Ich bin 15 Jahre oder älter und akzeptiere die <a href="https://kaideno.com/legal.html#cgu" target="_blank">Nutzungsbedingungen</a> und die <a href="https://kaideno.com/legal.html#confidentialite" target="_blank">Datenschutzerklärung</a>.',
     'l.consentreq':'Sie müssen die Bedingungen akzeptieren, um fortzufahren.',
     'x.export':'Exportieren',
     'x.copy':'Kopieren',
@@ -1316,6 +1372,7 @@ const UI = {
     'q.reached':'Monatslimit erreicht.',
     'q.upgrade':'Upgraden',
     'q.blocked':'⛔ Monatslimit erreicht — upgraden Sie, um weiterzumachen',
+    'plan.free':'Kostenlos', 'plan.ess':'Essential', 'plan.pro':'Pro',
     'q.almostdone':'⚠️ Sie haben diesen Monat weniger als 5 Minuten übrig',
     'js.summarize':'Meine Sitzungen zusammenfassen',
     'js.pending':'Meine offenen Aufgaben',
@@ -1370,6 +1427,13 @@ const UI = {
     'a29':'Öffnen',
     'a30':'Konto',
     'a31':'Abmelden',
+    'nav.theme':'Helles/dunkles Design', 'nav.settings':'Einstellungen',
+    'js.noresponse':'Entschuldigung, ich konnte nicht antworten.', 'js.chatconnerr':'⚠️ Verbindungsfehler mit dem Assistenten. Versuche es gleich noch einmal.', 'js.asstconnerr':'⚠️ Verbindungsfehler. Überprüfe deinen Claude-Schlüssel in den Einstellungen.', 'js.keyok':'✓ Konfiguriert', 'js.keymissing':'Fehlt',
+    'js.aiwelcome':'Hallo! Ich kenne den Inhalt dieser Aufnahme. Stell mir eine Frage oder wähle oben eine Aktion.', 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
+    'js.speaker':'Sprecher', 'js.renamespeakers':'Sprecher umbenennen',
+    'js.tag':'Kategorie', 'js.alltags':'Alle', 'tag.meeting':'Meeting', 'tag.course':'Kurs', 'tag.interview':'Interview', 'tag.brainstorm':'Brainstorming', 'tag.podcast':'Podcast', 'tag.consultation':'Beratung',
+    'ref.title':'Freund einladen', 'ref.desc':'Teile deinen Link: Dein Freund bekommt 30 Gratis-Minuten, und du auch, sobald er sich registriert.', 'ref.copy':'Link kopieren', 'js.grouptoday':'Heute', 'js.yesterday':'Gestern', 'js.aiconv':'KI-Chats', 'js.audio':'Audio', 'js.noresultsfor':'Keine Ergebnisse für', 'js.recfallback':'Aufnahme', 'js.aimsg':'KI-Nachr.', 'js.forgotlink':'Passwort vergessen?', 'js.forgotsub':'Erhalte einen Link, um ein neues Passwort zu wählen.', 'js.forgotbtn':'Link senden', 'js.sending':'Senden…', 'js.resetsent':'Falls ein Konto mit dieser E-Mail existiert, wurde gerade ein Link zum Zurücksetzen gesendet. Prüfe dein Postfach (und den Spam-Ordner).', 'js.backtologin':'Zurück zur Anmeldung', 'js.newpwd':'Wähle ein neues Passwort.', 'js.resetbtn':'Passwort zurücksetzen', 'js.resetdone':'Passwort geändert! Du kannst dich jetzt anmelden.', 'js.resetexpired':'Dieser Link ist nicht mehr gültig. Fordere einen neuen Link an.',
+    'js.autoanswer':'🤖 Fragen automatisch beantworten',
     'a32':'★ Verwaltung',
     'a33':'kaideno-Assistent',
     'a34':'Kennt alle Ihre Aufnahmen',
@@ -1458,7 +1522,7 @@ const UI = {
     'l.legal':'Informazioni legali',
     'l.legaldesc':'Note legali, privacy, termini',
     'l.consult':'Consulta',
-    'l.consent':'Ho 15 anni o più e accetto le <a href="legal.html#cgu" target="_blank">condizioni d\'uso</a> e la <a href="legal.html#confidentialite" target="_blank">politica sulla privacy</a>.',
+    'l.consent':'Ho 15 anni o più e accetto le <a href="https://kaideno.com/legal.html#cgu" target="_blank">condizioni d\'uso</a> e la <a href="https://kaideno.com/legal.html#confidentialite" target="_blank">politica sulla privacy</a>.',
     'l.consentreq':'Devi accettare le condizioni per continuare.',
     'x.export':'Esporta',
     'x.copy':'Copia',
@@ -1483,6 +1547,7 @@ const UI = {
     'q.reached':'Limite mensile raggiunto.',
     'q.upgrade':'Passa a superiore',
     'q.blocked':'⛔ Limite mensile raggiunto — passa a un piano superiore per continuare',
+    'plan.free':'Gratuito', 'plan.ess':'Essenziale', 'plan.pro':'Pro',
     'q.almostdone':'⚠️ Ti restano meno di 5 minuti questo mese',
     'js.summarize':'Riassumi le mie sessioni',
     'js.pending':'Le mie azioni in sospeso',
@@ -1537,6 +1602,13 @@ const UI = {
     'a29':'Apri',
     'a30':'Account',
     'a31':'Esci',
+    'nav.theme':'Tema chiaro/scuro', 'nav.settings':'Impostazioni',
+    'js.noresponse':'Mi dispiace, non sono riuscito a rispondere.', 'js.chatconnerr':"⚠️ Errore di connessione con l'assistente. Riprova tra poco.", 'js.asstconnerr':'⚠️ Errore di connessione. Controlla la tua chiave Claude in Impostazioni.', 'js.keyok':'✓ Configurata', 'js.keymissing':'Mancante',
+    'js.aiwelcome':"Ciao! Conosco il contenuto di questa registrazione. Fammi una domanda o scegli un'azione qui sopra.", 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
+    'js.speaker':'Interlocutore', 'js.renamespeakers':'Rinomina interlocutori',
+    'js.tag':'Categoria', 'js.alltags':'Tutte', 'tag.meeting':'Riunione', 'tag.course':'Corso', 'tag.interview':'Intervista', 'tag.brainstorm':'Brainstorming', 'tag.podcast':'Podcast', 'tag.consultation':'Consulenza',
+    'ref.title':'Invita un amico', 'ref.desc':'Condividi il tuo link: il tuo amico riceve 30 minuti omaggio, e anche tu, non appena si iscrive.', 'ref.copy':'Copia link', 'js.grouptoday':'Oggi', 'js.yesterday':'Ieri', 'js.aiconv':'Chat IA', 'js.audio':'Audio', 'js.noresultsfor':'Nessun risultato per', 'js.recfallback':'Registrazione', 'js.aimsg':'msg IA', 'js.forgotlink':'Password dimenticata?', 'js.forgotsub':'Ricevi un link per scegliere una nuova password.', 'js.forgotbtn':'Invia link', 'js.sending':'Invio…', 'js.resetsent':'Se esiste un account con questa email, è appena stato inviato un link di reimpostazione. Controlla la posta (e lo spam).', 'js.backtologin':'Torna al login', 'js.newpwd':'Scegli una nuova password.', 'js.resetbtn':'Reimposta password', 'js.resetdone':'Password cambiata! Ora puoi accedere.', 'js.resetexpired':'Questo link non è più valido. Richiedi un nuovo link di reimpostazione.',
+    'js.autoanswer':'🤖 Rispondi automaticamente alle domande',
     'a32':'★ Amministrazione',
     'a33':'Assistente kaideno',
     'a34':'Conosce tutte le tue registrazioni',
@@ -1625,7 +1697,7 @@ const UI = {
     'l.legal':'Informação legal',
     'l.legaldesc':'Aviso, privacidade, termos',
     'l.consult':'Consultar',
-    'l.consent':'Tenho 15 anos ou mais e aceito as <a href="legal.html#cgu" target="_blank">condições de utilização</a> e a <a href="legal.html#confidentialite" target="_blank">política de privacidade</a>.',
+    'l.consent':'Tenho 15 anos ou mais e aceito as <a href="https://kaideno.com/legal.html#cgu" target="_blank">condições de utilização</a> e a <a href="https://kaideno.com/legal.html#confidentialite" target="_blank">política de privacidade</a>.',
     'l.consentreq':'Tem de aceitar as condições para continuar.',
     'x.export':'Exportar',
     'x.copy':'Copiar',
@@ -1650,6 +1722,7 @@ const UI = {
     'q.reached':'Limite mensal atingido.',
     'q.upgrade':'Melhorar plano',
     'q.blocked':'⛔ Limite mensal atingido — melhore o plano para continuar',
+    'plan.free':'Gratuito', 'plan.ess':'Essencial', 'plan.pro':'Pro',
     'q.almostdone':'⚠️ Restam-lhe menos de 5 minutos este mês',
     'js.summarize':'Resumir as minhas sessões',
     'js.pending':'As minhas ações pendentes',
@@ -1704,6 +1777,13 @@ const UI = {
     'a29':'Abrir',
     'a30':'Conta',
     'a31':'Sair',
+    'nav.theme':'Tema claro/escuro', 'nav.settings':'Definições',
+    'js.noresponse':'Desculpa, não consegui responder.', 'js.chatconnerr':'⚠️ Erro de ligação com o assistente. Tenta novamente daqui a pouco.', 'js.asstconnerr':'⚠️ Erro de ligação. Verifica a tua chave Claude em Definições.', 'js.keyok':'✓ Configurada', 'js.keymissing':'Em falta',
+    'js.aiwelcome':'Olá! Conheço o conteúdo desta gravação. Faz-me uma pergunta ou escolhe uma ação acima.', 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
+    'js.speaker':'Interlocutor', 'js.renamespeakers':'Renomear interlocutores',
+    'js.tag':'Categoria', 'js.alltags':'Todas', 'tag.meeting':'Reunião', 'tag.course':'Aula', 'tag.interview':'Entrevista', 'tag.brainstorm':'Brainstorm', 'tag.podcast':'Podcast', 'tag.consultation':'Consulta',
+    'ref.title':'Convidar um amigo', 'ref.desc':'Partilha o teu link: o teu amigo recebe 30 minutos grátis, e tu também, assim que se inscrever.', 'ref.copy':'Copiar link', 'js.grouptoday':'Hoje', 'js.yesterday':'Ontem', 'js.aiconv':'Conversas IA', 'js.audio':'Áudio', 'js.noresultsfor':'Sem resultados para', 'js.recfallback':'Gravação', 'js.aimsg':'msg IA', 'js.forgotlink':'Esqueceste-te da password?', 'js.forgotsub':'Recebe um link para escolher uma nova password.', 'js.forgotbtn':'Enviar link', 'js.sending':'A enviar…', 'js.resetsent':'Se existir uma conta com este email, um link de redefinição acabou de ser enviado. Verifica a caixa de entrada (e o spam).', 'js.backtologin':'Voltar ao login', 'js.newpwd':'Escolhe uma nova password.', 'js.resetbtn':'Redefinir password', 'js.resetdone':'Password alterada! Já podes iniciar sessão.', 'js.resetexpired':'Este link já não é válido. Pede um novo link de redefinição.',
+    'js.autoanswer':'🤖 Responder automaticamente às perguntas',
     'a32':'★ Administração',
     'a33':'Assistente kaideno',
     'a34':'Conhece todas as suas gravações',
@@ -1792,7 +1872,7 @@ const UI = {
     'l.legal':'Juridische informatie',
     'l.legaldesc':'Kennisgeving, privacy, voorwaarden',
     'l.consult':'Bekijken',
-    'l.consent':'Ik ben 15 jaar of ouder en accepteer de <a href="legal.html#cgu" target="_blank">gebruiksvoorwaarden</a> en het <a href="legal.html#confidentialite" target="_blank">privacybeleid</a>.',
+    'l.consent':'Ik ben 15 jaar of ouder en accepteer de <a href="https://kaideno.com/legal.html#cgu" target="_blank">gebruiksvoorwaarden</a> en het <a href="https://kaideno.com/legal.html#confidentialite" target="_blank">privacybeleid</a>.',
     'l.consentreq':'U moet de voorwaarden accepteren om door te gaan.',
     'x.export':'Exporteren',
     'x.copy':'Kopiëren',
@@ -1817,6 +1897,7 @@ const UI = {
     'q.reached':'Maandlimiet bereikt.',
     'q.upgrade':'Upgraden',
     'q.blocked':'⛔ Maandlimiet bereikt — upgrade om door te gaan',
+    'plan.free':'Gratis', 'plan.ess':'Essentieel', 'plan.pro':'Pro',
     'q.almostdone':'⚠️ U hebt deze maand minder dan 5 minuten over',
     'js.summarize':'Mijn sessies samenvatten',
     'js.pending':'Mijn openstaande acties',
@@ -1871,6 +1952,13 @@ const UI = {
     'a29':'Openen',
     'a30':'Account',
     'a31':'Uitloggen',
+    'nav.theme':'Licht/donker thema', 'nav.settings':'Instellingen',
+    'js.noresponse':'Sorry, ik kon niet antwoorden.', 'js.chatconnerr':'⚠️ Verbindingsfout met de assistent. Probeer het zo weer.', 'js.asstconnerr':'⚠️ Verbindingsfout. Controleer je Claude-sleutel in Instellingen.', 'js.keyok':'✓ Geconfigureerd', 'js.keymissing':'Ontbreekt',
+    'js.aiwelcome':'Hallo! Ik ken de inhoud van deze opname. Stel me een vraag of kies hierboven een actie.', 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
+    'js.speaker':'Spreker', 'js.renamespeakers':'Sprekers hernoemen',
+    'js.tag':'Categorie', 'js.alltags':'Alle', 'tag.meeting':'Vergadering', 'tag.course':'Cursus', 'tag.interview':'Interview', 'tag.brainstorm':'Brainstorm', 'tag.podcast':'Podcast', 'tag.consultation':'Consult',
+    'ref.title':'Vriend uitnodigen', 'ref.desc':'Deel je link: je vriend krijgt 30 gratis minuten, en jij ook, zodra hij/zij zich aanmeldt.', 'ref.copy':'Link kopiëren', 'js.grouptoday':'Vandaag', 'js.yesterday':'Gisteren', 'js.aiconv':'AI-chats', 'js.audio':'Audio', 'js.noresultsfor':'Geen resultaten voor', 'js.recfallback':'Opname', 'js.aimsg':'AI-bericht', 'js.forgotlink':'Wachtwoord vergeten?', 'js.forgotsub':'Ontvang een link om een nieuw wachtwoord te kiezen.', 'js.forgotbtn':'Link versturen', 'js.sending':'Versturen…', 'js.resetsent':'Als er een account met dit e-mailadres bestaat, is er zojuist een resetlink verstuurd. Controleer je inbox (en spam).', 'js.backtologin':'Terug naar inloggen', 'js.newpwd':'Kies een nieuw wachtwoord.', 'js.resetbtn':'Wachtwoord opnieuw instellen', 'js.resetdone':'Wachtwoord gewijzigd! Je kunt nu inloggen.', 'js.resetexpired':'Deze link is niet meer geldig. Vraag een nieuwe resetlink aan.',
+    'js.autoanswer':'🤖 Vragen automatisch beantwoorden',
     'a32':'★ Beheer',
     'a33':'kaideno-assistent',
     'a34':'Kent al uw opnames',
@@ -1959,7 +2047,7 @@ const UI = {
     'l.legal':'法律信息',
     'l.legaldesc':'声明、隐私、条款',
     'l.consult':'查看',
-    'l.consent':'我已满 15 岁，并接受<a href="legal.html#cgu" target="_blank">使用条款</a>和<a href="legal.html#confidentialite" target="_blank">隐私政策</a>。',
+    'l.consent':'我已满 15 岁，并接受<a href="https://kaideno.com/legal.html#cgu" target="_blank">使用条款</a>和<a href="https://kaideno.com/legal.html#confidentialite" target="_blank">隐私政策</a>。',
     'l.consentreq':'您必须接受条款才能继续。',
     'x.export':'导出',
     'x.copy':'复制',
@@ -1984,6 +2072,7 @@ const UI = {
     'q.reached':'已达月度上限。',
     'q.upgrade':'升级方案',
     'q.blocked':'⛔ 已达月度上限 — 升级方案以继续使用',
+    'plan.free':'免费版', 'plan.ess':'基础版', 'plan.pro':'专业版',
     'q.almostdone':'⚠️ 本月剩余不足 5 分钟',
     'js.summarize':'总结我的会话',
     'js.pending':'我的待办事项',
@@ -2038,6 +2127,13 @@ const UI = {
     'a29':'打开',
     'a30':'账户',
     'a31':'退出登录',
+    'nav.theme':'浅色/深色主题', 'nav.settings':'设置',
+    'js.noresponse':'抱歉，我无法回答。', 'js.chatconnerr':'⚠️ 与助手的连接出错，请稍后重试。', 'js.asstconnerr':'⚠️ 连接错误，请在设置中检查您的 Claude 密钥。', 'js.keyok':'✓ 已配置', 'js.keymissing':'缺失',
+    'js.aiwelcome':'你好！我了解这段录音的内容。请提问，或选择上方的操作。', 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
+    'js.speaker':'发言人', 'js.renamespeakers':'重命名发言人',
+    'js.tag':'分类', 'js.alltags':'全部', 'tag.meeting':'会议', 'tag.course':'课程', 'tag.interview':'采访', 'tag.brainstorm':'头脑风暴', 'tag.podcast':'播客', 'tag.consultation':'咨询',
+    'ref.title':'邀请好友', 'ref.desc':'分享你的链接：好友注册后可获得 30 分钟免费时长，你也一样。', 'ref.copy':'复制链接', 'js.grouptoday':'今天', 'js.yesterday':'昨天', 'js.aiconv':'AI 对话', 'js.audio':'音频', 'js.noresultsfor':'没有找到相关结果：', 'js.recfallback':'录音', 'js.aimsg':'条 AI 消息', 'js.forgotlink':'忘记密码？', 'js.forgotsub':'获取链接以设置新密码。', 'js.forgotbtn':'发送链接', 'js.sending':'发送中…', 'js.resetsent':'如果该邮箱已注册账户，重置链接已发送。请查收邮箱（包括垃圾邮件）。', 'js.backtologin':'返回登录', 'js.newpwd':'设置新密码。', 'js.resetbtn':'重置密码', 'js.resetdone':'密码已修改！现在可以登录了。', 'js.resetexpired':'该链接已失效，请重新申请重置链接。',
+    'js.autoanswer':'🤖 自动回答问题',
     'a32':'★ 管理',
     'a33':'kaideno 助手',
     'a34':'了解您的所有录音',
@@ -2126,7 +2222,7 @@ const UI = {
     'l.legal':'法的情報',
     'l.legaldesc':'法的事項、プライバシー、規約',
     'l.consult':'見る',
-    'l.consent':'15歳以上であり、<a href="legal.html#cgu" target="_blank">利用規約</a>と<a href="legal.html#confidentialite" target="_blank">プライバシーポリシー</a>に同意します。',
+    'l.consent':'15歳以上であり、<a href="https://kaideno.com/legal.html#cgu" target="_blank">利用規約</a>と<a href="https://kaideno.com/legal.html#confidentialite" target="_blank">プライバシーポリシー</a>に同意します。',
     'l.consentreq':'続行するには規約に同意する必要があります。',
     'x.export':'エクスポート',
     'x.copy':'コピー',
@@ -2151,6 +2247,7 @@ const UI = {
     'q.reached':'月間上限に達しました。',
     'q.upgrade':'アップグレード',
     'q.blocked':'⛔ 月間上限に達しました — 続けるにはアップグレードしてください',
+    'plan.free':'無料', 'plan.ess':'エッセンシャル', 'plan.pro':'プロ',
     'q.almostdone':'⚠️ 今月の残りは5分未満です',
     'js.summarize':'セッションを要約する',
     'js.pending':'未完了のアクション',
@@ -2205,6 +2302,13 @@ const UI = {
     'a29':'開く',
     'a30':'アカウント',
     'a31':'ログアウト',
+    'nav.theme':'ライト/ダークテーマ', 'nav.settings':'設定',
+    'js.noresponse':'申し訳ありません、回答できませんでした。', 'js.chatconnerr':'⚠️ アシスタントへの接続エラーです。少し待ってからもう一度お試しください。', 'js.asstconnerr':'⚠️ 接続エラーです。設定でClaudeキーを確認してください。', 'js.keyok':'✓ 設定済み', 'js.keymissing':'未設定',
+    'js.aiwelcome':'こんにちは！この録音の内容を把握しています。質問するか、上のアクションを選んでください。', 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
+    'js.speaker':'話者', 'js.renamespeakers':'話者名を編集',
+    'js.tag':'カテゴリー', 'js.alltags':'すべて', 'tag.meeting':'会議', 'tag.course':'授業', 'tag.interview':'インタビュー', 'tag.brainstorm':'ブレインストーミング', 'tag.podcast':'ポッドキャスト', 'tag.consultation':'相談',
+    'ref.title':'友達を招待', 'ref.desc':'リンクをシェアすると、友達に30分の無料時間がプレゼントされ、あなたにも30分プレゼントされます。', 'ref.copy':'リンクをコピー', 'js.grouptoday':'今日', 'js.yesterday':'昨日', 'js.aiconv':'AIチャット', 'js.audio':'音声', 'js.noresultsfor':'該当する結果がありません：', 'js.recfallback':'録音', 'js.aimsg':'件のAIメッセージ', 'js.forgotlink':'パスワードをお忘れですか？', 'js.forgotsub':'新しいパスワードを設定するためのリンクを受け取る。', 'js.forgotbtn':'リンクを送信', 'js.sending':'送信中…', 'js.resetsent':'このメールアドレスのアカウントが存在する場合、リセットリンクを送信しました。受信箱（迷惑メールフォルダも）をご確認ください。', 'js.backtologin':'ログインに戻る', 'js.newpwd':'新しいパスワードを選択してください。', 'js.resetbtn':'パスワードをリセット', 'js.resetdone':'パスワードが変更されました！ログインできます。', 'js.resetexpired':'このリンクは無効です。新しいリセットリンクをリクエストしてください。',
+    'js.autoanswer':'🤖 質問に自動で回答する',
     'a32':'★ 管理',
     'a33':'kaidenoアシスタント',
     'a34':'すべての録音を把握しています',
@@ -2311,6 +2415,10 @@ function applyUILang(){
     const k = el.getAttribute('data-i18n-html');
     if(d[k]) el.innerHTML = d[k];
   });
+  document.querySelectorAll('[data-i18n-title]').forEach(el=>{
+    const k = el.getAttribute('data-i18n-title');
+    if(d[k]) el.title = d[k];
+  });
   document.documentElement.lang = uiLang();
 }
 function setUILang(lang){
@@ -2327,6 +2435,89 @@ function setUILang(lang){
 
 // ══ BACKEND CLOUDFLARE ══
 const WORKER_URL = 'https://nuro-proxy.worldultimaterecords.workers.dev';
+
+// Correspondance langue interface → locale JS, pour un formatage de dates/nombres cohérent
+// avec la langue choisie (avant : plusieurs endroits étaient figés en 'fr-FR').
+const LOCALE_MAP = { fr:'fr-FR', en:'en-GB', es:'es-ES', de:'de-DE', it:'it-IT', pt:'pt-PT', nl:'nl-NL', zh:'zh-CN', ja:'ja-JP' };
+function jsLocale(){ return LOCALE_MAP[uiLang()] || 'fr-FR'; }
+
+// ══ AUTH SERVEUR (vrais comptes, multi-appareil, quota infalsifiable) ══
+function authToken(){ return localStorage.getItem('nuro_token') || ''; }
+function setAuthToken(tok){ if(tok) localStorage.setItem('nuro_token', tok); else localStorage.removeItem('nuro_token'); }
+
+// Écrit le plan/quota renvoyés par le serveur dans les clés locales déjà utilisées par l'app
+// (userPlan()/usedSeconds() les lisent déjà — aucune autre modification nécessaire).
+function cacheServerAccount(email, data){
+  if(!email || !data) return;
+  if(data.plan) localStorage.setItem(`kaideno_plan_${email}`, data.plan);
+  if(data.quota_month && typeof data.used_seconds === 'number'){
+    localStorage.setItem(`kaideno_usage_${email}_${data.quota_month}`, String(data.used_seconds));
+  }
+  if(data.referral_code) localStorage.setItem(`kaideno_refcode_${email}`, data.referral_code);
+}
+
+// Crée un vrai compte serveur en plus du compte local. N'empêche jamais l'inscription si ça échoue
+// (hors-ligne, Worker indisponible, etc.) : le compte local reste toujours utilisable.
+async function registerServer(email, password, lang, ref){
+  if(!WORKER_URL) return null;
+  try{
+    const r = await fetch(WORKER_URL + '/register', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ email, password, lang, ref })
+    });
+    const d = await r.json();
+    if(r.ok && d.token){ setAuthToken(d.token); cacheServerAccount(email, d); return d; }
+  }catch(e){ /* silencieux */ }
+  return null;
+}
+
+// Connexion serveur — c'est ce qui permet de se connecter depuis un nouvel appareil
+// (là où le compte local n'existe pas encore) et de récupérer le vrai plan/quota.
+async function loginServer(email, password){
+  if(!WORKER_URL) return null;
+  try{
+    const r = await fetch(WORKER_URL + '/login', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ email, password })
+    });
+    const d = await r.json();
+    if(r.ok && d.token){ setAuthToken(d.token); cacheServerAccount(email, d); return d; }
+  }catch(e){ /* silencieux */ }
+  return null;
+}
+
+// Rafraîchit plan/quota depuis le serveur (utile si changés sur un autre appareil ou par l'admin)
+async function refreshServerAccount(email){
+  if(!WORKER_URL || !authToken()) return null;
+  try{
+    const r = await fetch(WORKER_URL + '/me', { headers:{ 'Authorization':'Bearer '+authToken() } });
+    if(r.status===401){ setAuthToken(''); return null; }
+    const d = await r.json();
+    if(r.ok){ cacheServerAccount(email, d); return d; }
+  }catch(e){ /* silencieux */ }
+  return null;
+}
+
+// Signale la consommation au serveur (quota infalsifiable). Silencieux si hors-ligne :
+// le décompte local (déjà fait par addUsedSeconds) reste alors la seule source.
+async function reportUsageServer(email, seconds){
+  if(!WORKER_URL || !authToken()) return null;
+  try{
+    const r = await fetch(WORKER_URL + '/usage', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+authToken()},
+      body: JSON.stringify({ seconds })
+    });
+    const d = await r.json();
+    if(r.ok){ cacheServerAccount(email, d); renderQuota(); }
+  }catch(e){ /* silencieux */ }
+}
+
+function logoutServer(){
+  if(!WORKER_URL || !authToken()) return;
+  fetch(WORKER_URL + '/logout', { method:'POST', headers:{'Authorization':'Bearer '+authToken()} }).catch(()=>{});
+  setAuthToken('');
+}
 
 // Appelle Claude via le Worker Cloudflare (clé cachée côté serveur).
 // Fallback sur la clé locale si l'utilisateur en a configuré une (mode avancé/fondateur).
@@ -2356,7 +2547,9 @@ async function callClaude(payload){
 async function getDeepgramKey(){
   if(WORKER_URL){
     try{
-      const r = await fetch(WORKER_URL + '/deepgram-token');
+      const headers = {};
+      if(authToken()) headers['Authorization'] = 'Bearer ' + authToken();
+      const r = await fetch(WORKER_URL + '/deepgram-token', { headers });
       if(r.ok){ const d = await r.json(); if(d.key) return d.key; }
     }catch(e){}
   }
@@ -2377,9 +2570,16 @@ const K = {
 
 // ══ STATE ══
 let currentUser=null, sessions=[];
+let pendingRef=null, resetToken=null;
 let isRec=false, mr=null, dgWs=null;
 let timerInt=null, startTime=null;
 let finalTx='', interimTx='';
+let autoAnswerEnabled = localStorage.getItem('kaideno_autoanswer')==='1';
+let lastAutoAnswerTime = 0;
+function toggleAutoAnswer(on){
+  autoAnswerEnabled = on;
+  localStorage.setItem('kaideno_autoanswer', on ? '1' : '0');
+}
 let liveUserScrolled = false;
 let speakerSegments=[];
 let vizBars=[], vizRaf=null, vizPhase=0;
@@ -2394,6 +2594,65 @@ function switchTab(t) {
   document.getElementById('auth-error').classList.remove('show');
 }
 function authErr(m){const e=document.getElementById('auth-error');e.textContent=m;e.classList.add('show')}
+
+// ── Mot de passe oublié ──
+function showForgotPassword(){
+  document.getElementById('auth-register').style.display='none';
+  document.getElementById('auth-login').style.display='none';
+  document.getElementById('auth-forgot').style.display='block';
+  document.getElementById('tab-reg').classList.remove('active');
+  document.getElementById('tab-log').classList.remove('active');
+  document.getElementById('auth-error').classList.remove('show');
+  const fe=document.getElementById('forgot-email'); const le=document.getElementById('log-email');
+  if(fe && le && le.value) fe.value = le.value;
+}
+function backToLogin(){
+  document.getElementById('auth-forgot').style.display='none';
+  switchTab('login');
+}
+async function submitForgotPassword(){
+  const email=document.getElementById('forgot-email').value.trim().toLowerCase();
+  if(!email){authErr(t('js.fields'));return}
+  const btn=document.getElementById('btn-forgot');
+  if(btn){btn.disabled=true;btn.textContent=t('js.sending');}
+  if(WORKER_URL){
+    try{
+      await fetch(WORKER_URL + '/forgot-password', {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ email })
+      });
+    }catch(e){ /* on affiche quand même le message générique ci-dessous */ }
+  }
+  document.getElementById('auth-forgot').innerHTML =
+    `<p class="auth-sub" style="text-align:center;padding:20px 0">${t('js.resetsent')}</p>
+     <button class="btn-submit" onclick="location.reload()">${t('js.backtologin')}</button>`;
+}
+
+// ── Réinitialisation (arrivée via le lien reçu par email, ?reset=token) ──
+async function submitResetPassword(){
+  const pwd=document.getElementById('reset-pwd').value;
+  if(!pwd||pwd.length<8){authErr(t('js.pwdshort'));return}
+  const btn=document.getElementById('btn-reset');
+  if(btn) btn.disabled=true;
+  try{
+    const r = await fetch(WORKER_URL + '/reset-password', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ token: resetToken, password: pwd })
+    });
+    const d = await r.json().catch(()=>({}));
+    if(r.ok && d.ok){
+      document.getElementById('auth-reset').innerHTML =
+        `<p class="auth-sub" style="text-align:center;padding:20px 0">${t('js.resetdone')}</p>
+         <button class="btn-submit" onclick="window.location.href='https://kaideno.com/index.html?login'">${t('a8')}</button>`;
+    } else {
+      authErr(t('js.resetexpired'));
+      if(btn) btn.disabled=false;
+    }
+  }catch(e){
+    authErr(t('js.resetexpired'));
+    if(btn) btn.disabled=false;
+  }
+}
 
 async function doRegister(){
   const email=document.getElementById('reg-email').value.trim().toLowerCase();
@@ -2411,6 +2670,8 @@ async function doRegister(){
   currentUser=email; localStorage.setItem('nuro_cu',email); localStorage.setItem('nuro_last_email',email);
   // Enregistrer l'inscription dans la base (en arrière-plan, sans bloquer)
   registerSignup(email);
+  // Créer aussi un vrai compte serveur (permet de se connecter depuis un autre appareil)
+  registerServer(email, pwd, (typeof uiLang === 'function') ? uiLang() : 'fr', pendingRef);
   enterDashboard();
 }
 
@@ -2432,14 +2693,24 @@ async function doLogin(){
   if(!email||!pwd){authErr(t('js.fields'));return}
   const users=K.users();
   const u = users[email];
-  const ok = await verifyPassword(pwd, u);
-  if(!ok){authErr(t('js.badlogin'));return}
+  const localOk = await verifyPassword(pwd, u);
+  // Toujours tenter le serveur : c'est ce qui permet de se connecter depuis un appareil
+  // où le compte n'a jamais été créé localement, et de récupérer le vrai plan/quota.
+  const serverAuth = await loginServer(email, pwd);
+  if(!localOk && !serverAuth){authErr(t('js.badlogin'));return}
   // Migration : si le compte est en ancien format, le sécuriser maintenant
   if(u && u.pwd && !u.hash){
     const salt = makeSalt();
     u.hash = await hashPassword(pwd, salt);
     u.salt = salt;
     delete u.pwd;
+    K.saveUsers(users);
+  }
+  // Nouvel appareil : le compte existe côté serveur mais pas encore ici → le créer localement
+  if(!u && serverAuth){
+    const salt = makeSalt();
+    const hash = await hashPassword(pwd, salt);
+    users[email] = {salt, hash, createdAt: Date.now()};
     K.saveUsers(users);
   }
   currentUser=email; localStorage.setItem('nuro_cu',email); localStorage.setItem('nuro_last_email',email);
@@ -2449,6 +2720,7 @@ async function doLogin(){
 
 function doLogout(){
   if(isRec)stopRec();
+  logoutServer();
   // Mémoriser le dernier email pour le pré-remplir à la prochaine connexion
   if(currentUser) localStorage.setItem('nuro_last_email', currentUser);
   currentUser=null; localStorage.removeItem('nuro_cu');
@@ -2502,7 +2774,7 @@ function enterDashboard(){
   renderStats();renderSessions();renderQuota();
   const fab=document.getElementById('fab-asst');if(fab)fab.style.display='flex';
   showView('dashboard');
-  if(isFounder()){setTimeout(()=>showToast(t('js.founder')),400)}
+  if(isFounder()){setTimeout(()=>showToast('★ Accès Fondateur — bienvenue !'),400)}
 }
 
 
@@ -2537,9 +2809,9 @@ async function verifyPassword(pwd, user){
 
 // ══ QUOTAS D'UTILISATION (protection des coûts API) ══
 const PLAN_LIMITS = {
-  free:      { minutes: 30,   label: 'Gratuit' },     // 30 min/mois
-  essentiel: { minutes: 600,  label: 'Essentiel' },   // 10 h/mois
-  pro:       { minutes: 1800, label: 'Pro' },         // 30 h/mois
+  free:      { minutes: 30,   i18nKey: 'plan.free' },   // 30 min/mois
+  essentiel: { minutes: 600,  i18nKey: 'plan.ess' },     // 10 h/mois
+  pro:       { minutes: 1800, i18nKey: 'plan.pro' },     // 30 h/mois
 };
 
 // Plan de l'utilisateur (pour l'instant tout le monde est en 'free',
@@ -2582,7 +2854,7 @@ function renderQuota(){
   const el = document.getElementById('quota-bar');
   if(!el) return;
   if(isFounder()){
-    el.innerHTML = `<div class="quota-inner founder"><span class="quota-star">★</span> ${t('q.unlimited')}</div>`;
+    el.innerHTML = `<div class="quota-inner founder"><span class="quota-star">★</span> Utilisation illimitée</div>`;
     return;
   }
   const lim = quotaLimitSec();
@@ -2614,6 +2886,7 @@ async function toggleRec(){
   try{
     const stream=await navigator.mediaDevices.getUserMedia({audio:true});
     finalTx='';interimTx='';
+    const aat=document.getElementById('auto-answer-toggle'); if(aat) aat.checked=autoAnswerEnabled;
     speakerSegments=[];
     recFinalized=false;
     document.getElementById('live-txt').innerHTML='';
@@ -2625,10 +2898,10 @@ async function toggleRec(){
     initLiveScroll();
     const dg=await getDeepgramKey();
     if(!dg){showToast('⚠️ Service de transcription indisponible');document.getElementById('live-box').classList.remove('show');return}
-    const recLang=localStorage.getItem('kaideno_rec_lang')||'fr';
-    dgWs=new WebSocket(`wss://api.deepgram.com/v1/listen?language=${recLang}&model=nova-2&punctuate=true&interim_results=true&smart_format=true&diarize=true`,['token',dg]);
+    dgWs=new WebSocket(`wss://api.deepgram.com/v1/listen?language=multi&model=nova-3&punctuate=true&interim_results=true&smart_format=true&diarize=true`,['token',dg]);
     dgWs.onopen=()=>{
       isRec=true;startTime=Date.now();setRecUI(true);startTimer();startViz();
+      if('vibrate' in navigator){try{navigator.vibrate(60)}catch(e){}}
       mr=new MediaRecorder(stream,{mimeType:getMime()});
       mr.addEventListener('dataavailable',e=>{if(e.data.size>0&&dgWs.readyState===WebSocket.OPEN)dgWs.send(e.data)});
       mr.start(250);
@@ -2654,6 +2927,7 @@ async function toggleRec(){
         }
         finalTx+=a.transcript+' ';
         interimTx='';
+        maybeAutoAnswer(a.transcript);
       } else {
         interimTx=a.transcript;
       }
@@ -2671,6 +2945,7 @@ function getMime(){return['audio/webm;codecs=opus','audio/webm','audio/ogg;codec
 
 function stopRec(){
   isRec=false;
+  if('vibrate' in navigator){try{navigator.vibrate([60,40,60])}catch(e){}}
   stopTimer();stopViz();setRecUI(false);
   if(mr && mr.state!=='inactive'){
     try{ mr.stop(); mr.stream.getTracks().forEach(t=>t.stop()); }catch(e){}
@@ -2708,14 +2983,15 @@ async function finishRec(){
       if(last && last.speaker===seg.speaker){ last.text += ' ' + seg.text; }
       else merged.push({speaker:seg.speaker, text:seg.text});
     });
-    formattedTx = merged.map(seg=>`— ${seg.text}`).join('\n');
+    formattedTx = merged.map(seg=>`S${seg.speaker}: ${seg.text}`).join('\n');
   }
 
-  // Comptabiliser la consommation
+  // Comptabiliser la consommation (localement, puis synchronisation serveur si possible)
   addUsedSeconds(dur);
   renderQuota();
+  reportUsageServer(currentUser, dur);
 
-  const s={id:`s_${Date.now()}`,createdAt:Date.now(),duration:dur,transcript:formattedTx,wordCount:tx.split(/\s+/).length,status:'processing',summary:null,speakerCount:speakers.length};
+  const s={id:`s_${Date.now()}`,createdAt:Date.now(),duration:dur,transcript:formattedTx,wordCount:tx.split(/\s+/).length,status:'processing',summary:null,speakerCount:speakers.length,speakerNames:{},tag:null};
   sessions.unshift(s);K.saveSessions(sessions);
   renderSessions();renderStats();
   showToast(t('js.saved'));
@@ -2736,7 +3012,7 @@ async function genSummary(s){
     s.status='done';s.summary=sum;
   }catch{s.status='error'}
   K.saveSessions(sessions);renderSessions();renderStats();
-  showToast(s.status==='done'?'✅ Résumé prêt !':'⚠️ Erreur résumé — vérifie ta clé Claude');
+  showToast(s.status==='done'?t('js.summaryok'):t('js.summaryerr'));
 }
 
 // ══ UI REC ══
@@ -2744,7 +3020,7 @@ function setRecUI(on){
   document.getElementById('rec-btn').classList.toggle('recording',on);
   document.getElementById('rec-wrap').classList.toggle('recording',on);
   const st=document.getElementById('rec-status');
-  st.textContent=on?'Appuie pour arrêter':'Appuie pour enregistrer';
+  st.textContent=on?t('js.stoprec'):t('js.taprec');
   st.classList.toggle('on',on);
   document.getElementById('rec-timer').classList.toggle('show',on);
   if(!on)document.getElementById('rec-timer').textContent='00:00';
@@ -2803,26 +3079,44 @@ async function askLiveAi(){
   const input=document.getElementById('live-ai-input');
   const q=input?.value.trim();
   if(!q) return;
+  input.value='';
+  await runLiveAiQuery(q, false);
+}
+
+// Détecte si un locuteur vient de poser une question à voix haute, et déclenche une réponse IA automatique
+function maybeAutoAnswer(segment){
+  if(!autoAnswerEnabled) return;
+  const text=(segment||'').trim();
+  if(!/\?\s*$/.test(text)) return; // ne se termine pas par un point d'interrogation
+  if(text.split(/\s+/).filter(Boolean).length < 4) return; // trop court, probablement du bruit
+  if(quotaExceeded()) return;
+  const now=Date.now();
+  if(now - lastAutoAnswerTime < 8000) return; // anti-spam : 8s minimum entre deux réponses auto
+  lastAutoAnswerTime = now;
+  runLiveAiQuery(text, true);
+}
+
+async function runLiveAiQuery(q, autoDetected){
   const answerEl=document.getElementById('live-ai-answer');
   const btn=document.querySelector('.live-ai-btn');
   const currentText=(finalTx+' '+interimTx).trim();
+  const prefix = autoDetected ? `🤖 « ${q} »\n\n` : '';
 
-  input.value='';
   if(btn) btn.disabled=true;
-  if(answerEl){ answerEl.className='live-ai-answer show thinking'; answerEl.textContent=t('js.thinking'); }
+  if(answerEl){ answerEl.className='live-ai-answer show thinking'; answerEl.textContent=prefix+t('js.thinking'); }
 
   try{
     const res=await callClaude({
       model:'claude-haiku-4-5-20251001', max_tokens:512,
-      system:`Tu es un assistant IA qui écoute un enregistrement en cours en temps réel. Voici ce qui a été dit jusqu'à présent :\n---\n${currentText || '(rien encore)'}\n---\nRéponds à la question de l'utilisateur de façon très concise et directe (2-3 phrases max), en français. Tu peux répondre sur le contenu de l'enregistrement OU à toute autre question.`,
+      system:`Tu es un assistant IA qui écoute un enregistrement en cours en temps réel. Voici ce qui a été dit jusqu'à présent :\n---\n${currentText || '(rien encore)'}\n---\nRéponds à la question de l'utilisateur de façon très concise et directe (2-3 phrases max), en ${getLangName()}. Tu peux répondre sur le contenu de l'enregistrement OU à toute autre question.`,
       messages:[{role:'user', content:q}]
     });
     if(!res.ok) throw new Error();
     const data=await res.json();
     const reply=data.content?.[0]?.text || t('js.noreply');
-    if(answerEl){ answerEl.className='live-ai-answer show'; answerEl.textContent=reply; }
+    if(answerEl){ answerEl.className='live-ai-answer show'; answerEl.textContent=prefix+reply; }
   }catch{
-    if(answerEl){ answerEl.className='live-ai-answer show'; answerEl.textContent=t('js.errretry'); }
+    if(answerEl){ answerEl.className='live-ai-answer show'; answerEl.textContent=prefix+t('js.errretry'); }
   }
   if(btn) btn.disabled=false;
 }
@@ -2872,29 +3166,74 @@ function renderSessions(){
   const c=document.getElementById('sessions-list');
   if(!sessions.length){c.innerHTML=`<div class="empty-state"><div class="empty-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="8" y="2" width="8" height="13" rx="4" stroke="#3D4D62" stroke-width="1.5"/><path d="M4 12a8 8 0 0016 0" stroke="#3D4D62" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="20" x2="12" y2="23" stroke="#3D4D62" stroke-width="1.5" stroke-linecap="round"/></svg></div><h3 class="empty-title">${t('js.norec')}</h3><p class="empty-sub">${t('js.empty')}</p></div>`;return}
   c.innerHTML=sessions.map(s=>{
-    const date=new Date(s.createdAt).toLocaleDateString('fr-FR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+    const date=new Date(s.createdAt).toLocaleDateString(jsLocale(),{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
     const badge=s.status==='done'?'<span class="bdg bdg-done">✓ Résumé</span>':s.status==='processing'?'<span class="bdg bdg-proc">⟳ En cours</span>':'<span class="bdg bdg-err">⚠ Erreur</span>';
     return`<div class="session-card" onclick="openSession('${s.id}')">
       <div class="sc-top"><span class="sc-title">${s.summary?.titre||'Enregistrement'}</span><span class="sc-dur">${fmtDur(s.duration)}</span></div>
       <p class="sc-preview">${s.summary?.resume||(s.transcript.substring(0,120)+'…')}</p>
-      <div class="sc-footer"><div class="sc-badges">${badge}${s.wordCount?`<span class="bdg bdg-date">${s.wordCount} mots</span>`:''}<span class="bdg bdg-date">${date}</span></div><svg class="sc-arr" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="sc-footer"><div class="sc-badges">${badge}${s.tag?`<span class="bdg bdg-date">${tagLabel(s.tag)}</span>`:''}${s.wordCount?`<span class="bdg bdg-date">${s.wordCount} mots</span>`:''}<span class="bdg bdg-date">${date}</span></div><svg class="sc-arr" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 3l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     </div>`;
   }).join('');
 }
 function fmtDur(s){if(!s)return'0:00';return`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`}
 
-// Formate la transcription en distinguant les prises de parole (tiret)
-function formatTranscript(text){
+// ══ CATÉGORIES DE SESSION ══
+const TAG_DEFS = [
+  {key:'meeting', icon:'💼', i18n:'tag.meeting'},
+  {key:'course', icon:'🎓', i18n:'tag.course'},
+  {key:'interview', icon:'🎙️', i18n:'tag.interview'},
+  {key:'brainstorm', icon:'💡', i18n:'tag.brainstorm'},
+  {key:'podcast', icon:'🎧', i18n:'tag.podcast'},
+  {key:'consultation', icon:'⚖️', i18n:'tag.consultation'},
+];
+function tagLabel(key){ const d=TAG_DEFS.find(x=>x.key===key); return d ? `${d.icon} ${t(d.i18n)}` : ''; }
+function setSessionTag(id, key){
+  const s=sessions.find(x=>x.id===id);if(!s)return;
+  s.tag = (s.tag===key) ? null : key; // re-cliquer sur la même catégorie la retire
+  K.saveSessions(sessions);
+  openSession(id); // ré-affiche le détail avec la sélection à jour
+  renderSessions();
+}
+
+// Couleurs cycliques pour distinguer visuellement les locuteurs
+const SPEAKER_COLORS = ['#3B82F6','#F0B429','#34D399','#F87171','#A78BFA','#FB923C'];
+function speakerLabel(s, idx){
+  const custom = s?.speakerNames?.[idx];
+  if(custom) return custom;
+  return `${t('js.speaker')} ${idx+1}`;
+}
+// Renvoie la liste des index de locuteurs détectés dans une transcription au format "S<N>: ..."
+function detectSpeakers(text){
+  if(!text) return [];
+  const found = new Set();
+  text.split('\n').forEach(line=>{
+    const m=line.match(/^S(\d+):\s/);
+    if(m) found.add(parseInt(m[1],10));
+  });
+  return [...found].sort((a,b)=>a-b);
+}
+// Formate la transcription en distinguant les prises de parole
+function formatTranscript(text, s){
   if(!text) return '';
   const esc = t => t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  // Ancien format "Locuteur N :" → convertir en tirets
+  // Nouveau format "S<N>: " (identité du locuteur conservée, renommable)
+  if(/^S\d+:\s/m.test(text)){
+    return text.split('\n').filter(l=>l.trim()).map(line=>{
+      const m=line.match(/^S(\d+):\s(.*)$/);
+      if(!m) return `<div>${esc(line)}</div>`;
+      const idx=parseInt(m[1],10);
+      const color=SPEAKER_COLORS[idx % SPEAKER_COLORS.length];
+      return `<div style="display:flex;gap:8px;margin-bottom:9px"><span style="color:${color};font-weight:700;flex-shrink:0;font-size:.78rem;white-space:nowrap">${esc(speakerLabel(s,idx))} :</span><span>${esc(m[2])}</span></div>`;
+    }).join('');
+  }
+  // Ancien format "Locuteur N :" → convertir en tirets (identité non conservée, pas renommable)
   if(/Locuteur \d+\s*:/.test(text)){
     text = text.split('\n').filter(l=>l.trim()).map(line=>{
       const m=line.match(/^Locuteur \d+\s*:\s*(.*)$/);
       return m ? '— ' + m[1] : line;
     }).join('\n');
   }
-  // Format tiret : chaque prise de parole sur sa ligne, avec un espacement clair
+  // Format tiret : chaque prise de parole sur sa ligne, avec un espacement clair (identité non conservée)
   if(/^—/m.test(text)){
     return text.split('\n').filter(l=>l.trim()).map(line=>{
       const t=line.replace(/^—\s*/,'');
@@ -2903,13 +3242,49 @@ function formatTranscript(text){
   }
   return esc(text);
 }
+// Convertit le transcript brut (marqueurs S<N>:) en texte lisible avec les noms de locuteurs, pour les exports
+function humanizeTranscript(s){
+  const text = s.transcript || '';
+  if(/^S\d+:\s/m.test(text)){
+    return text.split('\n').filter(l=>l.trim()).map(line=>{
+      const m=line.match(/^S(\d+):\s(.*)$/);
+      if(!m) return line;
+      return `${speakerLabel(s, parseInt(m[1],10))} : ${m[2]}`;
+    }).join('\n');
+  }
+  return text;
+}
+// Renomme un locuteur pour une session et rafraîchit l'affichage
+function renameSpeaker(id, idx, name){
+  const s=sessions.find(x=>x.id===id);if(!s)return;
+  if(!s.speakerNames) s.speakerNames={};
+  const clean=(name||'').trim();
+  if(clean) s.speakerNames[idx]=clean; else delete s.speakerNames[idx];
+  K.saveSessions(sessions);
+  const box=document.getElementById(`tx-txt-${id}`);
+  if(box) box.innerHTML=formatTranscript(s.transcript, s);
+}
 
 // ══ DÉTAIL ══
 function openSession(id){
   const s=sessions.find(x=>x.id===id);if(!s)return;
-  const date=new Date(s.createdAt).toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-  const time=new Date(s.createdAt).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+  const date=new Date(s.createdAt).toLocaleDateString(jsLocale(),{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  const time=new Date(s.createdAt).toLocaleTimeString(jsLocale(),{hour:'2-digit',minute:'2-digit'});
   const sum=s.summary;const wc=s.wordCount||0;
+  const spk=detectSpeakers(s.transcript);
+  const speakerChipsHtml = spk.length>1 ? `
+    <div style="margin-bottom:12px">
+      <div class="export-lbl">${t('js.renamespeakers')}</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        ${spk.map(idx=>`
+          <div style="display:flex;align-items:center;gap:6px;background:var(--bg1);border:1px solid var(--line);border-radius:999px;padding:5px 6px 5px 12px">
+            <span style="width:8px;height:8px;border-radius:50%;background:${SPEAKER_COLORS[idx % SPEAKER_COLORS.length]};flex-shrink:0"></span>
+            <input value="${(s.speakerNames?.[idx]||'').replace(/"/g,'&quot;')}" placeholder="${speakerLabel(s,idx)}"
+              style="background:transparent;border:none;color:var(--ink);font-size:.8rem;font-family:inherit;width:100px;outline:none"
+              onchange="renameSpeaker('${id}', ${idx}, this.value)">
+          </div>`).join('')}
+      </div>
+    </div>` : '';
   let html=`
     <button class="back-btn" onclick="showView('dashboard')"><svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M9 11L5 7.5 9 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg> Retour</button>
     <div class="detail-kicker">Enregistrement</div>
@@ -2919,6 +3294,12 @@ function openSession(id){
       <span class="meta-chip">${fmtDur(s.duration)}</span>
       ${wc?`<span class="meta-chip">${wc} ${t('js.words')}</span>`:''}
       ${s.status==='done'?`<span class="meta-chip" style="color:var(--green)">${t('js.summaryready')}</span>`:''}
+    </div>
+    <div class="detail-block">
+      <div class="block-lbl">${t('js.tag')}</div>
+      <div style="display:flex;gap:7px;flex-wrap:wrap">
+        ${TAG_DEFS.map(d=>`<button class="ai-edit-chip" style="${s.tag===d.key?'background:var(--accent2);border-color:var(--accent-b);color:var(--accent)':''}" onclick="setSessionTag('${id}','${d.key}')">${d.icon} ${t(d.i18n)}</button>`).join('')}
+      </div>
     </div>`;
   if(sum){
     html+=`<div class="summary-box"><div class="summary-lbl">${t('js.summary')}</div><p class="summary-txt">${sum.resume}</p></div>`;
@@ -2954,7 +3335,8 @@ function openSession(id){
             ${t('js.undo')}
           </button>
         </div>
-        <div class="transcript-txt" id="tx-txt-${id}">${formatTranscript(s.transcript)}</div>
+        ${speakerChipsHtml}
+        <div class="transcript-txt" id="tx-txt-${id}">${formatTranscript(s.transcript, s)}</div>
       </div>
     </div>
     <div class="ai-section">
@@ -2972,7 +3354,7 @@ function openSession(id){
         <button class="ai-chip" onclick="sendChip(this,'${id}')">${t('js.shortsum')}</button>
       </div>
       <div class="ai-msgs" id="ai-msgs-${id}">
-        <div class="ai-msg bot"><div class="ai-av">N</div><div class="ai-bubble">Bonjour ! Je connais le contenu de cet enregistrement. Pose-moi une question ou choisis une action ci-dessus.</div></div>
+        <div class="ai-msg bot"><div class="ai-av">N</div><div class="ai-bubble">${t('js.aiwelcome')}</div></div>
       </div>
       <div class="ai-input-row">
         <textarea class="ai-input" id="ai-in-${id}" placeholder="Demande-moi quelque chose…" onkeydown="aiKey(event,'${id}')"></textarea>
@@ -2988,7 +3370,15 @@ function openSession(id){
         </button>
         <button class="btn-export" onclick="downloadSession('${id}')">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v7M4 6.5L7 9.5l3-3M2.5 11.5h9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          ${t('x.download')}
+          ${t('x.download')} (.txt)
+        </button>
+        <button class="btn-export" onclick="downloadSessionMd('${id}')">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v7M4 6.5L7 9.5l3-3M2.5 11.5h9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          ${t('x.exportmd')}
+        </button>
+        <button class="btn-export" onclick="printSessionPdf('${id}')">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2v7M4 6.5L7 9.5l3-3M2.5 11.5h9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          ${t('x.exportpdf')}
         </button>
       </div>
     </div>
@@ -3041,8 +3431,8 @@ async function callAi(id,msg){
     if(!res.ok)throw new Error();
     const d=await res.json();
     th.remove();
-    addMsg(id,'bot',d.content?.[0]?.text||'Désolé, je n\'ai pas pu répondre.');
-  }catch{th.remove();addMsg(id,'bot','⚠️ Erreur de connexion à l\'assistant. Réessaie dans un instant.')}
+    addMsg(id,'bot',d.content?.[0]?.text||t('js.noresponse'));
+  }catch{th.remove();addMsg(id,'bot',t('js.chatconnerr'))}
   if(btn)btn.disabled=false;
 }
 
@@ -3051,38 +3441,49 @@ function sendChip(btn,id){callAi(id,btn.textContent.trim())}
 function aiKey(e,id){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendAi(id)}const t=e.target;t.style.height='auto';t.style.height=Math.min(t.scrollHeight,110)+'px'}
 
 // ══ HISTORIQUE ══
+let historyTagFilter = null;
 function filterHistory(q){renderHistory(q.toLowerCase().trim())}
 function clearSearch(){document.getElementById('h-search').value='';renderHistory('')}
+function setHistoryTagFilter(key){
+  historyTagFilter = (historyTagFilter===key) ? null : key;
+  renderHistory(document.getElementById('h-search')?.value.toLowerCase().trim()||'');
+}
 function renderHistory(q){
   const sEl=document.getElementById('h-stats');
   if(sEl){
     const sec=sessions.reduce((a,s)=>a+(s.duration||0),0);const m=Math.floor(sec/60);
     const ai=sessions.filter(s=>K.aiHist(s.id).length>0).length;
     const ts=m>=60?`${Math.floor(m/60)}h${String(m%60).padStart(2,'0')}`:`${m}m`;
-    sEl.innerHTML=`<div class="hstat"><div class="hstat-v">${sessions.length}</div><div class="hstat-l">Sessions</div></div><div class="hstat"><div class="hstat-v">${ts}</div><div class="hstat-l">Audio</div></div><div class="hstat"><div class="hstat-v">${ai}</div><div class="hstat-l">Conv. IA</div></div>`;
+    sEl.innerHTML=`<div class="hstat"><div class="hstat-v">${sessions.length}</div><div class="hstat-l">${t('a13')}</div></div><div class="hstat"><div class="hstat-v">${ts}</div><div class="hstat-l">${t('js.audio')}</div></div><div class="hstat"><div class="hstat-v">${ai}</div><div class="hstat-l">${t('js.aiconv')}</div></div>`;
   }
-  const fl=q?sessions.filter(s=>(s.transcript||'').toLowerCase().includes(q)||(s.summary?.titre||'').toLowerCase().includes(q)||(s.summary?.resume||'').toLowerCase().includes(q)):sessions;
+  let fl=q?sessions.filter(s=>(s.transcript||'').toLowerCase().includes(q)||(s.summary?.titre||'').toLowerCase().includes(q)||(s.summary?.resume||'').toLowerCase().includes(q)):sessions;
+  if(historyTagFilter) fl=fl.filter(s=>s.tag===historyTagFilter);
+  const tagBar=document.getElementById('h-tagbar');
+  if(tagBar){
+    tagBar.innerHTML = `<button class="ai-edit-chip" style="${!historyTagFilter?'background:var(--accent2);border-color:var(--accent-b);color:var(--accent)':''}" onclick="setHistoryTagFilter(null)">${t('js.alltags')}</button>` +
+      TAG_DEFS.map(d=>`<button class="ai-edit-chip" style="${historyTagFilter===d.key?'background:var(--accent2);border-color:var(--accent-b);color:var(--accent)':''}" onclick="setHistoryTagFilter('${d.key}')">${d.icon} ${t(d.i18n)}</button>`).join('');
+  }
   const el=document.getElementById('h-list');if(!el)return;
-  if(!fl.length){el.innerHTML=`<div class="h-empty">${q?`Aucun résultat pour "${q}"`:''}</div>`;return}
+  if(!fl.length){el.innerHTML=`<div class="h-empty">${q?`${t('js.noresultsfor')} "${q}"`:''}</div>`;return}
   const hl=t=>q?t.replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi'),'<span class="hl">$1</span>'):t;
   const groups={};
   fl.forEach(s=>{
     const d=new Date(s.createdAt);const today=new Date();const yest=new Date(today);yest.setDate(today.getDate()-1);
-    const lbl=d.toDateString()===today.toDateString()?"Aujourd'hui":d.toDateString()===yest.toDateString()?'Hier':d.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'});
+    const lbl=d.toDateString()===today.toDateString()?t('js.grouptoday'):d.toDateString()===yest.toDateString()?t('js.yesterday'):d.toLocaleDateString(jsLocale(),{weekday:'long',day:'numeric',month:'long'});
     if(!groups[lbl])groups[lbl]=[];groups[lbl].push(s);
   });
   el.innerHTML=Object.entries(groups).map(([lbl,items])=>`
     <div class="h-group">
       <div class="h-group-lbl">${lbl} <span style="color:var(--ink3);font-weight:500;font-size:.65rem">(${items.length})</span></div>
       ${items.map(s=>{
-        const time=new Date(s.createdAt).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+        const time=new Date(s.createdAt).toLocaleTimeString(jsLocale(),{hour:'2-digit',minute:'2-digit'});
         const ai=K.aiHist(s.id).filter(m=>m.role==='user').length;
         const badge=s.status==='done'?'<span class="bdg bdg-done">✓</span>':s.status==='processing'?'<span class="bdg bdg-proc">⟳</span>':'';
         return`<div class="h-item" onclick="openSession('${s.id}')">
           <div class="h-item-ico"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="5" y="1" width="6" height="9" rx="3" stroke="#3D4D62" stroke-width="1.2"/><path d="M2 8a5 5 0 0010 0" stroke="#3D4D62" stroke-width="1.2" stroke-linecap="round"/><line x1="8" y1="13" x2="8" y2="15" stroke="#3D4D62" stroke-width="1.2" stroke-linecap="round"/></svg></div>
           <div class="h-item-body">
-            <div class="h-item-title">${hl(s.summary?.titre||'Enregistrement')}</div>
-            <div class="h-item-meta">${time}${ai>0?` · 💬 ${ai} msg IA`:''}</div>
+            <div class="h-item-title">${hl(s.summary?.titre||t('js.recfallback'))}</div>
+            <div class="h-item-meta">${time}${s.tag?` · ${tagLabel(s.tag)}`:''}${ai>0?` · 💬 ${ai} ${t('js.aimsg')}`:''}</div>
             <div class="h-item-preview">${hl((s.summary?.resume||s.transcript).substring(0,100)+'…')}</div>
           </div>
           <div class="h-item-right"><div class="h-dur">${fmtDur(s.duration)}</div>${badge}</div>
@@ -3092,6 +3493,34 @@ function renderHistory(q){
 }
 
 // ══ SETTINGS ══
+// ══ PARRAINAGE (lien partageable, récompense à venir côté serveur) ══
+function referralCode(email){
+  // Hash simple et déterministe à partir de l'email, uniquement pour générer un code court et stable
+  let h = 0;
+  const str = (email||'anon').toLowerCase();
+  for(let i=0;i<str.length;i++){ h = ((h<<5)-h) + str.charCodeAt(i); h |= 0; }
+  return Math.abs(h).toString(36).slice(0,7);
+}
+function referralLink(){
+  const serverCode = localStorage.getItem(`kaideno_refcode_${currentUser}`);
+  const code = serverCode || referralCode(currentUser);
+  return `https://kaideno.com/?register&ref=${code}`;
+}
+async function copyReferralLink(){
+  const link = referralLink();
+  try{
+    await navigator.clipboard.writeText(link);
+    showToast(t('x.copied'));
+  }catch(e){
+    const ta=document.createElement('textarea');
+    ta.value=link; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); showToast(t('x.copied')); }
+    catch(e2){ showToast(t('x.copyfail')); }
+    ta.remove();
+  }
+}
+
 function refreshSettings(){
   const dg=K.dgKey(),cl=K.clKey();
   const dgEl=document.getElementById('dg-status');const clEl=document.getElementById('cl-status');
@@ -3100,10 +3529,12 @@ function refreshSettings(){
     if(dgEl){dgEl.textContent='★ Fondateur';dgEl.className='key-status key-founder'}
     if(clEl){clEl.textContent='★ Fondateur';clEl.className='key-status key-founder'}
   }else{
-    if(dgEl){dgEl.textContent=dg?'✓ Configurée':'Manquante';dgEl.className=`key-status ${dg?'key-ok':'key-missing'}`}
-    if(clEl){clEl.textContent=cl?'✓ Configurée':'Manquante';clEl.className=`key-status ${cl?'key-ok':'key-missing'}`}
+    if(dgEl){dgEl.textContent=dg?t('js.keyok'):t('js.keymissing');dgEl.className=`key-status ${dg?'key-ok':'key-missing'}`}
+    if(clEl){clEl.textContent=cl?t('js.keyok'):t('js.keymissing');clEl.className=`key-status ${cl?'key-ok':'key-missing'}`}
   }
   if(dgIn&&dg)dgIn.value=dg;if(clIn&&cl)clIn.value=cl;
+  const refEl=document.getElementById('ref-link');
+  if(refEl && currentUser) refEl.textContent=referralLink();
   const em=document.getElementById('s-email');const info=document.getElementById('s-info');
   if(em){em.textContent=currentUser||'—';if(isFounder())em.innerHTML+=' <span style="font-size:.7rem;background:rgba(240,180,41,0.12);color:#F0B429;border:1px solid rgba(240,180,41,0.3);border-radius:999px;padding:1px 7px;font-weight:700">★ Fondateur</span>'}
   if(info)info.textContent=`${sessions.length} enregistrement${sessions.length>1?'s':''}`;
@@ -3115,12 +3546,12 @@ function refreshSettings(){
   const pi=document.getElementById('plan-info');
   if(pi){
     if(isFounder()){
-      pi.innerHTML = `<strong>★ ${t('q.founderplan')}</strong><br>${t('q.unlimited')}`;
+      pi.innerHTML = `<strong>★ Accès Fondateur</strong><br>Utilisation illimitée`;
     } else {
       const plan = PLAN_LIMITS[userPlan()] || PLAN_LIMITS.free;
       const usedMin = Math.floor(usedSeconds()/60);
       const remMin = Math.floor(remainingSec()/60);
-      pi.innerHTML = `<strong>${t('q.plan')} : ${plan.label}</strong><br>
+      pi.innerHTML = `<strong>${t('q.plan')} : ${t(plan.i18nKey)}</strong><br>
         ${t('q.used')} : ${usedMin} min / ${plan.minutes} min<br>
         ${t('q.left')} : <strong style="color:${remMin<5?'#F0A500':'var(--accent)'}">${remMin} min</strong>
         <div style="margin-top:10px;font-size:.78rem;color:var(--ink3)">${t('q.resets')}</div>`;
@@ -3148,37 +3579,37 @@ function renderAdmin(){
 
   el.innerHTML=`
     <div class="settings-section">
-      <p class="settings-lbl">${t('js.mystats')}</p>
+      <p class="settings-lbl">Mes statistiques</p>
       <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px">
         <div style="background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:16px">
           <div style="font-size:1.6rem;font-weight:700;font-family:'Space Grotesk',sans-serif;color:var(--accent)">${sessions.length}</div>
-          <div style="font-size:.75rem;color:var(--ink3)">${t('js.recordings')}</div>
+          <div style="font-size:.75rem;color:var(--ink3)">enregistrements</div>
         </div>
         <div style="background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:16px">
           <div style="font-size:1.6rem;font-weight:700;font-family:'Space Grotesk',sans-serif;color:var(--accent)">${h>0?h+'h':''}${m}min</div>
-          <div style="font-size:.75rem;color:var(--ink3)">${t('js.audiototal')}</div>
+          <div style="font-size:.75rem;color:var(--ink3)">audio total</div>
         </div>
         <div style="background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:16px">
-          <div style="font-size:1.6rem;font-weight:700;font-family:'Space Grotesk',sans-serif;color:var(--accent)">${totalWords.toLocaleString('fr-FR')}</div>
-          <div style="font-size:.75rem;color:var(--ink3)">${t('js.wordstrans')}</div>
+          <div style="font-size:1.6rem;font-weight:700;font-family:'Space Grotesk',sans-serif;color:var(--accent)">${totalWords.toLocaleString(jsLocale())}</div>
+          <div style="font-size:.75rem;color:var(--ink3)">mots transcrits</div>
         </div>
         <div style="background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);padding:16px">
           <div style="font-size:1.6rem;font-weight:700;font-family:'Space Grotesk',sans-serif;color:var(--accent)">${totalSummaries}</div>
-          <div style="font-size:.75rem;color:var(--ink3)">${t('js.summaries')}</div>
+          <div style="font-size:.75rem;color:var(--ink3)">résumés générés</div>
         </div>
       </div>
     </div>
 
     <div class="settings-section">
-      <p class="settings-lbl">${t('js.aiactivity')}</p>
-      <div class="info-card">${t('js.asstquestions')} <strong>${asstToday}</strong>${isFounder()?' (illimité — fondateur)':''}</div>
+      <p class="settings-lbl">Activité IA</p>
+      <div class="info-card">Questions à l'assistant aujourd'hui : <strong>${asstToday}</strong>${isFounder()?' (illimité — fondateur)':''}</div>
     </div>
 
     <div class="settings-section">
       <p class="settings-lbl">Comptes sur cet appareil (${emails.length})</p>
       <div class="info-card" style="font-size:.78rem;margin-bottom:10px">ℹ️ Seuls les comptes créés sur CE navigateur sont visibles. Pour voir tous les utilisateurs où qu'ils soient, il faudra une base de données centrale (étape future).</div>
       <div style="display:flex;flex-direction:column;gap:8px">
-        ${emails.length===0?`<div style="font-size:.85rem;color:var(--ink3)">${t('js.noaccounts')}</div>`:emails.map(em=>{
+        ${emails.length===0?`<div style="font-size:.85rem;color:var(--ink3)">Aucun compte enregistré.</div>`:emails.map(em=>{
           const u=users[em];
           const date=u.createdAt?new Date(u.createdAt).toLocaleDateString('fr-FR'):'—';
           const founder=FOUNDERS.includes(em.toLowerCase());
@@ -3190,7 +3621,7 @@ function renderAdmin(){
     </div>
 
     <div class="settings-section">
-      <p class="settings-lbl">${t('js.costwatch')}</p>
+      <p class="settings-lbl">Surveillance des coûts</p>
       <div class="info-card" style="font-size:.82rem">💡 Rappel : chaque enregistrement et résumé consomme ton crédit API (Deepgram + Anthropic). Surveille ta consommation sur <a href="https://console.deepgram.com" target="_blank" style="color:var(--accent)">console.deepgram.com</a> et <a href="https://console.anthropic.com" target="_blank" style="color:var(--accent)">console.anthropic.com</a>.</div>
     </div>
   `;
@@ -3340,9 +3771,7 @@ function openAssistant(){
 
   if(asstHistory.length === 0){
     const c = document.getElementById('asst-msgs');
-    const welcome = hasSessions
-      ? "Bonjour ! Je suis votre assistant. Je peux répondre à toutes vos questions, mais aussi exploiter vos enregistrements : les résumer, les trier, retrouver un sujet, lister vos actions. Que puis-je faire ?"
-      : "Bonjour ! Je suis votre assistant IA. Posez-moi n'importe quelle question — j'y réponds. Et dès que vous ferez un enregistrement, je pourrai aussi le résumer, le trier et retrouver vos informations. Comment puis-je vous aider ?";
+    const welcome = hasSessions ? t('js.welcome1') : t('js.welcome2');
     if(c) c.innerHTML = `<div class="asst-msg bot"><div class="asst-av">N</div><div class="asst-bubble">${welcome}</div></div>`;
   }
   setTimeout(()=>document.getElementById('asst-input')?.focus(), 300);
@@ -3366,7 +3795,7 @@ function buildAsstContext(){
   // Résumé compact de toutes les sessions pour donner le contexte à l'IA
   if(sessions.length === 0) return "L'utilisateur n'a encore aucun enregistrement.";
   return sessions.slice(0, 20).map((s,i) => {
-    const date = new Date(s.createdAt).toLocaleDateString('fr-FR');
+    const date = new Date(s.createdAt).toLocaleDateString(jsLocale());
     const titre = s.summary?.titre || 'Sans titre';
     const resume = s.summary?.resume || (s.transcript||'').substring(0,200);
     const actions = (s.summary?.actions||[]).join('; ');
@@ -3412,13 +3841,13 @@ async function asstSend(){
     if(!res.ok) throw new Error();
     const data = await res.json();
     think.remove();
-    const reply = data.content?.[0]?.text || 'Désolé, je n\'ai pas pu répondre.';
+    const reply = data.content?.[0]?.text || t('js.noresponse');
     asstAddMsg('bot', reply);
     asstHistory.push({role:'assistant', content:reply});
     if(!asstUnlimited()){ incAsstUsed(); updateAsstQuota(); }
   }catch{
     think.remove();
-    asstAddMsg('bot','⚠️ Erreur de connexion. Vérifie ta clé Claude dans Paramètres.');
+    asstAddMsg('bot',t('js.asstconnerr'));
   }
   if(sendBtn) sendBtn.disabled = false;
 }
@@ -3430,7 +3859,7 @@ function showAsstLimit(){
   d.className = 'asst-limit';
   d.innerHTML = `<div class="asst-limit-box">
     <h4>${t('js.limitreached')}</h4>
-    <p>Tu as utilisé tes ${ASST_LIMITS.free} questions gratuites du jour. Passe à un plan payant pour poser des questions en illimité.</p>
+    <p>${t('js.limittext')}</p>
     <button class="btn-upgrade" onclick="closeAssistant();showView('settings')">${t('js.seeplans')}</button>
   </div>`;
   c.appendChild(d);
@@ -3448,15 +3877,9 @@ function asstKey(e){
   const t=e.target; t.style.height='auto'; t.style.height=Math.min(t.scrollHeight,120)+'px';
 }
 
-// ══ LANGUE DE TRANSCRIPTION ══
+// ══ LANGUE DE L'ASSISTANT / DES RÉSUMÉS (alignée sur la langue d'interface) ══
 const LANG_NAMES = {fr:'français',en:'English',es:'español',de:'Deutsch',it:'italiano',pt:'português',nl:'Nederlands',ru:'русский',ja:'日本語 (japonais)',zh:'中文 (chinois)',ar:'العربية (arabe)',hi:'हिन्दी (hindi)'};
-function getRecLang(){ return localStorage.getItem('kaideno_rec_lang')||'fr'; }
-function getLangName(){ return LANG_NAMES[getRecLang()]||'français'; }
-
-function saveRecLang(){
-  const sel=document.getElementById('rec-lang');
-  if(sel){localStorage.setItem('kaideno_rec_lang',sel.value);showToast('🌍 Langue : '+sel.options[sel.selectedIndex].text)}
-}
+function getLangName(){ return LANG_NAMES[uiLang()]||'français'; }
 
 // ══ THÈME CLAIR/SOMBRE ══
 function applyTheme(theme){
@@ -3483,7 +3906,7 @@ function toggleTheme(){
 
 // Construit le texte complet d'une session (titre, résumé, points clés, actions, transcription)
 function buildExportText(s){
-  const date = new Date(s.createdAt).toLocaleString(uiLang()==='en'?'en-GB':uiLang()==='es'?'es-ES':'fr-FR');
+  const date = new Date(s.createdAt).toLocaleString(jsLocale());
   const titre = s.summary?.titre || t('js.norec');
   const L = [];
   L.push(titre);
@@ -3517,7 +3940,7 @@ function buildExportText(s){
 
   L.push(t('js.transcript').toUpperCase());
   L.push('-'.repeat(20));
-  L.push(s.transcript || '');
+  L.push(humanizeTranscript(s));
   L.push('');
   L.push('---');
   L.push('kaideno');
@@ -3578,6 +4001,96 @@ function exportAll(){
   a.remove();
   URL.revokeObjectURL(url);
   showToast(t('x.allexported'));
+}
+
+// ══ EXPORT MARKDOWN ══
+function esc_md(s){ return String(s||'').replace(/([*_`\[\]])/g,'\\$1'); }
+function buildExportMarkdown(s){
+  const date = new Date(s.createdAt).toLocaleString(jsLocale());
+  const titre = s.summary?.titre || t('js.norec');
+  const L = [];
+  L.push(`# ${esc_md(titre)}`);
+  L.push('');
+  L.push(`**${t('x.date')} :** ${date}  `);
+  L.push(`**${t('x.duration')} :** ${fmtDur(s.duration)}  `);
+  L.push(`**${t('js.words')} :** ${s.wordCount || 0}`);
+  L.push('');
+  if(s.summary){
+    if(s.summary.resume){
+      L.push(`## ${t('js.summary')}`);
+      L.push('');
+      L.push(s.summary.resume);
+      L.push('');
+    }
+    if(s.summary.points_cles?.length){
+      L.push(`## ${t('js.keypoints')}`);
+      L.push('');
+      s.summary.points_cles.forEach(p => L.push(`- ${p}`));
+      L.push('');
+    }
+    if(s.summary.actions?.length){
+      L.push(`## ${t('js.actions')}`);
+      L.push('');
+      s.summary.actions.forEach(a => L.push(`- [ ] ${a}`));
+      L.push('');
+    }
+  }
+  L.push(`## ${t('js.transcript')}`);
+  L.push('');
+  L.push(humanizeTranscript(s));
+  L.push('');
+  L.push('---');
+  L.push('_kaideno_');
+  return L.join('\n');
+}
+function downloadSessionMd(id){
+  const s = sessions.find(x=>x.id===id);
+  if(!s) return;
+  const md = buildExportMarkdown(s);
+  const titre = (s.summary?.titre || 'kaideno').replace(/[^\w\sàâéèêëîïôùûüç-]/gi,'').trim().slice(0,50) || 'kaideno';
+  const date = new Date(s.createdAt).toISOString().slice(0,10);
+  const blob = new Blob([md], {type:'text/markdown;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${date}_${titre}.md`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  showToast(t('x.downloaded'));
+}
+
+// ══ EXPORT PDF (impression navigateur, sans dépendance externe) ══
+function esc_html(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function printSessionPdf(id){
+  const s = sessions.find(x=>x.id===id);
+  if(!s) return;
+  const date = new Date(s.createdAt).toLocaleString(jsLocale());
+  const titre = s.summary?.titre || t('js.norec');
+  let body = `<h1>${esc_html(titre)}</h1>
+    <p class="meta">${t('x.date')} : ${esc_html(date)} &nbsp;·&nbsp; ${t('x.duration')} : ${esc_html(fmtDur(s.duration))} &nbsp;·&nbsp; ${t('js.words')} : ${s.wordCount||0}</p>`;
+  if(s.summary){
+    if(s.summary.resume) body += `<h2>${t('js.summary')}</h2><p>${esc_html(s.summary.resume)}</p>`;
+    if(s.summary.points_cles?.length) body += `<h2>${t('js.keypoints')}</h2><ul>${s.summary.points_cles.map(p=>`<li>${esc_html(p)}</li>`).join('')}</ul>`;
+    if(s.summary.actions?.length) body += `<h2>${t('js.actions')}</h2><ul>${s.summary.actions.map(a=>`<li>${esc_html(a)}</li>`).join('')}</ul>`;
+  }
+  body += `<h2>${t('js.transcript')}</h2><p class="transcript">${esc_html(humanizeTranscript(s)).replace(/\n/g,'<br>')}</p>`;
+  const w = window.open('', '_blank');
+  if(!w){ showToast(t('js.errretry')); return; }
+  w.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${esc_html(titre)}</title>
+    <style>
+      body{font-family:Georgia,serif;color:#111;max-width:700px;margin:40px auto;padding:0 20px;line-height:1.6}
+      h1{font-size:1.6rem;margin-bottom:4px}
+      h2{font-size:1.1rem;margin-top:28px;border-bottom:1px solid #ddd;padding-bottom:4px}
+      .meta{color:#666;font-size:.85rem;margin-bottom:20px}
+      .transcript{white-space:pre-wrap;font-size:.92rem}
+      footer{margin-top:40px;color:#999;font-size:.75rem;text-align:center}
+      @media print{body{margin:0;padding:20px}}
+    </style></head><body>${body}<footer>kaideno</footer></body></html>`);
+  w.document.close();
+  // Un seul déclenchement de l'impression, avec un court délai pour laisser le temps au rendu
+  setTimeout(() => { try{ w.focus(); w.print(); }catch(e){} }, 300);
 }
 
 
@@ -3655,28 +4168,45 @@ function showToast(m){const t=document.getElementById('toast');t.textContent=m;t
 
 // ══ INIT ══
 window.addEventListener('DOMContentLoaded',()=>{
+  // Sur iOS, quand kaideno tourne dans un onglet Safari classique (pas installé sur l'écran d'accueil),
+  // la barre d'outils du navigateur recouvre le bas de l'écran sans que env(safe-area-inset-bottom) le sache.
+  // On ajoute alors une marge de sécurité supplémentaire pour que le bouton assistant et les toasts restent visibles.
+  if(!window.navigator.standalone){
+    document.documentElement.style.setProperty('--safe-bottom-extra', '44px');
+  }
   // Appliquer la langue de l'interface
   applyUILang();
   const uiSel=document.getElementById('ui-lang');
   if(uiSel) uiSel.value = uiLang();
+  const dashSel=document.getElementById('dash-lang');
+  if(dashSel) dashSel.value = uiLang();
   // Appliquer le thème sauvegardé
   applyTheme(localStorage.getItem('kaideno_theme')||'dark');
-  // Restaurer la langue de transcription
-  const langSel=document.getElementById('rec-lang');
-  if(langSel)langSel.value=localStorage.getItem('kaideno_rec_lang')||'fr';
   const viz=document.getElementById('audio-viz');
   for(let i=0;i<22;i++){const b=document.createElement('div');b.className='viz-bar';viz.appendChild(b);vizBars.push(b)}
   document.getElementById('reg-pwd')?.addEventListener('keydown',e=>{if(e.key==='Enter')doRegister()});
   document.getElementById('log-pwd')?.addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
 
-  // Détecter les paramètres d'URL : ?login ou ?register
+  // Détecter les paramètres d'URL : ?login, ?register, ?ref=, ?reset=
   const params = new URLSearchParams(window.location.search);
   const forceAuth = params.has('login') || params.has('register');
   const wantRegister = params.has('register');
+  const refParam = params.get('ref');
+  if(refParam) pendingRef = refParam;
+  const resetParam = params.get('reset');
 
   const saved=localStorage.getItem('nuro_cu');
 
-  if(forceAuth){
+  if(resetParam){
+    // Lien de réinitialisation de mot de passe reçu par email
+    resetToken = resetParam;
+    document.getElementById('auth-register').style.display='none';
+    document.getElementById('auth-login').style.display='none';
+    const af=document.getElementById('auth-forgot'); if(af) af.style.display='none';
+    const ar=document.getElementById('auth-reset'); if(ar) ar.style.display='block';
+    showView('auth');
+  }
+  else if(forceAuth){
     // On vient du site via "Se connecter" ou "Commencer" → toujours montrer l'écran d'auth
     prefillEmail();
     if(wantRegister){
@@ -3696,6 +4226,7 @@ window.addEventListener('DOMContentLoaded',()=>{
   }
   else if(saved&&K.users()[saved]){
     currentUser=saved;enterDashboard();
+    refreshServerAccount(currentUser).then(()=>renderQuota());
   }
   else {
     prefillEmail();
@@ -3709,3 +4240,4 @@ window.addEventListener('DOMContentLoaded',()=>{
 </script>
 </body>
 </html>
+                 

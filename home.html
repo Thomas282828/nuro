@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="kaideno transcrit et résume vos réunions en temps réel depuis votre téléphone. Sans boîtier. Sans prise de notes.">
 <title>kaideno — L'IA qui retient tout, pendant que vous écoutez</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -495,6 +497,19 @@ section{padding:96px 0}
 .plan.popular .btn-plan{background:var(--c-blue);border-color:var(--c-blue);color:#fff}
 .plan.popular .btn-plan:hover{opacity:.88}
 .pricing-note{text-align:center;color:var(--c-text3);font-size:.8rem;margin-top:28px}
+.pricing-compare{margin:40px auto 0;max-width:640px}
+.compare-title{text-align:center;font-weight:600;font-size:.95rem;color:var(--c-text2);margin-bottom:16px}
+.compare-table{border:1px solid var(--c-border);border-radius:14px;overflow:hidden;background:var(--c-surface)}
+.compare-row{display:grid;grid-template-columns:1.3fr 1fr 1fr}
+.compare-row>div{padding:12px 14px;font-size:.83rem;color:var(--c-text2)}
+.compare-row.compare-head{background:var(--c-surface2)}
+.compare-row.compare-head>div{font-weight:700;color:var(--c-text3);font-size:.68rem;text-transform:uppercase;letter-spacing:.05em}
+.compare-row+.compare-row{border-top:1px solid var(--c-border)}
+.compare-row>div:first-child{color:var(--c-text2);font-weight:600}
+.compare-row.compare-total{background:var(--c-blue-bg)}
+.compare-row.compare-total>div{font-weight:700;color:var(--c-text)}
+.compare-footnote{text-align:center;font-size:.7rem;color:var(--c-text3);margin-top:10px;line-height:1.5}
+@media(max-width:520px){.compare-row>div{padding:10px;font-size:.76rem}}
 
 /* ─── FAQ ────────────────────────────────────────────────────── */
 .faq-list{max-width:680px;margin:48px auto 0;display:flex;flex-direction:column;gap:2px}
@@ -645,7 +660,7 @@ section{padding:96px 0}
 <!-- ─── NAV ──────────────────────────────── -->
 <nav class="nav" id="main-nav" aria-label="Navigation principale">
   <div class="wrap">
-    <a href="https://thomas282828.github.io/nuro/home.html" class="nav-logo" aria-label="kaideno — accueil">
+    <a href="https://kaideno.com/home.html" class="nav-logo" aria-label="kaideno — accueil">
       <svg width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true">
         <rect width="28" height="28" rx="7" fill="#EEF1F5"/>
         <rect x="7.7" y="7.7" width="12.6" height="12.6" rx="2.8" fill="none" stroke="#4A5A6E" stroke-width="0.9" transform="rotate(8 14 14)"/>
@@ -671,8 +686,8 @@ section{padding:96px 0}
         <svg id="site-moon" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13 9.5A5.5 5.5 0 016.5 3a5.5 5.5 0 106.5 6.5z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
         <svg id="site-sun" width="16" height="16" viewBox="0 0 16 16" fill="none" style="display:none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.4"/><path d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3.05 3.05l1.06 1.06M11.89 11.89l1.06 1.06M12.95 3.05l-1.06 1.06M4.11 11.89l-1.06 1.06" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
       </button>
-      <a href="https://thomas282828.github.io/nuro/?login" class="nav-link" data-i18n="nav.login">Se connecter</a>
-      <a href="https://thomas282828.github.io/nuro/?register" class="btn-nav" data-i18n="nav.trial">Essai gratuit</a>
+      <a href="https://kaideno.com/?login" class="nav-link" data-i18n="nav.login">Se connecter</a>
+      <a href="https://kaideno.com/?register" class="btn-nav" data-i18n="nav.trial">Essai gratuit</a>
     </div>
   </div>
 </nav>
@@ -690,8 +705,8 @@ section{padding:96px 0}
           <span style="font-size:.85rem;font-weight:600;color:#34D399" data-i18n="hero.pitch">Ressortez de chaque réunion avec l'essentiel, sans lever le stylo</span>
         </div>
         <div class="hero-actions">
-          <a href="https://thomas282828.github.io/nuro/?register" class="btn-primary" data-i18n="hero.cta1">Commencer gratuitement</a>
-          <a href="https://thomas282828.github.io/nuro/?login" class="btn-secondary" data-i18n="hero.cta2">Se connecter</a>
+          <a href="https://kaideno.com/?register" class="btn-primary" data-i18n="hero.cta1">Commencer gratuitement</a>
+          <a href="https://kaideno.com/?login" class="btn-secondary" data-i18n="hero.cta2">Se connecter</a>
           <a href="#video" class="btn-secondary" data-i18n="hero.cta3">Voir la démo →</a>
         </div>
         <div class="hero-proof" aria-label="Sans engagement">
@@ -1050,6 +1065,46 @@ section{padding:96px 0}
   </div>
 </section>
 
+<!-- ─── CAS D'USAGE (SCÉNARIOS) ───────────── -->
+<section style="padding:96px 0">
+  <div class="wrap">
+    <div class="sh" style="margin-bottom:56px">
+      <div class="sh-tag" data-i18n="use.tag">Cas d'usage</div>
+      <h2 data-i18n="use.title">kaideno s'adapte à votre quotidien</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px">
+      <div style="background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius-xl);overflow:hidden">
+        <img src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?q=80&w=800&auto=format&fit=crop" alt="Équipe en réunion autour d'une table" data-i18n-alt="use.meeting.alt" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:var(--radius-xl) var(--radius-xl) 0 0;display:block">
+        <div style="padding:20px 22px">
+          <div style="font-weight:700;margin-bottom:6px" data-i18n="use.meeting.title">Réunions d'équipe</div>
+          <p style="font-size:.85rem;color:var(--c-text2);line-height:1.6;margin:0" data-i18n="use.meeting.desc">Chaque décision et action capturée, sans que personne ne quitte la conversation des yeux.</p>
+        </div>
+      </div>
+      <div style="background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius-xl);overflow:hidden">
+        <img src="https://images.unsplash.com/photo-1551135049-8a33b5883817?q=80&w=800&auto=format&fit=crop" alt="Quatre personnes qui réfléchissent autour d'un document" data-i18n-alt="use.brainstorm.alt" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:var(--radius-xl) var(--radius-xl) 0 0;display:block">
+        <div style="padding:20px 22px">
+          <div style="font-weight:700;margin-bottom:6px" data-i18n="use.brainstorm.title">Brainstorms</div>
+          <p style="font-size:.85rem;color:var(--c-text2);line-height:1.6;margin:0" data-i18n="use.brainstorm.desc">Toutes les idées gardées au vol, même celles qu'on aurait oubliées cinq minutes après.</p>
+        </div>
+      </div>
+      <div style="background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius-xl);overflow:hidden">
+        <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800&auto=format&fit=crop" alt="Deux personnes assises à une table pour un entretien" data-i18n-alt="use.interview.alt" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:var(--radius-xl) var(--radius-xl) 0 0;display:block">
+        <div style="padding:20px 22px">
+          <div style="font-weight:700;margin-bottom:6px" data-i18n="use.interview.title">Entretiens & podcasts</div>
+          <p style="font-size:.85rem;color:var(--c-text2);line-height:1.6;margin:0" data-i18n="use.interview.desc">Une transcription fidèle, prête à citer, relire ou publier.</p>
+        </div>
+      </div>
+      <div style="background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--radius-xl);overflow:hidden">
+        <img src="https://images.unsplash.com/photo-1573164574572-cb89e39749b4?q=80&w=800&auto=format&fit=crop" alt="Groupe de personnes travaillant ensemble avec des ordinateurs portables" data-i18n-alt="use.course.alt" loading="lazy" style="width:100%;height:180px;object-fit:cover;border-radius:var(--radius-xl) var(--radius-xl) 0 0;display:block">
+        <div style="padding:20px 22px">
+          <div style="font-weight:700;margin-bottom:6px" data-i18n="use.course.title">Cours & conférences</div>
+          <p style="font-size:.85rem;color:var(--c-text2);line-height:1.6;margin:0" data-i18n="use.course.desc">Révisez un cours entier sans avoir pris une seule note pendant qu'il se déroulait.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ─── HOW ───────────────────────────────── -->
 <section aria-labelledby="how-title">
   <div class="wrap">
@@ -1215,7 +1270,7 @@ section{padding:96px 0}
           <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p3">5 questions à l'assistant / jour</span></li>
           <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p4">Sans carte bancaire</span></li>
         </ul>
-        <button class="btn-plan" onclick="window.location.href='https://thomas282828.github.io/nuro/?register'" data-i18n="plan.cta.free">Commencer gratuitement</button>
+        <button class="btn-plan" onclick="window.location.href='https://kaideno.com/?register'" data-i18n="plan.cta.free">Commencer gratuitement</button>
       </div>
 
       <div class="plan popular" aria-label="Plan recommandé">
@@ -1231,7 +1286,7 @@ section{padding:96px 0}
           <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p7">Distinction des locuteurs</span></li>
           <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p8">Export + recherche</span></li>
         </ul>
-        <button class="btn-plan" onclick="window.location.href='https://thomas282828.github.io/nuro/?register'" data-i18n="plan.cta.ess">Choisir Essentiel</button>
+        <button class="btn-plan" onclick="window.location.href='https://kaideno.com/?register'" data-i18n="plan.cta.ess">Choisir Essentiel</button>
       </div>
 
       <div class="plan">
@@ -1247,10 +1302,36 @@ section{padding:96px 0}
           <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p11">12 langues de transcription</span></li>
           <li><svg class="pf-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2.5 7l3 3 6-6" stroke="#34D399" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="p12">Support prioritaire</span></li>
         </ul>
-        <button class="btn-plan" onclick="window.location.href='https://thomas282828.github.io/nuro/?register'" data-i18n="plan.cta.pro">Choisir Pro</button>
+        <button class="btn-plan" onclick="window.location.href='https://kaideno.com/?register'" data-i18n="plan.cta.pro">Choisir Pro</button>
       </div>
     </div>
-    <p class="pricing-note" data-i18n-html="note.pricing">Sans carte bancaire pour le plan gratuit · Sans engagement · Résiliable à tout moment · Besoin de plus ? <a href="https://thomas282828.github.io/nuro/?register" style="color:var(--c-blue)">Contactez-nous</a> pour une offre sur mesure</p>
+    <div class="pricing-compare">
+      <p class="compare-title" data-i18n="compare.title">kaideno vs boîtier dédié, sur la première année</p>
+      <div class="compare-table" role="table" aria-label="Comparaison des coûts">
+        <div class="compare-row compare-head" role="row">
+          <div role="columnheader"></div>
+          <div role="columnheader" data-i18n="compare.kaideno">kaideno</div>
+          <div role="columnheader" data-i18n="compare.competitor">Boîtier dédié (type Plaud)</div>
+        </div>
+        <div class="compare-row" role="row">
+          <div role="rowheader" data-i18n="compare.hardware">Matériel à acheter</div>
+          <div data-i18n="compare.hardware.kaideno">0€ — ton téléphone suffit</div>
+          <div data-i18n="compare.hardware.competitor">135 – 190€</div>
+        </div>
+        <div class="compare-row" role="row">
+          <div role="rowheader" data-i18n="compare.sub">Abonnement (facturation annuelle)</div>
+          <div data-i18n="compare.sub.kaideno">9€/mois (plan Essentiel)</div>
+          <div data-i18n="compare.sub.competitor">≈ 9,25€/mois (plan Pro)</div>
+        </div>
+        <div class="compare-row compare-total" role="row">
+          <div role="rowheader" data-i18n="compare.total">Coût 1ère année</div>
+          <div data-i18n="compare.total.kaideno">108€</div>
+          <div data-i18n="compare.total.competitor">≈ 246€</div>
+        </div>
+      </div>
+      <p class="compare-footnote" data-i18n="compare.footnote">Comparaison basée sur les tarifs publics Plaud (Note + Plan Pro, facturation annuelle) constatés en juillet 2026. Les prix peuvent varier.</p>
+    </div>
+    <p class="pricing-note" data-i18n-html="note.pricing">Sans carte bancaire pour le plan gratuit · Sans engagement · Résiliable à tout moment · Besoin de plus ? <a href="https://kaideno.com/?register" style="color:var(--c-blue)">Contactez-nous</a> pour une offre sur mesure</p>
   </div>
 </section>
 
@@ -1297,6 +1378,11 @@ section{padding:96px 0}
         </button>
         <div class="faq-a" data-i18n="t86">kaideno transcrit dans 12 langues : français, anglais, espagnol, allemand, italien, portugais, néerlandais, russe, japonais, chinois, arabe et hindi. L'assistant IA répond également dans la langue que vous avez choisie.</div>
       </div>
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false" onclick="toggleFaq(this)"><span data-i18n="q8">Puis-je verrouiller mon téléphone ou changer d'appli pendant l'enregistrement ?</span><svg class="faq-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4.5 6.75L9 11.25l4.5-4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-a" data-i18n="faq.lockscreen">Mieux vaut éviter. kaideno fonctionne dans le navigateur de votre téléphone, sans installation — mais la plupart des navigateurs mobiles coupent l'accès au micro dès que l'écran se verrouille ou que vous changez d'application. Gardez l'écran allumé et kaideno au premier plan pendant l'enregistrement pour ne rien perdre.</div>
+      </div>
     </div>
   </div>
 </section>
@@ -1307,8 +1393,8 @@ section{padding:96px 0}
     <h2 id="cta-title" data-i18n-html="h.cta">Commencez à écouter.<br>kaideno retient le reste.</h2>
     <p data-i18n="t87">Gratuit pour démarrer. Aucun boîtier. Aucun engagement.</p>
     <div class="cta-actions">
-      <a href="https://thomas282828.github.io/nuro/?register" class="btn-primary" style="display:inline-flex;align-items:center" data-i18n="t88">Créer un compte gratuit</a>
-      <a href="https://thomas282828.github.io/nuro/?login" class="btn-secondary" style="display:inline-flex;align-items:center" data-i18n="t89">Se connecter</a>
+      <a href="https://kaideno.com/?register" class="btn-primary" style="display:inline-flex;align-items:center" data-i18n="t88">Créer un compte gratuit</a>
+      <a href="https://kaideno.com/?login" class="btn-secondary" style="display:inline-flex;align-items:center" data-i18n="t89">Se connecter</a>
       <a href="#pricing" class="btn-secondary" data-i18n="t90">Voir les tarifs</a>
     </div>
   </div>
@@ -1402,7 +1488,7 @@ section{padding:96px 0}
         <a href="#features" data-i18n="t104">Fonctionnalités</a>
         <a href="#pricing" data-i18n="t105">Tarifs</a>
         <a href="#video" data-i18n="t106">Démo</a>
-        <a href="https://thomas282828.github.io/nuro/?login" data-i18n="t107">Se connecter</a>
+        <a href="https://kaideno.com/?login" data-i18n="t107">Se connecter</a>
       </div>
       <div class="footer-col">
         <div class="footer-col-title" data-i18n="c.support">Support</div>
@@ -1415,9 +1501,9 @@ section{padding:96px 0}
       <div style="display:flex;flex-direction:column;gap:8px">
         <p class="footer-legal" data-i18n="t111">© 2025 kaideno. Page de validation produit.</p>
         <div style="display:flex;gap:16px;flex-wrap:wrap">
-          <a href="legal.html#mentions" style="font-size:.78rem;color:var(--c-text3)" data-i18n="l.mentions">Mentions légales</a>
-          <a href="legal.html#confidentialite" style="font-size:.78rem;color:var(--c-text3)" data-i18n="l.privacy">Confidentialité</a>
-          <a href="legal.html#cgu" style="font-size:.78rem;color:var(--c-text3)" data-i18n="l.terms">CGU</a>
+          <a href="https://kaideno.com/legal.html#mentions" style="font-size:.78rem;color:var(--c-text3)" data-i18n="l.mentions">Mentions légales</a>
+          <a href="https://kaideno.com/legal.html#confidentialite" style="font-size:.78rem;color:var(--c-text3)" data-i18n="l.privacy">Confidentialité</a>
+          <a href="https://kaideno.com/legal.html#cgu" style="font-size:.78rem;color:var(--c-text3)" data-i18n="l.terms">CGU</a>
         </div>
       </div>
       <p class="footer-notice" data-i18n="t112">⚠️ Aucun produit commercial n'est encore vendu. Les données collectées servent uniquement à orienter le développement.</p>
@@ -1761,7 +1847,7 @@ function doRegister() {
   localStorage.setItem('nuro_current_user', email);
 
   // Rediriger vers l'app
-  setTimeout(() => { window.location.href = 'https://thomas282828.github.io/nuro/'; }, 400);
+  setTimeout(() => { window.location.href = 'https://kaideno.com/'; }, 400);
 }
 
 function doLogin() {
@@ -1779,7 +1865,7 @@ function doLogin() {
 
   btn.disabled = true; btn.textContent = 'Connexion…';
   localStorage.setItem('nuro_current_user', email);
-  setTimeout(() => { window.location.href = 'https://thomas282828.github.io/nuro/'; }, 400);
+  setTimeout(() => { window.location.href = 'https://kaideno.com/'; }, 400);
 }
 
 // Soumettre avec Entrée
@@ -2128,7 +2214,7 @@ const I18N = {
     'c.support':'Support',
     'c.contactus':'Nous contacter',
     'c.reportbug':'Signaler un bug',
-    'note.pricing':'Sans carte bancaire pour le plan gratuit · Sans engagement · Résiliable à tout moment · Besoin de plus ? <a href="https://thomas282828.github.io/nuro/?register" style="color:var(--c-blue)">Contactez-nous</a> pour une offre sur mesure',
+    'note.pricing':'Sans carte bancaire pour le plan gratuit · Sans engagement · Résiliable à tout moment · Besoin de plus ? <a href="https://kaideno.com/?register" style="color:var(--c-blue)">Contactez-nous</a> pour une offre sur mesure',
     'v1':'Lancement produit fixé au 15 du mois',
     'v2':'Envoyer le brief au marketing',
     'v3':'Valider le budget avant jeudi',
@@ -2146,7 +2232,7 @@ const I18N = {
     'p8':'Export + recherche',
     'p9':'30 heures d\'audio par mois',
     'p10':'Tout ce qui est dans Essentiel',
-    'p11':'12 langues de transcription',
+    'p11':'Transcription multilingue automatique',
     'p12':'Support prioritaire',
     'q1':'Mes données audio sont-elles stockées quelque part ?',
     'q2':'Ai-je besoin d\'une connexion internet pour enregistrer ?',
@@ -2201,7 +2287,7 @@ const I18N = {
     't23':'Fonctionnalités',
     't24':'Conçu pour les professionnels qui veulent capturer l\'essentiel sans friction.',
     't25':'Transcription en temps réel',
-    't26':'Chaque mot apparaît à mesure que vous parlez, en temps réel. La transcription est disponible en 12 langues, avec ponctuation et mise en forme automatiques.',
+    't26':'Chaque mot apparaît à mesure que vous parlez, en temps réel. La langue parlée est détectée automatiquement parmi 10 langues, avec ponctuation et mise en forme automatiques.',
     't27':'Résumé structuré par IA',
     't28':'Points clés, décisions prises, actions à suivre — extraits automatiquement à la fin de chaque enregistrement.',
     't29':'Historique consultable',
@@ -2212,7 +2298,7 @@ const I18N = {
     't34':'Application PWA — s\'installe sur l\'écran d\'accueil iOS et Android comme une app native.',
     't35':'Le workflow kaideno',
     't36':'01 — Capturer',
-    't37':'Audio · Temps réel · 12 langues',
+    't37':'Audio · Temps réel · 10 langues',
     't38':'Appuyez sur enregistrer. kaideno transcrit mot à mot en temps réel, depuis le micro de votre téléphone. Pas de boîtier, pas d\'installation.',
     't39':'02 — Extraire',
     't40':'Résumé · Points clés · Actions',
@@ -2250,6 +2336,12 @@ const I18N = {
     't72':'« Rédige-moi un email de compte-rendu pour l\'équipe » — et c\'est fait.',
     't73':'Tarifs',
     't74':'Transparent. Sans surprise.',
+    'compare.title':"kaideno vs boîtier dédié, sur la première année",
+    'compare.kaideno':'kaideno', 'compare.competitor':'Boîtier dédié (type Plaud)',
+    'compare.hardware':'Matériel à acheter', 'compare.hardware.kaideno':'0€ — ton téléphone suffit', 'compare.hardware.competitor':'135 – 190€',
+    'compare.sub':'Abonnement (facturation annuelle)', 'compare.sub.kaideno':'9€/mois (plan Essentiel)', 'compare.sub.competitor':'≈ 9,25€/mois (plan Pro)',
+    'compare.total':'Coût 1ère année', 'compare.total.kaideno':'108€', 'compare.total.competitor':'≈ 246€',
+    'compare.footnote':'Comparaison basée sur les tarifs publics Plaud (Note + Plan Pro, facturation annuelle) constatés en juillet 2026. Les prix peuvent varier.',
     't75':'Aucun boîtier à acheter. Résiliable à tout moment.',
     't76':'Mensuel',
     't78':'Contactez-nous',
@@ -2260,7 +2352,9 @@ const I18N = {
     't83':'Plaud et ses concurrents nécessitent un achat matériel de 150 à 200€ avant même de commencer. kaideno utilise le micro que vous avez déjà dans votre poche.',
     't84':'Oui. kaideno est une application web progressive (PWA) qui fonctionne dans le navigateur de n\'importe quel smartphone. Sur iOS, vous l\'installez via Safari → "Sur l\'écran d\'accueil". Sur Android, via Chrome → "Ajouter à l\'écran d\'accueil". Elle se comporte alors comme une application native.',
     't85':'Oui. Quand plusieurs personnes aux voix distinctes participent à une réunion, kaideno sépare automatiquement les prises de parole dans la transcription. Vous voyez clairement qui a dit quoi.',
-    't86':'kaideno transcrit dans 12 langues : français, anglais, espagnol, allemand, italien, portugais, néerlandais, russe, japonais, chinois, arabe et hindi. L\'assistant IA répond également dans la langue que vous avez choisie.',
+    't86':"kaideno détecte automatiquement la langue parlée — français, anglais, espagnol, allemand, italien, portugais, néerlandais, russe, japonais et hindi — sans réglage à faire. L'assistant IA et les résumés répondent dans la langue d'interface que vous avez choisie.",
+    'q8':"Puis-je verrouiller mon téléphone ou changer d'appli pendant l'enregistrement ?",
+    'faq.lockscreen':"Mieux vaut éviter. kaideno fonctionne dans le navigateur de votre téléphone, sans installation — mais la plupart des navigateurs mobiles coupent l'accès au micro dès que l'écran se verrouille ou que vous changez d'application. Gardez l'écran allumé et kaideno au premier plan pendant l'enregistrement pour ne rien perdre.",
     't87':'Gratuit pour démarrer. Aucun boîtier. Aucun engagement.',
     't88':'Créer un compte gratuit',
     't89':'Se connecter',
@@ -2292,6 +2386,20 @@ const I18N = {
     't117':'Créer mon compte gratuit',
     't118':'Content de te revoir !',
     't119':'Se connecter',
+    'use.tag':'Cas d\'usage',
+    'use.title':'kaideno s\'adapte à votre quotidien',
+    'use.meeting.title':'Réunions d\'équipe',
+    'use.meeting.desc':'Chaque décision et action capturée, sans que personne ne quitte la conversation des yeux.',
+    'use.meeting.alt':'Équipe en réunion autour d\'une table',
+    'use.brainstorm.title':'Brainstorms',
+    'use.brainstorm.desc':'Toutes les idées gardées au vol, même celles qu\'on aurait oubliées cinq minutes après.',
+    'use.brainstorm.alt':'Quatre personnes qui réfléchissent autour d\'un document',
+    'use.interview.title':'Entretiens & podcasts',
+    'use.interview.desc':'Une transcription fidèle, prête à citer, relire ou publier.',
+    'use.interview.alt':'Deux personnes assises à une table pour un entretien',
+    'use.course.title':'Cours & conférences',
+    'use.course.desc':'Révisez un cours entier sans avoir pris une seule note pendant qu\'il se déroulait.',
+    'use.course.alt':'Groupe de personnes travaillant ensemble avec des ordinateurs portables',
   },
   en: {
     'n.title':'Not ready to try it yet?',
@@ -2309,7 +2417,7 @@ const I18N = {
     'c.support':'Support',
     'c.contactus':'Contact us',
     'c.reportbug':'Report a bug',
-    'note.pricing':'No credit card for the free plan · No commitment · Cancel anytime · Need more? <a href="https://thomas282828.github.io/nuro/?register" style="color:var(--c-blue)">Contact us</a> for a custom offer',
+    'note.pricing':'No credit card for the free plan · No commitment · Cancel anytime · Need more? <a href="https://kaideno.com/?register" style="color:var(--c-blue)">Contact us</a> for a custom offer',
     'v1':'Product launch set for the 15th',
     'v2':'Send the brief to marketing',
     'v3':'Approve the budget before Thursday',
@@ -2327,7 +2435,7 @@ const I18N = {
     'p8':'Export + search',
     'p9':'30 hours of audio per month',
     'p10':'Everything in Essential',
-    'p11':'12 transcription languages',
+    'p11':'Automatic multilingual transcription',
     'p12':'Priority support',
     'q1':'Is my audio data stored anywhere?',
     'q2':'Do I need an internet connection to record?',
@@ -2382,7 +2490,7 @@ const I18N = {
     't23':'Features',
     't24':'Built for professionals who want to capture what matters, effortlessly.',
     't25':'Real-time transcription',
-    't26':'Every word appears as you speak, in real time. Transcription is available in 12 languages, with automatic punctuation and formatting.',
+    't26':'Every word appears as you speak, in real time. The spoken language is automatically detected among 10 languages, with automatic punctuation and formatting.',
     't27':'AI-structured summary',
     't28':'Key points, decisions made, action items — automatically extracted at the end of each recording.',
     't29':'Searchable history',
@@ -2393,7 +2501,7 @@ const I18N = {
     't34':'PWA app — installs on your iOS and Android home screen like a native app.',
     't35':'The kaideno workflow',
     't36':'01 — Capture',
-    't37':'Audio · Real time · 12 languages',
+    't37':'Audio · Real time · 10 languages',
     't38':'Tap record. kaideno transcribes word by word in real time, from your phone microphone. No device, no installation.',
     't39':'02 — Extract',
     't40':'Summary · Key points · Actions',
@@ -2431,6 +2539,12 @@ const I18N = {
     't72':'"Write me a summary email for the team" — and it is done.',
     't73':'Pricing',
     't74':'Transparent. No surprises.',
+    'compare.title':'kaideno vs a dedicated recorder, over the first year',
+    'compare.kaideno':'kaideno', 'compare.competitor':'Dedicated recorder (e.g. Plaud)',
+    'compare.hardware':'Hardware to buy', 'compare.hardware.kaideno':"€0 — your phone is enough", 'compare.hardware.competitor':'€135 – 190',
+    'compare.sub':'Subscription (annual billing)', 'compare.sub.kaideno':'€9/month (Essential plan)', 'compare.sub.competitor':'≈ €9.25/month (Pro plan)',
+    'compare.total':'First-year cost', 'compare.total.kaideno':'€108', 'compare.total.competitor':'≈ €246',
+    'compare.footnote':"Comparison based on Plaud's public pricing (Note + Pro Plan, annual billing) as of July 2026. Prices may vary.",
     't75':'No device to buy. Cancel anytime.',
     't76':'Monthly',
     't78':'Contact us',
@@ -2441,7 +2555,9 @@ const I18N = {
     't83':'Plaud and its competitors require a €150–200 hardware purchase before you even start. kaideno uses the microphone already in your pocket.',
     't84':'Yes. kaideno is a progressive web app (PWA) that runs in any smartphone browser. On iOS, install it via Safari → "Add to Home Screen". On Android, via Chrome → "Add to Home screen". It then behaves like a native app.',
     't85':'Yes. When several people with distinct voices take part in a meeting, kaideno automatically separates who says what in the transcript.',
-    't86':'kaideno transcribes in 12 languages: French, English, Spanish, German, Italian, Portuguese, Dutch, Russian, Japanese, Chinese, Arabic and Hindi. The AI assistant also replies in your chosen language.',
+    't86':"kaideno automatically detects the spoken language — French, English, Spanish, German, Italian, Portuguese, Dutch, Russian, Japanese and Hindi — no setup needed. The AI assistant and summaries reply in whichever interface language you've chosen.",
+    'q8':'Can I lock my phone or switch apps while recording?',
+    'faq.lockscreen':"Better not to. kaideno runs in your phone's browser with nothing to install — but most mobile browsers cut off microphone access as soon as the screen locks or you switch apps. Keep the screen on and kaideno in the foreground while recording so nothing gets lost.",
     't87':'Free to start. No device. No commitment.',
     't88':'Create a free account',
     't89':'Log in',
@@ -2473,6 +2589,20 @@ const I18N = {
     't117':'Create my free account',
     't118':'Welcome back!',
     't119':'Log in',
+    'use.tag':'Use cases',
+    'use.title':'kaideno fits into your day-to-day',
+    'use.meeting.title':'Team meetings',
+    'use.meeting.desc':'Every decision and action item captured, so no one has to look away to take notes.',
+    'use.meeting.alt':'Team in a meeting around a table',
+    'use.brainstorm.title':'Brainstorms',
+    'use.brainstorm.desc':'Every idea kept on the fly, even the ones you\'d have forgotten five minutes later.',
+    'use.brainstorm.alt':'Four people brainstorming over a document',
+    'use.interview.title':'Interviews & podcasts',
+    'use.interview.desc':'An accurate transcript, ready to quote, edit or publish.',
+    'use.interview.alt':'Two people during an interview at a table',
+    'use.course.title':'Lectures & courses',
+    'use.course.desc':'Review an entire class without taking a single note while it happens.',
+    'use.course.alt':'Group of people working together with laptops',
   },
   es: {
     'n.title':'¿Aún no listo para probarlo?',
@@ -2490,7 +2620,7 @@ const I18N = {
     'c.support':'Soporte',
     'c.contactus':'Contáctanos',
     'c.reportbug':'Reportar un error',
-    'note.pricing':'Sin tarjeta para el plan gratis · Sin compromiso · Cancela cuando quieras · ¿Necesitas más? <a href="https://thomas282828.github.io/nuro/?register" style="color:var(--c-blue)">Contáctanos</a> para una oferta a medida',
+    'note.pricing':'Sin tarjeta para el plan gratis · Sin compromiso · Cancela cuando quieras · ¿Necesitas más? <a href="https://kaideno.com/?register" style="color:var(--c-blue)">Contáctanos</a> para una oferta a medida',
     'v1':'Lanzamiento fijado el día 15',
     'v2':'Enviar el brief a marketing',
     'v3':'Validar el presupuesto antes del jueves',
@@ -2508,7 +2638,7 @@ const I18N = {
     'p8':'Exportar + buscar',
     'p9':'30 horas de audio al mes',
     'p10':'Todo lo de Esencial',
-    'p11':'12 idiomas de transcripción',
+    'p11':'Transcripción multilingüe automática',
     'p12':'Soporte prioritario',
     'q1':'¿Se almacenan mis datos de audio en algún sitio?',
     'q2':'¿Necesito conexión a internet para grabar?',
@@ -2563,7 +2693,7 @@ const I18N = {
     't23':'Funciones',
     't24':'Diseñado para profesionales que quieren capturar lo esencial sin fricción.',
     't25':'Transcripción en tiempo real',
-    't26':'Cada palabra aparece mientras hablas, en tiempo real. La transcripción está disponible en 12 idiomas, con puntuación y formato automáticos.',
+    't26':'Cada palabra aparece mientras hablas, en tiempo real. El idioma hablado se detecta automáticamente entre 10 idiomas, con puntuación y formato automáticos.',
     't27':'Resumen estructurado por IA',
     't28':'Puntos clave, decisiones tomadas, acciones a seguir — extraídos automáticamente al final de cada grabación.',
     't29':'Historial consultable',
@@ -2574,7 +2704,7 @@ const I18N = {
     't34':'Aplicación PWA — se instala en la pantalla de inicio de iOS y Android como una app nativa.',
     't35':'El flujo de trabajo kaideno',
     't36':'01 — Capturar',
-    't37':'Audio · Tiempo real · 12 idiomas',
+    't37':'Audio · Tiempo real · 10 idiomas',
     't38':'Pulsa grabar. kaideno transcribe palabra por palabra en tiempo real, desde el micrófono de tu teléfono. Sin dispositivo, sin instalación.',
     't39':'02 — Extraer',
     't40':'Resumen · Puntos clave · Acciones',
@@ -2612,6 +2742,12 @@ const I18N = {
     't72':'«Escríbeme un email de resumen para el equipo» — y ya está.',
     't73':'Precios',
     't74':'Transparente. Sin sorpresas.',
+    'compare.title':'kaideno frente a una grabadora dedicada, en el primer año',
+    'compare.kaideno':'kaideno', 'compare.competitor':'Grabadora dedicada (tipo Plaud)',
+    'compare.hardware':'Hardware a comprar', 'compare.hardware.kaideno':'0€ — con tu móvil basta', 'compare.hardware.competitor':'135 – 190€',
+    'compare.sub':'Suscripción (facturación anual)', 'compare.sub.kaideno':'9€/mes (plan Esencial)', 'compare.sub.competitor':'≈ 9,25€/mes (plan Pro)',
+    'compare.total':'Coste primer año', 'compare.total.kaideno':'108€', 'compare.total.competitor':'≈ 246€',
+    'compare.footnote':'Comparación basada en los precios públicos de Plaud (Note + Plan Pro, facturación anual) en julio de 2026. Los precios pueden variar.',
     't75':'Sin dispositivo que comprar. Cancela cuando quieras.',
     't76':'Mensual',
     't78':'Contáctanos',
@@ -2622,7 +2758,9 @@ const I18N = {
     't83':'Plaud y sus competidores requieren comprar un dispositivo de 150 a 200€ antes de empezar. kaideno usa el micrófono que ya llevas en el bolsillo.',
     't84':'Sí. kaideno es una aplicación web progresiva (PWA) que funciona en el navegador de cualquier smartphone. En iOS, la instalas con Safari → "Añadir a pantalla de inicio". En Android, con Chrome → "Añadir a pantalla de inicio". Funciona como una app nativa.',
     't85':'Sí. Cuando varias personas con voces distintas participan en una reunión, kaideno separa automáticamente las intervenciones en la transcripción.',
-    't86':'kaideno transcribe en 12 idiomas: francés, inglés, español, alemán, italiano, portugués, neerlandés, ruso, japonés, chino, árabe e hindi. El asistente de IA también responde en el idioma que elijas.',
+    't86':'kaideno detecta automáticamente el idioma hablado — francés, inglés, español, alemán, italiano, portugués, neerlandés, ruso, japonés e hindi — sin necesidad de configurarlo. El asistente de IA y los resúmenes responden en el idioma de interfaz que hayas elegido.',
+    'q8':'¿Puedo bloquear el teléfono o cambiar de app mientras grabo?',
+    'faq.lockscreen':'Mejor evitarlo. kaideno funciona en el navegador de tu teléfono, sin instalar nada — pero la mayoría de los navegadores móviles cortan el acceso al micrófono en cuanto se bloquea la pantalla o cambias de app. Mantén la pantalla encendida y kaideno en primer plano durante la grabación para no perder nada.',
     't87':'Gratis para empezar. Sin dispositivo. Sin compromiso.',
     't88':'Crear una cuenta gratis',
     't89':'Iniciar sesión',
@@ -2654,6 +2792,20 @@ const I18N = {
     't117':'Crear mi cuenta gratis',
     't118':'¡Bienvenido de nuevo!',
     't119':'Iniciar sesión',
+    'use.tag':'Casos de uso',
+    'use.title':'kaideno se adapta a tu día a día',
+    'use.meeting.title':'Reuniones de equipo',
+    'use.meeting.desc':'Cada decisión y tarea queda registrada, sin que nadie tenga que dejar de prestar atención para tomar notas.',
+    'use.meeting.alt':'Equipo reunido alrededor de una mesa',
+    'use.brainstorm.title':'Lluvias de ideas',
+    'use.brainstorm.desc':'Todas las ideas capturadas al vuelo, incluso las que habrías olvidado cinco minutos después.',
+    'use.brainstorm.alt':'Cuatro personas reflexionando sobre un documento',
+    'use.interview.title':'Entrevistas y podcasts',
+    'use.interview.desc':'Una transcripción fiel, lista para citar, editar o publicar.',
+    'use.interview.alt':'Dos personas en una entrevista en una mesa',
+    'use.course.title':'Clases y conferencias',
+    'use.course.desc':'Repasa una clase entera sin haber tomado ni una sola nota durante la sesión.',
+    'use.course.alt':'Grupo de personas trabajando juntas con portátiles',
   },
   de: {
     'n.title':'Noch nicht bereit zum Testen?',
@@ -2671,7 +2823,7 @@ const I18N = {
     'c.support':'Support',
     'c.contactus':'Kontakt aufnehmen',
     'c.reportbug':'Fehler melden',
-    'note.pricing':'Keine Kreditkarte für den Gratis-Plan · Keine Bindung · Jederzeit kündbar · Mehr nötig? <a href="https://thomas282828.github.io/nuro/?register" style="color:var(--c-blue)">Kontaktieren Sie uns</a> für ein maßgeschneidertes Angebot',
+    'note.pricing':'Keine Kreditkarte für den Gratis-Plan · Keine Bindung · Jederzeit kündbar · Mehr nötig? <a href="https://kaideno.com/?register" style="color:var(--c-blue)">Kontaktieren Sie uns</a> für ein maßgeschneidertes Angebot',
     'v1':'Produktstart auf den 15. festgelegt',
     'v2':'Briefing an das Marketing senden',
     'v3':'Budget vor Donnerstag freigeben',
@@ -2689,7 +2841,7 @@ const I18N = {
     'p8':'Export + Suche',
     'p9':'30 Stunden Audio pro Monat',
     'p10':'Alles aus Essential',
-    'p11':'12 Transkriptionssprachen',
+    'p11':'Automatische mehrsprachige Transkription',
     'p12':'Priority-Support',
     'q1':'Werden meine Audiodaten irgendwo gespeichert?',
     'q2':'Brauche ich eine Internetverbindung zum Aufnehmen?',
@@ -2757,7 +2909,7 @@ const I18N = {
     't23':'Funktionen',
     't24':'Entwickelt für Profis, die das Wesentliche mühelos erfassen wollen.',
     't25':'Echtzeit-Transkription',
-    't26':'Jedes Wort erscheint, während Sie sprechen, in Echtzeit. Die Transkription ist in 12 Sprachen verfügbar, mit automatischer Zeichensetzung und Formatierung.',
+    't26':'Jedes Wort erscheint, während Sie sprechen, in Echtzeit. Die gesprochene Sprache wird automatisch aus 10 Sprachen erkannt, mit automatischer Zeichensetzung und Formatierung.',
     't27':'KI-strukturierte Zusammenfassung',
     't28':'Kernpunkte, getroffene Entscheidungen, Folgeaufgaben — am Ende jeder Aufnahme automatisch extrahiert.',
     't29':'Durchsuchbarer Verlauf',
@@ -2768,7 +2920,7 @@ const I18N = {
     't34':'PWA-App — installiert sich wie eine native App auf dem iOS- und Android-Startbildschirm.',
     't35':'Der kaideno-Workflow',
     't36':'01 — Erfassen',
-    't37':'Audio · Echtzeit · 12 Sprachen',
+    't37':'Audio · Echtzeit · 10 Sprachen',
     't38':'Auf Aufnahme tippen. kaideno transkribiert Wort für Wort in Echtzeit, über das Mikrofon Ihres Handys. Kein Gerät, keine Installation.',
     't39':'02 — Extrahieren',
     't40':'Zusammenfassung · Kernpunkte · Aufgaben',
@@ -2806,6 +2958,12 @@ const I18N = {
     't72':'« Schreib mir eine Zusammenfassungs-E-Mail fürs Team » — und fertig.',
     't73':'Preise',
     't74':'Transparent. Keine Überraschungen.',
+    'compare.title':'kaideno im Vergleich zu einem eigenen Aufnahmegerät, im ersten Jahr',
+    'compare.kaideno':'kaideno', 'compare.competitor':'Eigenes Gerät (z. B. Plaud)',
+    'compare.hardware':'Anzuschaffende Hardware', 'compare.hardware.kaideno':'0€ — dein Handy reicht', 'compare.hardware.competitor':'135 – 190€',
+    'compare.sub':'Abo (jährliche Abrechnung)', 'compare.sub.kaideno':'9€/Monat (Essential-Plan)', 'compare.sub.competitor':'≈ 9,25€/Monat (Pro-Plan)',
+    'compare.total':'Kosten im ersten Jahr', 'compare.total.kaideno':'108€', 'compare.total.competitor':'≈ 246€',
+    'compare.footnote':'Vergleich basierend auf den öffentlichen Plaud-Preisen (Note + Pro-Plan, jährliche Abrechnung), Stand Juli 2026. Preise können variieren.',
     't75':'Kein Gerät zu kaufen. Jederzeit kündbar.',
     't76':'Monatlich',
     't78':'Kontaktieren Sie uns',
@@ -2816,7 +2974,9 @@ const I18N = {
     't83':'Plaud und seine Konkurrenten erfordern einen Hardwarekauf von 150 bis 200 €, bevor Sie überhaupt loslegen. kaideno nutzt das Mikrofon, das Sie bereits in der Tasche haben.',
     't84':'Ja. kaideno ist eine Progressive Web App (PWA), die in jedem Smartphone-Browser läuft. Auf iOS installieren Sie sie über Safari → "Zum Home-Bildschirm". Auf Android über Chrome → "Zum Startbildschirm hinzufügen". Sie verhält sich dann wie eine native App.',
     't85':'Ja. Wenn mehrere Personen mit unterschiedlichen Stimmen an einem Meeting teilnehmen, trennt kaideno die Redebeiträge automatisch in der Transkription.',
-    't86':'kaideno transkribiert in 12 Sprachen: Französisch, Englisch, Spanisch, Deutsch, Italienisch, Portugiesisch, Niederländisch, Russisch, Japanisch, Chinesisch, Arabisch und Hindi. Der KI-Assistent antwortet ebenfalls in der von Ihnen gewählten Sprache.',
+    't86':'kaideno erkennt die gesprochene Sprache automatisch — Französisch, Englisch, Spanisch, Deutsch, Italienisch, Portugiesisch, Niederländisch, Russisch, Japanisch und Hindi — ganz ohne Einstellung. Der KI-Assistent und die Zusammenfassungen antworten in der von Ihnen gewählten Oberflächensprache.',
+    'q8':'Kann ich mein Handy sperren oder die App wechseln, während ich aufnehme?',
+    'faq.lockscreen':'Besser nicht. kaideno läuft im Browser Ihres Handys, ganz ohne Installation — aber die meisten mobilen Browser unterbrechen den Mikrofonzugriff, sobald der Bildschirm gesperrt wird oder Sie die App wechseln. Lassen Sie den Bildschirm während der Aufnahme an und kaideno im Vordergrund, damit nichts verloren geht.',
     't87':'Kostenlos starten. Kein Gerät. Keine Bindung.',
     't88':'Kostenloses Konto erstellen',
     't89':'Anmelden',
@@ -2848,6 +3008,20 @@ const I18N = {
     't117':'Mein kostenloses Konto erstellen',
     't118':'Schön, Sie wiederzusehen!',
     't119':'Anmelden',
+    'use.tag':'Anwendungsfälle',
+    'use.title':'kaideno passt sich Ihrem Alltag an',
+    'use.meeting.title':'Team-Meetings',
+    'use.meeting.desc':'Jede Entscheidung und jede Aufgabe wird festgehalten, ohne dass jemand beim Mitschreiben den Faden verliert.',
+    'use.meeting.alt':'Team in einer Besprechung am Tisch',
+    'use.brainstorm.title':'Brainstormings',
+    'use.brainstorm.desc':'Jede Idee wird sofort festgehalten – auch die, die man fünf Minuten später wieder vergessen hätte.',
+    'use.brainstorm.alt':'Vier Personen beim Nachdenken über ein Dokument',
+    'use.interview.title':'Interviews & Podcasts',
+    'use.interview.desc':'Eine präzise Transkription, bereit zum Zitieren, Bearbeiten oder Veröffentlichen.',
+    'use.interview.alt':'Zwei Personen bei einem Interview am Tisch',
+    'use.course.title':'Vorlesungen & Kurse',
+    'use.course.desc':'Lassen Sie sich einen ganzen Kurs noch einmal durchgehen, ohne während der Sitzung eine einzige Notiz gemacht zu haben.',
+    'use.course.alt':'Gruppe von Personen, die gemeinsam mit Laptops arbeiten',
   },
   it: {
     'n.title':'Non ancora pronto a provare?',
@@ -2865,7 +3039,7 @@ const I18N = {
     'c.support':'Supporto',
     'c.contactus':'Contattaci',
     'c.reportbug':'Segnala un bug',
-    'note.pricing':'Nessuna carta per il piano gratuito · Nessun vincolo · Disdetta in qualsiasi momento · Serve di più? <a href="https://thomas282828.github.io/nuro/?register" style="color:var(--c-blue)">Contattaci</a> per un\'offerta su misura',
+    'note.pricing':'Nessuna carta per il piano gratuito · Nessun vincolo · Disdetta in qualsiasi momento · Serve di più? <a href="https://kaideno.com/?register" style="color:var(--c-blue)">Contattaci</a> per un\'offerta su misura',
     'v1':'Lancio prodotto fissato al 15',
     'v2':'Inviare il brief al marketing',
     'v3':'Approvare il budget entro giovedì',
@@ -2883,7 +3057,7 @@ const I18N = {
     'p8':'Esportazione + ricerca',
     'p9':'30 ore di audio al mese',
     'p10':'Tutto ciò che c\'è in Essenziale',
-    'p11':'12 lingue di trascrizione',
+    'p11':'Trascrizione multilingue automatica',
     'p12':'Supporto prioritario',
     'q1':'I miei dati audio vengono memorizzati da qualche parte?',
     'q2':'Ho bisogno di una connessione internet per registrare?',
@@ -2951,7 +3125,7 @@ const I18N = {
     't23':'Funzioni',
     't24':'Progettato per professionisti che vogliono catturare l\'essenziale senza attriti.',
     't25':'Trascrizione in tempo reale',
-    't26':'Ogni parola appare mentre parli, in tempo reale. La trascrizione è disponibile in 12 lingue, con punteggiatura e formattazione automatiche.',
+    't26':'Ogni parola appare mentre parli, in tempo reale. La lingua parlata viene rilevata automaticamente tra 10 lingue, con punteggiatura e formattazione automatiche.',
     't27':'Riassunto strutturato dall\'IA',
     't28':'Punti chiave, decisioni prese, azioni da seguire — estratti automaticamente al termine di ogni registrazione.',
     't29':'Cronologia consultabile',
@@ -2962,7 +3136,7 @@ const I18N = {
     't34':'App PWA — si installa sulla schermata iniziale di iOS e Android come un\'app nativa.',
     't35':'Il workflow kaideno',
     't36':'01 — Catturare',
-    't37':'Audio · Tempo reale · 12 lingue',
+    't37':'Audio · Tempo reale · 10 lingue',
     't38':'Tocca registra. kaideno trascrive parola per parola in tempo reale, dal microfono del tuo telefono. Nessun dispositivo, nessuna installazione.',
     't39':'02 — Estrarre',
     't40':'Riassunto · Punti chiave · Azioni',
@@ -3000,6 +3174,12 @@ const I18N = {
     't72':'« Scrivimi un\'email di resoconto per il team » — e fatto.',
     't73':'Prezzi',
     't74':'Trasparente. Senza sorprese.',
+    'compare.title':'kaideno rispetto a un registratore dedicato, nel primo anno',
+    'compare.kaideno':'kaideno', 'compare.competitor':'Registratore dedicato (tipo Plaud)',
+    'compare.hardware':'Hardware da acquistare', 'compare.hardware.kaideno':'0€ — basta il tuo telefono', 'compare.hardware.competitor':'135 – 190€',
+    'compare.sub':'Abbonamento (fatturazione annuale)', 'compare.sub.kaideno':'9€/mese (piano Essenziale)', 'compare.sub.competitor':'≈ 9,25€/mese (piano Pro)',
+    'compare.total':'Costo primo anno', 'compare.total.kaideno':'108€', 'compare.total.competitor':'≈ 246€',
+    'compare.footnote':'Confronto basato sui prezzi pubblici Plaud (Note + Piano Pro, fatturazione annuale) rilevati a luglio 2026. I prezzi possono variare.',
     't75':'Nessun dispositivo da comprare. Disdetta quando vuoi.',
     't76':'Mensile',
     't78':'Contattaci',
@@ -3010,7 +3190,9 @@ const I18N = {
     't83':'Plaud e i suoi concorrenti richiedono un acquisto hardware da 150 a 200€ prima ancora di iniziare. kaideno usa il microfono che hai già in tasca.',
     't84':'Sì. kaideno è un\'app web progressiva (PWA) che funziona nel browser di qualsiasi smartphone. Su iOS, la installi tramite Safari → "Aggiungi a Home". Su Android, tramite Chrome → "Aggiungi a schermata Home". Si comporta come un\'app nativa.',
     't85':'Sì. Quando più persone con voci distinte partecipano a una riunione, kaideno separa automaticamente gli interventi nella trascrizione.',
-    't86':'kaideno trascrive in 12 lingue: francese, inglese, spagnolo, tedesco, italiano, portoghese, olandese, russo, giapponese, cinese, arabo e hindi. L\'assistente IA risponde anche nella lingua scelta.',
+    't86':"kaideno rileva automaticamente la lingua parlata — francese, inglese, spagnolo, tedesco, italiano, portoghese, olandese, russo, giapponese e hindi — senza alcuna configurazione. L'assistente IA e i riepiloghi rispondono nella lingua dell'interfaccia che hai scelto.",
+    'q8':"Posso bloccare il telefono o cambiare app durante la registrazione?",
+    'faq.lockscreen':"Meglio evitarlo. kaideno funziona nel browser del telefono, senza installazione — ma la maggior parte dei browser mobili interrompe l'accesso al microfono non appena lo schermo si blocca o cambi app. Tieni lo schermo acceso e kaideno in primo piano durante la registrazione per non perdere nulla.",
     't87':'Inizia gratis. Nessun dispositivo. Nessun vincolo.',
     't88':'Crea un account gratuito',
     't89':'Accedi',
@@ -3042,6 +3224,20 @@ const I18N = {
     't117':'Crea il mio account gratuito',
     't118':'Bentornato!',
     't119':'Accedi',
+    'use.tag':'Casi d\'uso',
+    'use.title':'kaideno si adatta alla tua quotidianità',
+    'use.meeting.title':'Riunioni di team',
+    'use.meeting.desc':'Ogni decisione e ogni azione vengono registrate, senza che nessuno debba distogliere lo sguardo per prendere appunti.',
+    'use.meeting.alt':'Team riunito attorno a un tavolo',
+    'use.brainstorm.title':'Brainstorming',
+    'use.brainstorm.desc':'Tutte le idee catturate al volo, anche quelle che avresti dimenticato cinque minuti dopo.',
+    'use.brainstorm.alt':'Quattro persone che riflettono su un documento',
+    'use.interview.title':'Interviste & podcast',
+    'use.interview.desc':'Una trascrizione fedele, pronta da citare, modificare o pubblicare.',
+    'use.interview.alt':'Due persone durante un\'intervista a un tavolo',
+    'use.course.title':'Lezioni & conferenze',
+    'use.course.desc':'Ripassa un intero corso senza aver preso un solo appunto durante la lezione.',
+    'use.course.alt':'Gruppo di persone che lavorano insieme con i portatili',
   },
   pt: {
     'n.title':'Ainda não está pronto para testar?',
@@ -3059,7 +3255,7 @@ const I18N = {
     'c.support':'Suporte',
     'c.contactus':'Contacte-nos',
     'c.reportbug':'Reportar um erro',
-    'note.pricing':'Sem cartão para o plano gratuito · Sem compromisso · Cancele quando quiser · Precisa de mais? <a href="https://thomas282828.github.io/nuro/?register" style="color:var(--c-blue)">Contacte-nos</a> para uma oferta personalizada',
+    'note.pricing':'Sem cartão para o plano gratuito · Sem compromisso · Cancele quando quiser · Precisa de mais? <a href="https://kaideno.com/?register" style="color:var(--c-blue)">Contacte-nos</a> para uma oferta personalizada',
     'v1':'Lançamento do produto marcado para o dia 15',
     'v2':'Enviar o briefing ao marketing',
     'v3':'Validar o orçamento antes de quinta',
@@ -3077,7 +3273,7 @@ const I18N = {
     'p8':'Exportação + pesquisa',
     'p9':'30 horas de áudio por mês',
     'p10':'Tudo o que está em Essencial',
-    'p11':'12 idiomas de transcrição',
+    'p11':'Transcrição multilingue automática',
     'p12':'Suporte prioritário',
     'q1':'Os meus dados de áudio são armazenados em algum lugar?',
     'q2':'Preciso de ligação à internet para gravar?',
@@ -3145,7 +3341,7 @@ const I18N = {
     't23':'Funcionalidades',
     't24':'Concebido para profissionais que querem capturar o essencial sem esforço.',
     't25':'Transcrição em tempo real',
-    't26':'Cada palavra aparece enquanto fala, em tempo real. A transcrição está disponível em 12 idiomas, com pontuação e formatação automáticas.',
+    't26':'Cada palavra aparece enquanto fala, em tempo real. O idioma falado é detetado automaticamente entre 10 idiomas, com pontuação e formatação automáticas.',
     't27':'Resumo estruturado por IA',
     't28':'Pontos-chave, decisões tomadas, ações a seguir — extraídos automaticamente no final de cada gravação.',
     't29':'Histórico consultável',
@@ -3156,7 +3352,7 @@ const I18N = {
     't34':'Aplicação PWA — instala-se no ecrã inicial do iOS e Android como uma app nativa.',
     't35':'O fluxo kaideno',
     't36':'01 — Capturar',
-    't37':'Áudio · Tempo real · 12 idiomas',
+    't37':'Áudio · Tempo real · 10 idiomas',
     't38':'Toque em gravar. O kaideno transcreve palavra a palavra em tempo real, do microfone do seu telemóvel. Sem dispositivo, sem instalação.',
     't39':'02 — Extrair',
     't40':'Resumo · Pontos-chave · Ações',
@@ -3194,6 +3390,12 @@ const I18N = {
     't72':'« Escreve-me um email de resumo para a equipa » — e está feito.',
     't73':'Preços',
     't74':'Transparente. Sem surpresas.',
+    'compare.title':'kaideno vs. um gravador dedicado, no primeiro ano',
+    'compare.kaideno':'kaideno', 'compare.competitor':'Gravador dedicado (tipo Plaud)',
+    'compare.hardware':'Hardware a comprar', 'compare.hardware.kaideno':'0€ — o teu telemóvel chega', 'compare.hardware.competitor':'135 – 190€',
+    'compare.sub':'Subscrição (faturação anual)', 'compare.sub.kaideno':'9€/mês (plano Essencial)', 'compare.sub.competitor':'≈ 9,25€/mês (plano Pro)',
+    'compare.total':'Custo no 1.º ano', 'compare.total.kaideno':'108€', 'compare.total.competitor':'≈ 246€',
+    'compare.footnote':'Comparação baseada nos preços públicos da Plaud (Note + Plano Pro, faturação anual) em julho de 2026. Os preços podem variar.',
     't75':'Sem dispositivo para comprar. Cancele quando quiser.',
     't76':'Mensal',
     't78':'Contacte-nos',
@@ -3204,7 +3406,9 @@ const I18N = {
     't83':'O Plaud e os seus concorrentes exigem a compra de um dispositivo de 150 a 200€ antes mesmo de começar. O kaideno usa o microfone que já tem no bolso.',
     't84':'Sim. O kaideno é uma aplicação web progressiva (PWA) que funciona no navegador de qualquer smartphone. No iOS, instala-a via Safari → "Adicionar ao ecrã principal". No Android, via Chrome → "Adicionar ao ecrã principal". Comporta-se como uma app nativa.',
     't85':'Sim. Quando várias pessoas com vozes distintas participam numa reunião, o kaideno separa automaticamente as intervenções na transcrição.',
-    't86':'O kaideno transcreve em 12 idiomas: francês, inglês, espanhol, alemão, italiano, português, neerlandês, russo, japonês, chinês, árabe e hindi. O assistente de IA também responde no idioma escolhido.',
+    't86':'O kaideno deteta automaticamente o idioma falado — francês, inglês, espanhol, alemão, italiano, português, neerlandês, russo, japonês e hindi — sem qualquer configuração. O assistente de IA e os resumos respondem no idioma de interface que escolheste.',
+    'q8':'Posso bloquear o telemóvel ou mudar de app durante a gravação?',
+    'faq.lockscreen':'Melhor evitar. O kaideno funciona no navegador do teu telemóvel, sem instalação — mas a maioria dos navegadores móveis corta o acesso ao microfone assim que o ecrã bloqueia ou mudas de app. Mantém o ecrã ligado e o kaideno em primeiro plano durante a gravação para não perderes nada.',
     't87':'Começar grátis. Sem dispositivo. Sem compromisso.',
     't88':'Criar uma conta gratuita',
     't89':'Entrar',
@@ -3236,6 +3440,20 @@ const I18N = {
     't117':'Criar a minha conta gratuita',
     't118':'Bem-vindo de volta!',
     't119':'Entrar',
+    'use.tag':'Casos de utilização',
+    'use.title':'o kaideno adapta-se ao seu dia a dia',
+    'use.meeting.title':'Reuniões de equipa',
+    'use.meeting.desc':'Cada decisão e cada ação ficam registadas, sem que ninguém precise de desviar a atenção para tomar notas.',
+    'use.meeting.alt':'Equipa reunida à volta de uma mesa',
+    'use.brainstorm.title':'Brainstormings',
+    'use.brainstorm.desc':'Todas as ideias captadas na hora, mesmo as que teria esquecido cinco minutos depois.',
+    'use.brainstorm.alt':'Quatro pessoas a refletir sobre um documento',
+    'use.interview.title':'Entrevistas e podcasts',
+    'use.interview.desc':'Uma transcrição fiel, pronta a citar, editar ou publicar.',
+    'use.interview.alt':'Duas pessoas numa entrevista à mesa',
+    'use.course.title':'Aulas e conferências',
+    'use.course.desc':'Reveja uma aula inteira sem ter tirado um único apontamento durante a sessão.',
+    'use.course.alt':'Grupo de pessoas a trabalhar em conjunto com portáteis',
   },
   nl: {
     'n.title':'Nog niet klaar om te testen?',
@@ -3253,7 +3471,7 @@ const I18N = {
     'c.support':'Ondersteuning',
     'c.contactus':'Neem contact op',
     'c.reportbug':'Bug melden',
-    'note.pricing':'Geen creditcard voor het gratis plan · Geen verplichting · Altijd opzegbaar · Meer nodig? <a href="https://thomas282828.github.io/nuro/?register" style="color:var(--c-blue)">Neem contact op</a> voor een offerte op maat',
+    'note.pricing':'Geen creditcard voor het gratis plan · Geen verplichting · Altijd opzegbaar · Meer nodig? <a href="https://kaideno.com/?register" style="color:var(--c-blue)">Neem contact op</a> voor een offerte op maat',
     'v1':'Productlancering vastgesteld op de 15e',
     'v2':'Briefing naar marketing sturen',
     'v3':'Budget voor donderdag goedkeuren',
@@ -3271,7 +3489,7 @@ const I18N = {
     'p8':'Export + zoeken',
     'p9':'30 uur audio per maand',
     'p10':'Alles uit Essentieel',
-    'p11':'12 transcriptietalen',
+    'p11':'Automatische meertalige transcriptie',
     'p12':'Prioriteitsondersteuning',
     'q1':'Worden mijn audiogegevens ergens opgeslagen?',
     'q2':'Heb ik een internetverbinding nodig om op te nemen?',
@@ -3339,7 +3557,7 @@ const I18N = {
     't23':'Functies',
     't24':'Ontworpen voor professionals die moeiteloos het essentiële willen vastleggen.',
     't25':'Realtime transcriptie',
-    't26':'Elk woord verschijnt terwijl u spreekt, in realtime. Transcriptie is beschikbaar in 12 talen, met automatische interpunctie en opmaak.',
+    't26':'Elk woord verschijnt terwijl u spreekt, in realtime. De gesproken taal wordt automatisch herkend uit 10 talen, met automatische interpunctie en opmaak.',
     't27':'AI-gestructureerde samenvatting',
     't28':'Kernpunten, genomen beslissingen, vervolgacties — automatisch geëxtraheerd aan het einde van elke opname.',
     't29':'Doorzoekbare geschiedenis',
@@ -3350,7 +3568,7 @@ const I18N = {
     't34':'PWA-app — installeert op het startscherm van iOS en Android als een native app.',
     't35':'De kaideno-workflow',
     't36':'01 — Vastleggen',
-    't37':'Audio · Realtime · 12 talen',
+    't37':'Audio · Realtime · 10 talen',
     't38':'Tik op opnemen. kaideno transcribeert woord voor woord in realtime, via de microfoon van uw telefoon. Geen apparaat, geen installatie.',
     't39':'02 — Extraheren',
     't40':'Samenvatting · Kernpunten · Acties',
@@ -3388,6 +3606,12 @@ const I18N = {
     't72':'« Schrijf een samenvattingsmail voor het team » — en klaar.',
     't73':'Prijzen',
     't74':'Transparant. Geen verrassingen.',
+    'compare.title':'kaideno versus een los opnameapparaat, in het eerste jaar',
+    'compare.kaideno':'kaideno', 'compare.competitor':'Los opnameapparaat (zoals Plaud)',
+    'compare.hardware':'Aan te schaffen hardware', 'compare.hardware.kaideno':'€0 — je telefoon is genoeg', 'compare.hardware.competitor':'€135 – 190',
+    'compare.sub':'Abonnement (jaarlijkse facturering)', 'compare.sub.kaideno':'€9/maand (Essentieel-plan)', 'compare.sub.competitor':'≈ €9,25/maand (Pro-plan)',
+    'compare.total':'Kosten eerste jaar', 'compare.total.kaideno':'€108', 'compare.total.competitor':'≈ €246',
+    'compare.footnote':'Vergelijking gebaseerd op de openbare Plaud-prijzen (Note + Pro-plan, jaarlijkse facturering) in juli 2026. Prijzen kunnen variëren.',
     't75':'Geen apparaat te kopen. Altijd opzegbaar.',
     't76':'Maandelijks',
     't78':'Neem contact op',
@@ -3398,7 +3622,9 @@ const I18N = {
     't83':'Plaud en concurrenten vereisen een hardware-aankoop van € 150 tot 200 voordat u zelfs maar begint. kaideno gebruikt de microfoon die u al op zak hebt.',
     't84':'Ja. kaideno is een progressive web app (PWA) die in elke smartphonebrowser werkt. Op iOS installeert u het via Safari → "Zet op beginscherm". Op Android via Chrome → "Toevoegen aan startscherm". Het gedraagt zich dan als een native app.',
     't85':'Ja. Wanneer meerdere personen met verschillende stemmen deelnemen aan een vergadering, scheidt kaideno automatisch wie wat zegt in de transcriptie.',
-    't86':'kaideno transcribeert in 12 talen: Frans, Engels, Spaans, Duits, Italiaans, Portugees, Nederlands, Russisch, Japans, Chinees, Arabisch en Hindi. De AI-assistent antwoordt ook in de door u gekozen taal.',
+    't86':'kaideno herkent de gesproken taal automatisch — Frans, Engels, Spaans, Duits, Italiaans, Portugees, Nederlands, Russisch, Japans en Hindi — zonder dat je iets hoeft in te stellen. De AI-assistent en samenvattingen reageren in de interfacetaal die je hebt gekozen.',
+    'q8':'Kan ik mijn telefoon vergrendelen of van app wisselen tijdens het opnemen?',
+    'faq.lockscreen':'Beter van niet. kaideno werkt in de browser van je telefoon, zonder installatie — maar de meeste mobiele browsers blokkeren de microfoontoegang zodra het scherm vergrendelt of je van app wisselt. Houd het scherm aan en kaideno op de voorgrond tijdens het opnemen, zodat er niets verloren gaat.',
     't87':'Gratis beginnen. Geen apparaat. Geen verplichting.',
     't88':'Gratis account aanmaken',
     't89':'Inloggen',
@@ -3430,6 +3656,20 @@ const I18N = {
     't117':'Mijn gratis account aanmaken',
     't118':'Welkom terug!',
     't119':'Inloggen',
+    'use.tag':'Toepassingen',
+    'use.title':'kaideno past zich aan uw dagelijkse leven aan',
+    'use.meeting.title':'Teamvergaderingen',
+    'use.meeting.desc':'Elke beslissing en actie wordt vastgelegd, zonder dat iemand hoeft weg te kijken om notities te maken.',
+    'use.meeting.alt':'Team in vergadering aan tafel',
+    'use.brainstorm.title':'Brainstormsessies',
+    'use.brainstorm.desc':'Elk idee wordt meteen vastgelegd, ook de ideeën die u vijf minuten later weer vergeten zou zijn.',
+    'use.brainstorm.alt':'Vier personen die nadenken over een document',
+    'use.interview.title':'Interviews & podcasts',
+    'use.interview.desc':'Een nauwkeurige transcriptie, klaar om te citeren, bewerken of publiceren.',
+    'use.interview.alt':'Twee personen tijdens een interview aan tafel',
+    'use.course.title':'Colleges & conferenties',
+    'use.course.desc':'Neem een volledig college nog eens door, zonder tijdens de les ook maar één aantekening te hebben gemaakt.',
+    'use.course.alt':'Groep mensen die samen werken met laptops',
   },
   zh: {
     'n.title':'还没准备好试用？',
@@ -3447,7 +3687,7 @@ const I18N = {
     'c.support':'支持',
     'c.contactus':'联系我们',
     'c.reportbug':'报告问题',
-    'note.pricing':'免费方案无需信用卡 · 无需承诺 · 随时取消 · 需要更多？<a href="https://thomas282828.github.io/nuro/?register" style="color:var(--c-blue)">联系我们</a>获取定制方案',
+    'note.pricing':'免费方案无需信用卡 · 无需承诺 · 随时取消 · 需要更多？<a href="https://kaideno.com/?register" style="color:var(--c-blue)">联系我们</a>获取定制方案',
     'v1':'产品发布定于 15 号',
     'v2':'将简报发送给市场部',
     'v3':'周四前确认预算',
@@ -3465,7 +3705,7 @@ const I18N = {
     'p8':'导出 + 搜索',
     'p9':'每月 30 小时录音',
     'p10':'包含基础版所有功能',
-    'p11':'12 种转录语言',
+    'p11':'自动多语言转录',
     'p12':'优先支持',
     'q1':'我的音频数据会被存储吗？',
     'q2':'录音需要网络连接吗？',
@@ -3533,7 +3773,7 @@ const I18N = {
     't23':'功能',
     't24':'为想要毫不费力抓住重点的专业人士打造。',
     't25':'实时转录',
-    't26':'每个字都随您说话即时显现。支持 12 种语言转录，自动添加标点和格式。',
+    't26':'每个字都随您说话即时显现。系统会在 10 种语言中自动识别您所说的语言，并自动添加标点和格式。',
     't27':'AI 结构化摘要',
     't28':'要点、决策、待办事项——每次录音结束后自动提取。',
     't29':'可搜索的历史记录',
@@ -3544,7 +3784,7 @@ const I18N = {
     't34':'PWA 应用 — 像原生应用一样安装到 iOS 和 Android 主屏幕。',
     't35':'kaideno 工作流',
     't36':'01 — 采集',
-    't37':'音频 · 实时 · 12 种语言',
+    't37':'音频 · 实时 · 10 种语言',
     't38':'点击录音。kaideno 通过手机麦克风逐字实时转录。无需设备，无需安装。',
     't39':'02 — 提炼',
     't40':'摘要 · 要点 · 行动项',
@@ -3582,6 +3822,12 @@ const I18N = {
     't72':'「帮我写一封给团队的会议纪要邮件」——搞定。',
     't73':'价格',
     't74':'透明定价。没有意外。',
+    'compare.title':'kaideno 与专用录音设备的首年成本对比',
+    'compare.kaideno':'kaideno', 'compare.competitor':'专用录音设备（如 Plaud）',
+    'compare.hardware':'需购买的硬件', 'compare.hardware.kaideno':'0€ — 你的手机就够了', 'compare.hardware.competitor':'135 – 190€',
+    'compare.sub':'订阅费（按年计费）', 'compare.sub.kaideno':'9€/月（基础版）', 'compare.sub.competitor':'≈ 9.25€/月（Pro 版）',
+    'compare.total':'首年总花费', 'compare.total.kaideno':'108€', 'compare.total.competitor':'≈ 246€',
+    'compare.footnote':'对比基于 Plaud 2026 年 7 月的公开定价（Note + Pro 年付方案）。价格可能有所变动。',
     't75':'无需购买设备。随时取消。',
     't76':'月付',
     't78':'联系我们',
@@ -3592,7 +3838,9 @@ const I18N = {
     't83':'Plaud 及其竞争对手要求先花 150-200 欧元购买硬件才能开始。kaideno 使用您口袋里已有的麦克风。',
     't84':'支持。kaideno 是渐进式网页应用（PWA），可在任何手机浏览器中运行。iOS 用 Safari →「添加到主屏幕」。Android 用 Chrome →「添加到主屏幕」。之后就像原生应用一样使用。',
     't85':'可以。当多位声音不同的人参与会议时，kaideno 会在转录中自动区分每个人的发言。',
-    't86':'kaideno 支持 12 种语言转录：法语、英语、西班牙语、德语、意大利语、葡萄牙语、荷兰语、俄语、日语、中文、阿拉伯语和印地语。AI 助手也会用您选择的语言回复。',
+    't86':'kaideno 会自动识别所说的语言——法语、英语、西班牙语、德语、意大利语、葡萄牙语、荷兰语、俄语、日语和印地语——无需任何设置。AI 助手和摘要会使用你选择的界面语言回复。',
+    'q8':'录音时可以锁屏或切换到其他应用吗？',
+    'faq.lockscreen':'最好不要。kaideno 在手机浏览器中运行，无需安装——但大多数移动浏览器会在锁屏或切换应用后立即中断麦克风访问。录音期间请保持屏幕常亮，并让 kaideno 保持在前台，以免录音中断丢失。',
     't87':'免费开始。无需设备。无需承诺。',
     't88':'创建免费账户',
     't89':'登录',
@@ -3624,6 +3872,20 @@ const I18N = {
     't117':'创建我的免费账户',
     't118':'欢迎回来！',
     't119':'登录',
+    'use.tag':'使用场景',
+    'use.title':'kaideno 融入您的日常工作',
+    'use.meeting.title':'团队会议',
+    'use.meeting.desc':'每个决定和待办事项都被记录下来，无需分心做笔记。',
+    'use.meeting.alt':'团队围坐在桌前开会',
+    'use.brainstorm.title':'头脑风暴',
+    'use.brainstorm.desc':'灵光一现的想法即时记录，不再五分钟后就忘记。',
+    'use.brainstorm.alt':'四个人围着文件讨论',
+    'use.interview.title':'采访与播客',
+    'use.interview.desc':'精准的转录文字，随时可引用、编辑或发布。',
+    'use.interview.alt':'两个人在桌前进行采访',
+    'use.course.title':'课程与讲座',
+    'use.course.desc':'无需在课堂上记笔记，课后也能完整回顾整堂课。',
+    'use.course.alt':'一群人带着笔记本电脑一起工作',
   },
   ja: {
     'n.title':'まだ試す準備ができていませんか？',
@@ -3641,7 +3903,7 @@ const I18N = {
     'c.support':'サポート',
     'c.contactus':'お問い合わせ',
     'c.reportbug':'不具合を報告',
-    'note.pricing':'無料プランはクレジットカード不要 · 契約の縛りなし · いつでも解約可能 · さらに必要ですか？<a href="https://thomas282828.github.io/nuro/?register" style="color:var(--c-blue)">お問い合わせ</a>ください',
+    'note.pricing':'無料プランはクレジットカード不要 · 契約の縛りなし · いつでも解約可能 · さらに必要ですか？<a href="https://kaideno.com/?register" style="color:var(--c-blue)">お問い合わせ</a>ください',
     'v1':'製品ローンチは15日に決定',
     'v2':'マーケティングにブリーフを送付',
     'v3':'木曜までに予算を承認',
@@ -3659,7 +3921,7 @@ const I18N = {
     'p8':'エクスポート + 検索',
     'p9':'月30時間の音声',
     'p10':'エッセンシャルの全機能',
-    'p11':'12言語の文字起こし',
+    'p11':'自動多言語文字起こし',
     'p12':'優先サポート',
     'q1':'音声データはどこかに保存されますか？',
     'q2':'録音にインターネット接続は必要ですか？',
@@ -3727,7 +3989,7 @@ const I18N = {
     't23':'機能',
     't24':'要点を手間なく捉えたいプロフェッショナルのために。',
     't25':'リアルタイム文字起こし',
-    't26':'話すそばから文字が現れます。12言語に対応し、句読点と書式も自動で整います。',
+    't26':'話すそばから文字が現れます。話された言語は10言語の中から自動で判定され、句読点と書式も自動で整います。',
     't27':'AIによる構造化要約',
     't28':'要点、決定事項、アクション項目 — 録音終了時に自動で抽出されます。',
     't29':'検索可能な履歴',
@@ -3738,7 +4000,7 @@ const I18N = {
     't34':'PWAアプリ — iOSとAndroidのホーム画面にネイティブアプリのようにインストールできます。',
     't35':'kaideno のワークフロー',
     't36':'01 — 記録',
-    't37':'音声 · リアルタイム · 12言語',
+    't37':'音声 · リアルタイム · 10言語',
     't38':'録音をタップ。kaideno がスマホのマイクから一語一語リアルタイムで文字起こしします。機器も設定も不要。',
     't39':'02 — 抽出',
     't40':'要約 · 要点 · アクション',
@@ -3776,6 +4038,12 @@ const I18N = {
     't72':'「チーム向けの議事録メールを書いて」— それだけで完成。',
     't73':'料金',
     't74':'明朗な料金。追加費用なし。',
+    'compare.title':'kaideno と専用レコーダーの初年度コスト比較',
+    'compare.kaideno':'kaideno', 'compare.competitor':'専用レコーダー（Plaudなど）',
+    'compare.hardware':'購入が必要な機器', 'compare.hardware.kaideno':'0€ — お手持ちのスマホで十分', 'compare.hardware.competitor':'135〜190€',
+    'compare.sub':'サブスク（年払い）', 'compare.sub.kaideno':'9€/月（エッセンシャルプラン）', 'compare.sub.competitor':'≈ 9.25€/月（Proプラン）',
+    'compare.total':'初年度コスト', 'compare.total.kaideno':'108€', 'compare.total.competitor':'≈ 246€',
+    'compare.footnote':'2026年7月時点のPlaud公開価格（Note + Proプラン年払い）に基づく比較です。価格は変動する場合があります。',
     't75':'機器の購入は不要。いつでも解約できます。',
     't76':'月払い',
     't78':'お問い合わせ',
@@ -3786,7 +4054,9 @@ const I18N = {
     't83':'Plaudなどの競合製品は、始める前に150〜200ユーロの機器購入が必要です。kaidenoはすでにお持ちのスマホのマイクを使います。',
     't84':'対応しています。kaidenoはPWA（プログレッシブウェブアプリ）で、どのスマホのブラウザでも動作します。iOSはSafariから「ホーム画面に追加」、AndroidはChromeから「ホーム画面に追加」。ネイティブアプリのように使えます。',
     't85':'はい。声の異なる複数の人が会議に参加している場合、kaidenoは文字起こしで発言者を自動的に区別します。',
-    't86':'kaidenoは12言語に対応：フランス語、英語、スペイン語、ドイツ語、イタリア語、ポルトガル語、オランダ語、ロシア語、日本語、中国語、アラビア語、ヒンディー語。AIアシスタントも選択した言語で回答します。',
+    't86':'kaidenoは話された言語（フランス語、英語、スペイン語、ドイツ語、イタリア語、ポルトガル語、オランダ語、ロシア語、日本語、ヒンディー語）を設定不要で自動認識します。AIアシスタントと要約は、選択したインターフェース言語で返答します。',
+    'q8':'録音中にスマホをロックしたり、他のアプリに切り替えたりできますか？',
+    'faq.lockscreen':'できれば避けてください。kaidenoはスマホのブラウザ上で動作し、インストールは不要ですが、多くのモバイルブラウザは画面がロックされたり他のアプリに切り替えたりすると、すぐにマイクへのアクセスを停止します。録音中は画面をつけたまま、kaidenoを前面に表示しておいてください。',
     't87':'無料で開始。機器不要。契約の縛りなし。',
     't88':'無料アカウントを作成',
     't89':'ログイン',
@@ -3818,6 +4088,20 @@ const I18N = {
     't117':'無料アカウントを作成',
     't118':'おかえりなさい！',
     't119':'ログイン',
+    'use.tag':'活用シーン',
+    'use.title':'kaidenoは日々の業務に寄り添います',
+    'use.meeting.title':'チームミーティング',
+    'use.meeting.desc':'決定事項やアクションをすべて記録するので、メモを取るために話から目を離す必要がありません。',
+    'use.meeting.alt':'テーブルを囲んで会議をするチーム',
+    'use.brainstorm.title':'ブレインストーミング',
+    'use.brainstorm.desc':'浮かんだアイデアをその場で記録。5分後には忘れてしまうようなひらめきも逃しません。',
+    'use.brainstorm.alt':'資料を囲んで話し合う4人',
+    'use.interview.title':'インタビュー・ポッドキャスト',
+    'use.interview.desc':'そのまま引用・編集・公開できる、正確な文字起こし。',
+    'use.interview.alt':'テーブルでインタビューをする2人',
+    'use.course.title':'講義・カンファレンス',
+    'use.course.desc':'授業中に一切メモを取らなくても、後から講義全体を見返せます。',
+    'use.course.alt':'ノートパソコンを囲んで作業するグループ',
   }
 };
 
@@ -3830,6 +4114,10 @@ function applySiteLang(lang){
   document.querySelectorAll('[data-i18n-html]').forEach(el=>{
     const key = el.getAttribute('data-i18n-html');
     if(dict[key]) el.innerHTML = dict[key];
+  });
+  document.querySelectorAll('[data-i18n-alt]').forEach(el=>{
+    const key = el.getAttribute('data-i18n-alt');
+    if(dict[key]) el.alt = dict[key];
   });
   document.documentElement.lang = lang;
 }
