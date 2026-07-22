@@ -640,6 +640,17 @@ a{color:var(--accent)}
   <div class="settings-scroll">
     <div class="settings-inner">
       <div class="settings-section">
+        <p class="settings-lbl" data-i18n="guide.title">Comment utiliser kaideno ?</p>
+        <div class="info-card" style="display:flex;flex-direction:column;gap:10px;text-align:left">
+          <div><strong>1.</strong> <span data-i18n="guide.step1">Appuie sur le bouton d'enregistrement et autorise l'accès au micro (une seule fois). Parle normalement, la transcription s'affiche en direct.</span></div>
+          <div><strong>2.</strong> <span data-i18n="guide.step2">Appuie à nouveau pour arrêter. L'IA génère automatiquement un résumé avec les points clés et les actions à suivre.</span></div>
+          <div><strong>3.</strong> <span data-i18n="guide.step3">Pendant ou après l'enregistrement, utilise « Demander » pour poser une question à l'IA sur ce qui a été dit.</span></div>
+          <div><strong>4.</strong> <span data-i18n="guide.step4">Retrouve tous tes enregistrements dans l'Historique — recherche par mot-clé, date ou tag.</span></div>
+          <div><strong>5.</strong> <span data-i18n="guide.step5">Exporte une session ou tout ton historique en Markdown ou PDF depuis l'Historique.</span></div>
+          <div><strong>6.</strong> <span data-i18n="guide.step6">Invite un ami depuis « Inviter un ami » dans les paramètres : vous recevez chacun 30 minutes offertes.</span></div>
+        </div>
+      </div>
+      <div class="settings-section">
         <p class="settings-lbl" data-i18n="ui.lang.lbl">Langue de l'interface</p>
         <div class="acct-card">
           <div><div class="acct-email" data-i18n="ui.lang.desc">Langue des menus et boutons</div></div>
@@ -918,6 +929,14 @@ const UI = {
     'js.speaker':'Locuteur', 'js.renamespeakers':'Renommer les locuteurs',
     'js.tag':'Catégorie', 'js.alltags':'Toutes', 'tag.meeting':'Réunion', 'tag.course':'Cours', 'tag.interview':'Interview', 'tag.brainstorm':'Brainstorm', 'tag.podcast':'Podcast', 'tag.consultation':'Consultation',
     'ref.title':'Inviter un ami', 'ref.desc':'Partage ton lien : ton ami reçoit 30 minutes offertes, et toi aussi, dès qu\'il s\'inscrit.', 'ref.copy':'Copier le lien', 'js.grouptoday':'Aujourd\'hui', 'js.yesterday':'Hier', 'js.aiconv':'Conv. IA', 'js.audio':'Audio', 'js.noresultsfor':'Aucun résultat pour', 'js.recfallback':'Enregistrement', 'js.aimsg':'msg IA', 'js.forgotlink':'Mot de passe oublié ?', 'js.forgotsub':'Reçois un lien pour choisir un nouveau mot de passe.', 'js.forgotbtn':'Envoyer le lien', 'js.sending':'Envoi…', 'js.resetsent':'Si un compte existe avec cet email, un lien de réinitialisation vient d\'être envoyé. Vérifie ta boîte mail (et tes spams).', 'js.backtologin':'Retour à la connexion', 'js.newpwd':'Choisis un nouveau mot de passe.', 'js.resetbtn':'Réinitialiser le mot de passe', 'js.resetdone':'Mot de passe changé ! Tu peux maintenant te connecter.', 'js.resetexpired':'Ce lien n\'est plus valable. Redemande un nouveau lien de réinitialisation.',
+ 'guide.title':'Comment utiliser kaideno ?',
+ 'guide.step1':'Appuie sur le bouton d\'enregistrement et autorise l\'accès au micro (une seule fois). Parle normalement, la transcription s\'affiche en direct.',
+ 'guide.step2':'Appuie à nouveau pour arrêter. L\'IA génère automatiquement un résumé avec les points clés et les actions à suivre.',
+ 'guide.step3':'Pendant ou après l\'enregistrement, utilise « Demander » pour poser une question à l\'IA sur ce qui a été dit.',
+ 'guide.step4':'Retrouve tous tes enregistrements dans l\'Historique — recherche par mot-clé, date ou tag.',
+ 'guide.step5':'Exporte une session ou tout ton historique en Markdown ou PDF depuis l\'Historique.',
+ 'guide.step6':'Invite un ami depuis « Inviter un ami » dans les paramètres : vous recevez chacun 30 minutes offertes.',
+
     'js.autoanswer':'🤖 Répondre automatiquement aux questions',
     'a32':'★ Administration',
     'a33':'Assistant kaideno',
@@ -1093,6 +1112,14 @@ const UI = {
     'js.speaker':'Speaker', 'js.renamespeakers':'Rename speakers',
     'js.tag':'Category', 'js.alltags':'All', 'tag.meeting':'Meeting', 'tag.course':'Course', 'tag.interview':'Interview', 'tag.brainstorm':'Brainstorm', 'tag.podcast':'Podcast', 'tag.consultation':'Consultation',
     'ref.title':'Invite a friend', 'ref.desc':'Share your link: your friend gets 30 free minutes, and so do you, as soon as they sign up.', 'ref.copy':'Copy link', 'js.grouptoday':'Today', 'js.yesterday':'Yesterday', 'js.aiconv':'AI chats', 'js.audio':'Audio', 'js.noresultsfor':'No results for', 'js.recfallback':'Recording', 'js.aimsg':'AI msg', 'js.forgotlink':'Forgot password?', 'js.forgotsub':'Get a link to choose a new password.', 'js.forgotbtn':'Send link', 'js.sending':'Sending…', 'js.resetsent':'If an account exists with this email, a reset link was just sent. Check your inbox (and spam folder).', 'js.backtologin':'Back to login', 'js.newpwd':'Choose a new password.', 'js.resetbtn':'Reset password', 'js.resetdone':'Password changed! You can now log in.', 'js.resetexpired':'This link is no longer valid. Request a new reset link.',
+ 'guide.title':'How to use kaideno?',
+ 'guide.step1':'Tap the record button and allow microphone access (just once). Speak normally — the transcript appears live.',
+ 'guide.step2':'Tap again to stop. The AI automatically generates a summary with key points and action items.',
+ 'guide.step3':'During or after recording, use “Ask” to question the AI about what was said.',
+ 'guide.step4':'Find all your recordings in History — search by keyword, date, or tag.',
+ 'guide.step5':'Export a session or your whole history as Markdown or PDF from History.',
+ 'guide.step6':'Invite a friend from “Invite a friend” in settings: you both get 30 free minutes.',
+
     'js.autoanswer':'🤖 Automatically answer questions',
     'a32':'★ Admin',
     'a33':'kaideno Assistant',
@@ -1268,6 +1295,14 @@ const UI = {
     'js.speaker':'Interlocutor', 'js.renamespeakers':'Renombrar interlocutores',
     'js.tag':'Categoría', 'js.alltags':'Todas', 'tag.meeting':'Reunión', 'tag.course':'Clase', 'tag.interview':'Entrevista', 'tag.brainstorm':'Lluvia de ideas', 'tag.podcast':'Podcast', 'tag.consultation':'Consulta',
     'ref.title':'Invitar a un amigo', 'ref.desc':'Comparte tu enlace: tu amigo recibe 30 minutos gratis, y tú también, en cuanto se registre.', 'ref.copy':'Copiar enlace', 'js.grouptoday':'Hoy', 'js.yesterday':'Ayer', 'js.aiconv':'Chats IA', 'js.audio':'Audio', 'js.noresultsfor':'Sin resultados para', 'js.recfallback':'Grabación', 'js.aimsg':'msg IA', 'js.forgotlink':'¿Olvidaste tu contraseña?', 'js.forgotsub':'Recibe un enlace para elegir una nueva contraseña.', 'js.forgotbtn':'Enviar enlace', 'js.sending':'Enviando…', 'js.resetsent':'Si existe una cuenta con este email, se acaba de enviar un enlace de restablecimiento. Revisa tu bandeja (y spam).', 'js.backtologin':'Volver a iniciar sesión', 'js.newpwd':'Elige una nueva contraseña.', 'js.resetbtn':'Restablecer contraseña', 'js.resetdone':'¡Contraseña cambiada! Ya puedes iniciar sesión.', 'js.resetexpired':'Este enlace ya no es válido. Solicita un nuevo enlace de restablecimiento.',
+ 'guide.title':'¿Cómo usar kaideno?',
+ 'guide.step1':'Pulsa el botón de grabar y permite el acceso al micrófono (solo una vez). Habla con normalidad, la transcripción aparece en directo.',
+ 'guide.step2':'Pulsa de nuevo para detener. La IA genera automáticamente un resumen con los puntos clave y las acciones a seguir.',
+ 'guide.step3':'Durante o después de grabar, usa «Preguntar» para hacerle una pregunta a la IA sobre lo que se dijo.',
+ 'guide.step4':'Encuentra todas tus grabaciones en Historial — busca por palabra clave, fecha o etiqueta.',
+ 'guide.step5':'Exporta una sesión o todo tu historial en Markdown o PDF desde Historial.',
+ 'guide.step6':'Invita a un amigo desde «Invitar a un amigo» en ajustes: los dos recibís 30 minutos gratis.',
+
     'js.autoanswer':'🤖 Responder automáticamente a las preguntas',
     'a32':'★ Administración',
     'a33':'Asistente kaideno',
@@ -1433,6 +1468,14 @@ const UI = {
     'js.speaker':'Sprecher', 'js.renamespeakers':'Sprecher umbenennen',
     'js.tag':'Kategorie', 'js.alltags':'Alle', 'tag.meeting':'Meeting', 'tag.course':'Kurs', 'tag.interview':'Interview', 'tag.brainstorm':'Brainstorming', 'tag.podcast':'Podcast', 'tag.consultation':'Beratung',
     'ref.title':'Freund einladen', 'ref.desc':'Teile deinen Link: Dein Freund bekommt 30 Gratis-Minuten, und du auch, sobald er sich registriert.', 'ref.copy':'Link kopieren', 'js.grouptoday':'Heute', 'js.yesterday':'Gestern', 'js.aiconv':'KI-Chats', 'js.audio':'Audio', 'js.noresultsfor':'Keine Ergebnisse für', 'js.recfallback':'Aufnahme', 'js.aimsg':'KI-Nachr.', 'js.forgotlink':'Passwort vergessen?', 'js.forgotsub':'Erhalte einen Link, um ein neues Passwort zu wählen.', 'js.forgotbtn':'Link senden', 'js.sending':'Senden…', 'js.resetsent':'Falls ein Konto mit dieser E-Mail existiert, wurde gerade ein Link zum Zurücksetzen gesendet. Prüfe dein Postfach (und den Spam-Ordner).', 'js.backtologin':'Zurück zur Anmeldung', 'js.newpwd':'Wähle ein neues Passwort.', 'js.resetbtn':'Passwort zurücksetzen', 'js.resetdone':'Passwort geändert! Du kannst dich jetzt anmelden.', 'js.resetexpired':'Dieser Link ist nicht mehr gültig. Fordere einen neuen Link an.',
+ 'guide.title':'Wie benutzt man kaideno?',
+ 'guide.step1':'Tippe auf die Aufnahmetaste und erlaube den Mikrofonzugriff (nur einmal). Sprich normal — die Transkription erscheint live.',
+ 'guide.step2':'Tippe erneut, um zu stoppen. Die KI erstellt automatisch eine Zusammenfassung mit den wichtigsten Punkten und den nächsten Schritten.',
+ 'guide.step3':'Nutze während oder nach der Aufnahme „Fragen“, um der KI eine Frage zum Gesagten zu stellen.',
+ 'guide.step4':'Finde alle deine Aufnahmen im Verlauf — suche nach Stichwort, Datum oder Tag.',
+ 'guide.step5':'Exportiere eine Sitzung oder deinen gesamten Verlauf als Markdown oder PDF aus dem Verlauf.',
+ 'guide.step6':'Lade einen Freund über „Freund einladen“ in den Einstellungen ein: ihr bekommt beide 30 Gratis-Minuten.',
+
     'js.autoanswer':'🤖 Fragen automatisch beantworten',
     'a32':'★ Verwaltung',
     'a33':'kaideno-Assistent',
@@ -1608,6 +1651,14 @@ const UI = {
     'js.speaker':'Interlocutore', 'js.renamespeakers':'Rinomina interlocutori',
     'js.tag':'Categoria', 'js.alltags':'Tutte', 'tag.meeting':'Riunione', 'tag.course':'Corso', 'tag.interview':'Intervista', 'tag.brainstorm':'Brainstorming', 'tag.podcast':'Podcast', 'tag.consultation':'Consulenza',
     'ref.title':'Invita un amico', 'ref.desc':'Condividi il tuo link: il tuo amico riceve 30 minuti omaggio, e anche tu, non appena si iscrive.', 'ref.copy':'Copia link', 'js.grouptoday':'Oggi', 'js.yesterday':'Ieri', 'js.aiconv':'Chat IA', 'js.audio':'Audio', 'js.noresultsfor':'Nessun risultato per', 'js.recfallback':'Registrazione', 'js.aimsg':'msg IA', 'js.forgotlink':'Password dimenticata?', 'js.forgotsub':'Ricevi un link per scegliere una nuova password.', 'js.forgotbtn':'Invia link', 'js.sending':'Invio…', 'js.resetsent':'Se esiste un account con questa email, è appena stato inviato un link di reimpostazione. Controlla la posta (e lo spam).', 'js.backtologin':'Torna al login', 'js.newpwd':'Scegli una nuova password.', 'js.resetbtn':'Reimposta password', 'js.resetdone':'Password cambiata! Ora puoi accedere.', 'js.resetexpired':'Questo link non è più valido. Richiedi un nuovo link di reimpostazione.',
+ 'guide.title':'Come si usa kaideno?',
+ 'guide.step1':'Tocca il pulsante di registrazione e consenti l\'accesso al microfono (solo una volta). Parla normalmente, la trascrizione appare in diretta.',
+ 'guide.step2':'Tocca di nuovo per interrompere. L\'IA genera automaticamente un riassunto con i punti chiave e le azioni da seguire.',
+ 'guide.step3':'Durante o dopo la registrazione, usa «Chiedi» per fare una domanda all\'IA su quanto detto.',
+ 'guide.step4':'Trova tutte le tue registrazioni nella Cronologia — cerca per parola chiave, data o tag.',
+ 'guide.step5':'Esporta una sessione o tutta la cronologia in Markdown o PDF dalla Cronologia.',
+ 'guide.step6':'Invita un amico da «Invita un amico» nelle impostazioni: ricevete entrambi 30 minuti omaggio.',
+
     'js.autoanswer':'🤖 Rispondi automaticamente alle domande',
     'a32':'★ Amministrazione',
     'a33':'Assistente kaideno',
@@ -1783,6 +1834,14 @@ const UI = {
     'js.speaker':'Interlocutor', 'js.renamespeakers':'Renomear interlocutores',
     'js.tag':'Categoria', 'js.alltags':'Todas', 'tag.meeting':'Reunião', 'tag.course':'Aula', 'tag.interview':'Entrevista', 'tag.brainstorm':'Brainstorm', 'tag.podcast':'Podcast', 'tag.consultation':'Consulta',
     'ref.title':'Convidar um amigo', 'ref.desc':'Partilha o teu link: o teu amigo recebe 30 minutos grátis, e tu também, assim que se inscrever.', 'ref.copy':'Copiar link', 'js.grouptoday':'Hoje', 'js.yesterday':'Ontem', 'js.aiconv':'Conversas IA', 'js.audio':'Áudio', 'js.noresultsfor':'Sem resultados para', 'js.recfallback':'Gravação', 'js.aimsg':'msg IA', 'js.forgotlink':'Esqueceste-te da password?', 'js.forgotsub':'Recebe um link para escolher uma nova password.', 'js.forgotbtn':'Enviar link', 'js.sending':'A enviar…', 'js.resetsent':'Se existir uma conta com este email, um link de redefinição acabou de ser enviado. Verifica a caixa de entrada (e o spam).', 'js.backtologin':'Voltar ao login', 'js.newpwd':'Escolhe uma nova password.', 'js.resetbtn':'Redefinir password', 'js.resetdone':'Password alterada! Já podes iniciar sessão.', 'js.resetexpired':'Este link já não é válido. Pede um novo link de redefinição.',
+ 'guide.title':'Como usar o kaideno?',
+ 'guide.step1':'Toca no botão de gravação e permite o acesso ao microfone (só uma vez). Fala normalmente, a transcrição aparece em direto.',
+ 'guide.step2':'Toca novamente para parar. A IA gera automaticamente um resumo com os pontos-chave e as ações a seguir.',
+ 'guide.step3':'Durante ou depois da gravação, usa «Perguntar» para fazer uma pergunta à IA sobre o que foi dito.',
+ 'guide.step4':'Encontra todas as tuas gravações no Histórico — pesquisa por palavra-chave, data ou etiqueta.',
+ 'guide.step5':'Exporta uma sessão ou todo o histórico em Markdown ou PDF a partir do Histórico.',
+ 'guide.step6':'Convida um amigo em «Convidar um amigo» nas definições: ambos recebem 30 minutos grátis.',
+
     'js.autoanswer':'🤖 Responder automaticamente às perguntas',
     'a32':'★ Administração',
     'a33':'Assistente kaideno',
@@ -1958,6 +2017,14 @@ const UI = {
     'js.speaker':'Spreker', 'js.renamespeakers':'Sprekers hernoemen',
     'js.tag':'Categorie', 'js.alltags':'Alle', 'tag.meeting':'Vergadering', 'tag.course':'Cursus', 'tag.interview':'Interview', 'tag.brainstorm':'Brainstorm', 'tag.podcast':'Podcast', 'tag.consultation':'Consult',
     'ref.title':'Vriend uitnodigen', 'ref.desc':'Deel je link: je vriend krijgt 30 gratis minuten, en jij ook, zodra hij/zij zich aanmeldt.', 'ref.copy':'Link kopiëren', 'js.grouptoday':'Vandaag', 'js.yesterday':'Gisteren', 'js.aiconv':'AI-chats', 'js.audio':'Audio', 'js.noresultsfor':'Geen resultaten voor', 'js.recfallback':'Opname', 'js.aimsg':'AI-bericht', 'js.forgotlink':'Wachtwoord vergeten?', 'js.forgotsub':'Ontvang een link om een nieuw wachtwoord te kiezen.', 'js.forgotbtn':'Link versturen', 'js.sending':'Versturen…', 'js.resetsent':'Als er een account met dit e-mailadres bestaat, is er zojuist een resetlink verstuurd. Controleer je inbox (en spam).', 'js.backtologin':'Terug naar inloggen', 'js.newpwd':'Kies een nieuw wachtwoord.', 'js.resetbtn':'Wachtwoord opnieuw instellen', 'js.resetdone':'Wachtwoord gewijzigd! Je kunt nu inloggen.', 'js.resetexpired':'Deze link is niet meer geldig. Vraag een nieuwe resetlink aan.',
+ 'guide.title':'Hoe gebruik je kaideno?',
+ 'guide.step1':'Tik op de opnameknop en geef toegang tot de microfoon (eenmalig). Praat gewoon, de transcriptie verschijnt live.',
+ 'guide.step2':'Tik opnieuw om te stoppen. De AI maakt automatisch een samenvatting met de belangrijkste punten en actiepunten.',
+ 'guide.step3':'Gebruik tijdens of na de opname “Vragen” om de AI iets te vragen over wat er gezegd is.',
+ 'guide.step4':'Vind al je opnames terug in Geschiedenis — zoek op trefwoord, datum of tag.',
+ 'guide.step5':'Exporteer een sessie of je hele geschiedenis als Markdown of PDF vanuit Geschiedenis.',
+ 'guide.step6':'Nodig een vriend uit via “Vriend uitnodigen” in instellingen: jullie krijgen allebei 30 gratis minuten.',
+
     'js.autoanswer':'🤖 Vragen automatisch beantwoorden',
     'a32':'★ Beheer',
     'a33':'kaideno-assistent',
@@ -2133,6 +2200,14 @@ const UI = {
     'js.speaker':'发言人', 'js.renamespeakers':'重命名发言人',
     'js.tag':'分类', 'js.alltags':'全部', 'tag.meeting':'会议', 'tag.course':'课程', 'tag.interview':'采访', 'tag.brainstorm':'头脑风暴', 'tag.podcast':'播客', 'tag.consultation':'咨询',
     'ref.title':'邀请好友', 'ref.desc':'分享你的链接：好友注册后可获得 30 分钟免费时长，你也一样。', 'ref.copy':'复制链接', 'js.grouptoday':'今天', 'js.yesterday':'昨天', 'js.aiconv':'AI 对话', 'js.audio':'音频', 'js.noresultsfor':'没有找到相关结果：', 'js.recfallback':'录音', 'js.aimsg':'条 AI 消息', 'js.forgotlink':'忘记密码？', 'js.forgotsub':'获取链接以设置新密码。', 'js.forgotbtn':'发送链接', 'js.sending':'发送中…', 'js.resetsent':'如果该邮箱已注册账户，重置链接已发送。请查收邮箱（包括垃圾邮件）。', 'js.backtologin':'返回登录', 'js.newpwd':'设置新密码。', 'js.resetbtn':'重置密码', 'js.resetdone':'密码已修改！现在可以登录了。', 'js.resetexpired':'该链接已失效，请重新申请重置链接。',
+ 'guide.title':'如何使用 kaideno？',
+ 'guide.step1':'点击录音按钮并允许访问麦克风（仅需一次）。正常说话，转录会实时显示。',
+ 'guide.step2':'再次点击以停止。AI 会自动生成包含要点和后续行动的摘要。',
+ 'guide.step3':'录音期间或之后，可以点击提问按钮，向 AI 询问刚才说的内容。',
+ 'guide.step4':'在历史记录中查找所有录音——按关键词、日期或标签搜索。',
+ 'guide.step5':'从历史记录中将单个会话或全部历史导出为 Markdown 或 PDF。',
+ 'guide.step6':'在设置中点击邀请好友即可邀请朋友：你们都将获得 30 分钟免费时长。',
+
     'js.autoanswer':'🤖 自动回答问题',
     'a32':'★ 管理',
     'a33':'kaideno 助手',
@@ -2308,6 +2383,14 @@ const UI = {
     'js.speaker':'話者', 'js.renamespeakers':'話者名を編集',
     'js.tag':'カテゴリー', 'js.alltags':'すべて', 'tag.meeting':'会議', 'tag.course':'授業', 'tag.interview':'インタビュー', 'tag.brainstorm':'ブレインストーミング', 'tag.podcast':'ポッドキャスト', 'tag.consultation':'相談',
     'ref.title':'友達を招待', 'ref.desc':'リンクをシェアすると、友達に30分の無料時間がプレゼントされ、あなたにも30分プレゼントされます。', 'ref.copy':'リンクをコピー', 'js.grouptoday':'今日', 'js.yesterday':'昨日', 'js.aiconv':'AIチャット', 'js.audio':'音声', 'js.noresultsfor':'該当する結果がありません：', 'js.recfallback':'録音', 'js.aimsg':'件のAIメッセージ', 'js.forgotlink':'パスワードをお忘れですか？', 'js.forgotsub':'新しいパスワードを設定するためのリンクを受け取る。', 'js.forgotbtn':'リンクを送信', 'js.sending':'送信中…', 'js.resetsent':'このメールアドレスのアカウントが存在する場合、リセットリンクを送信しました。受信箱（迷惑メールフォルダも）をご確認ください。', 'js.backtologin':'ログインに戻る', 'js.newpwd':'新しいパスワードを選択してください。', 'js.resetbtn':'パスワードをリセット', 'js.resetdone':'パスワードが変更されました！ログインできます。', 'js.resetexpired':'このリンクは無効です。新しいリセットリンクをリクエストしてください。',
+ 'guide.title':'kaidenoの使い方',
+ 'guide.step1':'録音ボタンをタップしてマイクへのアクセスを許可（一度だけ）。普通に話すと、リアルタイムで文字起こしが表示されます。',
+ 'guide.step2':'もう一度タップすると停止します。AIが自動的に要点とアクションリスト付きの要約を作成します。',
+ 'guide.step3':'録音中または録音後に「質問する」を使って、話した内容についてAIに質問できます。',
+ 'guide.step4':'履歴からすべての録音を確認できます — キーワード、日付、タグで検索可能です。',
+ 'guide.step5':'履歴から、1件のセッションまたは全履歴をMarkdownまたはPDFでエクスポートできます。',
+ 'guide.step6':'設定の「友達を招待」から友達を招待すると、お互いに30分の無料時間がもらえます。',
+
     'js.autoanswer':'🤖 質問に自動で回答する',
     'a32':'★ 管理',
     'a33':'kaidenoアシスタント',
