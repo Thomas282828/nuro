@@ -102,6 +102,15 @@ a{color:var(--accent)}
 .rec-timer.show{opacity:1}
 .audio-viz{display:flex;align-items:center;justify-content:center;gap:3px;height:40px;margin:12px 0 0;opacity:0;transition:opacity .3s}
 .audio-viz.show{opacity:1}
+.quick-call-btn{display:inline-flex;align-items:center;gap:6px;margin-top:14px;background:var(--bg2);border:1px solid var(--line2);border-radius:999px;padding:8px 16px;font-size:.8rem;font-weight:600;color:var(--ink2);cursor:pointer;transition:all .15s}
+.quick-call-btn:hover{border-color:var(--accent-b);color:var(--accent)}
+.quick-call-btn.hidden{display:none}
+.rec-mode-lbl{font-size:.72rem;font-weight:600;color:var(--ink3);margin-top:18px;text-align:center}
+.rec-mode-row{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin:8px auto 0;max-width:340px;transition:opacity .2s}
+.rec-mode-row.disabled{opacity:.4;pointer-events:none}
+.rec-mode-chip{font-size:.72rem;font-weight:500;color:var(--ink2);background:var(--bg1);border:1px solid var(--line);border-radius:999px;padding:5px 11px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.rec-mode-chip:hover{border-color:var(--accent-b)}
+.rec-mode-chip.active{background:var(--accent2);border-color:var(--accent-b);color:var(--accent)}
 .lang-selector{display:inline-flex;align-items:center;gap:8px;margin-top:16px;background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:6px 14px}
 .lang-label{font-size:.75rem;font-weight:600;color:var(--ink3)}
 .lang-selector select{background:transparent;border:none;color:var(--ink);font-size:.82rem;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;outline:none;padding-right:4px}
@@ -122,8 +131,13 @@ a{color:var(--accent)}
 .live-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:blink 1.1s ease-in-out infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 .live-wc{font-size:.73rem;color:var(--ink3)}
-.live-txt{font-size:.88rem;line-height:1.72;color:var(--ink);max-height:180px;overflow-y:auto;word-break:break-word}
-.live-ai{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.live-txt{font-size:.88rem;line-height:1.72;color:var(--ink);max-height:180px;overflow-y:auto;word-break:break-word;transition:font-size .2s,max-height .2s}
+.live-ai{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);transition:opacity .15s}
+.caption-mode-btn{background:transparent;border:1px solid var(--line);border-radius:999px;padding:2px 8px;font-size:.85rem;line-height:1.4;cursor:pointer;color:var(--ink2);margin-left:8px}
+.caption-mode-btn.active{background:var(--accent2);border-color:var(--accent-b);color:var(--accent)}
+.live-box.caption-mode{position:fixed;inset:0;z-index:500;border-radius:0;border:none;padding:24px;display:flex;flex-direction:column;background:var(--bg0,var(--bg1))}
+.live-box.caption-mode .live-txt{font-size:2rem;line-height:1.5;max-height:none;flex:1;overflow-y:auto}
+.live-box.caption-mode .live-ai{display:none}
 .live-ai-row{display:flex;gap:7px}
 .live-ai-input{flex:1;background:var(--bg2);border:1.5px solid var(--line);border-radius:var(--radius-sm);padding:8px 12px;color:var(--ink);font-size:.82rem;font-family:'Inter',sans-serif;outline:none;transition:border-color .15s}
 .live-ai-input:focus{border-color:var(--accent)}
@@ -520,8 +534,11 @@ a{color:var(--accent)}
           </button>
         </div>
         <p class="rec-status" id="rec-status" data-i18n="a11">Appuie pour enregistrer</p>
+        <button class="quick-call-btn" id="quick-call-btn" onclick="quickCallRecord()" type="button">📞 <span data-i18n="js.quickcall">Enregistrer un appel</span></button>
         <div class="rec-timer" id="rec-timer">00:00</div>
         <div class="audio-viz" id="audio-viz"></div>
+        <div class="rec-mode-lbl" data-i18n="js.pickmode">Contexte (optionnel)</div>
+        <div class="rec-mode-row" id="rec-mode-row"></div>
         <div class="lang-selector" id="lang-selector">
           <span class="lang-label" data-i18n="a12">Langue :</span>
           <select id="dash-lang" onchange="setUILang(this.value)">
@@ -546,7 +563,7 @@ a{color:var(--accent)}
     </div>
     <div class="dash-inner">
       <div class="live-box" id="live-box">
-        <div class="live-hd"><div class="live-lbl"><span class="live-dot"></span>En direct</div><span class="live-wc" id="live-wc">0 mot</span></div>
+        <div class="live-hd"><div class="live-lbl"><span class="live-dot"></span>En direct</div><span class="live-wc" id="live-wc">0 mot</span><button class="caption-mode-btn" id="caption-mode-btn" onclick="toggleCaptionMode()" title="Mode sous-titres" data-i18n-title="js.captionmode" type="button">🔤</button></div>
         <div class="live-txt" id="live-txt"></div>
         <div class="live-ai" id="live-ai">
           <label style="display:flex;align-items:center;gap:7px;margin-bottom:10px;cursor:pointer;font-size:.76rem;color:var(--ink2)">
@@ -927,7 +944,8 @@ const UI = {
     'js.noresponse':"Désolé, je n'ai pas pu répondre.", 'js.chatconnerr':"⚠️ Erreur de connexion à l'assistant. Réessaie dans un instant.", 'js.asstconnerr':'⚠️ Erreur de connexion. Vérifie ta clé Claude dans Paramètres.', 'js.keyok':'✓ Configurée', 'js.keymissing':'Manquante',
     'js.aiwelcome':"Bonjour ! Je connais le contenu de cet enregistrement. Pose-moi une question ou choisis une action ci-dessus.", 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
     'js.speaker':'Locuteur', 'js.renamespeakers':'Renommer les locuteurs',
-    'js.tag':'Catégorie', 'js.alltags':'Toutes', 'tag.meeting':'Réunion', 'tag.course':'Cours', 'tag.interview':'Interview', 'tag.brainstorm':'Brainstorm', 'tag.podcast':'Podcast', 'tag.consultation':'Consultation',
+    'js.tag':'Catégorie', 'js.alltags':'Toutes', 'tag.meeting':'Réunion', 'tag.course':'Cours', 'tag.interview':'Interview', 'tag.brainstorm':'Brainstorm', 'tag.podcast':'Podcast', 'tag.consultation':'Consultation', 'tag.journal':'Journal perso', 'tag.call':'Appel',
+    'js.pickmode':'Contexte (optionnel)', 'js.captionmode':'Mode sous-titres', 'js.tolinkedin':'Post LinkedIn', 'js.toarticle':'Article de blog', 'js.quickcall':'Enregistrer un appel',
     'ref.title':'Inviter un ami', 'ref.desc':'Partage ton lien : ton ami reçoit 30 minutes offertes, et toi aussi, dès qu\'il s\'inscrit.', 'ref.copy':'Copier le lien', 'js.grouptoday':'Aujourd\'hui', 'js.yesterday':'Hier', 'js.aiconv':'Conv. IA', 'js.audio':'Audio', 'js.noresultsfor':'Aucun résultat pour', 'js.recfallback':'Enregistrement', 'js.aimsg':'msg IA', 'js.forgotlink':'Mot de passe oublié ?', 'js.forgotsub':'Reçois un lien pour choisir un nouveau mot de passe.', 'js.forgotbtn':'Envoyer le lien', 'js.sending':'Envoi…', 'js.resetsent':'Si un compte existe avec cet email, un lien de réinitialisation vient d\'être envoyé. Vérifie ta boîte mail (et tes spams).', 'js.backtologin':'Retour à la connexion', 'js.newpwd':'Choisis un nouveau mot de passe.', 'js.resetbtn':'Réinitialiser le mot de passe', 'js.resetdone':'Mot de passe changé ! Tu peux maintenant te connecter.', 'js.resetexpired':'Ce lien n\'est plus valable. Redemande un nouveau lien de réinitialisation.',
  'guide.title':'Comment utiliser kaideno ?',
  'guide.step1':'Appuie sur le bouton d\'enregistrement et autorise l\'accès au micro (une seule fois). Parle normalement, la transcription s\'affiche en direct.',
@@ -1110,7 +1128,8 @@ const UI = {
     'js.noresponse':"Sorry, I couldn't respond.", 'js.chatconnerr':'⚠️ Connection error with the assistant. Try again in a moment.', 'js.asstconnerr':'⚠️ Connection error. Check your Claude key in Settings.', 'js.keyok':'✓ Configured', 'js.keymissing':'Missing',
     'js.aiwelcome':'Hi! I know the content of this recording. Ask me a question or pick an action above.', 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
     'js.speaker':'Speaker', 'js.renamespeakers':'Rename speakers',
-    'js.tag':'Category', 'js.alltags':'All', 'tag.meeting':'Meeting', 'tag.course':'Course', 'tag.interview':'Interview', 'tag.brainstorm':'Brainstorm', 'tag.podcast':'Podcast', 'tag.consultation':'Consultation',
+    'js.tag':'Category', 'js.alltags':'All', 'tag.meeting':'Meeting', 'tag.course':'Course', 'tag.interview':'Interview', 'tag.brainstorm':'Brainstorm', 'tag.podcast':'Podcast', 'tag.consultation':'Consultation', 'tag.journal':'Personal journal', 'tag.call':'Call',
+    'js.pickmode':'Context (optional)', 'js.captionmode':'Caption mode', 'js.tolinkedin':'LinkedIn post', 'js.toarticle':'Blog article', 'js.quickcall':'Record a call',
     'ref.title':'Invite a friend', 'ref.desc':'Share your link: your friend gets 30 free minutes, and so do you, as soon as they sign up.', 'ref.copy':'Copy link', 'js.grouptoday':'Today', 'js.yesterday':'Yesterday', 'js.aiconv':'AI chats', 'js.audio':'Audio', 'js.noresultsfor':'No results for', 'js.recfallback':'Recording', 'js.aimsg':'AI msg', 'js.forgotlink':'Forgot password?', 'js.forgotsub':'Get a link to choose a new password.', 'js.forgotbtn':'Send link', 'js.sending':'Sending…', 'js.resetsent':'If an account exists with this email, a reset link was just sent. Check your inbox (and spam folder).', 'js.backtologin':'Back to login', 'js.newpwd':'Choose a new password.', 'js.resetbtn':'Reset password', 'js.resetdone':'Password changed! You can now log in.', 'js.resetexpired':'This link is no longer valid. Request a new reset link.',
  'guide.title':'How to use kaideno?',
  'guide.step1':'Tap the record button and allow microphone access (just once). Speak normally — the transcript appears live.',
@@ -1293,7 +1312,8 @@ const UI = {
     'js.noresponse':'Lo siento, no he podido responder.', 'js.chatconnerr':'⚠️ Error de conexión con el asistente. Inténtalo de nuevo en un momento.', 'js.asstconnerr':'⚠️ Error de conexión. Verifica tu clave de Claude en Ajustes.', 'js.keyok':'✓ Configurada', 'js.keymissing':'Falta',
     'js.aiwelcome':'¡Hola! Conozco el contenido de esta grabación. Hazme una pregunta o elige una acción arriba.', 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
     'js.speaker':'Interlocutor', 'js.renamespeakers':'Renombrar interlocutores',
-    'js.tag':'Categoría', 'js.alltags':'Todas', 'tag.meeting':'Reunión', 'tag.course':'Clase', 'tag.interview':'Entrevista', 'tag.brainstorm':'Lluvia de ideas', 'tag.podcast':'Podcast', 'tag.consultation':'Consulta',
+    'js.tag':'Categoría', 'js.alltags':'Todas', 'tag.meeting':'Reunión', 'tag.course':'Clase', 'tag.interview':'Entrevista', 'tag.brainstorm':'Lluvia de ideas', 'tag.podcast':'Podcast', 'tag.consultation':'Consulta', 'tag.journal':'Diario personal', 'tag.call':'Llamada',
+    'js.pickmode':'Contexto (opcional)', 'js.captionmode':'Modo subtítulos', 'js.tolinkedin':'Publicación LinkedIn', 'js.toarticle':'Artículo de blog', 'js.quickcall':'Grabar una llamada',
     'ref.title':'Invitar a un amigo', 'ref.desc':'Comparte tu enlace: tu amigo recibe 30 minutos gratis, y tú también, en cuanto se registre.', 'ref.copy':'Copiar enlace', 'js.grouptoday':'Hoy', 'js.yesterday':'Ayer', 'js.aiconv':'Chats IA', 'js.audio':'Audio', 'js.noresultsfor':'Sin resultados para', 'js.recfallback':'Grabación', 'js.aimsg':'msg IA', 'js.forgotlink':'¿Olvidaste tu contraseña?', 'js.forgotsub':'Recibe un enlace para elegir una nueva contraseña.', 'js.forgotbtn':'Enviar enlace', 'js.sending':'Enviando…', 'js.resetsent':'Si existe una cuenta con este email, se acaba de enviar un enlace de restablecimiento. Revisa tu bandeja (y spam).', 'js.backtologin':'Volver a iniciar sesión', 'js.newpwd':'Elige una nueva contraseña.', 'js.resetbtn':'Restablecer contraseña', 'js.resetdone':'¡Contraseña cambiada! Ya puedes iniciar sesión.', 'js.resetexpired':'Este enlace ya no es válido. Solicita un nuevo enlace de restablecimiento.',
  'guide.title':'¿Cómo usar kaideno?',
  'guide.step1':'Pulsa el botón de grabar y permite el acceso al micrófono (solo una vez). Habla con normalidad, la transcripción aparece en directo.',
@@ -1466,7 +1486,8 @@ const UI = {
     'js.noresponse':'Entschuldigung, ich konnte nicht antworten.', 'js.chatconnerr':'⚠️ Verbindungsfehler mit dem Assistenten. Versuche es gleich noch einmal.', 'js.asstconnerr':'⚠️ Verbindungsfehler. Überprüfe deinen Claude-Schlüssel in den Einstellungen.', 'js.keyok':'✓ Konfiguriert', 'js.keymissing':'Fehlt',
     'js.aiwelcome':'Hallo! Ich kenne den Inhalt dieser Aufnahme. Stell mir eine Frage oder wähle oben eine Aktion.', 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
     'js.speaker':'Sprecher', 'js.renamespeakers':'Sprecher umbenennen',
-    'js.tag':'Kategorie', 'js.alltags':'Alle', 'tag.meeting':'Meeting', 'tag.course':'Kurs', 'tag.interview':'Interview', 'tag.brainstorm':'Brainstorming', 'tag.podcast':'Podcast', 'tag.consultation':'Beratung',
+    'js.tag':'Kategorie', 'js.alltags':'Alle', 'tag.meeting':'Meeting', 'tag.course':'Kurs', 'tag.interview':'Interview', 'tag.brainstorm':'Brainstorming', 'tag.podcast':'Podcast', 'tag.consultation':'Beratung', 'tag.journal':'Persönliches Journal', 'tag.call':'Anruf',
+    'js.pickmode':'Kontext (optional)', 'js.captionmode':'Untertitel-Modus', 'js.tolinkedin':'LinkedIn-Beitrag', 'js.toarticle':'Blogartikel', 'js.quickcall':'Anruf aufnehmen',
     'ref.title':'Freund einladen', 'ref.desc':'Teile deinen Link: Dein Freund bekommt 30 Gratis-Minuten, und du auch, sobald er sich registriert.', 'ref.copy':'Link kopieren', 'js.grouptoday':'Heute', 'js.yesterday':'Gestern', 'js.aiconv':'KI-Chats', 'js.audio':'Audio', 'js.noresultsfor':'Keine Ergebnisse für', 'js.recfallback':'Aufnahme', 'js.aimsg':'KI-Nachr.', 'js.forgotlink':'Passwort vergessen?', 'js.forgotsub':'Erhalte einen Link, um ein neues Passwort zu wählen.', 'js.forgotbtn':'Link senden', 'js.sending':'Senden…', 'js.resetsent':'Falls ein Konto mit dieser E-Mail existiert, wurde gerade ein Link zum Zurücksetzen gesendet. Prüfe dein Postfach (und den Spam-Ordner).', 'js.backtologin':'Zurück zur Anmeldung', 'js.newpwd':'Wähle ein neues Passwort.', 'js.resetbtn':'Passwort zurücksetzen', 'js.resetdone':'Passwort geändert! Du kannst dich jetzt anmelden.', 'js.resetexpired':'Dieser Link ist nicht mehr gültig. Fordere einen neuen Link an.',
  'guide.title':'Wie benutzt man kaideno?',
  'guide.step1':'Tippe auf die Aufnahmetaste und erlaube den Mikrofonzugriff (nur einmal). Sprich normal — die Transkription erscheint live.',
@@ -1649,7 +1670,8 @@ const UI = {
     'js.noresponse':'Mi dispiace, non sono riuscito a rispondere.', 'js.chatconnerr':"⚠️ Errore di connessione con l'assistente. Riprova tra poco.", 'js.asstconnerr':'⚠️ Errore di connessione. Controlla la tua chiave Claude in Impostazioni.', 'js.keyok':'✓ Configurata', 'js.keymissing':'Mancante',
     'js.aiwelcome':"Ciao! Conosco il contenuto di questa registrazione. Fammi una domanda o scegli un'azione qui sopra.", 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
     'js.speaker':'Interlocutore', 'js.renamespeakers':'Rinomina interlocutori',
-    'js.tag':'Categoria', 'js.alltags':'Tutte', 'tag.meeting':'Riunione', 'tag.course':'Corso', 'tag.interview':'Intervista', 'tag.brainstorm':'Brainstorming', 'tag.podcast':'Podcast', 'tag.consultation':'Consulenza',
+    'js.tag':'Categoria', 'js.alltags':'Tutte', 'tag.meeting':'Riunione', 'tag.course':'Corso', 'tag.interview':'Intervista', 'tag.brainstorm':'Brainstorming', 'tag.podcast':'Podcast', 'tag.consultation':'Consulenza', 'tag.journal':'Diario personale', 'tag.call':'Chiamata',
+    'js.pickmode':'Contesto (opzionale)', 'js.captionmode':'Modalità sottotitoli', 'js.tolinkedin':'Post LinkedIn', 'js.toarticle':'Articolo di blog', 'js.quickcall':'Registra una chiamata',
     'ref.title':'Invita un amico', 'ref.desc':'Condividi il tuo link: il tuo amico riceve 30 minuti omaggio, e anche tu, non appena si iscrive.', 'ref.copy':'Copia link', 'js.grouptoday':'Oggi', 'js.yesterday':'Ieri', 'js.aiconv':'Chat IA', 'js.audio':'Audio', 'js.noresultsfor':'Nessun risultato per', 'js.recfallback':'Registrazione', 'js.aimsg':'msg IA', 'js.forgotlink':'Password dimenticata?', 'js.forgotsub':'Ricevi un link per scegliere una nuova password.', 'js.forgotbtn':'Invia link', 'js.sending':'Invio…', 'js.resetsent':'Se esiste un account con questa email, è appena stato inviato un link di reimpostazione. Controlla la posta (e lo spam).', 'js.backtologin':'Torna al login', 'js.newpwd':'Scegli una nuova password.', 'js.resetbtn':'Reimposta password', 'js.resetdone':'Password cambiata! Ora puoi accedere.', 'js.resetexpired':'Questo link non è più valido. Richiedi un nuovo link di reimpostazione.',
  'guide.title':'Come si usa kaideno?',
  'guide.step1':'Tocca il pulsante di registrazione e consenti l\'accesso al microfono (solo una volta). Parla normalmente, la trascrizione appare in diretta.',
@@ -1832,7 +1854,8 @@ const UI = {
     'js.noresponse':'Desculpa, não consegui responder.', 'js.chatconnerr':'⚠️ Erro de ligação com o assistente. Tenta novamente daqui a pouco.', 'js.asstconnerr':'⚠️ Erro de ligação. Verifica a tua chave Claude em Definições.', 'js.keyok':'✓ Configurada', 'js.keymissing':'Em falta',
     'js.aiwelcome':'Olá! Conheço o conteúdo desta gravação. Faz-me uma pergunta ou escolhe uma ação acima.', 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
     'js.speaker':'Interlocutor', 'js.renamespeakers':'Renomear interlocutores',
-    'js.tag':'Categoria', 'js.alltags':'Todas', 'tag.meeting':'Reunião', 'tag.course':'Aula', 'tag.interview':'Entrevista', 'tag.brainstorm':'Brainstorm', 'tag.podcast':'Podcast', 'tag.consultation':'Consulta',
+    'js.tag':'Categoria', 'js.alltags':'Todas', 'tag.meeting':'Reunião', 'tag.course':'Aula', 'tag.interview':'Entrevista', 'tag.brainstorm':'Brainstorm', 'tag.podcast':'Podcast', 'tag.consultation':'Consulta', 'tag.journal':'Diário pessoal', 'tag.call':'Chamada',
+    'js.pickmode':'Contexto (opcional)', 'js.captionmode':'Modo legendas', 'js.tolinkedin':'Post LinkedIn', 'js.toarticle':'Artigo de blog', 'js.quickcall':'Gravar uma chamada',
     'ref.title':'Convidar um amigo', 'ref.desc':'Partilha o teu link: o teu amigo recebe 30 minutos grátis, e tu também, assim que se inscrever.', 'ref.copy':'Copiar link', 'js.grouptoday':'Hoje', 'js.yesterday':'Ontem', 'js.aiconv':'Conversas IA', 'js.audio':'Áudio', 'js.noresultsfor':'Sem resultados para', 'js.recfallback':'Gravação', 'js.aimsg':'msg IA', 'js.forgotlink':'Esqueceste-te da password?', 'js.forgotsub':'Recebe um link para escolher uma nova password.', 'js.forgotbtn':'Enviar link', 'js.sending':'A enviar…', 'js.resetsent':'Se existir uma conta com este email, um link de redefinição acabou de ser enviado. Verifica a caixa de entrada (e o spam).', 'js.backtologin':'Voltar ao login', 'js.newpwd':'Escolhe uma nova password.', 'js.resetbtn':'Redefinir password', 'js.resetdone':'Password alterada! Já podes iniciar sessão.', 'js.resetexpired':'Este link já não é válido. Pede um novo link de redefinição.',
  'guide.title':'Como usar o kaideno?',
  'guide.step1':'Toca no botão de gravação e permite o acesso ao microfone (só uma vez). Fala normalmente, a transcrição aparece em direto.',
@@ -2015,7 +2038,8 @@ const UI = {
     'js.noresponse':'Sorry, ik kon niet antwoorden.', 'js.chatconnerr':'⚠️ Verbindingsfout met de assistent. Probeer het zo weer.', 'js.asstconnerr':'⚠️ Verbindingsfout. Controleer je Claude-sleutel in Instellingen.', 'js.keyok':'✓ Geconfigureerd', 'js.keymissing':'Ontbreekt',
     'js.aiwelcome':'Hallo! Ik ken de inhoud van deze opname. Stel me een vraag of kies hierboven een actie.', 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
     'js.speaker':'Spreker', 'js.renamespeakers':'Sprekers hernoemen',
-    'js.tag':'Categorie', 'js.alltags':'Alle', 'tag.meeting':'Vergadering', 'tag.course':'Cursus', 'tag.interview':'Interview', 'tag.brainstorm':'Brainstorm', 'tag.podcast':'Podcast', 'tag.consultation':'Consult',
+    'js.tag':'Categorie', 'js.alltags':'Alle', 'tag.meeting':'Vergadering', 'tag.course':'Cursus', 'tag.interview':'Interview', 'tag.brainstorm':'Brainstorm', 'tag.podcast':'Podcast', 'tag.consultation':'Consult', 'tag.journal':'Persoonlijk dagboek', 'tag.call':'Gesprek',
+    'js.pickmode':'Context (optioneel)', 'js.captionmode':'Ondertitelmodus', 'js.tolinkedin':'LinkedIn-post', 'js.toarticle':'Blogartikel', 'js.quickcall':'Gesprek opnemen',
     'ref.title':'Vriend uitnodigen', 'ref.desc':'Deel je link: je vriend krijgt 30 gratis minuten, en jij ook, zodra hij/zij zich aanmeldt.', 'ref.copy':'Link kopiëren', 'js.grouptoday':'Vandaag', 'js.yesterday':'Gisteren', 'js.aiconv':'AI-chats', 'js.audio':'Audio', 'js.noresultsfor':'Geen resultaten voor', 'js.recfallback':'Opname', 'js.aimsg':'AI-bericht', 'js.forgotlink':'Wachtwoord vergeten?', 'js.forgotsub':'Ontvang een link om een nieuw wachtwoord te kiezen.', 'js.forgotbtn':'Link versturen', 'js.sending':'Versturen…', 'js.resetsent':'Als er een account met dit e-mailadres bestaat, is er zojuist een resetlink verstuurd. Controleer je inbox (en spam).', 'js.backtologin':'Terug naar inloggen', 'js.newpwd':'Kies een nieuw wachtwoord.', 'js.resetbtn':'Wachtwoord opnieuw instellen', 'js.resetdone':'Wachtwoord gewijzigd! Je kunt nu inloggen.', 'js.resetexpired':'Deze link is niet meer geldig. Vraag een nieuwe resetlink aan.',
  'guide.title':'Hoe gebruik je kaideno?',
  'guide.step1':'Tik op de opnameknop en geef toegang tot de microfoon (eenmalig). Praat gewoon, de transcriptie verschijnt live.',
@@ -2198,7 +2222,8 @@ const UI = {
     'js.noresponse':'抱歉，我无法回答。', 'js.chatconnerr':'⚠️ 与助手的连接出错，请稍后重试。', 'js.asstconnerr':'⚠️ 连接错误，请在设置中检查您的 Claude 密钥。', 'js.keyok':'✓ 已配置', 'js.keymissing':'缺失',
     'js.aiwelcome':'你好！我了解这段录音的内容。请提问，或选择上方的操作。', 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
     'js.speaker':'发言人', 'js.renamespeakers':'重命名发言人',
-    'js.tag':'分类', 'js.alltags':'全部', 'tag.meeting':'会议', 'tag.course':'课程', 'tag.interview':'采访', 'tag.brainstorm':'头脑风暴', 'tag.podcast':'播客', 'tag.consultation':'咨询',
+    'js.tag':'分类', 'js.alltags':'全部', 'tag.meeting':'会议', 'tag.course':'课程', 'tag.interview':'采访', 'tag.brainstorm':'头脑风暴', 'tag.podcast':'播客', 'tag.consultation':'咨询', 'tag.journal':'个人日记', 'tag.call':'通话',
+    'js.pickmode':'场景（可选）', 'js.captionmode':'字幕模式', 'js.tolinkedin':'LinkedIn 帖子', 'js.toarticle':'博客文章', 'js.quickcall':'录制通话',
     'ref.title':'邀请好友', 'ref.desc':'分享你的链接：好友注册后可获得 30 分钟免费时长，你也一样。', 'ref.copy':'复制链接', 'js.grouptoday':'今天', 'js.yesterday':'昨天', 'js.aiconv':'AI 对话', 'js.audio':'音频', 'js.noresultsfor':'没有找到相关结果：', 'js.recfallback':'录音', 'js.aimsg':'条 AI 消息', 'js.forgotlink':'忘记密码？', 'js.forgotsub':'获取链接以设置新密码。', 'js.forgotbtn':'发送链接', 'js.sending':'发送中…', 'js.resetsent':'如果该邮箱已注册账户，重置链接已发送。请查收邮箱（包括垃圾邮件）。', 'js.backtologin':'返回登录', 'js.newpwd':'设置新密码。', 'js.resetbtn':'重置密码', 'js.resetdone':'密码已修改！现在可以登录了。', 'js.resetexpired':'该链接已失效，请重新申请重置链接。',
  'guide.title':'如何使用 kaideno？',
  'guide.step1':'点击录音按钮并允许访问麦克风（仅需一次）。正常说话，转录会实时显示。',
@@ -2381,7 +2406,8 @@ const UI = {
     'js.noresponse':'申し訳ありません、回答できませんでした。', 'js.chatconnerr':'⚠️ アシスタントへの接続エラーです。少し待ってからもう一度お試しください。', 'js.asstconnerr':'⚠️ 接続エラーです。設定でClaudeキーを確認してください。', 'js.keyok':'✓ 設定済み', 'js.keymissing':'未設定',
     'js.aiwelcome':'こんにちは！この録音の内容を把握しています。質問するか、上のアクションを選んでください。', 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
     'js.speaker':'話者', 'js.renamespeakers':'話者名を編集',
-    'js.tag':'カテゴリー', 'js.alltags':'すべて', 'tag.meeting':'会議', 'tag.course':'授業', 'tag.interview':'インタビュー', 'tag.brainstorm':'ブレインストーミング', 'tag.podcast':'ポッドキャスト', 'tag.consultation':'相談',
+    'js.tag':'カテゴリー', 'js.alltags':'すべて', 'tag.meeting':'会議', 'tag.course':'授業', 'tag.interview':'インタビュー', 'tag.brainstorm':'ブレインストーミング', 'tag.podcast':'ポッドキャスト', 'tag.consultation':'相談', 'tag.journal':'個人ジャーナル', 'tag.call':'通話',
+    'js.pickmode':'コンテキスト（任意）', 'js.captionmode':'字幕モード', 'js.tolinkedin':'LinkedIn投稿', 'js.toarticle':'ブログ記事', 'js.quickcall':'通話を録音',
     'ref.title':'友達を招待', 'ref.desc':'リンクをシェアすると、友達に30分の無料時間がプレゼントされ、あなたにも30分プレゼントされます。', 'ref.copy':'リンクをコピー', 'js.grouptoday':'今日', 'js.yesterday':'昨日', 'js.aiconv':'AIチャット', 'js.audio':'音声', 'js.noresultsfor':'該当する結果がありません：', 'js.recfallback':'録音', 'js.aimsg':'件のAIメッセージ', 'js.forgotlink':'パスワードをお忘れですか？', 'js.forgotsub':'新しいパスワードを設定するためのリンクを受け取る。', 'js.forgotbtn':'リンクを送信', 'js.sending':'送信中…', 'js.resetsent':'このメールアドレスのアカウントが存在する場合、リセットリンクを送信しました。受信箱（迷惑メールフォルダも）をご確認ください。', 'js.backtologin':'ログインに戻る', 'js.newpwd':'新しいパスワードを選択してください。', 'js.resetbtn':'パスワードをリセット', 'js.resetdone':'パスワードが変更されました！ログインできます。', 'js.resetexpired':'このリンクは無効です。新しいリセットリンクをリクエストしてください。',
  'guide.title':'kaidenoの使い方',
  'guide.step1':'録音ボタンをタップしてマイクへのアクセスを許可（一度だけ）。普通に話すと、リアルタイムで文字起こしが表示されます。',
@@ -2666,6 +2692,17 @@ function toggleAutoAnswer(on){
 let liveUserScrolled = false;
 let speakerSegments=[];
 let vizBars=[], vizRaf=null, vizPhase=0;
+let recMode=null; // tag choisi avant de démarrer l'enregistrement (meeting/course/journal/call/…)
+
+function setRecMode(key){
+  recMode = (recMode===key) ? null : key;
+  renderRecModeRow();
+}
+function renderRecModeRow(){
+  const el=document.getElementById('rec-mode-row');
+  if(!el) return;
+  el.innerHTML = TAG_DEFS.map(d=>`<button class="rec-mode-chip${recMode===d.key?' active':''}" onclick="setRecMode('${d.key}')" type="button">${d.icon} ${t(d.i18n)}</button>`).join('');
+}
 
 // ══ AUTH ══
 function switchTab(t) {
@@ -2854,7 +2891,7 @@ function enterDashboard(){
   const h=new Date().getHours();
   const g=h<6?t('js.night'):h<12?t('js.morning'):h<18?t('js.afternoon'):t('js.evening');
   const el=document.getElementById('dash-greeting');if(el)el.textContent=g;
-  renderStats();renderSessions();renderQuota();
+  renderStats();renderSessions();renderQuota();renderRecModeRow();
   const fab=document.getElementById('fab-asst');if(fab)fab.style.display='flex';
   showView('dashboard');
   if(isFounder()){setTimeout(()=>showToast('★ Accès Fondateur — bienvenue !'),400)}
@@ -2981,7 +3018,10 @@ async function toggleRec(){
     initLiveScroll();
     const dg=await getDeepgramKey();
     if(!dg){showToast('⚠️ Service de transcription indisponible');document.getElementById('live-box').classList.remove('show');return}
-    dgWs=new WebSocket(`wss://api.deepgram.com/v1/listen?language=multi&model=nova-3&punctuate=true&interim_results=true&smart_format=true&diarize=true`,['token',dg]);
+    // Langue épinglée sur celle choisie dans l'interface (plus précis que "multi" qui, en plus,
+    // ne couvre pas le chinois — voir docs Deepgram). "kaideno" en keyterm pour éviter que la
+    // marque elle-même soit mal transcrite (ex: "Qualideno").
+    dgWs=new WebSocket(`wss://api.deepgram.com/v1/listen?language=${uiLang()}&model=nova-3&punctuate=true&interim_results=true&smart_format=true&diarize=true&endpointing=100&keyterm=kaideno`,['token',dg]);
     dgWs.onopen=()=>{
       isRec=true;startTime=Date.now();setRecUI(true);startTimer();startViz();
       if('vibrate' in navigator){try{navigator.vibrate(60)}catch(e){}}
@@ -3030,15 +3070,27 @@ function stopRec(){
   isRec=false;
   if('vibrate' in navigator){try{navigator.vibrate([60,40,60])}catch(e){}}
   stopTimer();stopViz();setRecUI(false);
+  const stream = mr && mr.stream;
+  // Attendre que le dernier morceau audio soit bien envoyé et transcrit par Deepgram
+  // avant de fermer le flux et de sauvegarder — sinon la fin de l'enregistrement est perdue.
+  const closeAndFinish=()=>{
+    if(dgWs){
+      try{ if(dgWs.readyState===WebSocket.OPEN) dgWs.send(JSON.stringify({type:'CloseStream'})); }catch(e){}
+    }
+    setTimeout(()=>{
+      if(dgWs){ try{ dgWs.close(); }catch(e){} }
+      if(stream){ try{ stream.getTracks().forEach(t=>t.stop()); }catch(e){} }
+      finishRec();
+    }, 1200);
+  };
   if(mr && mr.state!=='inactive'){
-    try{ mr.stop(); mr.stream.getTracks().forEach(t=>t.stop()); }catch(e){}
+    try{
+      mr.addEventListener('stop', closeAndFinish, {once:true});
+      mr.stop();
+    }catch(e){ closeAndFinish(); }
+  } else {
+    closeAndFinish();
   }
-  if(dgWs){
-    // Laisser un court instant à Deepgram pour renvoyer les derniers mots, puis fermer et finaliser
-    try{ dgWs.close(); }catch(e){}
-  }
-  // Finaliser directement (ne dépend plus de onclose)
-  finishRec();
 }
 
 let recFinalized=false;
@@ -3074,7 +3126,7 @@ async function finishRec(){
   renderQuota();
   reportUsageServer(currentUser, dur);
 
-  const s={id:`s_${Date.now()}`,createdAt:Date.now(),duration:dur,transcript:formattedTx,wordCount:tx.split(/\s+/).length,status:'processing',summary:null,speakerCount:speakers.length,speakerNames:{},tag:null};
+  const s={id:`s_${Date.now()}`,createdAt:Date.now(),duration:dur,transcript:formattedTx,wordCount:tx.split(/\s+/).length,status:'processing',summary:null,speakerCount:speakers.length,speakerNames:{},tag:recMode};
   sessions.unshift(s);K.saveSessions(sessions);
   renderSessions();renderStats();
   showToast(t('js.saved'));
@@ -3084,9 +3136,10 @@ async function finishRec(){
 async function genSummary(s){
 
   try{
+    const hint = TAG_PROMPT_HINTS[s.tag] ? `\n${TAG_PROMPT_HINTS[s.tag]}` : '';
     const res=await callClaude({
         model:'claude-haiku-4-5-20251001',max_tokens:1024,
-        system:`Analyse cette transcription et réponds UNIQUEMENT en JSON valide sans markdown. IMPORTANT : rédige tout le contenu (titre, résumé, points clés, actions) en ${getLangName()}.\n{"titre":"Titre court (max 8 mots)","resume":"2-3 phrases claires","points_cles":["point 1","point 2"],"actions":["action 1"]}`,
+        system:`Analyse cette transcription et réponds UNIQUEMENT en JSON valide sans markdown. IMPORTANT : rédige tout le contenu (titre, résumé, points clés, actions) en ${getLangName()}.\n{"titre":"Titre court (max 8 mots)","resume":"2-3 phrases claires","points_cles":["point 1","point 2"],"actions":["action 1"]}${hint}`,
         messages:[{role:'user',content:`Transcription :\n\n${s.transcript}`}]
     });
     if(!res.ok)throw new Error();
@@ -3107,6 +3160,30 @@ function setRecUI(on){
   st.classList.toggle('on',on);
   document.getElementById('rec-timer').classList.toggle('show',on);
   if(!on)document.getElementById('rec-timer').textContent='00:00';
+  const rmRow=document.getElementById('rec-mode-row');
+  if(rmRow) rmRow.classList.toggle('disabled',on);
+  const qcb=document.getElementById('quick-call-btn');
+  if(qcb) qcb.classList.toggle('hidden',on);
+}
+
+// Démarre l'enregistrement immédiatement en mode "Appel" (1 tap) — le plus proche possible
+// d'un enregistrement d'appel automatique, sans accès natif à l'audio téléphonique (impossible
+// depuis un PWA). À utiliser dès que l'appel est décroché, téléphone en haut-parleur.
+function quickCallRecord(){
+  if(isRec) return;
+  recMode='call';
+  renderRecModeRow();
+  toggleRec();
+}
+
+// Mode sous-titres géant plein écran — pratique pour montrer la transcription en direct
+// à une personne sourde ou malentendante pendant une conversation.
+function toggleCaptionMode(){
+  const lb=document.getElementById('live-box');
+  const btn=document.getElementById('caption-mode-btn');
+  if(!lb) return;
+  const on=lb.classList.toggle('caption-mode');
+  if(btn) btn.classList.toggle('active',on);
 }
 function refreshLive(){
   const el=document.getElementById('live-txt');
@@ -3268,7 +3345,15 @@ const TAG_DEFS = [
   {key:'brainstorm', icon:'💡', i18n:'tag.brainstorm'},
   {key:'podcast', icon:'🎧', i18n:'tag.podcast'},
   {key:'consultation', icon:'⚖️', i18n:'tag.consultation'},
+  {key:'journal', icon:'📝', i18n:'tag.journal'},
+  {key:'call', icon:'📞', i18n:'tag.call'},
 ];
+// Contexte donné à l'IA pour adapter le ton/la structure du résumé selon le type d'enregistrement choisi.
+// Les tags sans entrée ici gardent le prompt générique par défaut.
+const TAG_PROMPT_HINTS = {
+  journal: "Cette transcription est une note vocale personnelle (réflexion, idée, journal intime) — PAS une réunion professionnelle. Adopte un ton personnel et bienveillant. \"resume\" doit ressembler à une entrée de journal (2-3 phrases, à la première personne si le texte le permet). \"points_cles\" = les idées ou sujets abordés. \"actions\" = pistes de réflexion ou petites prochaines étapes personnelles (pas des tâches d'équipe) ; laisse la liste vide si rien de tel ne ressort.",
+  call: "Cette transcription est un appel téléphonique. Structure le résumé comme un compte-rendu d'appel : \"resume\" identifie l'objet de l'appel et, si perceptible, les interlocuteurs. \"points_cles\" = ce qui a été dit/convenu. \"actions\" = les prochaines étapes ou rappels à faire suite à l'appel.",
+};
 function tagLabel(key){ const d=TAG_DEFS.find(x=>x.key===key); return d ? `${d.icon} ${t(d.i18n)}` : ''; }
 function setSessionTag(id, key){
   const s=sessions.find(x=>x.id===id);if(!s)return;
@@ -3306,7 +3391,10 @@ function formatTranscript(text, s){
       if(!m) return `<div>${esc(line)}</div>`;
       const idx=parseInt(m[1],10);
       const color=SPEAKER_COLORS[idx % SPEAKER_COLORS.length];
-      return `<div style="display:flex;gap:8px;margin-bottom:9px"><span style="color:${color};font-weight:700;flex-shrink:0;font-size:.78rem;white-space:nowrap">${esc(speakerLabel(s,idx))} :</span><span>${esc(m[2])}</span></div>`;
+      return `<div style="display:flex;flex-direction:column;gap:4px;margin-bottom:14px;padding:10px 14px;border-radius:10px;background:${color}14;border-left:3px solid ${color}">
+        <span style="color:${color};font-weight:700;font-size:.74rem;text-transform:uppercase;letter-spacing:.03em">${esc(speakerLabel(s,idx))}</span>
+        <span style="line-height:1.65">${esc(m[2])}</span>
+      </div>`;
     }).join('');
   }
   // Ancien format "Locuteur N :" → convertir en tirets (identité non conservée, pas renommable)
@@ -3320,7 +3408,7 @@ function formatTranscript(text, s){
   if(/^—/m.test(text)){
     return text.split('\n').filter(l=>l.trim()).map(line=>{
       const t=line.replace(/^—\s*/,'');
-      return `<div style="display:flex;gap:8px;margin-bottom:9px"><span style="color:var(--accent);font-weight:700;flex-shrink:0">—</span><span>${esc(t)}</span></div>`;
+      return `<div style="display:flex;gap:8px;margin-bottom:14px;padding:10px 14px;border-radius:10px;background:var(--bg1);border-left:3px solid var(--accent)"><span style="color:var(--accent);font-weight:700;flex-shrink:0">—</span><span style="line-height:1.65">${esc(t)}</span></div>`;
     }).join('');
   }
   return esc(text);
@@ -3435,6 +3523,8 @@ function openSession(id){
         <button class="ai-chip" onclick="sendChip(this,'${id}')">${t('js.writereport')}</button>
         <button class="ai-chip" onclick="sendChip(this,'${id}')">${t('js.listdec')}</button>
         <button class="ai-chip" onclick="sendChip(this,'${id}')">${t('js.shortsum')}</button>
+        <button class="ai-chip" onclick="publishChip(this,'${id}','linkedin')">${t('js.tolinkedin')}</button>
+        <button class="ai-chip" onclick="publishChip(this,'${id}','article')">${t('js.toarticle')}</button>
       </div>
       <div class="ai-msgs" id="ai-msgs-${id}">
         <div class="ai-msg bot"><div class="ai-av">N</div><div class="ai-bubble">${t('js.aiwelcome')}</div></div>
@@ -3521,6 +3611,40 @@ async function callAi(id,msg){
 
 function sendAi(id){const i=document.getElementById(`ai-in-${id}`);if(!i)return;const m=i.value.trim();if(!m)return;i.value='';i.style.height='auto';callAi(id,m)}
 function sendChip(btn,id){callAi(id,btn.textContent.trim())}
+
+// Transforme le contenu de l'enregistrement en contenu prêt à publier (post LinkedIn, article de blog…),
+// sans toucher à la transcription d'origine — le résultat s'affiche dans le fil de l'assistant IA.
+const PUBLISH_INSTRUCTIONS = {
+  linkedin: "Transforme le contenu de cet enregistrement (transcription et résumé) en un post LinkedIn prêt à publier : accroche percutante dès la première ligne, ton humain et direct, aération avec des sauts de ligne, 3 à 6 phrases courtes, 0 à 3 hashtags pertinents maximum, pas d'emoji en excès.",
+  article: "Transforme le contenu de cet enregistrement (transcription et résumé) en un article de blog structuré prêt à publier : un titre accrocheur, une courte introduction, 2 à 4 sous-titres avec leur paragraphe, et une brève conclusion.",
+};
+async function publishChip(btn, id, kind){
+  const s=sessions.find(x=>x.id===id);if(!s)return;
+  const instruction=PUBLISH_INSTRUCTIONS[kind];if(!instruction)return;
+  const label = kind==='linkedin' ? t('js.tolinkedin') : t('js.toarticle');
+
+  if(btn) btn.disabled=true;
+  addMsg(id,'user',label);
+  const c=document.getElementById(`ai-msgs-${id}`);
+  const th=document.createElement('div');th.className='ai-msg bot';
+  th.innerHTML=`<div class="ai-av">N</div><div class="ai-bubble thinking">${t('js.thinking')}</div>`;
+  if(c){c.appendChild(th);c.scrollTop=c.scrollHeight}
+
+  try{
+    const res=await callClaude({
+      model:'claude-haiku-4-5-20251001', max_tokens:1024,
+      system:`Tu es un assistant IA intégré à kaideno. Tu transformes le contenu d'un enregistrement vocal en contenu prêt à publier.\n\nTranscription :\n---\n${s.transcript}\n---\n${s.summary?`Résumé : ${s.summary.resume}`:''}\n\n${instruction}\n\nRéponds directement avec le contenu final en ${getLangName()}, sans commentaire ni préambule.`,
+      messages:[{role:'user',content:label}]
+    });
+    if(!res.ok)throw new Error();
+    const d=await res.json();
+    th.remove();
+    addMsg(id,'bot',d.content?.[0]?.text||t('js.noresponse'));
+  }catch{
+    th.remove();addMsg(id,'bot',t('js.chatconnerr'));
+  }
+  if(btn) btn.disabled=false;
+}
 function aiKey(e,id){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendAi(id)}const t=e.target;t.style.height='auto';t.style.height=Math.min(t.scrollHeight,110)+'px'}
 
 // ══ HISTORIQUE ══
