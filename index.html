@@ -56,6 +56,10 @@ a{color:var(--accent)}
 .field{margin-bottom:15px}
 .field label{display:block;font-size:.75rem;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
 .field input{width:100%;background:var(--bg2);border:1.5px solid var(--line);border-radius:var(--radius-sm);padding:12px 15px;color:var(--ink);font-size:.92rem;transition:border-color .15s;outline:none}
+.pwd-wrap{position:relative}
+.pwd-wrap input{padding-right:42px}
+.pwd-toggle{position:absolute;right:4px;top:50%;transform:translateY(-50%);background:transparent;border:none;cursor:pointer;color:var(--ink3);display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:8px;transition:color .15s}
+.pwd-toggle:hover{color:var(--ink)}
 .field input:focus{border-color:var(--accent)}
 .btn-submit{width:100%;background:var(--accent);color:white;padding:13px;border-radius:999px;font-weight:700;font-size:.92rem;transition:opacity .15s,transform .15s;box-shadow:0 4px 16px rgba(59,130,246,0.3)}
 .btn-submit:hover{opacity:.9;transform:translateY(-1px)}
@@ -111,6 +115,10 @@ a{color:var(--accent)}
 .rec-mode-chip{font-size:.72rem;font-weight:500;color:var(--ink2);background:var(--bg1);border:1px solid var(--line);border-radius:999px;padding:5px 11px;cursor:pointer;transition:all .15s;white-space:nowrap}
 .rec-mode-chip:hover{border-color:var(--accent-b)}
 .rec-mode-chip.active{background:var(--accent2);border-color:var(--accent-b);color:var(--accent)}
+.confidential-toggle{display:flex;align-items:center;gap:7px;margin-top:12px;font-size:.75rem;color:var(--ink3);cursor:pointer}
+.confidential-toggle input{accent-color:var(--accent);cursor:pointer}
+.confidential-toggle.hidden{display:none}
+.confidential-badge{display:inline-flex;align-items:center;gap:6px;background:var(--bg1);border:1px solid var(--line2);border-radius:var(--radius);padding:14px 16px;font-size:.85rem;color:var(--ink2);margin-bottom:24px}
 .lang-selector{display:inline-flex;align-items:center;gap:8px;margin-top:16px;background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:6px 14px}
 .lang-label{font-size:.75rem;font-weight:600;color:var(--ink3)}
 .lang-selector select{background:transparent;border:none;color:var(--ink);font-size:.82rem;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;outline:none;padding-right:4px}
@@ -124,6 +132,17 @@ a{color:var(--accent)}
 .stat-l{font-size:.68rem;color:var(--ink3);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-top:3px}
 
 /* LIVE */
+.actions-box{background:var(--bg1);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:16px}
+.actions-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.actions-hd-lbl{font-size:.68rem;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.08em}
+.actions-hd-ct{font-size:.72rem;color:var(--ink3)}
+.action-row{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}
+.action-row:last-child{border-bottom:none}
+.action-check{width:18px;height:18px;flex-shrink:0;margin-top:2px;accent-color:var(--accent);cursor:pointer}
+.action-body{flex:1;min-width:0}
+.action-txt{font-size:.86rem;color:var(--ink);line-height:1.5}
+.action-src{font-size:.7rem;color:var(--ink3);margin-top:2px;cursor:pointer}
+.action-src:hover{color:var(--accent)}
 .live-box{background:var(--bg1);border:1.5px solid var(--accent-b);border-radius:var(--radius);padding:16px;margin:16px 0 0;display:none}
 .live-box.show{display:block}
 .live-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
@@ -132,7 +151,12 @@ a{color:var(--accent)}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 .live-wc{font-size:.73rem;color:var(--ink3)}
 .live-txt{font-size:.88rem;line-height:1.72;color:var(--ink);max-height:180px;overflow-y:auto;word-break:break-word;transition:font-size .2s,max-height .2s}
+.live-translate-txt{display:none;font-size:.86rem;line-height:1.65;color:var(--accent);margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);white-space:pre-wrap;max-height:140px;overflow-y:auto}
+.live-translate-txt.show{display:block}
+.live-box.caption-mode .live-translate-txt{font-size:1.7rem;line-height:1.5;max-height:none;flex:1;overflow-y:auto}
 .live-ai{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);transition:opacity .15s}
+.live-translate-select{background:transparent;border:1px solid var(--line);border-radius:999px;padding:2px 6px;font-size:.75rem;color:var(--ink2);cursor:pointer;outline:none;margin-left:8px;font-family:'Inter',sans-serif}
+.live-translate-select option{background:var(--bg2);color:var(--ink)}
 .caption-mode-btn{background:transparent;border:1px solid var(--line);border-radius:999px;padding:2px 8px;font-size:.85rem;line-height:1.4;cursor:pointer;color:var(--ink2);margin-left:8px}
 .caption-mode-btn.active{background:var(--accent2);border-color:var(--accent-b);color:var(--accent)}
 .live-box.caption-mode{position:fixed;inset:0;z-index:500;border-radius:0;border:none;padding:24px;display:flex;flex-direction:column;background:var(--bg0,var(--bg1))}
@@ -191,12 +215,24 @@ a{color:var(--accent)}
 .summary-box{background:linear-gradient(135deg,rgba(59,130,246,0.06),transparent 80%);border:1.5px solid var(--accent-b);border-radius:var(--radius);padding:18px;margin-bottom:24px}
 .summary-lbl{font-size:.66rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:9px}
 .summary-txt{font-size:.95rem;line-height:1.75;color:var(--ink)}
+.btn-listen{display:inline-flex;align-items:center;gap:6px;margin-top:12px;background:var(--bg1);border:1px solid var(--accent-b);border-radius:999px;padding:7px 14px;font-size:.8rem;font-weight:600;color:var(--accent);cursor:pointer;transition:all .15s}
+.btn-listen:hover{background:var(--accent2)}
+.btn-listen.speaking{background:var(--accent2)}
 .kp-list{display:flex;flex-direction:column;gap:8px}
 .kp-item{display:flex;align-items:flex-start;gap:11px;background:var(--bg1);border:1px solid var(--line);border-radius:var(--radius-sm);padding:11px 13px;font-size:.88rem;line-height:1.5}
 .kp-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:5px}
 .act-list{display:flex;flex-direction:column;gap:7px}
 .act-item{display:flex;align-items:flex-start;gap:11px;background:var(--bg1);border:1px solid var(--line);border-radius:var(--radius-sm);padding:11px 13px;font-size:.88rem;line-height:1.5}
 .act-arr{color:var(--green);font-weight:700;flex-shrink:0}
+.act-date{display:inline-flex;align-items:center;gap:6px;font-size:.76rem;color:var(--ink3);margin-left:6px}
+.ics-btn{background:transparent;border:1px solid var(--line2);border-radius:999px;padding:2px 9px;font-size:.7rem;font-weight:600;color:var(--accent);cursor:pointer}
+.ics-btn:hover{background:var(--accent2)}
+.chapter-list{display:flex;flex-direction:column;gap:6px}
+.chapter-item{display:flex;align-items:center;gap:10px;background:var(--bg1);border:1px solid var(--line);border-radius:10px;padding:8px 12px;cursor:pointer;transition:all .15s;text-align:left;width:100%;font-family:inherit}
+.chapter-item:hover{border-color:var(--accent-b);background:var(--accent2)}
+.chapter-time{flex-shrink:0;font-size:.72rem;font-weight:700;color:var(--accent);background:var(--accent2);border-radius:999px;padding:2px 9px;font-variant-numeric:tabular-nums}
+.chapter-title{font-size:.85rem;color:var(--ink)}
+.transcript-txt.chapter-flash{outline:2px solid var(--accent-b);outline-offset:-2px;transition:outline-color .3s}
 .transcript-hd-actions{display:flex;align-items:center;gap:8px}
 .btn-ai-edit{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:600;color:var(--accent);background:var(--accent2);border:1px solid var(--accent-b);border-radius:999px;padding:4px 11px;cursor:pointer;transition:all .15s}
 .btn-ai-edit:hover{background:rgba(59,130,246,0.18)}
@@ -447,7 +483,10 @@ a{color:var(--accent)}
       <div id="auth-register">
         <p class="auth-sub" data-i18n="a3">Gratuit pour commencer — aucune carte bancaire.</p>
         <div class="field"><label data-i18n="a.email">Email</label><input type="email" id="reg-email" data-i18n-ph="a.emailph" placeholder="ton@email.com" autocomplete="email"></div>
-        <div class="field"><label data-i18n="a4">Mot de passe</label><input type="password" id="reg-pwd" data-i18n-ph="a.pwdph" placeholder="Minimum 8 caractères" autocomplete="new-password"></div>
+        <div class="field"><label data-i18n="a4">Mot de passe</label><div class="pwd-wrap"><input type="password" id="reg-pwd" data-i18n-ph="a.pwdph" placeholder="Minimum 8 caractères" autocomplete="new-password"><button type="button" class="pwd-toggle" onclick="togglePwd('reg-pwd')" aria-label="Afficher le mot de passe" title="Afficher le mot de passe">
+            <svg class="pwd-icon-eye" width="17" height="17" viewBox="0 0 20 20" fill="none"><path d="M1 10s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><circle cx="10" cy="10" r="2.6" stroke="currentColor" stroke-width="1.3"/></svg>
+            <svg class="pwd-icon-eyeoff" width="17" height="17" viewBox="0 0 20 20" fill="none" style="display:none"><path d="M2.5 2.5l15 15M8.3 8.4a2.6 2.6 0 003.4 3.4M5.3 5.4C3 6.8 1 10 1 10s3.5 6 9 6c1.5 0 2.9-.4 4.1-1.1M12.4 4.4C11.6 4.1 10.8 4 10 4c5.5 0 9 6 9 6s-.7 1.2-2 2.6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button></div></div>
         <label class="consent-row">
           <input type="checkbox" id="reg-consent">
           <span data-i18n-html="l.consent">J'ai 15 ans ou plus et j'accepte les <a href="https://thomas282828.github.io/nuro/legal.html#cgu" target="_blank">conditions d'utilisation</a> et la <a href="https://thomas282828.github.io/nuro/legal.html#confidentialite" target="_blank">politique de confidentialité</a>.</span>
@@ -459,7 +498,10 @@ a{color:var(--accent)}
         <div class="field"><label data-i18n="a.email">Email</label><input type="email" id="log-email" data-i18n-ph="a.emailph" placeholder="ton@email.com" autocomplete="email"></div>
         <div class="field">
           <label data-i18n="a7">Mot de passe</label>
-          <input type="password" id="log-pwd" placeholder="••••••••" autocomplete="current-password">
+          <div class="pwd-wrap"><input type="password" id="log-pwd" placeholder="••••••••" autocomplete="current-password"><button type="button" class="pwd-toggle" onclick="togglePwd('log-pwd')" aria-label="Afficher le mot de passe" title="Afficher le mot de passe">
+            <svg class="pwd-icon-eye" width="17" height="17" viewBox="0 0 20 20" fill="none"><path d="M1 10s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><circle cx="10" cy="10" r="2.6" stroke="currentColor" stroke-width="1.3"/></svg>
+            <svg class="pwd-icon-eyeoff" width="17" height="17" viewBox="0 0 20 20" fill="none" style="display:none"><path d="M2.5 2.5l15 15M8.3 8.4a2.6 2.6 0 003.4 3.4M5.3 5.4C3 6.8 1 10 1 10s3.5 6 9 6c1.5 0 2.9-.4 4.1-1.1M12.4 4.4C11.6 4.1 10.8 4 10 4c5.5 0 9 6 9 6s-.7 1.2-2 2.6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button></div>
         </div>
         <p style="text-align:right;margin:-10px 0 14px">
           <button onclick="showForgotPassword()" style="background:none;border:none;color:var(--ink3);font-size:.76rem;cursor:pointer;font-family:'Inter',sans-serif;text-decoration:underline" data-i18n="js.forgotlink">Mot de passe oublié ?</button>
@@ -479,7 +521,10 @@ a{color:var(--accent)}
       </div>
       <div id="auth-reset" style="display:none">
         <p class="auth-sub" data-i18n="js.newpwd">Choisis un nouveau mot de passe.</p>
-        <div class="field"><label data-i18n="a4">Mot de passe</label><input type="password" id="reset-pwd" data-i18n-ph="a.pwdph" placeholder="Minimum 8 caractères" autocomplete="new-password"></div>
+        <div class="field"><label data-i18n="a4">Mot de passe</label><div class="pwd-wrap"><input type="password" id="reset-pwd" data-i18n-ph="a.pwdph" placeholder="Minimum 8 caractères" autocomplete="new-password"><button type="button" class="pwd-toggle" onclick="togglePwd('reset-pwd')" aria-label="Afficher le mot de passe" title="Afficher le mot de passe">
+            <svg class="pwd-icon-eye" width="17" height="17" viewBox="0 0 20 20" fill="none"><path d="M1 10s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><circle cx="10" cy="10" r="2.6" stroke="currentColor" stroke-width="1.3"/></svg>
+            <svg class="pwd-icon-eyeoff" width="17" height="17" viewBox="0 0 20 20" fill="none" style="display:none"><path d="M2.5 2.5l15 15M8.3 8.4a2.6 2.6 0 003.4 3.4M5.3 5.4C3 6.8 1 10 1 10s3.5 6 9 6c1.5 0 2.9-.4 4.1-1.1M12.4 4.4C11.6 4.1 10.8 4 10 4c5.5 0 9 6 9 6s-.7 1.2-2 2.6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button></div></div>
         <button class="btn-submit" id="btn-reset" onclick="submitResetPassword()" data-i18n="js.resetbtn">Réinitialiser le mot de passe</button>
       </div>
     </div>
@@ -535,10 +580,16 @@ a{color:var(--accent)}
         </div>
         <p class="rec-status" id="rec-status" data-i18n="a11">Appuie pour enregistrer</p>
         <button class="quick-call-btn" id="quick-call-btn" onclick="quickCallRecord()" type="button">📞 <span data-i18n="js.quickcall">Enregistrer un appel</span></button>
+        <button class="quick-call-btn" id="import-file-btn" onclick="triggerImportFile()" type="button">📂 <span data-i18n="js.importfile">Importer un fichier</span></button>
+        <input type="file" id="import-file-input" accept="audio/*,video/*" style="display:none" onchange="handleImportFile(event)">
         <div class="rec-timer" id="rec-timer">00:00</div>
         <div class="audio-viz" id="audio-viz"></div>
         <div class="rec-mode-lbl" data-i18n="js.pickmode">Contexte (optionnel)</div>
         <div class="rec-mode-row" id="rec-mode-row"></div>
+        <label class="confidential-toggle" id="confidential-toggle-row">
+          <input type="checkbox" id="confidential-toggle" onchange="setConfidentialRec(this.checked)">
+          <span data-i18n="js.confidentialmode">🔒 Mode confidentiel (aucun résumé IA)</span>
+        </label>
         <div class="lang-selector" id="lang-selector">
           <span class="lang-label" data-i18n="a12">Langue :</span>
           <select id="dash-lang" onchange="setUILang(this.value)">
@@ -562,9 +613,25 @@ a{color:var(--accent)}
       <div class="stat-cell"><div class="stat-v" id="s-words">0</div><div class="stat-l" data-i18n="a15">Mots</div></div>
     </div>
     <div class="dash-inner">
+      <div id="actions-panel"></div>
       <div class="live-box" id="live-box">
-        <div class="live-hd"><div class="live-lbl"><span class="live-dot"></span>En direct</div><span class="live-wc" id="live-wc">0 mot</span><button class="caption-mode-btn" id="caption-mode-btn" onclick="toggleCaptionMode()" title="Mode sous-titres" data-i18n-title="js.captionmode" type="button">🔤</button></div>
+        <div class="live-hd"><div class="live-lbl"><span class="live-dot"></span>En direct</div><span class="live-wc" id="live-wc">0 mot</span>
+          <select id="live-translate-lang" class="live-translate-select" onchange="setLiveTranslateLang(this.value)" title="Traduire en direct" data-i18n-title="js.livetranslate">
+            <option value="">🌐 —</option>
+            <option value="fr">🇫🇷 FR</option>
+            <option value="en">🇬🇧 EN</option>
+            <option value="es">🇪🇸 ES</option>
+            <option value="de">🇩🇪 DE</option>
+            <option value="it">🇮🇹 IT</option>
+            <option value="pt">🇵🇹 PT</option>
+            <option value="nl">🇳🇱 NL</option>
+            <option value="zh">🇨🇳 ZH</option>
+            <option value="ja">🇯🇵 JA</option>
+          </select>
+          <button class="caption-mode-btn" id="caption-mode-btn" onclick="toggleCaptionMode()" title="Mode sous-titres" data-i18n-title="js.captionmode" type="button">🔤</button>
+        </div>
         <div class="live-txt" id="live-txt"></div>
+        <div class="live-translate-txt" id="live-translate-txt"></div>
         <div class="live-ai" id="live-ai">
           <label style="display:flex;align-items:center;gap:7px;margin-bottom:10px;cursor:pointer;font-size:.76rem;color:var(--ink2)">
             <input type="checkbox" id="auto-answer-toggle" onchange="toggleAutoAnswer(this.checked)" style="accent-color:var(--accent);cursor:pointer">
@@ -704,6 +771,14 @@ a{color:var(--accent)}
             <button class="btn-save" onclick="saveKeys()" data-i18n="a25">Sauvegarder</button>
           </div>
         </details>
+      </div>
+      <div class="settings-section">
+        <p class="settings-lbl" data-i18n="kt.title">Vocabulaire personnalisé</p>
+        <div class="info-card" style="font-size:.8rem" data-i18n="kt.desc">Ajoute des noms, mots ou expressions que kaideno doit mieux reconnaître (noms de collègues, jargon métier, nom de ton entreprise). Un par ligne, 20 maximum.</div>
+        <div class="field">
+          <textarea id="kt-input" rows="3" data-i18n-ph="kt.placeholder" placeholder="Ex : Delphine Rousseau&#10;Acme Corp&#10;Kubernetes" style="width:100%;background:var(--bg2);border:1.5px solid var(--line);border-radius:var(--radius-sm);padding:12px 15px;color:var(--ink);font-size:.88rem;font-family:inherit;resize:vertical;outline:none"></textarea>
+        </div>
+        <button class="btn-save" onclick="saveKeyterms()" data-i18n="a25">Sauvegarder</button>
       </div>
       <div class="settings-section" id="admin-section" style="display:none">
         <p class="settings-lbl">★ Administration</p>
@@ -945,7 +1020,7 @@ const UI = {
     'js.aiwelcome':"Bonjour ! Je connais le contenu de cet enregistrement. Pose-moi une question ou choisis une action ci-dessus.", 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
     'js.speaker':'Locuteur', 'js.renamespeakers':'Renommer les locuteurs',
     'js.tag':'Catégorie', 'js.alltags':'Toutes', 'tag.meeting':'Réunion', 'tag.course':'Cours', 'tag.interview':'Interview', 'tag.brainstorm':'Brainstorm', 'tag.podcast':'Podcast', 'tag.consultation':'Consultation', 'tag.journal':'Journal perso', 'tag.call':'Appel',
-    'js.pickmode':'Contexte (optionnel)', 'js.captionmode':'Mode sous-titres', 'js.tolinkedin':'Post LinkedIn', 'js.toarticle':'Article de blog', 'js.quickcall':'Enregistrer un appel',
+    'js.pickmode':'Contexte (optionnel)', 'js.captionmode':'Mode sous-titres', 'js.tolinkedin':'Post LinkedIn', 'js.toarticle':'Article de blog', 'js.quickcall':'Enregistrer un appel', 'kt.title':'Vocabulaire personnalisé', 'kt.desc':'Ajoute des noms, mots ou expressions que kaideno doit mieux reconnaître (noms de collègues, jargon métier, nom de ton entreprise). Un par ligne, 20 maximum.', 'kt.placeholder':'Ex : Delphine Rousseau', 'js.listensummary':'Écouter le résumé', 'js.stopspeak':'Arrêter', 'js.ttsunsupported':'La lecture audio n\'est pas prise en charge par ce navigateur.', 'js.livetranslate':'Traduire en direct', 'js.pendingactions':'Actions en attente', 'js.daysago1':'Il y a ', 'js.daysago2':' jours', 'js.importfile':'Importer un fichier', 'js.importprocessing':'Transcription du fichier en cours…', 'js.importerror':'Erreur pendant l\'import du fichier.', 'js.filetoolarge':'Fichier trop volumineux (60 Mo max).', 'js.importunavailable':'Import indisponible — connecte-toi pour utiliser cette fonctionnalité.', 'js.stoprecfirst':'Arrête l\'enregistrement en cours avant d\'importer un fichier.', 'js.share':'Partager', 'js.shareunavailable':'Partage indisponible — connecte-toi pour utiliser cette fonctionnalité.', 'js.shareerror':'Erreur pendant la création du lien de partage.', 'js.sharecopied':'Lien de partage copié !', 'js.confidentialmode':'🔒 Mode confidentiel (aucun résumé IA)', 'js.confidentialsaved':'Enregistré en local, sans IA.', 'js.confidentialnote':'Mode confidentiel : aucun résumé IA n\'a été généré. La transcription reste stockée uniquement sur cet appareil.', 'js.confidentialnoai':'Mode confidentiel actif : l\'assistant IA est désactivé pour cet enregistrement.', 'js.addtocal':'Ajouter au calendrier', 'js.chapters':'Chapitres',
     'ref.title':'Inviter un ami', 'ref.desc':'Partage ton lien : ton ami reçoit 30 minutes offertes, et toi aussi, dès qu\'il s\'inscrit.', 'ref.copy':'Copier le lien', 'js.grouptoday':'Aujourd\'hui', 'js.yesterday':'Hier', 'js.aiconv':'Conv. IA', 'js.audio':'Audio', 'js.noresultsfor':'Aucun résultat pour', 'js.recfallback':'Enregistrement', 'js.aimsg':'msg IA', 'js.forgotlink':'Mot de passe oublié ?', 'js.forgotsub':'Reçois un lien pour choisir un nouveau mot de passe.', 'js.forgotbtn':'Envoyer le lien', 'js.sending':'Envoi…', 'js.resetsent':'Si un compte existe avec cet email, un lien de réinitialisation vient d\'être envoyé. Vérifie ta boîte mail (et tes spams).', 'js.backtologin':'Retour à la connexion', 'js.newpwd':'Choisis un nouveau mot de passe.', 'js.resetbtn':'Réinitialiser le mot de passe', 'js.resetdone':'Mot de passe changé ! Tu peux maintenant te connecter.', 'js.resetexpired':'Ce lien n\'est plus valable. Redemande un nouveau lien de réinitialisation.',
  'guide.title':'Comment utiliser kaideno ?',
  'guide.step1':'Appuie sur le bouton d\'enregistrement et autorise l\'accès au micro (une seule fois). Parle normalement, la transcription s\'affiche en direct.',
@@ -1129,7 +1204,7 @@ const UI = {
     'js.aiwelcome':'Hi! I know the content of this recording. Ask me a question or pick an action above.', 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
     'js.speaker':'Speaker', 'js.renamespeakers':'Rename speakers',
     'js.tag':'Category', 'js.alltags':'All', 'tag.meeting':'Meeting', 'tag.course':'Course', 'tag.interview':'Interview', 'tag.brainstorm':'Brainstorm', 'tag.podcast':'Podcast', 'tag.consultation':'Consultation', 'tag.journal':'Personal journal', 'tag.call':'Call',
-    'js.pickmode':'Context (optional)', 'js.captionmode':'Caption mode', 'js.tolinkedin':'LinkedIn post', 'js.toarticle':'Blog article', 'js.quickcall':'Record a call',
+    'js.pickmode':'Context (optional)', 'js.captionmode':'Caption mode', 'js.tolinkedin':'LinkedIn post', 'js.toarticle':'Blog article', 'js.quickcall':'Record a call', 'kt.title':'Custom vocabulary', 'kt.desc':'Add names, words or phrases kaideno should recognize better (colleague names, industry jargon, your company name). One per line, 20 max.', 'kt.placeholder':'e.g. Delphine Rousseau', 'js.listensummary':'Listen to summary', 'js.stopspeak':'Stop', 'js.ttsunsupported':'Audio playback is not supported by this browser.', 'js.livetranslate':'Live translate', 'js.pendingactions':'Pending actions', 'js.daysago1':'', 'js.daysago2':' days ago', 'js.importfile':'Import a file', 'js.importprocessing':'Transcribing the file…', 'js.importerror':'Error while importing the file.', 'js.filetoolarge':'File too large (60 MB max).', 'js.importunavailable':'Import unavailable — log in to use this feature.', 'js.stoprecfirst':'Stop the current recording before importing a file.', 'js.share':'Share', 'js.shareunavailable':'Sharing unavailable — log in to use this feature.', 'js.shareerror':'Error while creating the share link.', 'js.sharecopied':'Share link copied!', 'js.confidentialmode':'🔒 Confidential mode (no AI summary)', 'js.confidentialsaved':'Saved locally, no AI involved.', 'js.confidentialnote':'Confidential mode: no AI summary was generated. The transcript is stored only on this device.', 'js.confidentialnoai':'Confidential mode is on: the AI assistant is disabled for this recording.', 'js.addtocal':'Add to calendar', 'js.chapters':'Chapters',
     'ref.title':'Invite a friend', 'ref.desc':'Share your link: your friend gets 30 free minutes, and so do you, as soon as they sign up.', 'ref.copy':'Copy link', 'js.grouptoday':'Today', 'js.yesterday':'Yesterday', 'js.aiconv':'AI chats', 'js.audio':'Audio', 'js.noresultsfor':'No results for', 'js.recfallback':'Recording', 'js.aimsg':'AI msg', 'js.forgotlink':'Forgot password?', 'js.forgotsub':'Get a link to choose a new password.', 'js.forgotbtn':'Send link', 'js.sending':'Sending…', 'js.resetsent':'If an account exists with this email, a reset link was just sent. Check your inbox (and spam folder).', 'js.backtologin':'Back to login', 'js.newpwd':'Choose a new password.', 'js.resetbtn':'Reset password', 'js.resetdone':'Password changed! You can now log in.', 'js.resetexpired':'This link is no longer valid. Request a new reset link.',
  'guide.title':'How to use kaideno?',
  'guide.step1':'Tap the record button and allow microphone access (just once). Speak normally — the transcript appears live.',
@@ -1313,7 +1388,7 @@ const UI = {
     'js.aiwelcome':'¡Hola! Conozco el contenido de esta grabación. Hazme una pregunta o elige una acción arriba.', 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
     'js.speaker':'Interlocutor', 'js.renamespeakers':'Renombrar interlocutores',
     'js.tag':'Categoría', 'js.alltags':'Todas', 'tag.meeting':'Reunión', 'tag.course':'Clase', 'tag.interview':'Entrevista', 'tag.brainstorm':'Lluvia de ideas', 'tag.podcast':'Podcast', 'tag.consultation':'Consulta', 'tag.journal':'Diario personal', 'tag.call':'Llamada',
-    'js.pickmode':'Contexto (opcional)', 'js.captionmode':'Modo subtítulos', 'js.tolinkedin':'Publicación LinkedIn', 'js.toarticle':'Artículo de blog', 'js.quickcall':'Grabar una llamada',
+    'js.pickmode':'Contexto (opcional)', 'js.captionmode':'Modo subtítulos', 'js.tolinkedin':'Publicación LinkedIn', 'js.toarticle':'Artículo de blog', 'js.quickcall':'Grabar una llamada', 'kt.title':'Vocabulario personalizado', 'kt.desc':'Añade nombres, palabras o frases que kaideno debería reconocer mejor (nombres de compañeros, jerga del sector, el nombre de tu empresa). Uno por línea, 20 máximo.', 'kt.placeholder':'Ej: Delphine Rousseau', 'js.listensummary':'Escuchar el resumen', 'js.stopspeak':'Detener', 'js.ttsunsupported':'La lectura en voz alta no es compatible con este navegador.', 'js.livetranslate':'Traducir en directo', 'js.pendingactions':'Acciones pendientes', 'js.daysago1':'Hace ', 'js.daysago2':' días', 'js.importfile':'Importar un archivo', 'js.importprocessing':'Transcribiendo el archivo…', 'js.importerror':'Error al importar el archivo.', 'js.filetoolarge':'Archivo demasiado grande (60 MB máx).', 'js.importunavailable':'Importación no disponible — inicia sesión para usar esta función.', 'js.stoprecfirst':'Detén la grabación en curso antes de importar un archivo.', 'js.share':'Compartir', 'js.shareunavailable':'Compartir no disponible — inicia sesión para usar esta función.', 'js.shareerror':'Error al crear el enlace para compartir.', 'js.sharecopied':'¡Enlace copiado!', 'js.confidentialmode':'🔒 Modo confidencial (sin resumen IA)', 'js.confidentialsaved':'Guardado localmente, sin IA.', 'js.confidentialnote':'Modo confidencial: no se generó ningún resumen IA. La transcripción se guarda solo en este dispositivo.', 'js.confidentialnoai':'Modo confidencial activo: el asistente IA está desactivado para esta grabación.', 'js.addtocal':'Añadir al calendario', 'js.chapters':'Capítulos',
     'ref.title':'Invitar a un amigo', 'ref.desc':'Comparte tu enlace: tu amigo recibe 30 minutos gratis, y tú también, en cuanto se registre.', 'ref.copy':'Copiar enlace', 'js.grouptoday':'Hoy', 'js.yesterday':'Ayer', 'js.aiconv':'Chats IA', 'js.audio':'Audio', 'js.noresultsfor':'Sin resultados para', 'js.recfallback':'Grabación', 'js.aimsg':'msg IA', 'js.forgotlink':'¿Olvidaste tu contraseña?', 'js.forgotsub':'Recibe un enlace para elegir una nueva contraseña.', 'js.forgotbtn':'Enviar enlace', 'js.sending':'Enviando…', 'js.resetsent':'Si existe una cuenta con este email, se acaba de enviar un enlace de restablecimiento. Revisa tu bandeja (y spam).', 'js.backtologin':'Volver a iniciar sesión', 'js.newpwd':'Elige una nueva contraseña.', 'js.resetbtn':'Restablecer contraseña', 'js.resetdone':'¡Contraseña cambiada! Ya puedes iniciar sesión.', 'js.resetexpired':'Este enlace ya no es válido. Solicita un nuevo enlace de restablecimiento.',
  'guide.title':'¿Cómo usar kaideno?',
  'guide.step1':'Pulsa el botón de grabar y permite el acceso al micrófono (solo una vez). Habla con normalidad, la transcripción aparece en directo.',
@@ -1487,7 +1562,7 @@ const UI = {
     'js.aiwelcome':'Hallo! Ich kenne den Inhalt dieser Aufnahme. Stell mir eine Frage oder wähle oben eine Aktion.', 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
     'js.speaker':'Sprecher', 'js.renamespeakers':'Sprecher umbenennen',
     'js.tag':'Kategorie', 'js.alltags':'Alle', 'tag.meeting':'Meeting', 'tag.course':'Kurs', 'tag.interview':'Interview', 'tag.brainstorm':'Brainstorming', 'tag.podcast':'Podcast', 'tag.consultation':'Beratung', 'tag.journal':'Persönliches Journal', 'tag.call':'Anruf',
-    'js.pickmode':'Kontext (optional)', 'js.captionmode':'Untertitel-Modus', 'js.tolinkedin':'LinkedIn-Beitrag', 'js.toarticle':'Blogartikel', 'js.quickcall':'Anruf aufnehmen',
+    'js.pickmode':'Kontext (optional)', 'js.captionmode':'Untertitel-Modus', 'js.tolinkedin':'LinkedIn-Beitrag', 'js.toarticle':'Blogartikel', 'js.quickcall':'Anruf aufnehmen', 'kt.title':'Persönliches Vokabular', 'kt.desc':'Füge Namen, Wörter oder Ausdrücke hinzu, die kaideno besser erkennen soll (Namen von Kollegen, Fachjargon, dein Firmenname). Eins pro Zeile, max. 20.', 'kt.placeholder':'z.B. Delphine Rousseau', 'js.listensummary':'Zusammenfassung anhören', 'js.stopspeak':'Stopp', 'js.ttsunsupported':'Die Sprachausgabe wird von diesem Browser nicht unterstützt.', 'js.livetranslate':'Live übersetzen', 'js.pendingactions':'Offene Aktionen', 'js.daysago1':'Vor ', 'js.daysago2':' Tagen', 'js.importfile':'Datei importieren', 'js.importprocessing':'Datei wird transkribiert…', 'js.importerror':'Fehler beim Importieren der Datei.', 'js.filetoolarge':'Datei zu groß (max. 60 MB).', 'js.importunavailable':'Import nicht verfügbar — melde dich an, um diese Funktion zu nutzen.', 'js.stoprecfirst':'Beende die laufende Aufnahme, bevor du eine Datei importierst.', 'js.share':'Teilen', 'js.shareunavailable':'Teilen nicht verfügbar — melde dich an, um diese Funktion zu nutzen.', 'js.shareerror':'Fehler beim Erstellen des Freigabelinks.', 'js.sharecopied':'Freigabelink kopiert!', 'js.confidentialmode':'🔒 Vertraulicher Modus (keine KI-Zusammenfassung)', 'js.confidentialsaved':'Lokal gespeichert, ohne KI.', 'js.confidentialnote':'Vertraulicher Modus: Es wurde keine KI-Zusammenfassung erstellt. Die Transkription wird nur auf diesem Gerät gespeichert.', 'js.confidentialnoai':'Vertraulicher Modus aktiv: Der KI-Assistent ist für diese Aufnahme deaktiviert.', 'js.addtocal':'Zum Kalender hinzufügen', 'js.chapters':'Kapitel',
     'ref.title':'Freund einladen', 'ref.desc':'Teile deinen Link: Dein Freund bekommt 30 Gratis-Minuten, und du auch, sobald er sich registriert.', 'ref.copy':'Link kopieren', 'js.grouptoday':'Heute', 'js.yesterday':'Gestern', 'js.aiconv':'KI-Chats', 'js.audio':'Audio', 'js.noresultsfor':'Keine Ergebnisse für', 'js.recfallback':'Aufnahme', 'js.aimsg':'KI-Nachr.', 'js.forgotlink':'Passwort vergessen?', 'js.forgotsub':'Erhalte einen Link, um ein neues Passwort zu wählen.', 'js.forgotbtn':'Link senden', 'js.sending':'Senden…', 'js.resetsent':'Falls ein Konto mit dieser E-Mail existiert, wurde gerade ein Link zum Zurücksetzen gesendet. Prüfe dein Postfach (und den Spam-Ordner).', 'js.backtologin':'Zurück zur Anmeldung', 'js.newpwd':'Wähle ein neues Passwort.', 'js.resetbtn':'Passwort zurücksetzen', 'js.resetdone':'Passwort geändert! Du kannst dich jetzt anmelden.', 'js.resetexpired':'Dieser Link ist nicht mehr gültig. Fordere einen neuen Link an.',
  'guide.title':'Wie benutzt man kaideno?',
  'guide.step1':'Tippe auf die Aufnahmetaste und erlaube den Mikrofonzugriff (nur einmal). Sprich normal — die Transkription erscheint live.',
@@ -1671,7 +1746,7 @@ const UI = {
     'js.aiwelcome':"Ciao! Conosco il contenuto di questa registrazione. Fammi una domanda o scegli un'azione qui sopra.", 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
     'js.speaker':'Interlocutore', 'js.renamespeakers':'Rinomina interlocutori',
     'js.tag':'Categoria', 'js.alltags':'Tutte', 'tag.meeting':'Riunione', 'tag.course':'Corso', 'tag.interview':'Intervista', 'tag.brainstorm':'Brainstorming', 'tag.podcast':'Podcast', 'tag.consultation':'Consulenza', 'tag.journal':'Diario personale', 'tag.call':'Chiamata',
-    'js.pickmode':'Contesto (opzionale)', 'js.captionmode':'Modalità sottotitoli', 'js.tolinkedin':'Post LinkedIn', 'js.toarticle':'Articolo di blog', 'js.quickcall':'Registra una chiamata',
+    'js.pickmode':'Contesto (opzionale)', 'js.captionmode':'Modalità sottotitoli', 'js.tolinkedin':'Post LinkedIn', 'js.toarticle':'Articolo di blog', 'js.quickcall':'Registra una chiamata', 'kt.title':'Vocabolario personalizzato', 'kt.desc':'Aggiungi nomi, parole o espressioni che kaideno deve riconoscere meglio (nomi di colleghi, gergo di settore, il nome della tua azienda). Uno per riga, massimo 20.', 'kt.placeholder':'Es: Delphine Rousseau', 'js.listensummary':'Ascolta il riassunto', 'js.stopspeak':'Ferma', 'js.ttsunsupported':'La lettura vocale non è supportata da questo browser.', 'js.livetranslate':'Traduci in diretta', 'js.pendingactions':'Azioni in sospeso', 'js.daysago1':'', 'js.daysago2':' giorni fa', 'js.importfile':'Importa un file', 'js.importprocessing':'Trascrizione del file in corso…', 'js.importerror':'Errore durante l\'importazione del file.', 'js.filetoolarge':'File troppo grande (max 60 MB).', 'js.importunavailable':'Importazione non disponibile — accedi per usare questa funzione.', 'js.stoprecfirst':'Ferma la registrazione in corso prima di importare un file.', 'js.share':'Condividi', 'js.shareunavailable':'Condivisione non disponibile — accedi per usare questa funzione.', 'js.shareerror':'Errore durante la creazione del link di condivisione.', 'js.sharecopied':'Link di condivisione copiato!', 'js.confidentialmode':'🔒 Modalità riservata (nessun riassunto IA)', 'js.confidentialsaved':'Salvato localmente, senza IA.', 'js.confidentialnote':'Modalità riservata: nessun riassunto IA è stato generato. La trascrizione resta salvata solo su questo dispositivo.', 'js.confidentialnoai':'Modalità riservata attiva: l\'assistente IA è disattivato per questa registrazione.', 'js.addtocal':'Aggiungi al calendario', 'js.chapters':'Capitoli',
     'ref.title':'Invita un amico', 'ref.desc':'Condividi il tuo link: il tuo amico riceve 30 minuti omaggio, e anche tu, non appena si iscrive.', 'ref.copy':'Copia link', 'js.grouptoday':'Oggi', 'js.yesterday':'Ieri', 'js.aiconv':'Chat IA', 'js.audio':'Audio', 'js.noresultsfor':'Nessun risultato per', 'js.recfallback':'Registrazione', 'js.aimsg':'msg IA', 'js.forgotlink':'Password dimenticata?', 'js.forgotsub':'Ricevi un link per scegliere una nuova password.', 'js.forgotbtn':'Invia link', 'js.sending':'Invio…', 'js.resetsent':'Se esiste un account con questa email, è appena stato inviato un link di reimpostazione. Controlla la posta (e lo spam).', 'js.backtologin':'Torna al login', 'js.newpwd':'Scegli una nuova password.', 'js.resetbtn':'Reimposta password', 'js.resetdone':'Password cambiata! Ora puoi accedere.', 'js.resetexpired':'Questo link non è più valido. Richiedi un nuovo link di reimpostazione.',
  'guide.title':'Come si usa kaideno?',
  'guide.step1':'Tocca il pulsante di registrazione e consenti l\'accesso al microfono (solo una volta). Parla normalmente, la trascrizione appare in diretta.',
@@ -1855,7 +1930,7 @@ const UI = {
     'js.aiwelcome':'Olá! Conheço o conteúdo desta gravação. Faz-me uma pergunta ou escolhe uma ação acima.', 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
     'js.speaker':'Interlocutor', 'js.renamespeakers':'Renomear interlocutores',
     'js.tag':'Categoria', 'js.alltags':'Todas', 'tag.meeting':'Reunião', 'tag.course':'Aula', 'tag.interview':'Entrevista', 'tag.brainstorm':'Brainstorm', 'tag.podcast':'Podcast', 'tag.consultation':'Consulta', 'tag.journal':'Diário pessoal', 'tag.call':'Chamada',
-    'js.pickmode':'Contexto (opcional)', 'js.captionmode':'Modo legendas', 'js.tolinkedin':'Post LinkedIn', 'js.toarticle':'Artigo de blog', 'js.quickcall':'Gravar uma chamada',
+    'js.pickmode':'Contexto (opcional)', 'js.captionmode':'Modo legendas', 'js.tolinkedin':'Post LinkedIn', 'js.toarticle':'Artigo de blog', 'js.quickcall':'Gravar uma chamada', 'kt.title':'Vocabulário personalizado', 'kt.desc':'Adiciona nomes, palavras ou expressões que o kaideno deve reconhecer melhor (nomes de colegas, jargão do setor, o nome da tua empresa). Um por linha, máximo 20.', 'kt.placeholder':'Ex: Delphine Rousseau', 'js.listensummary':'Ouvir o resumo', 'js.stopspeak':'Parar', 'js.ttsunsupported':'A leitura em voz alta não é suportada por este navegador.', 'js.livetranslate':'Traduzir ao vivo', 'js.pendingactions':'Ações pendentes', 'js.daysago1':'Há ', 'js.daysago2':' dias', 'js.importfile':'Importar um ficheiro', 'js.importprocessing':'A transcrever o ficheiro…', 'js.importerror':'Erro ao importar o ficheiro.', 'js.filetoolarge':'Ficheiro demasiado grande (60 MB máx).', 'js.importunavailable':'Importação indisponível — inicia sessão para usar esta funcionalidade.', 'js.stoprecfirst':'Para a gravação em curso antes de importar um ficheiro.', 'js.share':'Partilhar', 'js.shareunavailable':'Partilha indisponível — inicia sessão para usar esta funcionalidade.', 'js.shareerror':'Erro ao criar o link de partilha.', 'js.sharecopied':'Link de partilha copiado!', 'js.confidentialmode':'🔒 Modo confidencial (sem resumo IA)', 'js.confidentialsaved':'Guardado localmente, sem IA.', 'js.confidentialnote':'Modo confidencial: nenhum resumo IA foi gerado. A transcrição fica guardada apenas neste dispositivo.', 'js.confidentialnoai':'Modo confidencial ativo: o assistente IA está desativado para esta gravação.', 'js.addtocal':'Adicionar ao calendário', 'js.chapters':'Capítulos',
     'ref.title':'Convidar um amigo', 'ref.desc':'Partilha o teu link: o teu amigo recebe 30 minutos grátis, e tu também, assim que se inscrever.', 'ref.copy':'Copiar link', 'js.grouptoday':'Hoje', 'js.yesterday':'Ontem', 'js.aiconv':'Conversas IA', 'js.audio':'Áudio', 'js.noresultsfor':'Sem resultados para', 'js.recfallback':'Gravação', 'js.aimsg':'msg IA', 'js.forgotlink':'Esqueceste-te da password?', 'js.forgotsub':'Recebe um link para escolher uma nova password.', 'js.forgotbtn':'Enviar link', 'js.sending':'A enviar…', 'js.resetsent':'Se existir uma conta com este email, um link de redefinição acabou de ser enviado. Verifica a caixa de entrada (e o spam).', 'js.backtologin':'Voltar ao login', 'js.newpwd':'Escolhe uma nova password.', 'js.resetbtn':'Redefinir password', 'js.resetdone':'Password alterada! Já podes iniciar sessão.', 'js.resetexpired':'Este link já não é válido. Pede um novo link de redefinição.',
  'guide.title':'Como usar o kaideno?',
  'guide.step1':'Toca no botão de gravação e permite o acesso ao microfone (só uma vez). Fala normalmente, a transcrição aparece em direto.',
@@ -2039,7 +2114,7 @@ const UI = {
     'js.aiwelcome':'Hallo! Ik ken de inhoud van deze opname. Stel me een vraag of kies hierboven een actie.', 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
     'js.speaker':'Spreker', 'js.renamespeakers':'Sprekers hernoemen',
     'js.tag':'Categorie', 'js.alltags':'Alle', 'tag.meeting':'Vergadering', 'tag.course':'Cursus', 'tag.interview':'Interview', 'tag.brainstorm':'Brainstorm', 'tag.podcast':'Podcast', 'tag.consultation':'Consult', 'tag.journal':'Persoonlijk dagboek', 'tag.call':'Gesprek',
-    'js.pickmode':'Context (optioneel)', 'js.captionmode':'Ondertitelmodus', 'js.tolinkedin':'LinkedIn-post', 'js.toarticle':'Blogartikel', 'js.quickcall':'Gesprek opnemen',
+    'js.pickmode':'Context (optioneel)', 'js.captionmode':'Ondertitelmodus', 'js.tolinkedin':'LinkedIn-post', 'js.toarticle':'Blogartikel', 'js.quickcall':'Gesprek opnemen', 'kt.title':'Persoonlijke woordenlijst', 'kt.desc':'Voeg namen, woorden of uitdrukkingen toe die kaideno beter moet herkennen (namen van collega\'s, vakjargon, je bedrijfsnaam). Eén per regel, max. 20.', 'kt.placeholder':'Bijv. Delphine Rousseau', 'js.listensummary':'Samenvatting beluisteren', 'js.stopspeak':'Stoppen', 'js.ttsunsupported':'Audio-afspelen wordt niet ondersteund door deze browser.', 'js.livetranslate':'Live vertalen', 'js.pendingactions':'Openstaande acties', 'js.daysago1':'', 'js.daysago2':' dagen geleden', 'js.importfile':'Bestand importeren', 'js.importprocessing':'Bestand wordt getranscribeerd…', 'js.importerror':'Fout bij het importeren van het bestand.', 'js.filetoolarge':'Bestand te groot (max. 60 MB).', 'js.importunavailable':'Importeren niet beschikbaar — log in om deze functie te gebruiken.', 'js.stoprecfirst':'Stop de lopende opname voordat je een bestand importeert.', 'js.share':'Delen', 'js.shareunavailable':'Delen niet beschikbaar — log in om deze functie te gebruiken.', 'js.shareerror':'Fout bij het maken van de deellink.', 'js.sharecopied':'Deellink gekopieerd!', 'js.confidentialmode':'🔒 Vertrouwelijke modus (geen AI-samenvatting)', 'js.confidentialsaved':'Lokaal opgeslagen, zonder AI.', 'js.confidentialnote':'Vertrouwelijke modus: er is geen AI-samenvatting gemaakt. De transcriptie wordt alleen op dit apparaat bewaard.', 'js.confidentialnoai':'Vertrouwelijke modus actief: de AI-assistent is uitgeschakeld voor deze opname.', 'js.addtocal':'Toevoegen aan agenda', 'js.chapters':'Hoofdstukken',
     'ref.title':'Vriend uitnodigen', 'ref.desc':'Deel je link: je vriend krijgt 30 gratis minuten, en jij ook, zodra hij/zij zich aanmeldt.', 'ref.copy':'Link kopiëren', 'js.grouptoday':'Vandaag', 'js.yesterday':'Gisteren', 'js.aiconv':'AI-chats', 'js.audio':'Audio', 'js.noresultsfor':'Geen resultaten voor', 'js.recfallback':'Opname', 'js.aimsg':'AI-bericht', 'js.forgotlink':'Wachtwoord vergeten?', 'js.forgotsub':'Ontvang een link om een nieuw wachtwoord te kiezen.', 'js.forgotbtn':'Link versturen', 'js.sending':'Versturen…', 'js.resetsent':'Als er een account met dit e-mailadres bestaat, is er zojuist een resetlink verstuurd. Controleer je inbox (en spam).', 'js.backtologin':'Terug naar inloggen', 'js.newpwd':'Kies een nieuw wachtwoord.', 'js.resetbtn':'Wachtwoord opnieuw instellen', 'js.resetdone':'Wachtwoord gewijzigd! Je kunt nu inloggen.', 'js.resetexpired':'Deze link is niet meer geldig. Vraag een nieuwe resetlink aan.',
  'guide.title':'Hoe gebruik je kaideno?',
  'guide.step1':'Tik op de opnameknop en geef toegang tot de microfoon (eenmalig). Praat gewoon, de transcriptie verschijnt live.',
@@ -2223,7 +2298,7 @@ const UI = {
     'js.aiwelcome':'你好！我了解这段录音的内容。请提问，或选择上方的操作。', 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
     'js.speaker':'发言人', 'js.renamespeakers':'重命名发言人',
     'js.tag':'分类', 'js.alltags':'全部', 'tag.meeting':'会议', 'tag.course':'课程', 'tag.interview':'采访', 'tag.brainstorm':'头脑风暴', 'tag.podcast':'播客', 'tag.consultation':'咨询', 'tag.journal':'个人日记', 'tag.call':'通话',
-    'js.pickmode':'场景（可选）', 'js.captionmode':'字幕模式', 'js.tolinkedin':'LinkedIn 帖子', 'js.toarticle':'博客文章', 'js.quickcall':'录制通话',
+    'js.pickmode':'场景（可选）', 'js.captionmode':'字幕模式', 'js.tolinkedin':'LinkedIn 帖子', 'js.toarticle':'博客文章', 'js.quickcall':'录制通话', 'kt.title':'个性化词汇', 'kt.desc':'添加希望 kaideno 更好识别的姓名、词语或短语（同事姓名、行业术语、公司名称）。每行一个，最多20个。', 'kt.placeholder':'例如：Delphine Rousseau', 'js.listensummary':'朗读摘要', 'js.stopspeak':'停止', 'js.ttsunsupported':'此浏览器不支持语音朗读。', 'js.livetranslate':'实时翻译', 'js.pendingactions':'待处理事项', 'js.daysago1':'', 'js.daysago2':'天前', 'js.importfile':'导入文件', 'js.importprocessing':'正在转录文件…', 'js.importerror':'导入文件时出错。', 'js.filetoolarge':'文件过大（最大60MB）。', 'js.importunavailable':'导入功能不可用 — 请登录后使用此功能。', 'js.stoprecfirst':'请先停止当前录音，再导入文件。', 'js.share':'分享', 'js.shareunavailable':'分享功能不可用 — 请登录后使用此功能。', 'js.shareerror':'创建分享链接时出错。', 'js.sharecopied':'分享链接已复制！', 'js.confidentialmode':'🔒 保密模式（不生成AI摘要）', 'js.confidentialsaved':'已在本地保存，未使用AI。', 'js.confidentialnote':'保密模式：未生成AI摘要。转录内容仅保存在本设备上。', 'js.confidentialnoai':'保密模式已开启：此录音的AI助手已停用。', 'js.addtocal':'添加到日历', 'js.chapters':'章节',
     'ref.title':'邀请好友', 'ref.desc':'分享你的链接：好友注册后可获得 30 分钟免费时长，你也一样。', 'ref.copy':'复制链接', 'js.grouptoday':'今天', 'js.yesterday':'昨天', 'js.aiconv':'AI 对话', 'js.audio':'音频', 'js.noresultsfor':'没有找到相关结果：', 'js.recfallback':'录音', 'js.aimsg':'条 AI 消息', 'js.forgotlink':'忘记密码？', 'js.forgotsub':'获取链接以设置新密码。', 'js.forgotbtn':'发送链接', 'js.sending':'发送中…', 'js.resetsent':'如果该邮箱已注册账户，重置链接已发送。请查收邮箱（包括垃圾邮件）。', 'js.backtologin':'返回登录', 'js.newpwd':'设置新密码。', 'js.resetbtn':'重置密码', 'js.resetdone':'密码已修改！现在可以登录了。', 'js.resetexpired':'该链接已失效，请重新申请重置链接。',
  'guide.title':'如何使用 kaideno？',
  'guide.step1':'点击录音按钮并允许访问麦克风（仅需一次）。正常说话，转录会实时显示。',
@@ -2407,7 +2482,7 @@ const UI = {
     'js.aiwelcome':'こんにちは！この録音の内容を把握しています。質問するか、上のアクションを選んでください。', 'x.exportmd':'Markdown', 'x.exportpdf':'PDF',
     'js.speaker':'話者', 'js.renamespeakers':'話者名を編集',
     'js.tag':'カテゴリー', 'js.alltags':'すべて', 'tag.meeting':'会議', 'tag.course':'授業', 'tag.interview':'インタビュー', 'tag.brainstorm':'ブレインストーミング', 'tag.podcast':'ポッドキャスト', 'tag.consultation':'相談', 'tag.journal':'個人ジャーナル', 'tag.call':'通話',
-    'js.pickmode':'コンテキスト（任意）', 'js.captionmode':'字幕モード', 'js.tolinkedin':'LinkedIn投稿', 'js.toarticle':'ブログ記事', 'js.quickcall':'通話を録音',
+    'js.pickmode':'コンテキスト（任意）', 'js.captionmode':'字幕モード', 'js.tolinkedin':'LinkedIn投稿', 'js.toarticle':'ブログ記事', 'js.quickcall':'通話を録音', 'kt.title':'カスタム語彙', 'kt.desc':'kaidenoに正しく認識してほしい名前・単語・表現を追加（同僚の名前、専門用語、会社名など）。1行に1つ、最大20個。', 'kt.placeholder':'例：Delphine Rousseau', 'js.listensummary':'要約を読み上げる', 'js.stopspeak':'停止', 'js.ttsunsupported':'このブラウザは音声読み上げに対応していません。', 'js.livetranslate':'ライブ翻訳', 'js.pendingactions':'未対応のアクション', 'js.daysago1':'', 'js.daysago2':'日前', 'js.importfile':'ファイルをインポート', 'js.importprocessing':'ファイルを文字起こし中…', 'js.importerror':'ファイルのインポート中にエラーが発生しました。', 'js.filetoolarge':'ファイルが大きすぎます（最大60MB）。', 'js.importunavailable':'インポートは利用できません — この機能を使うにはログインしてください。', 'js.stoprecfirst':'ファイルをインポートする前に、進行中の録音を停止してください。', 'js.share':'共有', 'js.shareunavailable':'共有は利用できません — この機能を使うにはログインしてください。', 'js.shareerror':'共有リンクの作成中にエラーが発生しました。', 'js.sharecopied':'共有リンクをコピーしました！', 'js.confidentialmode':'🔒 機密モード（AI要約なし）', 'js.confidentialsaved':'ローカルに保存されました（AI不使用）。', 'js.confidentialnote':'機密モード：AI要約は生成されていません。文字起こしはこの端末にのみ保存されています。', 'js.confidentialnoai':'機密モードが有効です：この録音ではAIアシスタントは無効化されています。', 'js.addtocal':'カレンダーに追加', 'js.chapters':'章',
     'ref.title':'友達を招待', 'ref.desc':'リンクをシェアすると、友達に30分の無料時間がプレゼントされ、あなたにも30分プレゼントされます。', 'ref.copy':'リンクをコピー', 'js.grouptoday':'今日', 'js.yesterday':'昨日', 'js.aiconv':'AIチャット', 'js.audio':'音声', 'js.noresultsfor':'該当する結果がありません：', 'js.recfallback':'録音', 'js.aimsg':'件のAIメッセージ', 'js.forgotlink':'パスワードをお忘れですか？', 'js.forgotsub':'新しいパスワードを設定するためのリンクを受け取る。', 'js.forgotbtn':'リンクを送信', 'js.sending':'送信中…', 'js.resetsent':'このメールアドレスのアカウントが存在する場合、リセットリンクを送信しました。受信箱（迷惑メールフォルダも）をご確認ください。', 'js.backtologin':'ログインに戻る', 'js.newpwd':'新しいパスワードを選択してください。', 'js.resetbtn':'パスワードをリセット', 'js.resetdone':'パスワードが変更されました！ログインできます。', 'js.resetexpired':'このリンクは無効です。新しいリセットリンクをリクエストしてください。',
  'guide.title':'kaidenoの使い方',
  'guide.step1':'録音ボタンをタップしてマイクへのアクセスを許可（一度だけ）。普通に話すと、リアルタイムで文字起こしが表示されます。',
@@ -2675,6 +2750,10 @@ const K = {
   clKey: () => localStorage.getItem('nuro_cl')||'',
   aiHist: id => JSON.parse(localStorage.getItem(`nuro_ai_${currentUser}_${id}`)||'[]'),
   saveAi: (id,h) => localStorage.setItem(`nuro_ai_${currentUser}_${id}`, JSON.stringify(h)),
+  keyterms: () => JSON.parse(localStorage.getItem(`nuro_kt_${currentUser}`)||'[]'),
+  saveKeyterms: arr => localStorage.setItem(`nuro_kt_${currentUser}`, JSON.stringify(arr)),
+  doneActions: () => JSON.parse(localStorage.getItem(`nuro_done_${currentUser}`)||'[]'),
+  saveDoneActions: arr => localStorage.setItem(`nuro_done_${currentUser}`, JSON.stringify(arr)),
 };
 
 // ══ STATE ══
@@ -2693,6 +2772,39 @@ let liveUserScrolled = false;
 let speakerSegments=[];
 let vizBars=[], vizRaf=null, vizPhase=0;
 let recMode=null; // tag choisi avant de démarrer l'enregistrement (meeting/course/journal/call/…)
+let confidentialRec=false; // si actif : aucun appel à Claude pendant/après cet enregistrement
+function setConfidentialRec(v){ confidentialRec=v; }
+
+// ── Sous-titres traduits en direct ──
+let liveTranslateLang=''; // code langue cible ('' = désactivé)
+let translatedTx='';
+let translateChain=Promise.resolve(); // file d'attente pour traduire les segments dans l'ordre
+function setLiveTranslateLang(v){
+  liveTranslateLang=v;
+  translatedTx='';
+  const el=document.getElementById('live-translate-txt');
+  if(el){ el.textContent=''; el.classList.toggle('show', !!v); }
+}
+function queueTranslateSegment(text){
+  translateChain = translateChain.then(async()=>{
+    try{
+      const targetName = LANG_NAMES[liveTranslateLang] || liveTranslateLang;
+      const res=await callClaude({
+        model:'claude-haiku-4-5-20251001', max_tokens:300,
+        system:`Traduis ce texte en ${targetName}. Réponds UNIQUEMENT avec la traduction, sans commentaire, sans guillemets, sans reformulation superflue.`,
+        messages:[{role:'user',content:text}]
+      });
+      if(!res.ok) return;
+      const d=await res.json();
+      const translated=d.content?.[0]?.text?.trim();
+      if(translated){
+        translatedTx += (translatedTx?' ':'') + translated;
+        const el=document.getElementById('live-translate-txt');
+        if(el){ el.textContent=translatedTx; el.scrollTop=el.scrollHeight; }
+      }
+    }catch(e){ /* une traduction ratée ne doit pas interrompre la transcription */ }
+  });
+}
 
 function setRecMode(key){
   recMode = (recMode===key) ? null : key;
@@ -2714,6 +2826,20 @@ function switchTab(t) {
   document.getElementById('auth-error').classList.remove('show');
 }
 function authErr(m){const e=document.getElementById('auth-error');e.textContent=m;e.classList.add('show')}
+
+// Affiche/masque un champ mot de passe en clair au clic sur l'icône œil
+function togglePwd(id){
+  const input=document.getElementById(id);
+  if(!input) return;
+  const btn=input.parentElement.querySelector('.pwd-toggle');
+  const showing = input.type==='text';
+  input.type = showing ? 'password' : 'text';
+  if(btn){
+    const eye=btn.querySelector('.pwd-icon-eye'), off=btn.querySelector('.pwd-icon-eyeoff');
+    if(eye) eye.style.display = showing ? '' : 'none';
+    if(off) off.style.display = showing ? 'none' : '';
+  }
+}
 
 // ── Mot de passe oublié ──
 function showForgotPassword(){
@@ -3006,6 +3132,8 @@ async function toggleRec(){
   try{
     const stream=await navigator.mediaDevices.getUserMedia({audio:true});
     finalTx='';interimTx='';
+    translatedTx=''; translateChain=Promise.resolve();
+    const ltEl=document.getElementById('live-translate-txt'); if(ltEl) ltEl.textContent='';
     const aat=document.getElementById('auto-answer-toggle'); if(aat) aat.checked=autoAnswerEnabled;
     speakerSegments=[];
     recFinalized=false;
@@ -3014,14 +3142,17 @@ async function toggleRec(){
     const laa=document.getElementById('live-ai-answer'); if(laa){laa.className='live-ai-answer';laa.textContent='';}
     const lai=document.getElementById('live-ai-input'); if(lai) lai.value='';
     document.getElementById('live-box').classList.add('show');
+    const liveAiBox=document.getElementById('live-ai'); if(liveAiBox) liveAiBox.style.display=confidentialRec?'none':'';
     liveUserScrolled = false;
     initLiveScroll();
     const dg=await getDeepgramKey();
     if(!dg){showToast('⚠️ Service de transcription indisponible');document.getElementById('live-box').classList.remove('show');return}
     // Langue épinglée sur celle choisie dans l'interface (plus précis que "multi" qui, en plus,
-    // ne couvre pas le chinois — voir docs Deepgram). "kaideno" en keyterm pour éviter que la
-    // marque elle-même soit mal transcrite (ex: "Qualideno").
-    dgWs=new WebSocket(`wss://api.deepgram.com/v1/listen?language=${uiLang()}&model=nova-3&punctuate=true&interim_results=true&smart_format=true&diarize=true&endpointing=100&keyterm=kaideno`,['token',dg]);
+    // ne couvre pas le chinois — voir docs Deepgram). "kaideno" + vocabulaire perso en keyterm
+    // pour éviter que des mots/noms importants soient mal transcrits (ex: "Qualideno").
+    const keyterms=['kaideno', ...K.keyterms()];
+    const keytermQS=keyterms.map(kw=>`&keyterm=${encodeURIComponent(kw)}`).join('');
+    dgWs=new WebSocket(`wss://api.deepgram.com/v1/listen?language=${uiLang()}&model=nova-3&punctuate=true&interim_results=true&smart_format=true&diarize=true&endpointing=100${keytermQS}`,['token',dg]);
     dgWs.onopen=()=>{
       isRec=true;startTime=Date.now();setRecUI(true);startTimer();startViz();
       if('vibrate' in navigator){try{navigator.vibrate(60)}catch(e){}}
@@ -3034,23 +3165,27 @@ async function toggleRec(){
       const a=d.channel?.alternatives?.[0];if(!a)return;
       if(d.is_final){
         // Regrouper les mots par locuteur (diarization)
+        // On garde aussi l'horodatage (secondes depuis le début du flux Deepgram) de chaque
+        // segment, pour pouvoir reconstruire des chapitres cliquables sur les longs enregistrements.
         const words=a.words||[];
         if(words.length && words[0].speaker!==undefined){
-          let curSpk=words[0].speaker, buf='';
+          let curSpk=words[0].speaker, buf='', segTime=words[0].start!=null?words[0].start:null;
           words.forEach(w=>{
             if(w.speaker!==curSpk){
-              speakerSegments.push({speaker:curSpk, text:buf.trim()});
-              curSpk=w.speaker; buf='';
+              speakerSegments.push({speaker:curSpk, text:buf.trim(), time:segTime});
+              curSpk=w.speaker; buf=''; segTime=w.start!=null?w.start:segTime;
             }
             buf+=(w.punctuated_word||w.word)+' ';
           });
-          if(buf.trim()) speakerSegments.push({speaker:curSpk, text:buf.trim()});
+          if(buf.trim()) speakerSegments.push({speaker:curSpk, text:buf.trim(), time:segTime});
         } else if(a.transcript){
-          speakerSegments.push({speaker:0, text:a.transcript});
+          const segTime=words.length&&words[0].start!=null?words[0].start:(startTime?(Date.now()-startTime)/1000:0);
+          speakerSegments.push({speaker:0, text:a.transcript, time:segTime});
         }
         finalTx+=a.transcript+' ';
         interimTx='';
         maybeAutoAnswer(a.transcript);
+        if(liveTranslateLang && a.transcript && a.transcript.trim()) queueTranslateSegment(a.transcript.trim());
       } else {
         interimTx=a.transcript;
       }
@@ -3108,7 +3243,10 @@ async function finishRec(){
   if(!tx||tx.length<5){showToast(t('js.tooshort'));return}
 
   // Construire un transcript formaté avec les locuteurs (si plusieurs détectés)
+  // segMap : correspondance approximative {charOffset dans formattedTx -> secondes écoulées},
+  // utilisée ensuite pour permettre de "sauter" à un chapitre depuis le résumé (task chapitrage).
   let formattedTx = tx;
+  const segMap=[];
   const speakers = [...new Set(speakerSegments.map(s=>s.speaker))];
   if(speakerSegments.length && speakers.length > 1){
     const merged=[];
@@ -3116,9 +3254,22 @@ async function finishRec(){
       if(!seg.text) return;
       const last=merged[merged.length-1];
       if(last && last.speaker===seg.speaker){ last.text += ' ' + seg.text; }
-      else merged.push({speaker:seg.speaker, text:seg.text});
+      else merged.push({speaker:seg.speaker, text:seg.text, time:seg.time});
     });
-    formattedTx = merged.map(seg=>`S${seg.speaker}: ${seg.text}`).join('\n');
+    let offset=0;
+    formattedTx = merged.map(seg=>{
+      const line=`S${seg.speaker}: ${seg.text}`;
+      segMap.push({charOffset:offset, time:seg.time||0});
+      offset += line.length + 1;
+      return line;
+    }).join('\n');
+  } else if(speakerSegments.length){
+    let offset=0;
+    speakerSegments.forEach(seg=>{
+      if(!seg.text) return;
+      segMap.push({charOffset:offset, time:seg.time||0});
+      offset += seg.text.length + 1;
+    });
   }
 
   // Comptabiliser la consommation (localement, puis synchronisation serveur si possible)
@@ -3126,10 +3277,17 @@ async function finishRec(){
   renderQuota();
   reportUsageServer(currentUser, dur);
 
-  const s={id:`s_${Date.now()}`,createdAt:Date.now(),duration:dur,transcript:formattedTx,wordCount:tx.split(/\s+/).length,status:'processing',summary:null,speakerCount:speakers.length,speakerNames:{},tag:recMode};
+  const wasConfidential=confidentialRec;
+  // Réinitialisation systématique après chaque enregistrement : le mode confidentiel
+  // doit être un choix explicite à chaque fois, jamais reconduit par erreur.
+  confidentialRec=false;
+  const ct=document.getElementById('confidential-toggle'); if(ct) ct.checked=false;
+
+  const s={id:`s_${Date.now()}`,createdAt:Date.now(),duration:dur,transcript:formattedTx,wordCount:tx.split(/\s+/).length,status:wasConfidential?'done':'processing',summary:null,speakerCount:speakers.length,speakerNames:{},tag:recMode,confidential:wasConfidential,segMap};
   sessions.unshift(s);K.saveSessions(sessions);
   renderSessions();renderStats();
   showToast(t('js.saved'));
+  if(wasConfidential){ showToast(t('js.confidentialsaved')); return; }
   await genSummary(s);
 }
 
@@ -3137,18 +3295,52 @@ async function genSummary(s){
 
   try{
     const hint = TAG_PROMPT_HINTS[s.tag] ? `\n${TAG_PROMPT_HINTS[s.tag]}` : '';
+    const sessionDate = new Date(s.createdAt).toISOString().slice(0,10);
+    const validTags = TAG_DEFS.map(d=>d.key).join('|');
+    // Chapitrage : uniquement proposé aux enregistrements assez longs pour contenir plusieurs
+    // parties distinctes (au-delà de 5 minutes), pour éviter du bruit sur les courts enregistrements.
+    const longEnough = (s.duration||0) >= 300 && Array.isArray(s.segMap) && s.segMap.length>1;
+    const chapterField = longEnough ? `,"chapitres":[{"titre":"titre court du chapitre (max 6 mots)","debut_sec":0}]` : '';
+    const chapterInstr = longEnough ? ` Découpe aussi l'enregistrement (${Math.round(s.duration/60)} min) en 2 à 6 chapitres si plusieurs sujets/parties distincts s'en dégagent (sinon "chapitres":[]) ; "debut_sec" = secondes écoulées depuis le début, au plus proche du début réel de chaque partie.` : '';
     const res=await callClaude({
         model:'claude-haiku-4-5-20251001',max_tokens:1024,
-        system:`Analyse cette transcription et réponds UNIQUEMENT en JSON valide sans markdown. IMPORTANT : rédige tout le contenu (titre, résumé, points clés, actions) en ${getLangName()}.\n{"titre":"Titre court (max 8 mots)","resume":"2-3 phrases claires","points_cles":["point 1","point 2"],"actions":["action 1"]}${hint}`,
+        system:`Analyse cette transcription et réponds UNIQUEMENT en JSON valide sans markdown. IMPORTANT : rédige tout le contenu (titre, résumé, points clés, actions${longEnough?', chapitres':''}) en ${getLangName()}. Date de l'enregistrement : ${sessionDate}.${chapterInstr}\n{"titre":"Titre court (max 8 mots)","resume":"2-3 phrases claires","points_cles":["point 1","point 2"],"actions":["action 1"],"action_dates":["YYYY-MM-DD ou null, un élément par action, dans le même ordre — uniquement si une échéance est mentionnée ou clairement déductible par rapport à la date de l'enregistrement"],"tag_suggestion":"une valeur parmi ${validTags}, celle qui décrit le mieux ce contenu, ou null si aucune ne convient clairement"${chapterField}}${hint}`,
         messages:[{role:'user',content:`Transcription :\n\n${s.transcript}`}]
     });
     if(!res.ok)throw new Error();
     const d=await res.json();
     let sum;try{sum=JSON.parse((d.content?.[0]?.text||'{}').replace(/```json|```/g,'').trim())}catch{sum={titre:'Résumé',resume:d.content?.[0]?.text||'',points_cles:[],actions:[]}}
     s.status='done';s.summary=sum;
+    // Catégorisation automatique : uniquement si l'utilisateur n'avait pas déjà choisi un mode avant d'enregistrer.
+    if(!s.tag && sum.tag_suggestion && TAG_DEFS.some(dd=>dd.key===sum.tag_suggestion)){
+      s.tag = sum.tag_suggestion;
+    }
   }catch{s.status='error'}
   K.saveSessions(sessions);renderSessions();renderStats();
   showToast(s.status==='done'?t('js.summaryok'):t('js.summaryerr'));
+}
+
+// Lit le résumé à voix haute avec la synthèse vocale du navigateur (gratuit, aucun appel réseau).
+function speakSummary(id){
+  if(!('speechSynthesis' in window)){ showToast(t('js.ttsunsupported')); return; }
+  const btn=document.getElementById(`speak-btn-${id}`);
+  // Si on est déjà en train de lire (ce résumé ou un autre), un nouveau clic arrête la lecture.
+  if(window.speechSynthesis.speaking){
+    window.speechSynthesis.cancel();
+    if(btn){btn.classList.remove('speaking');btn.innerHTML=`🔊 ${t('js.listensummary')}`;}
+    return;
+  }
+  const s=sessions.find(x=>x.id===id); if(!s||!s.summary) return;
+  const sum=s.summary;
+  let text=(sum.titre?sum.titre+'. ':'')+(sum.resume||'');
+  if(sum.points_cles?.length) text+='. '+t('js.keypoints')+' : '+sum.points_cles.join('. ');
+  if(sum.actions?.length) text+='. Actions : '+sum.actions.join('. ');
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang=jsLocale();
+  const reset=()=>{ if(btn){btn.classList.remove('speaking');btn.innerHTML=`🔊 ${t('js.listensummary')}`;} };
+  u.onend=reset; u.onerror=reset;
+  window.speechSynthesis.speak(u);
+  if(btn){btn.classList.add('speaking');btn.innerHTML=`⏸ ${t('js.stopspeak')}`;}
 }
 
 // ══ UI REC ══
@@ -3164,6 +3356,10 @@ function setRecUI(on){
   if(rmRow) rmRow.classList.toggle('disabled',on);
   const qcb=document.getElementById('quick-call-btn');
   if(qcb) qcb.classList.toggle('hidden',on);
+  const ifb=document.getElementById('import-file-btn');
+  if(ifb) ifb.classList.toggle('hidden',on);
+  const ctr=document.getElementById('confidential-toggle-row');
+  if(ctr) ctr.classList.toggle('hidden',on);
 }
 
 // Démarre l'enregistrement immédiatement en mode "Appel" (1 tap) — le plus proche possible
@@ -3174,6 +3370,77 @@ function quickCallRecord(){
   recMode='call';
   renderRecModeRow();
   toggleRec();
+}
+
+// ══ IMPORT D'UN FICHIER AUDIO DÉJÀ ENREGISTRÉ ══
+// Contrairement à l'enregistrement live (streaming), on envoie le fichier entier au Worker,
+// qui le relaie vers l'API Deepgram "pre-recorded" (voir /deepgram-transcribe-file dans worker.js).
+function triggerImportFile(){
+  if(isRec){ showToast(t('js.stoprecfirst')); return; }
+  if(quotaExceeded()){ showToast(t('q.blocked')); renderQuota(); return; }
+  const input=document.getElementById('import-file-input');
+  if(input) input.click();
+}
+
+// Reconstruit un transcript au format "S<N>: texte" (identique au format live) à partir
+// de la réponse JSON de l'API Deepgram pre-recorded.
+function transcriptFromDeepgramResult(dgResult){
+  const alt=dgResult?.results?.channels?.[0]?.alternatives?.[0];
+  if(!alt) return {text:'', speakerCount:1};
+  const words=alt.words||[];
+  if(words.length && words[0].speaker!==undefined){
+    const merged=[];
+    let curSpk=words[0].speaker, buf='';
+    words.forEach(w=>{
+      if(w.speaker!==curSpk){ merged.push({speaker:curSpk,text:buf.trim()}); curSpk=w.speaker; buf=''; }
+      buf+=(w.punctuated_word||w.word)+' ';
+    });
+    if(buf.trim()) merged.push({speaker:curSpk,text:buf.trim()});
+    const speakers=[...new Set(merged.map(m=>m.speaker))];
+    return { text: merged.map(m=>`S${m.speaker}: ${m.text}`).join('\n'), speakerCount: speakers.length };
+  }
+  return { text: alt.transcript||'', speakerCount:1 };
+}
+
+async function handleImportFile(e){
+  const file=e.target.files[0];
+  e.target.value=''; // permet de resélectionner le même fichier plus tard
+  if(!file) return;
+  if(!WORKER_URL || !authToken()){ showToast(t('js.importunavailable')); return; }
+
+  showToast(t('js.importprocessing'));
+  try{
+    const keyterms=['kaideno', ...K.keyterms()];
+    const qs=new URLSearchParams();
+    qs.set('language', uiLang());
+    keyterms.forEach(k=>qs.append('keyterm', k));
+
+    const res=await fetch(`${WORKER_URL}/deepgram-transcribe-file?${qs.toString()}`,{
+      method:'POST',
+      headers:{ 'Authorization':'Bearer '+authToken(), 'Content-Type': file.type||'audio/wav' },
+      body: file
+    });
+    if(res.status===403){ showToast(t('q.blocked')); renderQuota(); return; }
+    if(res.status===413){ showToast(t('js.filetoolarge')); return; }
+    if(!res.ok){ showToast(t('js.importerror')); return; }
+
+    const data=await res.json();
+    const {text, speakerCount}=transcriptFromDeepgramResult(data.result);
+    if(!text || text.trim().length<5){ showToast(t('js.tooshort')); return; }
+
+    const dur=Math.ceil(data.duration||data.result?.metadata?.duration||0);
+    // La consommation a déjà été comptabilisée côté serveur (voir worker.js) : on se contente
+    // de resynchroniser l'affichage du quota local depuis le compte serveur.
+    await refreshServerAccount(currentUser); renderQuota();
+
+    const s={id:`s_${Date.now()}`,createdAt:Date.now(),duration:dur,transcript:text,wordCount:text.split(/\s+/).filter(Boolean).length,status:'processing',summary:null,speakerCount,speakerNames:{},tag:recMode,imported:true};
+    sessions.unshift(s); K.saveSessions(sessions);
+    renderSessions(); renderStats();
+    showToast(t('js.saved'));
+    await genSummary(s);
+  }catch(err){
+    showToast(t('js.importerror'));
+  }
 }
 
 // Mode sous-titres géant plein écran — pratique pour montrer la transcription en direct
@@ -3236,6 +3503,7 @@ function initLiveScroll(){
 
 // IA en direct pendant l'enregistrement
 async function askLiveAi(){
+  if(confidentialRec){ showToast(t('js.confidentialnoai')); return; }
   const input=document.getElementById('live-ai-input');
   const q=input?.value.trim();
   if(!q) return;
@@ -3245,6 +3513,7 @@ async function askLiveAi(){
 
 // Détecte si un locuteur vient de poser une question à voix haute, et déclenche une réponse IA automatique
 function maybeAutoAnswer(segment){
+  if(confidentialRec) return; // mode confidentiel : aucun appel à Claude, même l'auto-réponse
   if(!autoAnswerEnabled) return;
   const text=(segment||'').trim();
   if(!/\?\s*$/.test(text)) return; // ne se termine pas par un point d'interrogation
@@ -3321,7 +3590,115 @@ function renderStats(){
   document.getElementById('s-time').textContent=m>=60?`${Math.floor(m/60)}h${String(m%60).padStart(2,'0')}`:`${m}m`;
   document.getElementById('s-words').textContent=wds>999?`${(wds/1000).toFixed(1)}k`:wds;
   document.getElementById('s-ct').textContent=n;
+  renderActionsPanel();
 }
+
+// Rassemble les actions extraites de tous les résumés, les plus anciennes en premier,
+// en excluant celles déjà cochées comme faites.
+function getPendingActions(){
+  const done=new Set(K.doneActions());
+  const out=[];
+  sessions.forEach(s=>{
+    (s.summary?.actions||[]).forEach((text,idx)=>{
+      const id=`${s.id}_${idx}`;
+      if(!done.has(id)) out.push({id, text, sessionId:s.id, idx, dueDate:s.summary?.action_dates?.[idx]||null, sessionTitle:s.summary?.titre||t('js.recfallback'), date:s.createdAt});
+    });
+  });
+  return out.sort((a,b)=>a.date-b.date); // plus anciennes d'abord
+}
+function renderActionsPanel(){
+  const el=document.getElementById('actions-panel');
+  if(!el) return;
+  const pending=getPendingActions();
+  if(!pending.length){ el.innerHTML=''; return; }
+  const shown=pending.slice(0,5);
+  el.innerHTML=`
+    <div class="actions-box">
+      <div class="actions-hd">
+        <span class="actions-hd-lbl">📌 ${t('js.pendingactions')}</span>
+        <span class="actions-hd-ct">${pending.length}</span>
+      </div>
+      ${shown.map(a=>`
+        <div class="action-row">
+          <input type="checkbox" class="action-check" onchange="toggleActionDone('${a.id}')">
+          <div class="action-body">
+            <div class="action-txt">${a.text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}${a.dueDate?` <span class="act-date">📅 ${fmtActionDate(a.dueDate)} <button class="ics-btn" onclick="downloadActionIcs('${a.sessionId}',${a.idx})">${t('js.addtocal')}</button></span>`:''}</div>
+            <div class="action-src" onclick="openSession('${a.sessionId}')">${a.sessionTitle} · ${fmtRelativeDays(a.date)}</div>
+          </div>
+        </div>`).join('')}
+    </div>`;
+}
+function toggleActionDone(id){
+  const done=K.doneActions();
+  if(!done.includes(id)){ done.push(id); K.saveDoneActions(done); }
+  renderActionsPanel();
+}
+// "il y a X jours" / "aujourd'hui" / "hier" à partir d'un timestamp
+function fmtRelativeDays(ts){
+  const days=Math.floor((Date.now()-ts)/86400000);
+  if(days<=0) return t('js.today');
+  if(days===1) return t('js.yesterday');
+  return `${t('js.daysago1')}${days}${t('js.daysago2')}`;
+}
+// Formate une date d'échéance "YYYY-MM-DD" (renvoyée par l'IA) en date lisible localisée
+function fmtActionDate(dateStr){
+  try{
+    const dt=new Date(dateStr+'T00:00:00');
+    if(isNaN(dt.getTime())) return dateStr;
+    return dt.toLocaleDateString(jsLocale(),{weekday:'short',day:'numeric',month:'short'});
+  }catch(e){ return dateStr; }
+}
+// Génère un fichier .ics téléchargeable pour une action ayant une échéance, à partir de son résumé de session
+function downloadActionIcs(sessionId, actionIdx){
+  const s=sessions.find(x=>x.id===sessionId); if(!s||!s.summary) return;
+  const text=s.summary.actions?.[actionIdx]; const dateStr=s.summary.action_dates?.[actionIdx];
+  if(!text||!dateStr) return;
+  const d=dateStr.replace(/-/g,'');
+  const uid=`${sessionId}-${actionIdx}@kaideno`;
+  const now=new Date().toISOString().replace(/[-:]/g,'').split('.')[0]+'Z';
+  const esc=t=>String(t).replace(/([,;])/g,'\\$1');
+  const ics=[
+    'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//kaideno//action//FR','BEGIN:VEVENT',
+    `UID:${uid}`,`DTSTAMP:${now}`,`DTSTART;VALUE=DATE:${d}`,`DTEND;VALUE=DATE:${d}`,
+    `SUMMARY:${esc(text)}`,`DESCRIPTION:${esc((s.summary.titre||'kaideno')+' — '+text)}`,
+    'END:VEVENT','END:VCALENDAR'
+  ].join('\r\n');
+  const blob=new Blob([ics],{type:'text/calendar'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download='action-kaideno.ics';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url), 2000);
+}
+
+// Formate un nombre de secondes en mm:ss (ou h:mm:ss au-delà d'une heure), pour l'affichage des chapitres.
+function fmtChapterTime(sec){
+  sec=Math.max(0, Math.round(sec||0));
+  const h=Math.floor(sec/3600), m=Math.floor((sec%3600)/60), s=sec%60;
+  const mm=h?String(m).padStart(2,'0'):String(m);
+  const ss=String(s).padStart(2,'0');
+  return h?`${h}:${mm}:${ss}`:`${mm}:${ss}`;
+}
+
+// "Saut" approximatif vers un chapitre : on retrouve, via segMap (construit pendant l'enregistrement),
+// le décalage de caractères le plus proche de l'horodatage visé, puis on fait défiler et on
+// surligne brièvement la zone correspondante dans le bloc transcription.
+function jumpToChapter(sessionId, sec){
+  const s=sessions.find(x=>x.id===sessionId); if(!s) return;
+  const txt=document.getElementById(`tx-txt-${sessionId}`);
+  if(!txt) return;
+  const segMap=s.segMap;
+  let ratio=0;
+  if(Array.isArray(segMap) && segMap.length){
+    let best=segMap[0];
+    for(const seg of segMap){ if(seg.time<=sec) best=seg; else break; }
+    ratio = (s.transcript?.length) ? best.charOffset / s.transcript.length : 0;
+  }
+  const target = ratio * (txt.scrollHeight - txt.clientHeight);
+  txt.scrollTo({top:Math.max(0,target), behavior:'smooth'});
+  txt.classList.add('chapter-flash');
+  setTimeout(()=>txt.classList.remove('chapter-flash'), 900);
+}
+
 function renderSessions(){
   const c=document.getElementById('sessions-list');
   if(!sessions.length){c.innerHTML=`<div class="empty-state"><div class="empty-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="8" y="2" width="8" height="13" rx="4" stroke="#3D4D62" stroke-width="1.5"/><path d="M4 12a8 8 0 0016 0" stroke="#3D4D62" stroke-width="1.5" stroke-linecap="round"/><line x1="12" y1="20" x2="12" y2="23" stroke="#3D4D62" stroke-width="1.5" stroke-linecap="round"/></svg></div><h3 class="empty-title">${t('js.norec')}</h3><p class="empty-sub">${t('js.empty')}</p></div>`;return}
@@ -3472,10 +3849,13 @@ function openSession(id){
         ${TAG_DEFS.map(d=>`<button class="ai-edit-chip" style="${s.tag===d.key?'background:var(--accent2);border-color:var(--accent-b);color:var(--accent)':''}" onclick="setSessionTag('${id}','${d.key}')">${d.icon} ${t(d.i18n)}</button>`).join('')}
       </div>
     </div>`;
-  if(sum){
-    html+=`<div class="summary-box"><div class="summary-lbl">${t('js.summary')}</div><p class="summary-txt">${sum.resume}</p></div>`;
+  if(s.confidential){
+    html+=`<div class="confidential-badge">🔒 ${t('js.confidentialnote')}</div>`;
+  }else if(sum){
+    html+=`<div class="summary-box"><div class="summary-lbl">${t('js.summary')}</div><p class="summary-txt">${sum.resume}</p><button class="btn-listen" id="speak-btn-${id}" onclick="speakSummary('${id}')">🔊 ${t('js.listensummary')}</button></div>`;
     if(sum.points_cles?.length)html+=`<div class="detail-block"><div class="block-lbl">${t('js.keypoints')}</div><div class="kp-list">${sum.points_cles.map(p=>`<div class="kp-item"><span class="kp-dot"></span>${p}</div>`).join('')}</div></div>`;
-    if(sum.actions?.length)html+=`<div class="detail-block"><div class="block-lbl">Actions</div><div class="act-list">${sum.actions.map(a=>`<div class="act-item"><span class="act-arr">→</span>${a}</div>`).join('')}</div></div>`;
+    if(sum.actions?.length)html+=`<div class="detail-block"><div class="block-lbl">Actions</div><div class="act-list">${sum.actions.map((a,idx)=>`<div class="act-item"><span class="act-arr">→</span><span>${a}${sum.action_dates?.[idx]?` <span class="act-date">📅 ${fmtActionDate(sum.action_dates[idx])} <button class="ics-btn" onclick="downloadActionIcs('${id}',${idx})">${t('js.addtocal')}</button></span>`:''}</span></div>`).join('')}</div></div>`;
+    if(sum.chapitres?.length>1)html+=`<div class="detail-block"><div class="block-lbl">${t('js.chapters')}</div><div class="chapter-list">${sum.chapitres.map(c=>`<button class="chapter-item" onclick="jumpToChapter('${id}', ${Number(c.debut_sec)||0})"><span class="chapter-time">${fmtChapterTime(c.debut_sec)}</span><span class="chapter-title">${c.titre}</span></button>`).join('')}</div></div>`;
   }else if(s.status==='processing'){html+=`<div style="background:var(--bg1);border:1px solid var(--line);border-radius:var(--radius);padding:16px;font-size:.85rem;color:var(--ink2);margin-bottom:24px">${t('js.generating')}</div>`}
   html+=`
     <div class="detail-block"><div class="block-lbl">${t('js.transcript')}</div>
@@ -3484,13 +3864,13 @@ function openSession(id){
           <span class="transcript-lbl">${t('js.rawtext')}</span>
           <div class="transcript-hd-actions">
             <span class="transcript-wc" id="tx-wc-${id}">${wc} ${t('js.words')}</span>
-            <button class="btn-ai-edit" onclick="toggleAiEdit('${id}')">
+            ${s.confidential?'':`<button class="btn-ai-edit" onclick="toggleAiEdit('${id}')">
               <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1l1.3 3.2L10.5 5 7.3 6.3 6 9.5 4.7 6.3 1.5 5l3.2-.8L6 1z" fill="currentColor"/></svg>
               ${t('js.aiedit')}
-            </button>
+            </button>`}
           </div>
         </div>
-        <div class="ai-edit-bar" id="ai-edit-bar-${id}">
+        ${s.confidential?'':`<div class="ai-edit-bar" id="ai-edit-bar-${id}">
           <div class="ai-edit-chips">
             <button class="ai-edit-chip" onclick="aiEditChip('${id}','Corrige les fautes d\'orthographe et de grammaire')">${t('js.fixtypos')}</button>
             <button class="ai-edit-chip" onclick="aiEditChip('${id}','Enlève les hésitations, répétitions et mots parasites')">${t('js.clean')}</button>
@@ -3505,12 +3885,12 @@ function openSession(id){
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6a4 4 0 104-4M2 6l1.6-1.3M2 6l1.4 1.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
             ${t('js.undo')}
           </button>
-        </div>
+        </div>`}
         ${speakerChipsHtml}
         <div class="transcript-txt" id="tx-txt-${id}">${formatTranscript(s.transcript, s)}</div>
       </div>
     </div>
-    <div class="ai-section">
+    ${s.confidential?'':`<div class="ai-section">
       <div class="ai-hd">
         <div class="ai-hd-icon"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 2h10v8H8l-2 2-2-2H2V2z" stroke="#3B82F6" stroke-width="1.2" stroke-linejoin="round"/></svg></div>
         <div class="ai-hd-title">Assistant IA</div>
@@ -3533,10 +3913,14 @@ function openSession(id){
         <textarea class="ai-input" id="ai-in-${id}" placeholder="Demande-moi quelque chose…" onkeydown="aiKey(event,'${id}')"></textarea>
         <button class="ai-send" onclick="sendAi('${id}')">Envoyer</button>
       </div>
-    </div>
+    </div>`}
     <div class="export-zone">
       <div class="export-lbl">${t('x.export')}</div>
       <div class="export-btns">
+        <button class="btn-export" id="share-btn-${id}" onclick="shareSession('${id}')">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="11" cy="3" r="1.8" stroke="currentColor" stroke-width="1.3"/><circle cx="3" cy="7" r="1.8" stroke="currentColor" stroke-width="1.3"/><circle cx="11" cy="11" r="1.8" stroke="currentColor" stroke-width="1.3"/><path d="M4.6 6.2l4.8-2.4M4.6 7.8l4.8 2.4" stroke="currentColor" stroke-width="1.3"/></svg>
+          ${t('js.share')}
+        </button>
         <button class="btn-export" onclick="copySession('${id}')">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="4.5" y="4.5" width="7.5" height="7.5" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M9.5 4.5V3a1 1 0 00-1-1H3a1 1 0 00-1 1v5.5a1 1 0 001 1h1.5" stroke="currentColor" stroke-width="1.3"/></svg>
           ${t('x.copy')}
@@ -3740,6 +4124,8 @@ function refreshSettings(){
     if(clEl){clEl.textContent=cl?t('js.keyok'):t('js.keymissing');clEl.className=`key-status ${cl?'key-ok':'key-missing'}`}
   }
   if(dgIn&&dg)dgIn.value=dg;if(clIn&&cl)clIn.value=cl;
+  const ktIn=document.getElementById('kt-input');
+  if(ktIn) ktIn.value=K.keyterms().join('\n');
   const refEl=document.getElementById('ref-link');
   if(refEl && currentUser) refEl.textContent=referralLink();
   const em=document.getElementById('s-email');const info=document.getElementById('s-info');
@@ -3839,6 +4225,17 @@ function saveKeys(){
   if(dg)localStorage.setItem('nuro_dg',dg);
   if(cl)localStorage.setItem('nuro_cl',cl);
   refreshSettings();showToast(t('js.keysaved'));showView('dashboard');
+}
+
+// Vocabulaire personnalisé : noms/mots que l'utilisateur veut mieux faire reconnaître par Deepgram
+// (voir aussi la constante KEYTERM_BASE utilisée dans toggleRec).
+function saveKeyterms(){
+  const raw=document.getElementById('kt-input')?.value||'';
+  const arr=[...new Set(raw.split('\n').map(s=>s.trim()).filter(Boolean))].slice(0,20);
+  K.saveKeyterms(arr);
+  const ktIn=document.getElementById('kt-input');
+  if(ktIn) ktIn.value=arr.join('\n');
+  showToast(t('js.keysaved'));
 }
 
 // ══ MODIFICATION IA DE LA TRANSCRIPTION ══
@@ -4156,6 +4553,40 @@ function buildExportText(s){
 }
 
 // Copier dans le presse-papier
+// Crée un lien public en lecture seule (résumé + transcription, sans accès au compte)
+// et le copie dans le presse-papiers. Voir /share dans worker.js et share.html.
+async function shareSession(id){
+  const s=sessions.find(x=>x.id===id);
+  if(!s || !s.summary) return;
+  if(!WORKER_URL || !authToken()){ showToast(t('js.shareunavailable')); return; }
+  const btn=document.getElementById(`share-btn-${id}`);
+  if(btn) btn.disabled=true;
+  try{
+    const res=await fetch(`${WORKER_URL}/share`,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+authToken()},
+      body: JSON.stringify({ title: s.summary.titre||t('js.recfallback'), summary: s.summary, transcript: humanizeTranscript(s) })
+    });
+    if(!res.ok){ showToast(t('js.shareerror')); if(btn) btn.disabled=false; return; }
+    const data=await res.json();
+    const url=`https://thomas282828.github.io/nuro/share.html?t=${data.token}`;
+    try{
+      await navigator.clipboard.writeText(url);
+      showToast(t('js.sharecopied'));
+    }catch(e){
+      const ta=document.createElement('textarea');
+      ta.value=url; ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.appendChild(ta); ta.select();
+      try{ document.execCommand('copy'); showToast(t('js.sharecopied')); }
+      catch(e2){ showToast(url); }
+      ta.remove();
+    }
+  }catch(e){
+    showToast(t('js.shareerror'));
+  }
+  if(btn) btn.disabled=false;
+}
+
 async function copySession(id){
   const s = sessions.find(x=>x.id===id);
   if(!s) return;
