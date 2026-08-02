@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<meta name="description" content="Enregistrement partagé via kaideno — transcription et résumé IA.">
+<title>Enregistrement partagé — kaideno</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080C12;--bg1:#0E1420;--bg2:#141C2C;
+  --ink:#EEF2F7;--ink2:#7D8EA4;--ink3:#3D4D62;
+  --accent:#3B82F6;--accent2:rgba(59,130,246,0.12);--accent-b:rgba(59,130,246,0.25);
+  --line:rgba(255,255,255,0.07);--line2:rgba(255,255,255,0.12);
+  --radius:14px;--radius-sm:9px;--radius-lg:20px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.6}
+h1,h2{font-family:'Space Grotesk',sans-serif;line-height:1.15;letter-spacing:-0.02em;font-weight:700}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:680px;margin:0 auto;padding:0 20px 80px}
+.nav{padding:18px 0;border-bottom:1px solid var(--line);margin-bottom:28px}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;padding-bottom:0}
+.nav-logo{display:flex;align-items:center;gap:9px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.05rem}
+.btn-nav{background:var(--accent);color:#fff;font-size:.82rem;font-weight:600;padding:9px 18px;border-radius:999px}
+.badge{display:inline-flex;align-items:center;gap:6px;background:var(--accent2);border:1px solid var(--accent-b);color:var(--accent);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:5px 12px;border-radius:999px;margin-bottom:14px}
+.title{font-size:1.7rem;margin-bottom:8px}
+.meta{font-size:.8rem;color:var(--ink3);margin-bottom:24px}
+.summary-box{background:linear-gradient(135deg,rgba(59,130,246,0.08),transparent 80%);border:1.5px solid var(--accent-b);border-radius:var(--radius);padding:18px;margin-bottom:22px}
+.summary-lbl{font-size:.7rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.summary-txt{font-size:.95rem;line-height:1.7}
+.block{margin-bottom:22px}
+.block-lbl{font-size:.7rem;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.kp-item,.act-item{display:flex;gap:8px;font-size:.88rem;margin-bottom:8px;line-height:1.5}
+.kp-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:7px;flex-shrink:0}
+.act-arr{color:var(--accent);font-weight:700;flex-shrink:0}
+.transcript-box{background:var(--bg1);border:1px solid var(--line);border-radius:var(--radius);padding:18px;font-size:.88rem;line-height:1.75;white-space:pre-wrap;word-break:break-word}
+.cta-box{margin-top:36px;padding:24px;text-align:center;background:var(--bg1);border:1px solid var(--line);border-radius:var(--radius-lg)}
+.cta-box p{color:var(--ink2);font-size:.88rem;margin-bottom:14px}
+.state{text-align:center;padding:80px 20px;color:var(--ink2)}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="wrap">
+    <a href="home.html" class="nav-logo">
+      <svg width="24" height="24" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="7" fill="#0E1420"/><rect x="7.7" y="7.7" width="12.6" height="12.6" rx="2.8" fill="none" stroke="#3D4D62" stroke-width="0.9" transform="rotate(8 14 14)"/><rect x="8.7" y="8.7" width="10.6" height="10.6" rx="2.2" fill="none" stroke="#3B82F6" stroke-width="1.4" transform="rotate(-6 14 14)"/></svg>
+      kaideno
+    </a>
+    <a href="?register" class="btn-nav">Essai gratuit</a>
+  </div>
+</nav>
+
+<div class="wrap" id="content">
+  <div class="state">Chargement…</div>
+</div>
+
+<script>
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+async function load(){
+  const el=document.getElementById('content');
+  const params=new URLSearchParams(window.location.search);
+  const token=params.get('t');
+  const WORKER_URL='https://nuro-proxy.worldultimaterecords.workers.dev';
+  if(!token){ el.innerHTML='<div class="state">Lien invalide.</div>'; return; }
+  try{
+    const res=await fetch(`${WORKER_URL}/share?token=${encodeURIComponent(token)}`);
+    if(!res.ok){
+      el.innerHTML = res.status===404
+        ? '<div class="state">Ce lien de partage n\'existe pas ou plus.</div>'
+        : '<div class="state">Impossible de charger cet enregistrement pour le moment.</div>';
+      return;
+    }
+    const data=await res.json();
+    const sum=data.summary||{};
+    const date=data.created_at ? new Date(data.created_at).toLocaleDateString('fr-FR',{day:'numeric',month:'long',year:'numeric'}) : '';
+
+    let html=`
+      <span class="badge">🔒 Lecture seule</span>
+      <h1 class="title">${esc(data.title||sum.titre||'Enregistrement partagé')}</h1>
+      <div class="meta">Partagé via kaideno${date?' · '+date:''}</div>`;
+
+    if(sum.resume){
+      html+=`<div class="summary-box"><div class="summary-lbl">Résumé</div><div class="summary-txt">${esc(sum.resume)}</div></div>`;
+    }
+    if(sum.points_cles?.length){
+      html+=`<div class="block"><div class="block-lbl">Points clés</div>${sum.points_cles.map(p=>`<div class="kp-item"><span class="kp-dot"></span>${esc(p)}</div>`).join('')}</div>`;
+    }
+    if(sum.actions?.length){
+      html+=`<div class="block"><div class="block-lbl">Actions</div>${sum.actions.map(a=>`<div class="act-item"><span class="act-arr">→</span>${esc(a)}</div>`).join('')}</div>`;
+    }
+    if(data.transcript){
+      html+=`<div class="block"><div class="block-lbl">Transcription complète</div><div class="transcript-box">${esc(data.transcript)}</div></div>`;
+    }
+    html+=`
+      <div class="cta-box">
+        <p>Créé avec kaideno — transcription et résumé IA de vos réunions, sans boîtier.</p>
+        <a href="?register" class="btn-nav">Essayer kaideno gratuitement →</a>
+      </div>`;
+
+    el.innerHTML=html;
+  }catch(e){
+    el.innerHTML='<div class="state">Impossible de charger cet enregistrement pour le moment.</div>';
+  }
+}
+load();
+</script>
+
+</body>
+</html>

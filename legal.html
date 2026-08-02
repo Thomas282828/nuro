@@ -211,7 +211,7 @@ footer a{color:var(--c-text2); margin:0 10px}
     <h3>Hébergement</h3>
     <ul>
       <li><strong>Site et application</strong> : GitHub Pages — GitHub Inc., 88 Colin P. Kelly Jr. St, San Francisco, CA 94107, États-Unis</li>
-      <li><strong>Serveur applicatif</strong> : Cloudflare Workers — Cloudflare Inc., 101 Townsend St, San Francisco, CA 94107, États-Unis</li>
+      <li><strong>Serveur applicatif et base de données de comptes</strong> : Cloudflare Workers et Cloudflare D1 — Cloudflare Inc., 101 Townsend St, San Francisco, CA 94107, États-Unis</li>
     </ul>
 
     <h3>Propriété intellectuelle</h3>
@@ -242,13 +242,28 @@ footer a{color:var(--c-text2); margin:0 10px}
       <tbody>
         <tr>
           <td>Adresse email</td>
-          <td>Créer et identifier votre compte</td>
+          <td>Créer et identifier votre compte, vous contacter</td>
           <td>Jusqu'à suppression du compte</td>
         </tr>
         <tr>
-          <td>Mot de passe</td>
-          <td>Sécuriser l'accès à votre compte</td>
+          <td>Mot de passe (haché, jamais stocké en clair)</td>
+          <td>Sécuriser l'accès à votre compte, depuis n'importe quel appareil</td>
           <td>Jusqu'à suppression du compte</td>
+        </tr>
+        <tr>
+          <td>Abonnement (plan) et minutes consommées ce mois-ci</td>
+          <td>Appliquer les limites d'usage de votre offre</td>
+          <td>Le compteur se réinitialise chaque mois ; le compte, jusqu'à suppression</td>
+        </tr>
+        <tr>
+          <td>Code de parrainage et lien filleul ↔ parrain</td>
+          <td>Attribuer les minutes offertes lors d'un parrainage</td>
+          <td>Jusqu'à suppression du compte</td>
+        </tr>
+        <tr>
+          <td>Jeton de réinitialisation de mot de passe</td>
+          <td>Vous permettre de changer un mot de passe oublié</td>
+          <td>Supprimé après usage, ou au bout d'1 heure si non utilisé</td>
         </tr>
         <tr>
           <td>Flux audio</td>
@@ -258,26 +273,37 @@ footer a{color:var(--c-text2); margin:0 10px}
         <tr>
           <td>Transcriptions et résumés</td>
           <td>Vous permettre de les consulter</td>
-          <td>Jusqu'à suppression par vos soins</td>
+          <td>Jusqu'à suppression par vos soins — stockés uniquement sur votre appareil</td>
         </tr>
       </tbody>
     </table>
 
     <div class="callout">
       <strong>Vos enregistrements audio ne sont jamais stockés.</strong> Le flux est transmis
-      directement au service de transcription, converti en texte, puis écarté. Seul le texte est
-      conservé, dans le navigateur de votre appareil.
+      directement au service de transcription, converti en texte, puis écarté. Le texte
+      (transcriptions, résumés) reste sur votre appareil et ne transite jamais par nos serveurs.
     </div>
 
     <h3>Où sont stockées vos données</h3>
     <p>
-      Vos transcriptions et résumés sont enregistrés <strong>localement, dans le navigateur de
-      votre appareil</strong> (stockage local). Ils ne transitent pas par nos serveurs et ne sont
-      pas accessibles par l'éditeur.
+      Deux catégories de données, deux emplacements différents :
     </p>
+    <ul>
+      <li>
+        <strong>Compte</strong> (email, mot de passe haché, abonnement, minutes consommées, code
+        de parrainage) : stocké sur nos serveurs, dans une base de données Cloudflare D1. C'est ce
+        qui vous permet de vous connecter depuis n'importe quel appareil.
+      </li>
+      <li>
+        <strong>Transcriptions et résumés</strong> : stockés <strong>uniquement dans le navigateur
+        de l'appareil</strong> qui a servi à l'enregistrement (stockage local). Ils ne transitent
+        pas par nos serveurs et ne sont pas accessibles par l'éditeur.
+      </li>
+    </ul>
     <p>
-      Conséquence : si vous effacez les données de votre navigateur, vos enregistrements sont
-      définitivement perdus. Pensez à les exporter régulièrement.
+      Conséquence : si vous effacez les données de votre navigateur, vos transcriptions sont
+      définitivement perdues (pensez à les exporter régulièrement) — mais votre compte, lui, reste
+      accessible depuis un autre appareil grâce aux informations stockées côté serveur.
     </p>
 
     <h3>Sous-traitants</h3>
@@ -293,7 +319,13 @@ footer a{color:var(--c-text2); margin:0 10px}
         <a href="https://www.anthropic.com/legal/privacy" target="_blank" rel="noopener">Politique de confidentialité</a>
       </li>
       <li>
-        <strong>Cloudflare</strong> (États-Unis) — relaie les requêtes vers ces services.
+        <strong>Cloudflare</strong> (États-Unis) — héberge le serveur applicatif, la base de
+        données de comptes (Cloudflare D1), et relaie les requêtes vers ces services.
+      </li>
+      <li>
+        <strong>Resend</strong> (États-Unis) — le cas échéant, envoie l'email de réinitialisation
+        de mot de passe (uniquement votre adresse email et le lien de réinitialisation).
+        <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener">Politique de confidentialité</a>
       </li>
     </ul>
     <p>
@@ -304,7 +336,8 @@ footer a{color:var(--c-text2); margin:0 10px}
     <h3>Base légale</h3>
     <p>
       Le traitement de vos données repose sur l'<strong>exécution du service</strong> que vous
-      demandez : sans transmission de l'audio, aucune transcription n'est possible.
+      demandez : sans transmission de l'audio, aucune transcription n'est possible ; sans compte
+      serveur, aucune connexion multi-appareil ni contrôle d'usage n'est possible.
     </p>
 
     <h3>Vos droits</h3>
@@ -312,7 +345,7 @@ footer a{color:var(--c-text2); margin:0 10px}
     <ul>
       <li><strong>Accès</strong> — vos données sont visibles à tout moment dans l'application</li>
       <li><strong>Rectification</strong> — vous pouvez modifier vos transcriptions</li>
-      <li><strong>Suppression</strong> — supprimez un enregistrement ou tout votre compte, à tout moment</li>
+      <li><strong>Suppression</strong> — supprimez un enregistrement ou tout votre compte (local et serveur), à tout moment</li>
       <li><strong>Portabilité</strong> — exportez vos données au format texte depuis l'application</li>
       <li><strong>Opposition</strong> — cessez simplement d'utiliser le service</li>
     </ul>

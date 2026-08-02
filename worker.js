@@ -19,11 +19,28 @@
 //      Dashboard Cloudflare → Workers & Pages → [ton worker] → Settings → Trigger
 //      Events → Cron Triggers → Add Cron Trigger → ex. "0 8 * * 1" (chaque lundi
 //      8h UTC). Sans cette étape, "scheduled" n'est jamais appelée.
+//   4. Paiements Stripe (migration5.sql à exécuter en plus des précédentes) :
+//      - Ajouter 2 secrets (Settings → Variables and Secrets) :
+//        STRIPE_SECRET_KEY (clé secrète Stripe, sk_live_... ou sk_test_...)
+//        STRIPE_WEBHOOK_SECRET (obtenu en créant le endpoint webhook ci-dessous)
+//      - Dans Stripe → Développeurs → Webhooks → Ajouter un endpoint :
+//        URL = <url de ce worker>/stripe-webhook
+//        Événements à écouter : checkout.session.completed,
+//        customer.subscription.updated, customer.subscription.deleted
 // ══════════════════════════════════════════════════════════════════════════
 
 const FOUNDERS = ['vincent.naigeon@gmail.com', 'worldultimaterecords@outlook.com'];
 const PLAN_MINUTES = { free: 30, essentiel: 600, pro: 1800 };
 const REFERRAL_BONUS_MINUTES = 30; // offert au parrain ET au filleul, une fois, à l'inscription du filleul
+
+// ── Paiements Stripe : IDs de prix créés dans le Dashboard Stripe (kaideno Essentiel / Pro) ──
+const STRIPE_PRICE_IDS = {
+  essentiel: 'price_1TyrsTFdHLr7aIQGEqHg8gWz',
+  pro: 'price_1TyrvuFdHLr7aIQGMKzdjH88',
+};
+const PRICE_TO_PLAN = Object.fromEntries(
+  Object.entries(STRIPE_PRICE_IDS).map(([plan, price]) => [price, plan])
+);
 
 function json(obj, status, cors) {
   return new Response(JSON.stringify(obj), {
@@ -147,6 +164,59 @@ const DIGEST_I18N = {
 function digestEmailContent(lang, minutes) {
   const build = DIGEST_I18N[lang] || DIGEST_I18N.fr;
   return build(minutes, 'https://thomas282828.github.io/nuro/index.html');
+}
+
+// ── Appels à l'API REST Stripe, sans SDK (le worker est un simple fichier, sans build/npm).
+// Stripe attend un corps "application/x-www-form-urlencoded" avec une notation à crochets
+// pour les objets/tableaux imbriqués (ex: line_items[0][price]=xxx, metadata[email]=xxx). ──
+function flattenStripeParams(value, prefix, out) {
+  out = out || [];
+  if (Array.isArray(value)) {
+    value.forEach((v, i) => flattenStripeParams(v, `${prefix}[${i}]`, out));
+  } else if (value && typeof value === 'object') {
+    for (const [k, v] of Object.entries(value)) {
+      if (v === undefined || v === null) continue;
+      flattenStripeParams(v, prefix ? `${prefix}[${k}]` : k, out);
+    }
+  } else {
+    out.push([prefix, String(value)]);
+  }
+  return out;
+}
+
+async function stripeApi(env, method, path, params) {
+  const body = new URLSearchParams();
+  for (const [k, v] of flattenStripeParams(params || {}, '', [])) body.append(k, v);
+  const r = await fetch(`https://api.stripe.com/v1/${path}`, {
+    method,
+    headers: {
+      'Authorization': `Bearer ${env.STRIPE_SECRET_KEY}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: method === 'GET' ? undefined : body.toString(),
+  });
+  const data = await r.json();
+  if (!r.ok) throw new Error((data.error && data.error.message) || 'stripe_error');
+  return data;
+}
+
+// Vérifie la signature d'un webhook Stripe (en-tête "Stripe-Signature") avec l'API Web Crypto
+// (compatible Cloudflare Workers, sans dépendance Node). Voir doc Stripe "Verify webhook signatures".
+async function verifyStripeSignature(rawBody, sigHeader, secret) {
+  if (!sigHeader) return false;
+  const parts = Object.fromEntries(sigHeader.split(',').map(p => p.split('=')));
+  const t = parts.t, v1 = parts.v1;
+  if (!t || !v1) return false;
+  const enc = new TextEncoder();
+  const key = await crypto.subtle.importKey(
+    'raw', enc.encode(secret), { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']
+  );
+  const sigBuf = await crypto.subtle.sign('HMAC', key, enc.encode(`${t}.${rawBody}`));
+  const computed = [...new Uint8Array(sigBuf)].map(b => b.toString(16).padStart(2, '0')).join('');
+  if (computed.length !== v1.length) return false;
+  let diff = 0;
+  for (let i = 0; i < computed.length; i++) diff |= computed.charCodeAt(i) ^ v1.charCodeAt(i);
+  return diff === 0;
 }
 
 // ── Valide un jeton "Authorization: Bearer ..." et renvoie l'utilisateur (ou null) ──
@@ -452,6 +522,115 @@ export default {
       } catch (e) {
         return json({ error: String(e) }, 500, cors);
       }
+    }
+
+    // ── Créer une session Stripe Checkout pour souscrire à un plan payant (Essentiel/Pro) ──
+    if (url.pathname === '/checkout' && request.method === 'POST') {
+      const u = await getAuthUser(request, env);
+      if (!u) return json({ error: 'unauthorized' }, 401, cors);
+      try {
+        const { plan } = await request.json();
+        const priceId = STRIPE_PRICE_IDS[plan];
+        if (!priceId) return json({ error: 'invalid_plan' }, 400, cors);
+        if (!env.STRIPE_SECRET_KEY) return json({ error: 'stripe_not_configured' }, 500, cors);
+
+        let customerId = u.stripe_customer_id;
+        if (!customerId) {
+          const customer = await stripeApi(env, 'POST', 'customers', {
+            email: u.email,
+            metadata: { app_email: u.email },
+          });
+          customerId = customer.id;
+          await env.DB.prepare('UPDATE users SET stripe_customer_id=? WHERE email=?')
+            .bind(customerId, u.email).run();
+        }
+
+        const session = await stripeApi(env, 'POST', 'checkout/sessions', {
+          mode: 'subscription',
+          customer: customerId,
+          line_items: [{ price: priceId, quantity: 1 }],
+          success_url: 'https://thomas282828.github.io/nuro/home.html?checkout=success',
+          cancel_url: 'https://thomas282828.github.io/nuro/home.html?checkout=cancel',
+          client_reference_id: u.email,
+          metadata: { email: u.email, plan },
+          subscription_data: { metadata: { email: u.email, plan } },
+        });
+
+        return json({ url: session.url }, 200, cors);
+      } catch (e) {
+        return json({ error: String(e.message || e) }, 500, cors);
+      }
+    }
+
+    // ── Portail client Stripe : gérer ou annuler son abonnement en libre-service ──
+    if (url.pathname === '/billing-portal' && request.method === 'POST') {
+      const u = await getAuthUser(request, env);
+      if (!u) return json({ error: 'unauthorized' }, 401, cors);
+      if (!u.stripe_customer_id) return json({ error: 'no_subscription' }, 400, cors);
+      try {
+        const portal = await stripeApi(env, 'POST', 'billing_portal/sessions', {
+          customer: u.stripe_customer_id,
+          return_url: 'https://thomas282828.github.io/nuro/home.html',
+        });
+        return json({ url: portal.url }, 200, cors);
+      } catch (e) {
+        return json({ error: String(e.message || e) }, 500, cors);
+      }
+    }
+
+    // ── Webhook Stripe : source de vérité pour activer/mettre à jour/annuler le plan payant.
+    // Ne jamais faire confiance au retour du navigateur après paiement — seul cet événement,
+    // signé par Stripe, doit modifier le plan d'un compte. ──
+    if (url.pathname === '/stripe-webhook' && request.method === 'POST') {
+      const rawBody = await request.text();
+      const sig = request.headers.get('Stripe-Signature');
+      const valid = env.STRIPE_WEBHOOK_SECRET
+        ? await verifyStripeSignature(rawBody, sig, env.STRIPE_WEBHOOK_SECRET)
+        : false;
+      if (!valid) return json({ error: 'invalid_signature' }, 400, cors);
+
+      let event;
+      try { event = JSON.parse(rawBody); } catch (e) { return json({ error: 'bad_json' }, 400, cors); }
+
+      try {
+        const obj = event.data && event.data.object;
+        if (event.type === 'checkout.session.completed' && obj) {
+          const email = (obj.metadata && obj.metadata.email) || obj.client_reference_id;
+          const plan = obj.metadata && obj.metadata.plan;
+          if (email && plan) {
+            await env.DB.prepare(
+              'UPDATE users SET plan=?, stripe_customer_id=?, stripe_subscription_id=? WHERE email=?'
+            ).bind(plan, obj.customer, obj.subscription, email).run();
+          }
+        } else if (event.type === 'customer.subscription.updated' && obj) {
+          const items = obj.items && obj.items.data;
+          const priceId = items && items[0] && items[0].price && items[0].price.id;
+          const plan = (obj.metadata && obj.metadata.plan) || PRICE_TO_PLAN[priceId];
+          const email = obj.metadata && obj.metadata.email;
+          if (obj.status === 'active' && plan) {
+            if (email) {
+              await env.DB.prepare('UPDATE users SET plan=?, stripe_subscription_id=? WHERE email=?')
+                .bind(plan, obj.id, email).run();
+            } else {
+              await env.DB.prepare(
+                'UPDATE users SET plan=?, stripe_subscription_id=? WHERE stripe_customer_id=?'
+              ).bind(plan, obj.id, obj.customer).run();
+            }
+          } else if (['canceled', 'unpaid', 'incomplete_expired'].includes(obj.status)) {
+            await env.DB.prepare("UPDATE users SET plan='free' WHERE stripe_customer_id=?")
+              .bind(obj.customer).run();
+          }
+        } else if (event.type === 'customer.subscription.deleted' && obj) {
+          await env.DB.prepare(
+            "UPDATE users SET plan='free', stripe_subscription_id=NULL WHERE stripe_customer_id=?"
+          ).bind(obj.customer).run();
+        }
+      } catch (e) {
+        // On répond quand même 200 : Stripe re-tenterait sinon indéfiniment un événement
+        // qu'on ne saurait de toute façon pas mieux traiter au prochain essai.
+      }
+
+      return json({ received: true }, 200, cors);
     }
 
     // ── Mot de passe oublié : envoie un lien de réinitialisation par email ──

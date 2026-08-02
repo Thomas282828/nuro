@@ -2670,6 +2670,41 @@ async function loginServer(email, password){
   return null;
 }
 
+// Lance le paiement Stripe pour un plan (Essentiel/Pro) : appelée juste après une inscription/
+// connexion réussie si l'utilisateur venait du site avec un plan payant déjà choisi (bouton
+// "Choisir Essentiel"/"Choisir Pro"). Redirige vers la page de paiement hébergée par Stripe.
+async function startPlanCheckout(plan){
+  if(!WORKER_URL || !authToken()) return;
+  try{
+    const r = await fetch(WORKER_URL + '/checkout', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+authToken()},
+      body: JSON.stringify({ plan })
+    });
+    const d = await r.json();
+    if(r.ok && d.url){ window.location.href = d.url; return; }
+    showToast('Impossible de lancer le paiement pour le moment. Réessaie depuis Paramètres → Mon abonnement.');
+  }catch(e){
+    showToast('Impossible de lancer le paiement pour le moment. Réessaie depuis Paramètres → Mon abonnement.');
+  }
+}
+
+// Ouvre le portail client Stripe (gérer le moyen de paiement, changer de plan, résilier).
+async function openBillingPortal(){
+  if(!WORKER_URL || !authToken()) return;
+  try{
+    const r = await fetch(WORKER_URL + '/billing-portal', {
+      method:'POST',
+      headers:{'Authorization':'Bearer '+authToken()}
+    });
+    const d = await r.json();
+    if(r.ok && d.url){ window.location.href = d.url; return; }
+    showToast("Impossible d'ouvrir la gestion de l'abonnement pour le moment.");
+  }catch(e){
+    showToast("Impossible d'ouvrir la gestion de l'abonnement pour le moment.");
+  }
+}
+
 // Rafraîchit plan/quota depuis le serveur (utile si changés sur un autre appareil ou par l'admin)
 async function refreshServerAccount(email){
   if(!WORKER_URL || !authToken()) return null;
@@ -2758,7 +2793,7 @@ const K = {
 
 // ══ STATE ══
 let currentUser=null, sessions=[];
-let pendingRef=null, resetToken=null;
+let pendingRef=null, resetToken=null, pendingPlanCheckout=null;
 let isRec=false, mr=null, dgWs=null;
 let timerInt=null, startTime=null;
 let finalTx='', interimTx='';
@@ -2916,9 +2951,12 @@ async function doRegister(){
   currentUser=email; localStorage.setItem('nuro_cu',email); localStorage.setItem('nuro_last_email',email);
   // Enregistrer l'inscription dans la base (en arrière-plan, sans bloquer)
   registerSignup(email);
-  // Créer aussi un vrai compte serveur (permet de se connecter depuis un autre appareil)
-  registerServer(email, pwd, (typeof uiLang === 'function') ? uiLang() : 'fr', pendingRef);
+  // Créer aussi un vrai compte serveur (permet de se connecter depuis un autre appareil).
+  // On l'attend cette fois (contrairement à avant) : si un plan payant a été choisi sur le site
+  // avant l'inscription, il faut le jeton d'authentification pour lancer le paiement juste après.
+  await registerServer(email, pwd, (typeof uiLang === 'function') ? uiLang() : 'fr', pendingRef);
   enterDashboard();
+  if(pendingPlanCheckout){ const p=pendingPlanCheckout; pendingPlanCheckout=null; startPlanCheckout(p); }
 }
 
 // Signale l'inscription au serveur (pour le suivi admin).
@@ -2962,6 +3000,7 @@ async function doLogin(){
   currentUser=email; localStorage.setItem('nuro_cu',email); localStorage.setItem('nuro_last_email',email);
   registerSignup(email);   // met à jour la date de dernière visite
   enterDashboard();
+  if(pendingPlanCheckout){ const p=pendingPlanCheckout; pendingPlanCheckout=null; startPlanCheckout(p); }
 }
 
 function doLogout(){
@@ -4141,13 +4180,26 @@ function refreshSettings(){
     if(isFounder()){
       pi.innerHTML = `<strong>★ Accès Fondateur</strong><br>Utilisation illimitée`;
     } else {
-      const plan = PLAN_LIMITS[userPlan()] || PLAN_LIMITS.free;
+      const curPlan = userPlan();
+      const plan = PLAN_LIMITS[curPlan] || PLAN_LIMITS.free;
       const usedMin = Math.floor(usedSeconds()/60);
       const remMin = Math.floor(remainingSec()/60);
+      let billingHtml;
+      if(curPlan==='free'){
+        billingHtml = `<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn-save" style="margin:0" onclick="startPlanCheckout('essentiel')">Passer à Essentiel — 9€/mois</button>
+          <button class="btn-save" style="margin:0;background:var(--accent)" onclick="startPlanCheckout('pro')">Passer à Pro — 19€/mois</button>
+        </div>`;
+      } else {
+        billingHtml = `<div style="margin-top:12px">
+          <button class="btn-save" style="margin:0" onclick="openBillingPortal()">Gérer mon abonnement</button>
+        </div>`;
+      }
       pi.innerHTML = `<strong>${t('q.plan')} : ${t(plan.i18nKey)}</strong><br>
         ${t('q.used')} : ${usedMin} min / ${plan.minutes} min<br>
         ${t('q.left')} : <strong style="color:${remMin<5?'#F0A500':'var(--accent)'}">${remMin} min</strong>
-        <div style="margin-top:10px;font-size:.78rem;color:var(--ink3)">${t('q.resets')}</div>`;
+        <div style="margin-top:10px;font-size:.78rem;color:var(--ink3)">${t('q.resets')}</div>
+        ${billingHtml}`;
     }
   }
 }
@@ -4832,6 +4884,25 @@ window.addEventListener('DOMContentLoaded',()=>{
   const refParam = params.get('ref');
   if(refParam) pendingRef = refParam;
   const resetParam = params.get('reset');
+  // Plan payant choisi sur le site (boutons "Choisir Essentiel"/"Choisir Pro") avant inscription :
+  // on le retient pour lancer le paiement Stripe automatiquement juste après la création du compte.
+  const planParam = params.get('plan');
+  if(planParam==='essentiel' || planParam==='pro') pendingPlanCheckout = planParam;
+  // Retour depuis Stripe Checkout (succès ou annulation), pour un utilisateur déjà connecté.
+  const checkoutParam = params.get('checkout');
+
+  // Ces paramètres ne doivent servir qu'une seule fois, au chargement où ils arrivent (ex: lien
+  // "Se connecter" depuis le site). On les retire tout de suite de l'URL (sans recharger la page) :
+  // sinon, tout rechargement ultérieur de cette même page — par ex. après un changement de langue
+  // ou de thème, qui recharge la page via location.replace() — les relirait et renverrait
+  // l'utilisateur déjà connecté vers l'écran de connexion/inscription.
+  if(forceAuth || refParam || resetParam || planParam || checkoutParam){
+    try{
+      const cleanUrl = new URL(window.location.href);
+      ['login','register','ref','reset','plan','checkout'].forEach(k=>cleanUrl.searchParams.delete(k));
+      window.history.replaceState({}, '', cleanUrl.toString());
+    }catch(e){}
+  }
 
   const saved=localStorage.getItem('nuro_cu');
 
@@ -4864,7 +4935,11 @@ window.addEventListener('DOMContentLoaded',()=>{
   }
   else if(saved&&K.users()[saved]){
     currentUser=saved;enterDashboard();
-    refreshServerAccount(currentUser).then(()=>renderQuota());
+    refreshServerAccount(currentUser).then(()=>{
+      renderQuota();
+      if(checkoutParam==='success') showToast('✓ Abonnement activé, merci !');
+      else if(checkoutParam==='cancel') showToast('Paiement annulé — ton plan n\'a pas changé.');
+    });
   }
   else {
     prefillEmail();

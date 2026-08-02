@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Pas besoin d'un enregistreur dédié pour transcrire une réunion. Voici comment obtenir une transcription et un résumé IA avec votre téléphone, en 3 étapes.">
+<title>Comment transcrire une réunion sans acheter de boîtier dédié — kaideno</title>
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --c-bg:#FFFFFF; --c-surface:#F7F8FA; --c-surface2:#EEF1F5; --c-surface3:#E2E7EE;
+  --c-border:rgba(15,23,42,0.09); --c-border2:rgba(15,23,42,0.16);
+  --c-text:#0F172A; --c-text2:#55637A; --c-text3:#94A3B8;
+  --c-blue:#2563EB; --c-blue-l:#3B82F6; --c-blue-bg:rgba(37,99,235,0.07); --c-blue-b:rgba(37,99,235,0.18);
+  --c-green:#059669; --c-green-bg:rgba(5,150,105,0.08);
+  --radius:12px; --radius-lg:20px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--c-bg);color:var(--c-text);font-family:'Inter',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;line-height:1.15;letter-spacing:-0.02em;font-weight:700}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:900px;margin:0 auto;padding:0 24px}
+.nav{padding:18px 0;border-bottom:1px solid var(--c-border)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem}
+.nav-right{display:flex;align-items:center;gap:8px}
+.nav-link{font-size:.85rem;font-weight:500;color:var(--c-text2);padding:8px 14px;border-radius:8px;transition:background .15s}
+.nav-link:hover{background:var(--c-surface2)}
+.btn-nav{background:var(--c-blue);color:#fff;font-size:.85rem;font-weight:600;padding:9px 18px;border-radius:999px}
+.article-wrap{max-width:720px;margin:0 auto;padding:0 24px}
+.back-link{display:inline-block;font-size:.85rem;color:var(--c-text2);margin:28px 0 18px}
+.back-link:hover{color:var(--c-blue)}
+.article-tag{font-size:.72rem;font-weight:700;color:var(--c-blue);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.article-title{font-size:2rem;margin-bottom:16px}
+.article-meta{font-size:.82rem;color:var(--c-text3);margin-bottom:36px}
+.article-body p{margin-bottom:18px;font-size:1.02rem;color:var(--c-text)}
+.article-body h2{font-size:1.35rem;margin:38px 0 14px}
+.article-body ul{margin:0 0 18px 22px}
+.article-body li{margin-bottom:8px;font-size:1.02rem}
+.article-body strong{color:var(--c-text)}
+.cta-box{background:var(--c-blue-bg);border:1px solid var(--c-blue-b);border-radius:var(--radius-lg);padding:28px;text-align:center;margin:40px 0 64px}
+.cta-box p{color:var(--c-text2);margin-bottom:16px}
+.cta-btn{display:inline-block;background:var(--c-blue);color:#fff;font-weight:600;font-size:.95rem;padding:12px 26px;border-radius:999px}
+.footer{padding:36px 0;border-top:1px solid var(--c-border);text-align:center}
+.footer p{font-size:.8rem;color:var(--c-text3)}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Navigation principale">
+  <div class="wrap">
+    <a href="../home.html" class="nav-logo" aria-label="kaideno — accueil">
+      <svg width="26" height="26" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+        <rect width="28" height="28" rx="7" fill="#EEF1F5"/>
+        <rect x="7.7" y="7.7" width="12.6" height="12.6" rx="2.8" fill="none" stroke="#4A5A6E" stroke-width="0.9" transform="rotate(8 14 14)"/>
+        <rect x="8.7" y="8.7" width="10.6" height="10.6" rx="2.2" fill="none" stroke="#3B82F6" stroke-width="1.4" transform="rotate(-6 14 14)"/>
+      </svg>
+      kaideno
+    </a>
+    <div class="nav-right">
+      <a href="../home.html" class="nav-link">Accueil</a>
+      <a href="../?login" class="nav-link">Se connecter</a>
+      <a href="../?register" class="btn-nav">Essai gratuit</a>
+    </div>
+  </div>
+</nav>
+
+<article class="article-wrap">
+  <a href="index.html" class="back-link">← Blog kaideno</a>
+  <div class="article-tag">Guide</div>
+  <h1 class="article-title">Comment transcrire une réunion sans acheter de boîtier dédié</h1>
+  <p class="article-meta">kaideno</p>
+
+  <div class="article-body">
+    <p>« Qu'est-ce qui a été décidé, déjà ? » Si cette phrase vous est familière à la sortie d'une réunion, vous avez déjà envisagé un enregistreur vocal dédié pour ne plus rien oublier. Bonne nouvelle : il n'y a pas besoin d'acheter d'appareil supplémentaire pour ça. Votre téléphone suffit.</p>
+
+    <h2>Pourquoi un boîtier dédié n'est pas la seule option</h2>
+    <p>Les enregistreurs vocaux IA type Plaud existent parce qu'ils résolvent un vrai problème : capter une conversation proprement et en tirer un résumé exploitable, sans prise de notes manuelle. Mais la fonction technique derrière — capter l'audio, le transcrire, le résumer avec une IA — ne nécessite pas un objet physique spécifique. Un microphone de smartphone moderne capte très bien une voix à plusieurs mètres, et la transcription/le résumé se font de toute façon dans le cloud, pas dans le boîtier lui-même.</p>
+    <p>Des applications comme kaideno reproduisent exactement ce flux (micro → transcription en direct → résumé IA) directement depuis le navigateur du téléphone, sans matériel à acheter, recharger ou transporter en plus.</p>
+
+    <h2>Les 3 étapes pour transcrire une réunion avec son téléphone</h2>
+    <p><strong>1. Poser le téléphone au centre de la table.</strong> Un smartphone posé à plat, écran vers le haut, capte correctement une conversation à plusieurs voix dans une pièce de taille normale. Pas besoin de le tenir ni de le rapprocher de chaque personne qui parle.</p>
+    <p><strong>2. Lancer l'enregistrement avant que la réunion commence.</strong> Avec une app comme kaideno, il suffit d'appuyer sur un bouton pour démarrer : la transcription s'affiche mot à mot à l'écran en temps réel, avec ponctuation automatique. Si plusieurs personnes parlent, les prises de parole sont distinguées automatiquement (diarisation), sans configuration préalable.</p>
+    <p><strong>3. Arrêter l'enregistrement en fin de réunion.</strong> L'IA génère alors automatiquement un résumé structuré : les points clés abordés, les décisions prises, et les actions à suivre identifiées dans la conversation — généralement en quelques secondes.</p>
+    <p>Important à garder en tête : gardez l'écran du téléphone allumé et l'app au premier plan pendant l'enregistrement. La plupart des navigateurs mobiles coupent l'accès au micro dès que l'écran se verrouille ou que vous changez d'application.</p>
+
+    <h2>Que faire de la transcription ensuite</h2>
+    <p>Une fois la réunion terminée, la transcription et son résumé restent disponibles dans l'historique, cherchables par mot-clé. Selon l'outil utilisé, vous pouvez généralement :</p>
+    <ul>
+      <li>poser des questions sur le contenu (« quelles actions me concernent ? », « résume-moi la partie budget ») ;</li>
+      <li>reformater le compte-rendu en email prêt à envoyer à l'équipe ;</li>
+      <li>exporter la transcription complète en texte, Markdown ou PDF ;</li>
+      <li>renommer les locuteurs détectés pour retrouver qui a dit quoi.</li>
+    </ul>
+
+    <h2>Ça marche aussi au-delà des réunions</h2>
+    <p>Le même principe s'applique à d'autres situations où l'on aimerait ne rien noter à la main : un cours à réviser plus tard, un entretien ou un podcast à retranscrire fidèlement, une session de brainstorm où les idées vont trop vite pour être notées, ou même une note vocale personnelle qu'on veut structurer sans repasser dessus soi-même.</p>
+
+    <h2>En résumé</h2>
+    <p>Transcrire une réunion sans boîtier dédié demande simplement une app qui utilise le micro du téléphone en temps réel et une IA pour le résumé — pas un objet supplémentaire à acheter. kaideno propose ce flux complet, avec un plan gratuit de 30 minutes par mois pour tester sans engagement.</p>
+  </div>
+
+  <div class="cta-box">
+    <p>Testez kaideno gratuitement, sans carte bancaire.</p>
+    <a href="../?register" class="cta-btn">Essayer kaideno gratuitement →</a>
+  </div>
+</article>
+
+<footer class="footer">
+  <div class="wrap">
+    <p>© 2026 kaideno. Tous droits réservés.</p>
+  </div>
+</footer>
+
+</body>
+</html>

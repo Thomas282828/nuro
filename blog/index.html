@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Le blog kaideno : conseils, comparatifs et guides sur la transcription et le résumé vocal par IA, sans boîtier dédié.">
+<title>Blog kaideno — transcription et résumé vocal par IA</title>
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --c-bg:#FFFFFF; --c-surface:#F7F8FA; --c-surface2:#EEF1F5; --c-surface3:#E2E7EE;
+  --c-border:rgba(15,23,42,0.09); --c-border2:rgba(15,23,42,0.16);
+  --c-text:#0F172A; --c-text2:#55637A; --c-text3:#94A3B8;
+  --c-blue:#2563EB; --c-blue-l:#3B82F6; --c-blue-bg:rgba(37,99,235,0.07); --c-blue-b:rgba(37,99,235,0.18);
+  --radius:12px; --radius-lg:20px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--c-bg);color:var(--c-text);font-family:'Inter',system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif;line-height:1.15;letter-spacing:-0.02em;font-weight:700}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:900px;margin:0 auto;padding:0 24px}
+.nav{padding:18px 0;border-bottom:1px solid var(--c-border)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:1.1rem}
+.nav-right{display:flex;align-items:center;gap:8px}
+.nav-link{font-size:.85rem;font-weight:500;color:var(--c-text2);padding:8px 14px;border-radius:8px;transition:background .15s}
+.nav-link:hover{background:var(--c-surface2)}
+.btn-nav{background:var(--c-blue);color:#fff;font-size:.85rem;font-weight:600;padding:9px 18px;border-radius:999px}
+.blog-hero{padding:56px 0 32px}
+.blog-hero h1{font-size:2rem;margin-bottom:10px}
+.blog-hero p{color:var(--c-text2);font-size:1rem}
+.post-list{padding:8px 0 72px;display:flex;flex-direction:column;gap:18px}
+.post-card{display:block;border:1px solid var(--c-border);border-radius:var(--radius-lg);padding:26px 28px;transition:border-color .15s,transform .15s}
+.post-card:hover{border-color:var(--c-blue-b);transform:translateY(-2px)}
+.post-tag{font-size:.72rem;font-weight:700;color:var(--c-blue);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.post-title{font-size:1.25rem;margin-bottom:8px}
+.post-desc{color:var(--c-text2);font-size:.92rem}
+.footer{padding:36px 0;border-top:1px solid var(--c-border);text-align:center}
+.footer p{font-size:.8rem;color:var(--c-text3)}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Navigation principale">
+  <div class="wrap">
+    <a href="../home.html" class="nav-logo" aria-label="kaideno — accueil">
+      <svg width="26" height="26" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+        <rect width="28" height="28" rx="7" fill="#EEF1F5"/>
+        <rect x="7.7" y="7.7" width="12.6" height="12.6" rx="2.8" fill="none" stroke="#4A5A6E" stroke-width="0.9" transform="rotate(8 14 14)"/>
+        <rect x="8.7" y="8.7" width="10.6" height="10.6" rx="2.2" fill="none" stroke="#3B82F6" stroke-width="1.4" transform="rotate(-6 14 14)"/>
+      </svg>
+      kaideno
+    </a>
+    <div class="nav-right">
+      <a href="../home.html" class="nav-link">Accueil</a>
+      <a href="../?login" class="nav-link">Se connecter</a>
+      <a href="../?register" class="btn-nav">Essai gratuit</a>
+    </div>
+  </div>
+</nav>
+
+<section class="blog-hero">
+  <div class="wrap">
+    <h1>Le blog kaideno</h1>
+    <p>Conseils, comparatifs et guides sur la transcription et le résumé vocal par IA — sans boîtier dédié.</p>
+  </div>
+</section>
+
+<section class="post-list">
+  <div class="wrap">
+    <a class="post-card" href="alternative-plaud.html">
+      <div class="post-tag">Comparatif</div>
+      <div class="post-title">Alternative à Plaud gratuite : le comparatif complet</div>
+      <p class="post-desc">Prix, fonctionnalités et limites — kaideno face à un boîtier d'enregistrement dédié type Plaud.</p>
+    </a>
+    <a class="post-card" href="transcrire-reunion-sans-boitier.html">
+      <div class="post-tag">Guide</div>
+      <div class="post-title">Comment transcrire une réunion sans acheter de boîtier dédié</div>
+      <p class="post-desc">La méthode en 3 étapes pour transcrire et résumer une réunion avec le téléphone que vous avez déjà.</p>
+    </a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <p>© 2026 kaideno. Tous droits réservés.</p>
+  </div>
+</footer>
+
+</body>
+</html>
