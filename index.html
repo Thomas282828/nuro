@@ -4455,8 +4455,106 @@ function buildAsstContext(){
     const titre = s.summary?.titre || 'Sans titre';
     const resume = s.summary?.resume || (s.transcript||'').substring(0,200);
     const actions = (s.summary?.actions||[]).join('; ');
-    return `[Session ${i+1}] ${date} — "${titre}" (${fmtDur(s.duration)}, ${s.wordCount||0} mots)\nRésumé : ${resume}${actions?`\nActions : ${actions}`:''}`;
+    return `[id: ${s.id}] ${date} — "${titre}" (${fmtDur(s.duration)}, ${s.wordCount||0} mots)\nRésumé : ${resume}${actions?`\nActions : ${actions}`:''}`;
   }).join('\n\n');
+}
+
+// ── Connaissance de l'app, injectée dans le prompt système pour que l'assistant réponde
+// avec précision aux questions sur le fonctionnement de kaideno (pas de généralités vagues). ──
+const APP_KNOWLEDGE = `
+Fonctionnement de kaideno (app PWA, aucune installation requise) :
+- Enregistrer : bouton micro sur le tableau de bord → transcription en direct, 12 langues, distinction des locuteurs si plusieurs voix.
+- "Enregistrer un appel" et "Importer un fichier" sont aussi disponibles depuis le tableau de bord.
+- Mode confidentiel : case à cocher avant l'enregistrement → aucun résumé IA n'est généré pour cette session (transcription seule, rien envoyé au résumé automatique).
+- Après l'enregistrement : résumé automatique généré (points clés + actions à faire).
+- Historique : icône horloge en haut → liste de tous les enregistrements, recherche par mot-clé, export global.
+- Sur chaque enregistrement (page détail) : renommer/consulter la transcription, partager, copier, exporter en .txt, .md ou .pdf, poser des questions à l'IA sur cet enregistrement précis, et un bouton "Supprimer" (zone dangereuse) tout en bas.
+- Assistant kaideno (ce chat) : répond à toutes les questions, connaît tous les enregistrements de l'utilisateur, et peut directement renommer, modifier le résumé/les actions, ou supprimer un enregistrement quand on le lui demande.
+- Paramètres (icône ⚙️) : langue de l'interface, clés API personnelles (Deepgram/Claude, optionnel — tout fonctionne déjà sans), vocabulaire personnalisé (mots/noms à mieux reconnaître), plan et consommation du mois, parrainage (lien à partager, minutes offertes), informations légales, suppression de compte.
+- Plans : Gratuit (30 min/mois), Essentiel 9€/mois (10h/mois), Pro 19€/mois (30h/mois, toutes langues, support prioritaire). Changement de plan depuis Paramètres → Mon abonnement.
+- Vie privée : l'audio n'est jamais stocké sur les serveurs, seule la transcription texte l'est, supprimable à tout moment.
+`.trim();
+
+// ── Outils que l'assistant peut utiliser pour agir directement sur les enregistrements
+// (format "tool use" de l'API Claude). ──
+const ASST_TOOLS = [
+  {
+    name: 'rename_recording',
+    description: "Renomme le titre d'un enregistrement existant.",
+    input_schema: { type:'object', properties: {
+      id: {type:'string', description:"Identifiant de l'enregistrement, ex: s_1234567890"},
+      new_title: {type:'string', description:'Le nouveau titre'}
+    }, required:['id','new_title'] }
+  },
+  {
+    name: 'edit_summary',
+    description: "Modifie le résumé et/ou la liste des actions à faire d'un enregistrement. Ne fournir que les champs à changer.",
+    input_schema: { type:'object', properties: {
+      id: {type:'string', description:"Identifiant de l'enregistrement"},
+      resume: {type:'string', description:'Nouveau texte de résumé'},
+      actions: {type:'array', items:{type:'string'}, description:'Nouvelle liste complète des actions à faire'}
+    }, required:['id'] }
+  },
+  {
+    name: 'add_action_item',
+    description: "Ajoute une action à faire à un enregistrement, sans toucher au reste du résumé.",
+    input_schema: { type:'object', properties: {
+      id: {type:'string'}, action: {type:'string', description:"Le texte de l'action à ajouter"}
+    }, required:['id','action'] }
+  },
+  {
+    name: 'delete_recording',
+    description: "Supprime définitivement un enregistrement (transcription, résumé, tout). Irréversible — ne l'utiliser que si l'utilisateur le demande clairement.",
+    input_schema: { type:'object', properties: {
+      id: {type:'string', description:"Identifiant de l'enregistrement à supprimer"}
+    }, required:['id'] }
+  },
+  // Recherche web native (exécutée côté Anthropic) : donne accès à des infos à jour
+  // au-delà des connaissances de l'IA. Plafonnée à 3 recherches par message pour limiter le coût.
+  { type:'web_search_20250305', name:'web_search', max_uses:3 }
+];
+
+// Exécute un outil demandé par l'assistant et renvoie le résultat (texte) à lui transmettre.
+function execAsstTool(name, input){
+  const s = sessions.find(x=>x.id===input.id);
+  if(!s && name !== 'delete_recording'){
+    return { error:'not_found', message:`Aucun enregistrement avec l'id ${input.id}.` };
+  }
+  try{
+    if(name === 'rename_recording'){
+      if(!s) return { error:'not_found' };
+      s.summary = s.summary || {};
+      s.summary.titre = input.new_title;
+      K.saveSessions(sessions); renderSessions(); renderStats();
+      return { ok:true, id:s.id, new_title:s.summary.titre };
+    }
+    if(name === 'edit_summary'){
+      if(!s) return { error:'not_found' };
+      s.summary = s.summary || {};
+      if(typeof input.resume === 'string') s.summary.resume = input.resume;
+      if(Array.isArray(input.actions)) s.summary.actions = input.actions;
+      K.saveSessions(sessions); renderSessions(); renderStats();
+      return { ok:true, id:s.id };
+    }
+    if(name === 'add_action_item'){
+      if(!s) return { error:'not_found' };
+      s.summary = s.summary || {};
+      s.summary.actions = s.summary.actions || [];
+      s.summary.actions.push(input.action);
+      K.saveSessions(sessions); renderSessions(); renderStats();
+      return { ok:true, id:s.id, actions:s.summary.actions };
+    }
+    if(name === 'delete_recording'){
+      const exists = sessions.some(x=>x.id===input.id);
+      if(!exists) return { error:'not_found' };
+      sessions = sessions.filter(x=>x.id!==input.id);
+      K.saveSessions(sessions); renderSessions(); renderStats();
+      return { ok:true, deleted:input.id };
+    }
+    return { error:'unknown_tool' };
+  }catch(e){
+    return { error:'exec_failed', message:String(e) };
+  }
 }
 
 async function asstSend(){
@@ -4486,18 +4584,38 @@ async function asstSend(){
   if(c){c.appendChild(think);c.scrollTop=c.scrollHeight;}
 
   const context = buildAsstContext();
-  const msgs = [...asstHistory.slice(-10).map(m=>({role:m.role==='user'?'user':'assistant',content:m.content}))];
+  const system = `Tu es l'assistant IA de kaideno, une app d'enregistrement et transcription vocale. Tu es polyvalent et serviable comme un assistant général : tu réponds à TOUTES les questions de l'utilisateur, qu'elles concernent ses enregistrements ou non (culture générale, aide à la rédaction, traduction, conseils, explications, etc.).\n\nTu peux aussi agir directement sur les enregistrements de l'utilisateur grâce aux outils fournis (renommer, modifier le résumé ou les actions, ajouter une action, supprimer). Utilise-les dès que l'utilisateur demande une modification, sans attendre de confirmation supplémentaire, sauf pour une suppression si sa demande est ambiguë. Après avoir utilisé un outil, confirme brièvement ce qui a été fait.\n\n${APP_KNOWLEDGE}\n\nÉtat des enregistrements de l'utilisateur :\n---\n${context}\n---\n\nRéponds en ${getLangName()}, de façon concise, claire et utile. Si la question concerne un enregistrement précis, réfère-t'y par son titre. Si l'utilisateur n'a pas encore d'enregistrement et pose une question générale, réponds simplement à sa question sans insister sur les enregistrements.`;
+
+  let msgs = [...asstHistory.slice(-10).map(m=>({role:m.role==='user'?'user':'assistant',content:m.content}))];
 
   try{
-    const res = await callClaude({
-        model:'claude-haiku-4-5-20251001', max_tokens:1024,
-        system:`Tu es l'assistant IA de kaideno, une app d'enregistrement et transcription vocale. Tu es polyvalent et serviable comme un assistant général : tu réponds à TOUTES les questions de l'utilisateur, qu'elles concernent ses enregistrements ou non (culture générale, aide à la rédaction, traduction, conseils, explications, etc.).\n\nTu peux aussi aider l'utilisateur avec ses enregistrements : les résumer, les trier, retrouver un sujet, lister ses actions en attente.\n\nÉtat des enregistrements de l'utilisateur :\n---\n${context}\n---\n\nRéponds en ${getLangName()}, de façon concise, claire et utile. Si la question concerne un enregistrement précis, réfère-t'y par son titre. Si l'utilisateur n'a pas encore d'enregistrement et pose une question générale, réponds simplement à sa question sans insister sur les enregistrements.`,
-        messages: msgs
-    });
-    if(!res.ok) throw new Error();
-    const data = await res.json();
+    let reply = '';
+    for(let round=0; round<5; round++){
+      const res = await callClaude({
+          model:'claude-haiku-4-5-20251001', max_tokens:1024,
+          system, tools: ASST_TOOLS,
+          messages: msgs
+      });
+      if(!res.ok) throw new Error();
+      const data = await res.json();
+      const textBlocks = (data.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('\n').trim();
+      const toolBlocks = (data.content||[]).filter(b=>b.type==='tool_use');
+
+      if(data.stop_reason === 'tool_use' && toolBlocks.length){
+        if(textBlocks) reply = textBlocks; // garder le dernier texte intermédiaire au cas où
+        msgs.push({role:'assistant', content:data.content});
+        const toolResults = toolBlocks.map(tb => ({
+          type:'tool_result',
+          tool_use_id: tb.id,
+          content: JSON.stringify(execAsstTool(tb.name, tb.input||{}))
+        }));
+        msgs.push({role:'user', content: toolResults});
+        continue; // relancer l'appel pour que l'assistant commente le résultat
+      }
+      reply = textBlocks || reply || t('js.noresponse');
+      break;
+    }
     think.remove();
-    const reply = data.content?.[0]?.text || t('js.noresponse');
     asstAddMsg('bot', reply);
     asstHistory.push({role:'assistant', content:reply});
     if(!asstUnlimited()){ incAsstUsed(); updateAsstQuota(); }
