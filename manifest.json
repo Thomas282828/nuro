@@ -2,7 +2,7 @@
   "name": "kaideno",
   "short_name": "kaideno",
   "description": "Transcription et résumé vocal en temps réel, sans boîtier.",
-  "start_url": "./index.html",
+  "start_url": "./app.html",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
