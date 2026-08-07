@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# L'application (derriere connexion) et les pages techniques n'ont rien a indexer.
+Disallow: /app.html
+Disallow: /home.html
+Disallow: /share.html
+Disallow: /admin.html
+
+Sitemap: https://kaideno.com/sitemap.xml
